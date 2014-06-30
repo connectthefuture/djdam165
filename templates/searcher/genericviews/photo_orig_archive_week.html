@@ -1,0 +1,44 @@
+{% extends "base/jbhome.html" %}
+{# {% extends "base/resultbase.html" %} #}
+
+{% block page_title %}
+<h1>Week {{ week|date:'W' }}</h1>
+{% endblock %}
+
+{% block result_summary %}
+<h2><p>Found {{ object_list|length }} shot{{ object_list|pluralize }} this week.</p></h2>
+{% endblock %}
+
+
+{% block content %}
+
+{% regroup object_list|dictsort:"colorstyle" by colorstyle as colorstyles %}
+<ul>
+    {% for photo in colorstyles %}
+        {% for attr in photo.list %}
+        {% if forloop.counter0|divisibleby:"4" %}<span>{% endif%}
+        {% ifchanged %}{{ attr.colorstyle }}
+        <br>
+        {% else %}
+        <a href="{{ attr.file_path }}">{% debug %}
+        <li>{{ attr.photo_date|date:"F j, Y" }}: {{ attr.colorstyle }}--{{ attr.alt }}</li>
+        <img height="150px" src="{{ attr.file_path }}" alt="{{ attr.alt }}" /></a>
+
+        {% if forloop.last or forloop.counter0|divisibleby:"4" %}</span>{% endif %}
+        {% endifchanged %}
+        {% endfor %}
+        <br>
+    {% endfor %}
+</ul>
+<p>
+    {% if previous_week %}
+        Previous Week: {{ previous_week|date:"F Y" }}
+    {% endif %}
+    {% if previous_week and next_week %}--{% endif %}
+    {% if next_week %}
+        Next week: {{ next_week|date:"F Y" }}
+    {% endif %}
+</p>
+
+
+{% endblock %}

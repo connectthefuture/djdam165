@@ -1,0 +1,43 @@
+{% extends "search_results.html" %}
+
+{% block image_results_group %}
+
+
+
+{% regroup results|dictsort:"colorstyle" by colorstyle as colorstyles %} 
+
+<ul>
+{% for style in colorstyles %}
+    <li>{{ style.grouper }}
+    <ul>
+        {% for attr in style.list %}
+          <li>{{ attr.name }}: {{ attr.url }}</li>
+        {% endfor %}
+    </ul>
+    </li>
+{% endfor %}
+</ul>
+{% for result in results %}
+    {% if forloop.counter0|divisibleby:"3" %}<span class="col-md-4">{% endif%}
+     <a href="{{ result.file_path }}">
+      {# <img class="img-thumbnail rounded" alt="{{ result.shot_number }}" height="150" src="{{ result.file_path }}" width="100"/> #}
+      {# <img alt="{{ result.shot_number }}" src="{{ settings.MEDIA_URL }}{{ result.file_path }}" width="100"/> #}
+      {% load thumbnail %}
+      {% thumbnail result.file_path "x150" crop="center" as im %}
+        <img src="{{ im }}" alt="{{ result.photo_date }}">
+      {% endthumbnail %}
+     </a>
+    {% if forloop.last or forloop.counter|divisibleby:"3" %}</span>{% endif %}
+  {# endfor #}<br/>
+{% comment %}
+
+    {% block metadata_modal_entry %}
+    {% endblock %}    
+
+{% endcomment %}
+{% endfor %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,191 @@
+{% extends "search_results.html" %}
+
+<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}uploader/css/style.css">
+{% comment %}
+<link  href="http://fotorama.s3.amazonaws.com/4.4.9/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+<script src="http://fotorama.s3.amazonaws.com/4.4.9/fotorama.js"></script> <!-- 15 KB -->
+{% endcomment %}
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+
+{% block header %}
+<h3>Found {{ images|length }} result{{ images|pluralize }}</h3>
+{% endblock %}
+
+{% block image_results %}
+{% regroup images by colorstyle as colorstyles %}
+
+
+<div class="container">
+{% for groups in colorstyles %}
+<table class="table table-bordered table-striped">
+
+
+
+                {#{% block image_results_group_title %}{% endblock %}#}
+{#  <table class="table table-bordered table-striped">#}
+    {#style=""#}
+{% for image in groups.list %}
+      <tr>
+      <td>
+      <button class="btn btn-danger btn-mini" data-toggle="modal" data-target="#myModal{{ image.pk }}"><span class="glyphicon glyphicon-file"></span> Edit Metadata </button>
+      </td>
+
+    <div class="modal fade" id="myModal{{ image.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel{{ image.pk }}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel{{ image.pk }}">{{ image.file_path }}</h4>
+        </div>
+        <form enctype="multipart/form-data" action="/searcher/metadata/edit/{{ image.pk }}/" method="post">
+                <!--{% comment %}-->
+           <!--<form enctype="multipart/form-data" action="metadata/edit//{{ image.pk }}/{{ image.colorstyle }}/{{ image.alt }}/{{ image.shot_number }}/" method="post">-->
+                <!--{% endcomment %}-->
+                {% csrf_token %}
+
+            <div class="modal-body">
+              {# block modal_body %} {% endblock #}
+              <p>Colorstyle:  {{ image.colorstyle }}</p>
+              <p><label for="imagepk">PK: </label><input type="text" id="imagepk" name="imagepk" value="{{ image.pk }}" /></p>
+              <p><label for="alt">Alt Number: </label><input type="text" name="alt" id="alt" value="{{ image.alt }}" /></p>
+              <p><label for="shot_number">Shot Number: </label><input type="text" name="shot_number" id="shot_number" value="{{ image.shot_number }}" /></p>
+              <p><label for="photo_date">Photo Date: </label><input type="date" name="photo_date" id="photo_date" value="{{ image.photo_date }}" /></p>
+              <p><label for="brand">Brand: </label><input type="text" name="brand" id="brand" value="{{ image.styledata.brand }}" /></p>
+              <p><label for="file_path">Source URL: </label><input type="url" name="file_path" id="file_path{{ image.pk }}" value="http:/{{ image.file_path }}" /></p>
+              <p><label for="modelname">Model: </label><input type="text" name="modelname" id="modelname" value="{{ styledata.model }}" /></p>
+              <p><label for="notes">Notes: </label><input type="text" name="notes" id="notes" value="{{ image.notes.notes }}" /></p>
+                                                   <input type="hidden" name="file_path" id="file_path{{ image.pk }}" value="{{ image.file_path }}">
+
+              <button type="submit" id="submit" name="submit" class="btn btn-primary">
+                  Save changes
+              </button>
+
+              <a href="{{ image.file_path }}"><img class="img-rounded" style="width: 240px;" alt="{{ image.colorstyle }}"
+                    {% if image.shot_number %}
+                    src="{{ image.file_path }}_thumb"/>
+
+                    {% elif image.alt and image.alt == '1' %}
+                    src="/zImages/{{ image.colorstyle|stringformat:'.4s' }}/{{ image.colorstyle }}_{{ image.alt }}.jpg"/>
+
+                    {% elif image.alt and image.alt != '1' %}
+                    src="/zImages/{{ image.colorstyle|stringformat:'.4s' }}/{{ image.colorstyle }}_{{ image.alt }}.jpg"/>
+
+                    {% else %}
+                    src="{{ image.file_path }}"/>
+
+                    {% endif %}
+              </a>
+            </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="submit" id="submit" name="submit" class="btn btn-primary">
+                    Save changes
+                </button>
+              </div>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal-fade -->
+    <!-- </div> /.modal-container-interior -->
+
+    <!-- /.modal -->
+    <td>
+        <form enctype="multipart/form-data" action="/searcher/mark-selected/{{ image.pk }}/" method="POST">
+            {#{{ image.colorstyle }}/{{ image.alt }}/{{ image.shot_number }}#}
+        {% csrf_token %}
+            <input type="hidden" name="selectedFiles" id="CheckedBoxes" value="{{ image.file_path }}">
+
+            {% comment %}<div class="fotorama" data-click="true" data-thumbheight="120" data-loop="true">{% endcomment %}
+            <a href="{{ image.file_path }}">
+                <img class="img-rounded" style="width: 180px;" alt="Alt{{ image.colorstyle }}"
+                {% if image.shot_number %}
+                src="{{ image.file_path }}_thumb"/>
+
+                {% elif image.alt and image.alt == '1' %}
+                src="/zImages/{{ image.colorstyle|stringformat:'.4s' }}/{{ image.colorstyle }}_{{ image.alt }}.jpg"/>
+
+                {% elif image.alt and image.alt != '1' %}
+                src="/zImages/{{ image.colorstyle|stringformat:'.4s' }}/{{ image.colorstyle }}_{{ image.alt }}.jpg"/>
+
+                {% else %}
+                src="{{ image.file_path }}"/>
+
+                {% endif %}
+            </a>
+            IMG
+           {% comment %} </div>{% endcomment %}
+
+            <label for="isselected{{ image.pk }}" class="btn btn-mini btn-warning">
+            <input type="checkbox"name="imagepk" class="a-checkbox" id="isselected{{ image.pk }}" value="{{ image.pk }}"> {{ image.colorstyle }}
+            </label>
+            <input type="hidden" name="file_path" id="file_path{{ image.pk }}" value="{{ image.file_path }}">
+            <button type="submit" name="submit" class="btn btn-mini btn-success" value="SubmitSelect"><span class="glyphicon glyphicon-edit"></span>
+                SubmitSelection
+            </button>
+        </form>
+    </td>
+    </tr>
+
+    <tr>
+        <th> Style Number</th>
+        <td> {{ image.colorstyle }}</td>
+       </tr>
+    <tr>
+
+        <th align="left" scope="row"> Brand</th>
+        <td> {{ styledata.brand }}</td>
+       </tr>
+    <tr>
+        <th align="left" scope="row"> PO Number</th>
+        <td> {{ styledata.po_number }}</td>
+    </tr>
+    <tr>
+        <th align="left" scope="row"> Photo Date</th>
+        <td><span class="glyphicon glyphicon-calendar"></span> {{ image.photo_date }}</td>
+   </tr>
+    <tr>
+        <th align="left" scope="row"> Alt Img Number</th>
+        <td><span class="glyphicon glyphicon-hand-right"></span> {{ image.alt }}</td>
+    </tr>
+
+  {% if image.shot_number %}
+    <tr>
+        <th> Shot Number</th>
+        <td><span class="glyphicon glyphicon-camera"></span>  {{ image.shot_number }}</td>
+    </tr>    
+  {% endif %}
+  
+  {% if image.model_name %}
+    <tr>
+        <th> Model Name</th>
+        <td><span class="glyphicon glyphicon-camera"></span>  {{ image.model_name }}</td>
+    </tr>    
+  {% endif %}
+{% endfor %}
+
+
+{% comment %}
+</div></div>
+<div class="row">
+    <div class="col-md-12"> {# endcomment #} {# <a href="{{ image.file_path }}">#}
+            <form enctype="multipart/form-data" action="mark-as-selected/" method="post">IMG
+                <input class="checkbox" type="checkbox" name="isselected1" id="isselected1" selected="selected" value="isselected" />{{ image.shot_number }}
+               <button type="submit" name="submit" class="btn btn-mini" value="SubmitSelect"></button>
+               <img class="img-rounded" height="180" alt="Alt{{ image.colorstyle }}" src="{{ image.file_path_thumb }}"/>
+            </form>
+            </a>
+        <h4 class="media-heading">{{ groups.grouper }}MEDIAHEADING</h4>{% if forloop.last or forloop.counter0|divisibleby:"12" %}</div></div>Endimggroup
+<hr>{% endif %}
+{% endcomment %}
+</table><!-- table close-->
+{% endfor %}
+
+<p>ENDLASTFORLOOPFORPAGEALLGROUOP</p>
+</div><!-- container close-->
+{% endblock %}

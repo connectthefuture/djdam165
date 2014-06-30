@@ -1,0 +1,124 @@
+@CHARSET "UTF-8";
+/*!
+ * OVERIDES STANDARD CSS SETTINGS for Bootstrap v3.0.2 by @fat and @mdo
+ */
+
+/*! normalize.css v2.1.3 | MIT License | git.io/normalize */
+
+/* This fixes the navbar collapse issue by deprioritizing the bg*/
+/*.navbar-inner
+{
+  background: none !important;
+}*/
+
+
+/* Custom button Twitter
+-------------------------------------------------- */
+
+/* Override base .btn styles */
+/* Apply text and background changes to three key states: default, hover, and active (click). */
+/*.btn-ttc,*/
+/*.btn-ttc:hover,*/
+/*.btn-ttc:active {*/
+  /*color: white;*/
+  /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);*/
+  /*background-color: #007da7;*/
+/*}*/
+
+/* Apply the custom-colored gradients */
+/* Note: you'll need to include all the appropriate gradients for various browsers and standards. */
+/*.btn-ttc {*/
+  /*background-repeat: repeat-x;*/
+  /*background-image: linear-gradient(top, #009ED2 0%, #007DA7 100%);*/
+ /*}*/
+
+/* Set the hover state */
+/* An easy hover state is just to move the gradient up a small amount. Add other embellishments as you see fit. */
+/*.btn-ttc:hover {*/
+  /*background-position: 0 -15px;*/
+/*}*/
+
+
+/*
+
+div.button 
+	{
+	font-size: medium;
+	font-weight: normal;
+	color: rgb(210,210,215);
+	background-color: rgb(0,0,51);
+	display: inline;
+	text-align: justify;
+	float: inherit;
+	height: auto;
+	width: auto;
+body
+	{
+	background-color: rgb(215,215,215);
+}
+
+input
+	{
+
+}
+
+img
+	{
+
+}
+
+
+div.oldbutton
+	{
+	font-size: medium;
+	font-weight: normal;
+	color: rgb(210,210,215);
+	background-color: rgb(0,0,51);
+	display: inline;
+	text-align: justify;
+	float: inherit;
+	height: auto;
+	width: auto;
+}
+
+#submit_params
+	{
+	font-variant: small-caps;
+	color: #FFF;
+	background-color: #666;
+	text-align: justify;
+	display: inline;
+	padding: 1px;
+	border-top-color: #CF0;
+	border-right-color: #CF0;
+	border-bottom-color: #CF0;
+	border-left-color: #CF0;
+}
+
+#table_params
+	{
+	border: thin inset #006;
+	overflow: auto;
+	position: relative;
+	text-align: left;
+	vertical-align: auto;
+	display: inline-table;
+	font-size: medium;
+	font-weight: bold;
+	padding: 11px;
+}
+
+#formsearchmulti {
+
+}
+#lavenderborder {
+
+    border-color: lavender;
+    border: lavender;
+}
+form {
+
+}*/
+
+
+

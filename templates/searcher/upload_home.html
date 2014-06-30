@@ -1,0 +1,148 @@
+{% extends 'base/jbhome.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1>File Uploader</h1>
+    <form action="searcher/excel/upload/" method="post" id="upload" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Upload" />
+    </form>
+    <hr>
+    <form action="searcher/api/v1/pmdata/" method="post" id="searchForm" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+        <input type="text" id="input_colorstyle" name="input_colorstyle" placeholder="enter colorstyles" >
+        <input type="text" id="output_colorstyle" name="output_colorstyle" placeholder="matching colorstyles">
+        <div id=""> <input type="text" id="output_vendor_style" name="output_vendor_style" placeholder="matching vendor_styles"></div>
+        <input type="text" id="output_color_group_id" name="output_color_group_id" placeholder="color group">
+        <input type="text" id="output_po_number" name="output_po_number" placeholder="po number">
+        <p>
+        <input type="text" id="input_list" name="input_list" placeholder="list-styles">
+        <input type="text" id="output_list" name="output_list" placeholder="result">
+        <input type="submit" value="Submit" />
+    </form>
+
+{% comment %}
+{% if files %}
+    {% for file in files %}
+            {{ forloop.counter }}.<a href="{{ file.file_path }}">{{ file.file_name }}</a>
+            ({{ file.modify_dt }})<hr />
+    {% endfor %}
+    {% endif %}
+{% endcomment %}
+
+</div>
+
+<div id="result_success"></div>
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#searchForm").submit(function (event) {
+        // Stop form from submitting normally
+        event.preventDefault();
+        // Get some values from elements on the page:
+        var $form = $(this),
+                inputterm = $form.find("input[name='input_list']").val(),
+                url = $form.attr("action");
+
+        // Send the data using post
+        var posting = $.post(url, { input_list: inputterm });
+
+        // Put the results in a div
+        posting.done(function (data) {
+            var content = $(data).find("#result_success");
+            $("#output_list").empty().append(content);
+        })
+    })
+})
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#override_input_list").change(function () {
+        var val = $(this).val();
+        if(val == "") return;
+        $.getJSON("http://prodimages.ny.bluefly.com/api/v1/excel-view-vendorstyle-lookup/?format=json", 
+            {"output_colorstyle":val}, 
+            function(response,code) {
+            $("#output_colorstyle").val(response.colorstyle);
+            $("#output_vendor_style").val(response.vendor_style);
+            $("#output_color_group_id").val(response.color_group_id);
+        })
+    })
+})
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#input_colorstyle").blur(function () {
+        $.post("http://prodimages.ny.bluefly.com/api/v1/excel-tool-data/" + $("#input_colorstyle").val() + "/?format=json",
+        {output_vendor_style: $(this).val()},
+        function (data) {
+            $("#output_vendor_style").val(data);
+        });
+    });
+});
+</script>
+
+{#  comment #}
+<script>
+$(document).ready(function() {
+    $("#input_clrstyle").bind("change", function (e) {
+        $.getJSON("http://prodimages.ny.bluefly.com/api/v1/excel-view-vendorstyle-lookup/" + $("#input_colorstyle").val() + "/?format=json",
+        function (data) {
+            $.each(data, function (i, item) {
+                if (item.field == "output_colorstyle") {
+                    $("#colorstyle").val(item.value);
+                } else if (item.field == "output_vendor_style") {
+                    $("#vendor_style").val(item.value);
+                } else if (item.field == "output_color_group_id") {
+                    $("#output_color_group_id").val(item.value);
+                } else if (item.field == "output_po_number") {
+                    $("#po_number").val(item.value);
+                }
+            });
+        });
+    });
+})
+</script>
+{#  endcomment #}
+<script>
+$(document).ready(function() {
+    $("#input_list").change(function () {
+        $.ajax({
+            url: 'http://prodimages.ny.bluefly.com/api/v1/excel-tool-data/',
+            type: 'GET',
+            accepts: 'application/json',
+            dataType: 'json',
+            data: {input_list: $(this).val(),
+                output_list: $("#output_list").val()
+            },
+            success: function (response) {
+                $("#output_list").html(response)
+            }
+        })
+    })
+})
+</script>
+
+
+<script>
+$(document).ready(function() {
+    $("#po_number").bind("change", function (e) {
+        $.getJSON("http://prodimages.ny.bluefly.com/api/v1/excel-view-vendorstyle-lookup/" + $("#input_colorstyle").val() + "/?format=json",
+                {colorstyle: $(this).val()}, function (data) {
+                    $("#colorstyle").val(data.colorstyle);
+                    $("#vendor_style").val(data.vendor_style);
+                    $("#color_group_id").val(data.color_group_id);
+                    $("#po_number").val(data.color_group_id);
+                })
+    })
+})
+</script>
+
+{% endblock %}

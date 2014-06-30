@@ -1,0 +1,26 @@
+<h1>{{ day }}</h1>
+<h2><p>Looks like {{ object_list|length }} shot on {{ day }}.</p></h2>
+<ul>
+    {% for photo in object_list %}
+        <a href="{{ photo.file_path }}">
+        <li>
+            {% load thumbnail %}
+            {% thumbnail photo.file_path "100x150" crop="center" as im %}
+                <img src="{{ im }}" alt="{{ photo.photo_date }}">
+            {% endthumbnail %}
+        </li>
+        <li>{{ photo.photo_date|date:"F j, Y" }}: {{ photo.colorstyle }}--{{ photo.alt }}</li></a>
+        <br>
+    {% endfor %}
+</ul>
+
+
+<p>
+    {% if previous_day %}
+        Previous Day: {{ previous_day }}
+    {% endif %}
+    {% if previous_day and next_day %}--{% endif %}
+    {% if next_day %}
+        Next Day: {{ next_day }}
+    {% endif %}
+</p>

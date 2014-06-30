@@ -1,0 +1,17 @@
+{% extends "base/jbhome.html" %}
+{% load url from future %}
+{% load i18n %}
+
+{% block title %}{% trans "Images" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Images" %}</h1>
+    <p>
+        {% for instance in images %}
+            <a href="{% url "change_image" image_id=instance.pk %}">
+                <img alt="{{ instance.title }}" src="{{ MEDIA_URL }}{{ instance.image.name }}" />
+            </a>
+        {% endfor %}
+    </p>
+    <p><a href="{% url "addedit_image" %}">{% trans "Add image" %}</a></p>
+{% endblock %}

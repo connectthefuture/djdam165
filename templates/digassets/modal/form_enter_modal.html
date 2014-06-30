@@ -1,0 +1,53 @@
+{% extends "image/image_results.html" %}{# extends base/jbhome.html #}
+
+{% block modal_form_submit %}
+
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch ImageAlbum modal</a>
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">{{ modal_form_header }}</h3>
+    </div>
+    <div class="modal-body">
+        <form id="myForm" method="post" action="." method="post" enctype="multipart/form-data">
+              {{ImageForm.colorstyle}} <br />
+              {{AlbumForm.title}} <br />
+              {{MetadataForm.metadata_type}} <br />
+              {{MetadataForm.metadata_tag}} <br />
+              {{MetadataForm.metadata_value}} <br />
+
+              <input type="submit" value="Save" />
+          
+        </form>
+
+          <input type="hidden" value="helloSubmitedFormDataFieldValueForDB" id="myField">
+            <button id="myFormSubmit" type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary">Save changes</button>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+##And the jquery ajax to get the form fields and submit it..
+{% block js %}
+
+$('#myFormSubmit').click(function(e){
+      e.preventDefault();
+      alert($('#myField').val());
+      /*
+      $.post('http://path/to/post', 
+         $('#myForm').serialize(), 
+         function(data, status, xhr){
+           // do something here with response;
+         });
+      */
+});
+
+{% endblock %}

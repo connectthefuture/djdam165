@@ -1,0 +1,45 @@
+{% extends 'base/jbhome.html' %}
+
+{% block content %}
+
+<h1>File Upload Test</h1>
+<!--class='upload-form image'-->
+    	<!-- List of uploaded documents -->
+{% comment %}
+        {% if files %}
+        <ul>
+        {% for file in files %}
+        <li><a href="{{ file.file.url }}">{{ file.file.name }}</a></li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <p>No Files Here.</p>
+        {% endif %}
+{% endcomment %}
+
+    <form  method="POST" action="{% url 'input_merge_list' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset><legend>UploadedImage Upload</legend>
+        <div id="excel_file_upload">
+                <p>{{ form.non_field_errors }}</p>
+                <p>{{ form.input_list}} {{ form.output_list }}</p>
+                <p>
+                {{ form.file_path.errors }}
+                {{ form.file_path }}
+                </p>
+                <input type="text" name="input_list">
+                <input type="text" name="output_list">
+                <input type="file" name="file">
+                <button class="btn-success" type="submit" name="submit"> SubmitFile
+                </button>
+        </div>
+            <div>
+
+                <button class="btn-success" type="submit" name="submit"> SubmitFile
+                    </button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}
+
+

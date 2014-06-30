@@ -1,0 +1,56 @@
+{% extends "../../../base/templates/_layouts/base.html" %}
+
+{% block page_title %}Search Results{% endblock %}
+
+{% block body %}
+
+{% block result_summary %}
+<span><p>Your Search Result Summary based on: <strong>{{ query }}</strong></p></span>
+{% endblock %}
+
+
+{% if results %}
+    <p>Found {{ results|length }} result{{ results|pluralize }}.</p>
+	
+	{% block content %}
+	{% for result in results %}
+	  <div class="imgtitle">
+	   <b>{{ result.colorstyle }} {{ result.shot_number }}</b>
+	  </div>
+	  <a href="{{ result.file_path }}">
+	   <img class="img-rounded" alt="{{ result.shot_number }}" height="180" src="{{ result.file_path }}" width="150"/>
+	  </a>
+	  <div id="infotable" >
+	  <table class="table table-striped" border="1" cols="2" width="80">
+	   <tbody>
+	    <tr>
+	     <th align="left" scope="row"> Style Number </th>
+	     <td>{{ result.colorstyle }}</td>
+	    </tr>
+	    <tr>
+	     <th align="left" scope="row"> Brand </th>
+	     <td>{{ result.alt }}</td>
+	    </tr>
+	    <tr>
+	     <th align="left" scope="row"> Photo Date </th>
+	     <td>{{ result.photo_date }}</td>
+	    </tr>
+	    <tr>
+	     <th align="left" scope="row"> Alt Img Number </th>
+	     <td>{{ result.alt }}</td>
+	    </tr>
+	    <tr>
+	     <th align="left" scope="row"> Shot Number </th>
+	     <td>{{ result.shot_number }}</td>
+	    </tr>
+	   </tbody>
+	  </table>
+	  <hr align="left" color="#336699" size="2" width="25%"/>
+	{% endfor %}
+	{% endblock %}
+
+{% else %}
+    <p>Nothing matched your search criteria.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "listing/image_list_page.html" %}
+
+{# {% extends "search_results.html" %} #}
+
+{% block imagetable %}
+    <div id="container">
+     
+
+          <table class="table table-striped table-hover table-responsive">
+           <tbody>
+            <tr>
+             <th align="left" scope="row"> Style Number </th>
+             <td>{{ result.colorstyle }}</td>
+            </tr>
+            <tr>
+             <th align="left" scope="row"> Brand </th>
+             <td>{{ result.alt }}</td>
+            </tr>
+            <tr>
+             <th align="left" scope="row"> Photo Date </th>
+             <td>{{ result.photo_date }}</td>
+            </tr>
+            <tr>
+             <th align="left" scope="row"> Alt Img Number </th>
+             <td>{{ result.alt }}</td>
+            </tr>
+            <tr>
+             <th align="left" scope="row"> Shot Number </th>
+             <td>{{ result.shot_number }}</td>
+            </tr>
+           </tbody>
+          </table>
+
+
+    </div>
+{% endblock %}

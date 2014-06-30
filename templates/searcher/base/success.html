@@ -1,0 +1,84 @@
+{% extends "search_results.html" %}
+{% block content %}
+
+{% if user_index or imagepk %}
+
+    <h3>{{ imagepk }} has been added!!</h3>
+
+    <h4>Congrats, on your success. You did great!</h4>
+
+
+    <img class="img-rounded" style="width: 180px;" alt="Alt{{ image.colorstyle }}"
+
+        {% if image.shot_number %}
+        src="{{ image.file_path }}_thumb"/>
+
+        {% elif image.alt and image.alt == '1' %}
+        src="/zImages/{{ image.colorstyle|stringformat:'.4s' }}/{{ image.colorstyle }}_{{ image.alt }}.jpg"/>
+
+        {% elif image.alt and image.alt != '1' %}
+        src="/zImages/{{ image.colorstyle|stringformat:'.4s' }}/{{ image.colorstyle }}_{{ image.alt }}.jpg"/>
+
+        {% else %}
+        src="{{ image.file_path }}"/>
+
+        {% endif %}
+
+    <div class="container">
+    {% for fpath in user_index %}
+
+     <div class="row">
+
+        {% if forloop.first or forloop.counter0|divisibleby:12 %}
+
+        <div class="col-lg-12 col-md-12">
+        {% endif %}
+
+        <a href="{{ fpath.file_path }}">
+        <img class="img-rounded" style="width: 100px;" alt="Alt{{ fpath.colorstyle }}"
+
+        {% if image.shot_number %}
+        src="{{ fpath.file_path }}_thumb"/>
+        {% else %}
+        src="{{ fpath.file_path }}"/>
+        {% endif %}
+        </a>
+
+        <form enctype="multipart/form-data" action="/searcher/mark-removed/{{ image.pk }}/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="file_path" id="file_path{{ image.pk }}" value="{{ image.file_path }}">
+        <input type="hidden" name="selectedFiles" id="CheckedBoxes">
+        <label for="toremove{{ image.pk }}" class="btn btn-xs btn-danger">
+            <input type="checkbox" name="imagepk" class="a-checkbox" id="toremove{{ image.pk }}" value="{{ image.pk }}"> {{ image.colorstyle }}
+        <button type="submit" name="submit" class="btn btn-sm btn-danger" value="RemoveSelect"><span class="glyphicon glyphicon-trash"></span>
+        Remove
+        </button>
+        </label>
+
+
+
+        </form>
+{% comment %}
+
+        {% elif image.alt and image.alt == '1' %}
+        src="/zImages/{{ image.colorstyle|stringformat:'.4s' }}/{{ image.colorstyle }}_{{ image.alt }}.jpg"/>
+
+        {% elif image.alt and image.alt != '1' %}
+        src="/zImages/{{ image.colorstyle|stringformat:'.4s' }}/{{ image.colorstyle }}_{{ image.alt }}.jpg"/>
+{% endcomment %}
+
+
+
+        {% if forloop.last or forloop.counter0|divisibleby:12 %}
+        </div>
+
+        {% endif %}
+        </div>
+
+    {% endfor %}
+    </div>
+
+{% endif %}
+
+
+{% endblock %}

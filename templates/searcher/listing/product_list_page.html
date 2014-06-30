@@ -1,0 +1,13 @@
+{% extends "search_results.html" %}
+
+{% block content %}
+
+
+{% for product in product_list %}
+
+    {{ product.colorstyle }}  <br />
+
+{% endfor %}
+
+
+{% endblock %}

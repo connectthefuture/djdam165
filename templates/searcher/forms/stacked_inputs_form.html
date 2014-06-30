@@ -1,0 +1,50 @@
+
+<form action="." class="form-inline" method="post">{% csrf_token %}
+    <div style='display:none'></div>
+
+    <div>
+        <input type="hidden" name="form-TOTAL_FORMS" value="2" id="id_form-TOTAL_FORMS" />
+        <input type="hidden" name="form-INITIAL_FORMS" value="0" id="id_form-INITIAL_FORMS" />
+        <input type="hidden" name="form-MAX_NUM_FORMS" value="1000" id="id_form-MAX_NUM_FORMS" />
+    </div>
+
+    <div id="div_id_form-0-name" class="control-group">
+        <div class="controls">
+            <input name="form-0-name" maxlength="50" placeholder="Name" type="text" class="textinput textInput" id="id_form-0-name" />
+        </div>
+    </div>
+
+    <div id="div_id_form-0-favorite_food" class="control-group">
+        <div class="controls">
+            <input name="form-0-favorite_food" maxlength="50" placeholder="Favorite food" type="text" class="textinput textInput" id="id_form-0-favorite_food" />
+        </div>
+    </div>
+
+    <div id="div_id_form-0-favorite_game" class="control-group">
+        <div class="controls">
+            <input name="form-0-favorite_game" maxlength="50" placeholder="Favorite game" type="text" class="textinput textInput" id="id_form-0-favorite_game" />
+        </div>
+    </div>
+
+    <div id="div_id_form-1-name" class="control-group">
+        <div class="controls">
+            <input name="form-1-name" maxlength="50" placeholder="Name" type="text" class="textinput textInput" id="id_form-1-name" />
+        </div>
+    </div>
+
+    <div id="div_id_form-1-favorite_food" class="control-group">
+        <div class="controls">
+            <input name="form-1-favorite_food" maxlength="50" placeholder="Favorite food" type="text" class="textinput textInput" id="id_form-1-favorite_food" />
+        </div>
+    </div>
+
+    <div id="div_id_form-1-favorite_game" class="control-group">
+        <div class="controls">
+            <input name="form-1-favorite_game" maxlength="50" placeholder="Favorite game" type="text" class="textinput textInput" id="id_form-1-favorite_game" />
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <input type="submit" name="submit" value="Submit" class="btn btn-primary" id="submit-id-submit" />
+    </div>
+</form>

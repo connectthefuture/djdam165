@@ -1,0 +1,34 @@
+{% extends 'base/jbhome.html' %}
+{% block content %}
+<form action="{% url 'input_merge_list' %}" class="form-inline" method="post">{% csrf_token %}
+    <div style='display:none'></div>
+
+    <div>
+        <input type="hidden" name="form-TOTAL_FORMS" value="2" id="id_form-TOTAL_FORMS" />
+        <input type="hidden" name="form-INITIAL_FORMS" value="0" id="id_form-INITIAL_FORMS" />
+        <input type="hidden" name="form-MAX_NUM_FORMS" value="1000" id="id_form-MAX_NUM_FORMS" />
+    </div>
+
+    <div>
+        <label for="file">Excel File</label>
+        <input name="file" type="file" />
+            <p>{{ form.non_field_errors }}</p>
+            <p>{{ form.input_list}} {{ form.output_list }}</p>
+            <p>
+            {{ form.file_path.errors }}
+            {{ form.file_path }}
+            </p>
+    </div>
+    <div>
+        <label for="input_list">Older PO</label>
+        <input name="input_list" type="text" />
+    </div>
+    <div>
+        <label for="input_list2">Newer PO</label>
+        <input name="input_list2" type="text" />
+    </div>
+    <div class="form-actions">
+        <input type="submit" name="submit" value="Submit" class="btn btn-primary" id="submit-id-submit" />
+    </div>
+</form>
+{% endblock %}

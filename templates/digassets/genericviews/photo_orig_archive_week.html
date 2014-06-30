@@ -1,0 +1,19 @@
+<h1>Week {{ week|date:'W' }}</h1>
+<h2><p>Found {{ object_list|length }} shot{{ object_list|pluralize }} this week.</p></h2>
+<ul>
+    {% for photo in object_list %}
+        <a href="{{ photo.file_path }}"
+        <li>{{ photo.photo_date|date:"F j, Y" }}: {{ photo.colorstyle }}--{{ photo.alt }}</li>
+        <img height="120px" src="{{ photo.file_path }}" alt="{{ photo.alt }}" /></a>
+        <br>
+    {% endfor %}
+</ul>
+<p>
+    {% if previous_week %}
+        Previous Week: {{ previous_week|date:"F Y" }}
+    {% endif %}
+    {% if previous_week and next_week %}--{% endif %}
+    {% if next_week %}
+        Next week: {{ next_week|date:"F Y" }}
+    {% endif %}
+</p>

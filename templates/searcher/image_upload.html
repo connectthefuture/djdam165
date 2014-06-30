@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>File Upload Test</h1>
+
+    <form class='upload-form image' method="POST" action="{% url upload_import_crop %}" enctype="multipart/form-data">
+        <fieldset><legend>UploadedImage Upload</legend>
+        <div class="progress"><span class="complete"></span></div>
+        {% comment %} Equivalent to: {{ image_form }} {% endcomment %}
+        {% with image_form as form %}
+            {% include "formfields.html" %}
+        {% endwith %}
+        </fieldset>
+    </form>
+{% endblock %}
+
+{% block page_templates %}
+    <div class="uploading-file">
+        <div class="status">Uploading</div>
+    </div>
+{% endblock %}
+
+{% block page_scripts %}
+{% comment %}JQuery UI Version of File Upload Plugin
+
+#https://github.com/blueimp/jQuery-File-Upload/tree/master/js
+{% endcomment %}
+<script src="{{STATIC_URL}}js/jquery.ui.widget.js"></script>
+<script src="{{STATIC_URL}}js/jquery.iframe-transport.js"></script>
+<script src="{{STATIC_URL}}js/jquery.fileupload.js"></script>
+
+<script type="text/javascript">
+$(document).ready( function() {
+    $('.upload-form').each( function() {
+        var form = $(this);
+        /* assumes you decorate each field with a class of field-fieldname */
+        var file_field = form.find( '.field-file input' );
+        var progress = form.find( '.progress' );
+        var find_progress = function( fileInput ) {
+            /* find the project info related to this fileInput instance */
+            var result = null;
+            progress.find( '.uploading-file' ).each( function() {
+                if ($(this).data( 'fileInput' ) === fileInput){
+                    result = $(this);
+                }
+            });
+            return result;
+        };
+        file_field.fileupload({
+            dataType: 'json',
+            url: form.attr( 'action' ),
+            form: form,
+            dropZone: form,
+            add: function( e, data ) {
+                var this_status = $('.templates .uploading-file').clone();
+                progress.append( this_status );
+                this_status.data( 'fileInput', data.fileInput );
+                data.submit();
+            },
+            done: function (e, data) {
+                var status = find_progress( data.fileInput );
+                if (status) {
+                    $.each(data.result, function (index, file) {
+                        if (file.error) {
+                            status.html( 'Upload Failed' );
+                            if (file.error[field]) {
+                                /* show your errors to your users */
+                                status.addClass( 'error' );
+                            }
+                        } else {
+                            $('<p/>').text(file.name).appendTo(status);
+                            status.addClass( 'success' );
+                        }
+                    });
+                    status.fadeOut( 5000, function() {
+                        status.remove();
+                    });
+                    /* You'll likely need to refresh your local data now */
+                } else {
+                    console.log( "Got a done for a file that didn't upload" );
+                }
+            },
+            fail: function( e, data ) {
+                var status = find_progress( data.fileInput );
+                if (status) {
+                    status.html( 'Upload failed '+data.textStatus );
+                }
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
+
+
+{% comment %}
+'''Which takes your rendered ModelForm and renders it into the HTML, allowing you to submit whatever other fields you need (including hidden and csrf-protection fields) for your file upload.  Note that there's no submit/button here.  The file-upload plugin considers "select a file" to be a submit event.  You could defer the event by storing the "data" parameter in the "add" callback and then calling data.submit() in your button/submit handler for your form.  In any event, the js should likely *hide* the submit when activated so that regular click-to-submit uploading would still work.
+'''
+# The back-end is pretty similar to what you're familiar with if you do file model-form handling;
+# views.py
+@render_to_json
+def upload_image( request, image=None ):
+    if request.method == 'POST':
+        form = forms.UploadedImageForm( request.POST, files=request.FILES,instance=image )
+        if form.is_valid():
+            image = form.save()
+            if request.is_ajax():
+                return [{
+                    "name": os.path.basename(image.file.name),
+                    "size": form.cleaned_data['file'].size,
+                    "type": image.content_type,
+                }]
+            else:
+                messages.success( request, _("UploadedImage Uploaded"))
+        else:
+            if request.is_ajax():
+                return [{
+                    'error': dict([
+                        (k,unicode(v))
+                        for (k,v) in form.errors.items()
+                        
+                    ]),
+                }]
+            else:
+                messages.error( request, _("There was an error uploading your image: %(error)s")%{
+                    'error':unicode(form.errors.items())
+                })
+    return HttpResponseRedirect( reverse('content'))
+{% endcomment %}

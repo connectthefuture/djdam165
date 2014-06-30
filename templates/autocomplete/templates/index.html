@@ -1,0 +1,36 @@
+{% extends 'base/jbhome.html' %}
+ 
+
+ 
+{% block content %}
+ 
+<div>
+<input id="q" type="text"/>
+<input id="searchSubmit" type="submit" value="Search"/>
+<br/>
+<span class="hint">Type in a query string to search for users</span>
+<div class="margin">
+<span id="spinner"><img src="http://upload.wikimedia.org/wikipedia/commons/d/de/Ajax-loader.gif"/></span>
+<div id="results"></div>
+</div>
+</div>
+{% endblock %}
+
+{% block js %}
+ 
+<script type="text/javascript">
+$( document ).ready( function() {
+$( '#searchSubmit' ).click( function() {
+q = $( '#q' ).val();
+$( '#results' ).html( '&nbsp;' ).load( '{% url ajax_pmstyle_list %}?q=' + q );
+});
+});
+ 
+$( document ).ajaxStart( function() {
+$( '#spinner' ).show();
+}).ajaxStop( function() {
+$( '#spinner' ).hide();
+});
+</script>
+ 
+{% endblock %}

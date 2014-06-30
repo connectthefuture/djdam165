@@ -1,0 +1,96 @@
+{% extends 'base/jbhome.html' %}
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+{% block content %}
+<form action="#" id="searchForm">
+  <input type="text" name="input_list" placeholder="Search...">
+  <input type="submit" value="Submit">
+
+<!-- the result of the search will be rendered inside this div -->
+<div id="result"><input type="text" id="output_list" name="r" placeholder="Search..."></div>
+
+</form>
+
+<form action="#" id="input_list_form" enctype="multipart/form-data">
+  <input type="text" name="input_list" placeholder="Enter StyleList...">
+  <input type="submit" value="Search">
+</form>
+{% for row in results %}
+<form action="#" id="form{{ row.pk }}" enctype="multipart/form-data">
+  <table class='table-responsive'>
+    <tr>
+      <td>{{ row.colorstyle }}</td>
+      <input type="text" name="nameColorstyle" id='idColorstyle' value="{{ row.colorstyle }}">
+    </tr>
+    <tr>
+      <td>{{ row.po_number }}</td>
+      <input type="text" name="namePoNumber" id='idPoNumber' value="{{ row.po_number }}">
+    </tr>
+    <tr>
+      <td>{{ row.brand }}</td>
+      <input type="text" name="nameBrand" id='idBrand' value="{{ row.brand  }}">
+    </tr>
+    <tr>
+      <td>{{ row.vendor_style }}</td>
+      <input type="text" name="nameVendorStyle" id='idVendorStyle' value="{{ row.vendor_style  }}">
+    </tr>
+  </table>
+  <input type="submit" value="Submit">
+</form>
+{% endfor %}
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+// Attach a submit handler to the form
+// $.ajax({
+//   url: '/path/to/file',
+//   type: 'GET',
+//   dataType: 'json',
+//   data: {param1: 'value1'},
+// })
+
+
+$( "#searchForm" ).submit(function( event ) {
+ 
+  // Stop form from submitting normally
+  event.preventDefault();
+ 
+  // Get some values from elements on the page:
+  var $form = $(this),
+    inputterm = $form.find( "input[name='input_list']" ).val(),
+    url = $form.attr( "action" );
+ 
+  // Send the data using post
+  var posting = $.post( url, { input_list: inputterm } );
+ 
+  // Put the results in a div
+  posting.done(function(data) {
+    var content = $(data).find( "#content" );
+    $( "#output_list" ).empty().append( content );
+  });
+});
+</script>
+
+<script>
+$("#input_list_form").submit(function() {
+
+    //var url = 'http://prodimages.ny.bluefly.com/api/v1/excel-tool-data/'; // the script where you handle the form input.
+    // var url = 'http://prodimages.ny.bluefly.com/searcher/ajax/colorstyle/';
+    //var url = '{% url 'searcher:views-ajax_colorstyle_search' %}';
+    var url = 'searcher/ajax/colorstyle';
+    $.ajax({
+           type: "get",
+           url: url,
+           data: $("#input_list_form").serialize(), // serializes the form's elements.
+           success: function(data) {
+                    alert(data); // show response from the php script.
+                    }
+         });
+
+    return false; // avoid to execute the actual submit of the form.
+});
+</script>
+ {% endblock %}

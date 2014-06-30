@@ -1,0 +1,66 @@
+{% extends "search_results.html" %}
+{#{% extends "search_results_imagetable.html" %}#}
+
+{% block content %}
+
+
+
+    {#   for image in imageset #}
+    {% if images %}
+        {% regroup images|dictsort:"colorstyle" by colorstyle as colorstyles %}
+        {#    {% for result in results %}#}
+        {# for row in result    TODO:REGROUP BY RESULT.COLORSTYLE #}
+        {# {% ifequal image.colorstyle result.colorstyle %} #}
+        {% for style in colorstyles %}
+            {% if forloop.first %}
+                {% block imagetable %}{% endblock %}
+            {%  endif  %}
+        {% for attr in style.list %}
+
+            {% if forloop.counter0|divisibleby:"3" %}<span class="col-md-4 col-sm-4">{% endif %}
+            {#                 <a href="{{ result.file_path }}"> #}
+                    {% load thumbnail %}
+                        <div class="media">
+                            <a href="{{ attr.url }}">
+                                <img class="img-thumbnail" height="200" alt="Alt{{ attr.colorstyle }}" src="{{ attr.file_path }}"/>
+                            </a>
+
+                            <div class="media-body">
+                                <h4 class="media-heading">{{ style.grouper }}</h4>
+                            </div>
+                        </div>
+{#                     <img class="img-responsive" alt="{{ result.shot_number }}" src="{{ result.file_path }}" width="100"/> #}
+                {#    </a><p>{{ result.colorstyle }}</p> #}
+            {% if forloop.last or forloop.counter0|divisibleby:"3" %}</span>{% endif %}
+            {# {% if result %} #}
+            {#                {% block imagetable %}{% endblock %}#}
+            {# {% endif %} #}
+            {#{% endifequal %} #}
+        {% endfor %}
+        {% endfor %}
+
+        <br/>
+
+        <p>PARAGRAPH</p>
+        <br/>
+        {#    {% endfor %}#}
+        <div class="pagination">
+        <span class="step-links">
+        {% if results.has_previous %}
+            <a href="?page={{ results.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ results.number }} of {{ results.paginator.num_pages }}.
+        </span>
+
+        {% if results.has_next %}
+            <a href="?page={{ results.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+        </div>
+    {% else %}
+        <h2>Your Query Returned no Results</h2>
+    {% endif %}
+
+{% endblock %}

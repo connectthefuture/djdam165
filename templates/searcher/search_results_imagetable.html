@@ -1,0 +1,37 @@
+{#{% extends "listing/image_list_page.html" %}#}
+{# {% extends "search_results.html" %} #}
+
+{% block imagetable %}
+{# <div id="container"> #}
+            {# {% block image_results_group_title %}{% endblock %}#}
+            <table class="table table-bordered table-striped" style="width: 250px;">
+
+                <tbody>
+                <tr>
+                    <th> Style Number</th>
+                    <td>{{ image.colorstyle }}</td>
+                </tr>
+                <tr>
+                    <th align="left" scope="row"> Brand</th>
+                    <td>{{ styledata.brand }}</td>
+                </tr>
+                <tr>
+                    <th align="left" scope="row"> PO Number</th>
+                    <td>{{ styledata.po_number }}</td>
+                </tr>
+                <tr>
+                    <th align="left" scope="row"> Photo Date</th>
+                    <td>{{ image.photo_date }}</td>
+                </tr>
+                <tr>
+                    <th align="left" scope="row"> Alt Img Number</th>
+                    <td>{{ image.alt }}</td>
+                </tr>
+                <tr>
+                    <th align="left" scope="row"> Shot Number</th>
+                    <td>{{ image.shot_number }}</td>
+                </tr>
+                </tbody>
+            </table>
+{#     </div>#}
+{% endblock %}

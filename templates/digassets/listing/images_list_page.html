@@ -1,0 +1,58 @@
+{% extends "search_results.html" %}
+{#{% extends "search_results_imagetable.html" %}#}
+
+{% block content %}
+
+
+
+    {#   for image in imageset #}
+{% if results %}
+    
+    {% for result in results %}
+        {# for row in result    TODO:REGROUP BY RESULT.COLORSTYLE #}
+{# {% ifequal image.colorstyle result.colorstyle %} #}
+            {% if forloop.counter0|divisibleby:"3" %}<span class="col-md-4">{% endif%}
+{#                 <a href="{{ result.file_path }}"> #}
+                    {% load thumbnail %}
+                        <div class="media">
+                            <a class="pull-left" href="{{ result.file_path }}">
+                            <img class="media-object" alt="{{ result.shot_number }}" src="{{ result.file_path }}" width="120"/>
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{ result.colorstyle }}</h4>
+                            </div>
+                        </div>
+{#                     <img class="img-responsive" alt="{{ result.shot_number }}" src="{{ result.file_path }}" width="100"/> #}
+                {#    </a><p>{{ result.colorstyle }}</p> #}
+            {% if forloop.last or forloop.counter|divisibleby:"3" %}</span>{% endif %}
+                {# {% if result %} #}
+{#                {% block imagetable %}{% endblock %}#}
+                {# {% endif %} #}
+{#{% endifequal %} #}
+    {% endfor %}
+
+    <br />
+
+    <p>PARAGRAPH</p>
+    <br />
+{#    {% endfor %}#}
+<div class="pagination">
+    <span class="step-links">
+        {% if results.has_previous %}
+            <a href="?page={{ results.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ results.number }} of {{ results.paginator.num_pages }}.
+        </span>
+
+        {% if results.has_next %}
+            <a href="?page={{ results.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% else %}
+    <h2>Your Query Returned no Results</h2>
+{% endif %}
+
+{% endblock %}

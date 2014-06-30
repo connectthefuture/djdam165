@@ -1,0 +1,39 @@
+{% extends "_layouts/base.html" %}
+{# {% extends "base/resultbase.html" %} #}
+
+{% block page_title %}Search Results{% endblock %}
+
+
+{# block body #}
+
+
+
+
+{% block header %}
+
+{% endblock %}
+
+
+
+
+{% block content %}
+
+
+{% if images %}
+
+<span><p>Your Search Result Summary based on: <strong>{{ query }}
+    {#{ image.photo_date }#}
+    </strong></p>
+</span>
+
+          {% block image_results %}{% endblock %}
+
+
+{% else %}
+    <p>Nothing matched your search criteria.</p>
+{% endif %}
+{% endblock %}
+{# endblock #}
+
+
+

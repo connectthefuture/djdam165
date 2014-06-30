@@ -1,0 +1,17 @@
+<h2><p>Found {{ object_list|length }} shots{{ object_list|pluralize }} this year.</p></h2>
+<ul>
+    {% for date in date_list %}
+        <li>{{ date|date }}</li>
+    {% endfor %}
+</ul>
+
+<div>
+    <h1>All Photos for {{ year|date:"Y" }}</h1>
+<ul>
+    {% for photo in object_list %}
+        <a href="{{ photo.file_path }}"
+        <li>{{ photo.photo_date|date:"F j, Y" }}: {{ photo.colorstyle }}--{{ photo.alt }}</li></a>
+        <br>
+    {% endfor %}
+</ul>
+</div>

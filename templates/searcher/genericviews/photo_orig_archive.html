@@ -1,0 +1,8 @@
+<h2><p>Found {{ object_list|length }} result{{ object_list|pluralize }}.</p></h2>
+<ul>
+    {% for photo in object_list %}
+        <a href="{{ photo.file_path }}"
+        <li>{{ photo.photo_date|date:"F j, Y" }}: {{ photo.colorstyle }}--{{ photo.alt }}</li></a>
+        <br>
+    {% endfor %}
+</ul>

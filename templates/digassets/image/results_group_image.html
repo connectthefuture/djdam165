@@ -1,0 +1,34 @@
+{% extends "search_results.html" %}
+
+{% block image_results_group %}
+
+{% block image_results_group_title %} {% endblock %}
+
+
+
+    
+    {% for result in results %}
+        {# for row in result #}
+          {% if forloop.counter0|divisibleby:"3" %}<span class="col-sm-4">{% endif%}
+           <a href="{{ result.file_path }}">
+{#            <img class="img-thumbnail rounded" alt="{{ result.shot_number }}" height="150" src="{{ result.file_path }}" width="100"/> #}
+{#           <img alt="{{ result.shot_number }}" src="{{ settings.MEDIA_URL }}{{ result.file_path }}" width="100"/> #}
+            {% load thumbnail %}
+            {% thumbnail result.file_path "x150" crop="center" as im %}
+                <img src="{{ im.url }}" alt="{{ result.photo_date }}">
+            {% endthumbnail %}
+           </a>
+          {% if forloop.last or forloop.counter|divisibleby:"3" %}</span>{% endif %}
+        {# endfor #}<br/>
+{% comment %}
+
+          {% block metadata_modal_entry %}
+          {% endblock %}    
+
+{% endcomment %}
+    {% endfor %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,39 @@
+
+                {#{% block image_results_group_title %}{% endblock %}#}
+{#  <table class="table table-bordered table-striped">#}
+    {#style=""#}
+{% for image in groups.list %}
+
+{#                 {% csrf_token %} #}
+
+
+
+
+
+<ul id="lot-images" class="thumb-uploaders">
+    {% if form.errors %}
+        {% load load_form_objects %}
+        {% load_form_objects lot_form.images as images %}
+        {% for image in images %}
+        {% if image %}
+            <li>
+                <input type="hidden" name="images" value="{{image.id}}"/>
+                <div class="image">
+                    <div class="mask"></div>
+                    <img src="{{ image.get_thumbnail_url }}" alt=""/>
+                                            <a href="#" class="delete">Delete</a>
+                </div>
+            </li>
+        {% else %}
+            <li><a class="upload-medium"></a></li>
+        {% endif %}
+    {% endfor %}
+    {% else %}          
+    <li><a class="upload-medium"></a></li>
+    <li><a class="upload-medium"></a></li>
+    <li><a class="upload-medium"></a></li>
+    <li><a class="upload-medium"></a></li>
+    <li><a class="upload-medium"></a></li>
+    {% endif %}
+</ul>
+{% endfor %}
