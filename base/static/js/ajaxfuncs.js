@@ -1,6 +1,134 @@
 /**
  * Created by johnb on 12/5/13.
  */
+ 
+ 
+/////
+$(document).ready(function() {
+    $("#override_input_list").change(function () {
+        var val = $(this).val();
+        if(val == "") return;
+        $.getJSON("http://prodimages.ny.bluefly.com/api/v1/excel-view-vendorstyle-lookup/?format=json",
+            {"output_colorstyle":val},
+            function(response,code) {
+            $("#output_colorstyle").val(response.colorstyle);
+            $("#output_vendor_style").val(response.vendor_style);
+            $("#output_color_group_id").val(response.color_group_id);
+        })
+    })
+})
+
+
+///// Input colorstyle AJAX get return to output vendor style
+$(document).ready(function() {
+    $("#input_colorstyle").blur(function () {
+        $.post("http://prodimages.ny.bluefly.com/api/v1/excel-tool-data/" + $("#input_colorstyle").val() + "/?format=json",
+        {output_vendor_style: $(this).val()},
+        function (data) {
+            $("#output_vendor_style").val(data);
+        });
+    });
+});
+
+
+/////
+$(document).ready(function() {
+    $("#input_clrstyle").bind("change", function (e) {
+        $.getJSON("http://prodimages.ny.bluefly.com/api/v1/excel-view-vendorstyle-lookup/" + $("#input_colorstyle").val() + "/?format=json",
+        function (data) {
+            $.each(data, function (i, item) {
+                if (item.field == "output_colorstyle") {
+                    $("#colorstyle").val(item.value);
+                } else if (item.field == "output_vendor_style") {
+                    $("#vendor_style").val(item.value);
+                } else if (item.field == "output_color_group_id") {
+                    $("#output_color_group_id").val(item.value);
+                } else if (item.field == "output_po_number") {
+                    $("#po_number").val(item.value);
+                }
+            });
+        });
+    });
+})
+
+///// Input List return output list input fields
+$(document).ready(function() {
+    $("#input_list").change(function () {
+        $.ajax({
+            url: 'http://prodimages.ny.bluefly.com/api/v1/excel-tool-data/',
+            type: 'GET',
+            accepts: 'application/json',
+            dataType: 'json',
+            data: {input_list: $(this).val(),
+                output_list: $("#output_list").val()
+            },
+            success: function (response) {
+                $("#output_list").html(response)
+            }
+        })
+    })
+})
+
+
+/////  Input POnumber
+$(document).ready(function() {
+    $("#po_number").bind("change", function (e) {
+        $.getJSON("http://prodimages.ny.bluefly.com/api/v1/excel-view-vendorstyle-lookup/" + $("#input_colorstyle").val() + "/?format=json",
+                {colorstyle: $(this).val()}, function (data) {
+                    $("#colorstyle").val(data.colorstyle);
+                    $("#vendor_style").val(data.vendor_style);
+                    $("#color_group_id").val(data.color_group_id);
+                    $("#po_number").val(data.color_group_id);
+                })
+    })
+})
+
+
+// Form scripts to grab and return input
+
+///// Submit the search form with an input_list collected from input fields with id inputlist
+$( "#searchForm" ).submit(function( event ) {
+ 
+  // Stop form from submitting normally
+  event.preventDefault();
+ 
+  // Get some values from elements on the page:
+  var $form = $(this),
+    inputterm = $form.find( "input[name='input_list']" ).val(),
+    url = $form.attr( "action" );
+ 
+  // Send the data using post
+  var posting = $.post( url, { input_list: inputterm } );
+ 
+  // Put the results in a div
+  posting.done(function(data) {
+    var content = $(data).find( "#content" );
+    $( "#output_list" ).empty().append( content );
+  });
+});
+
+
+/////
+$("#input_list_form").submit(function() {
+
+    //var url = 'http://prodimages.ny.bluefly.com/api/v1/excel-tool-data/'; // the script where you handle the form input.
+    // var url = 'http://prodimages.ny.bluefly.com/searcher/ajax/colorstyle/';
+    //var url = '{% url 'searcher:views-ajax_colorstyle_search' %}';
+    var url = 'searcher/ajax/colorstyle';
+    $.ajax({
+           type: "get",
+           url: url,
+           data: $("#input_list_form").serialize(), // serializes the form's elements.
+           success: function(data) {
+                    alert(data); // show response from the php script.
+                    }
+         });
+
+    return false; // avoid to execute the actual submit of the form.
+});
+ 
+
+/////
 $(document).ready(function(){
     ajax_search();
     $("#throbber").html('<img alt="loading..." src="/img/calendar.gif" />').hide();
@@ -18,6 +146,8 @@ $(document).ready(function(){
     });
 });
 
+
+////// example must adjust to work
 var timeout = null;
 
 function ajax_search() {
@@ -47,6 +177,8 @@ function ajax_search() {
     }, 400);
 }
 
+
+///// example
 function result_table(jsondata,search_val,winkel_id) {
         var aantal = jsondata.length
         if (aantal == 0) {
