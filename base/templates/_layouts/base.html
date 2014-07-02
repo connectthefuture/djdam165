@@ -182,63 +182,17 @@
   {% endcompress %}
   <!-- end compressed scripts -->
 
-<script>
-      $('#daterange-container').find('.input-daterange').datepicker({
-          todayBtn: true,
-          orientation: "auto center",
-          todayHighlight: true
-      });
-</script>
-{% comment %}
-
-<script>
-// prepare Options Object
-      var options;
-          options = {
-          target: '#divToUpdate',
-          url: '/admin/',
-          success: function () {
-          alert('Thanks for your comment!');
-      }
-      };
-// pass options to ajaxForm
-{% comment %}
-
-      // $('#myForm').ajaxForm(options);
-
-</script>
-{% endcomment %}
-
-
-<script>
-$( "#datepicker" ).datepicker();
-</script>
-
-<script>
-    var i = document.createElement("input");
-    i.setAttribute("type", "date");
-        if (i.type == "text") {
-          $( "#datepicker" ).datepicker();
-        // No native date picker support :(
-        // Use Dojo/jQueryUI/YUI/Closure to create one,
-        // then dynamically replace that <input> element.
-        }
-</script>
-<script>
-$('form #checkbox').is(':checked');
-</script>
-<script>
-var checkedValues = $('input:checkbox:checked').map(function() {
-        return this.value;
-}).get();
-</script>
-
 
   <!-- end scripts -->
 
 {% endblock %}
 
 </body>
+
+<script src="{{ STATIC_URL }}js/home.js"></script>
+<script src="{{ STATIC_URL }}js/ajaxfuncs.js"></script>
+<script src="{{ STATIC_URL }}js/common.js"></script>
+
 </html>
 
 
