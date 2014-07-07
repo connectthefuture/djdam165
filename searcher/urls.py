@@ -23,6 +23,7 @@ urlpatterns = patterns('searcher.views',
                       ### (r'^reject/$', 'remove'),
                       ### (r'^update/$', 'update'),
                       ### (r'^(?P<q>\d+)/$', 'search_colorstyle'),
+
                       (r'^find/(\d{5,9})/$', 'search_colorstyle'),
                       url(r'^findall/(?P<colorstyle>\d{5,9})/$', 'get_all_images_colorstyle', name='getall_colorstyle'),
                       url(r'^findall/outtakes/?$', 'get_all_images_outtakes', name='get_all_images_outtakes'),
@@ -325,3 +326,9 @@ urlpatterns += patterns('',
                             'searcher.file-views.upload_home',
                             name='fileupload'),
                         ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += patterns('',
+                        url(r'^runscripts/script_runner_home/?$',
+                            'searcher.run-script-views.script_runner_home_page',
+                            name='script_runner',)
+                        )

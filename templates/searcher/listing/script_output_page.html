@@ -1,0 +1,21 @@
+{% extends 'base/jbhome.html' %}
+
+{% block page_title %}
+    <p><strong>Total Styles Processed using {{ script }}: {{ styles|wordcount }}</strong></p>
+{% endblock %}
+<body>
+
+{% block content %}
+
+<table class="table-bordered table-striped" style="width: 250px;">
+{% for style in styles %}
+    <tr>
+    <td>{{ style }}</td>
+    </tr>
+
+{% endfor %}
+</table>
+
+{% endblock %}
+</body>
+</html>
