@@ -41,10 +41,10 @@ def script_runner_home_page(request):
         elif script_selected == 'newAll_Sites_CacheClear.py':
             styles = ' '.join(styles)
             res = subprocess.call(['utils/', script_selected, styles])
-        elif script_selected == 'bfly_listpage_scrape_clear.py' and len(styles) = 1:
+        elif script_selected == 'bfly_listpage_scrape_clear.py' and len(styles) == 1:
             url = styles.pop()
             res = subprocess.call(['utils/', script_selected, url])
-        elif script_selected == 'bflyurl_scrape_return_styles_only.py' and len(styles) = 1:
+        elif script_selected == 'bflyurl_scrape_return_styles_only.py' and len(styles) == 1:
             url = styles.pop()
             res = subprocess.call(['utils/', script_selected, url])
         elif len(styles) > 1:
