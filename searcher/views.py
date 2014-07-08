@@ -1340,7 +1340,7 @@ def download_merge_file(request):
     return HttpResponse(open('output.xls','rbU').read(), mimetype='application/vnd.ms-excel')
 
 
-from utils.utils import ExcelResponse
+from utilities import ExcelResponse
 from models import ExcelToolData
 def output_excel_table(request):
     oldpo = 'm'
