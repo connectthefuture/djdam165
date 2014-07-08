@@ -77,102 +77,107 @@ def url_download_file(url,filepath):
 
 
 #### Run ###
+def main():
+    import os,sys, urllib
 
-import os,sys, urllib
+    args = sys.argv[1:]
 
-args = sys.argv[1:]
-
-regex_r = re.compile(r'.*?\r.*?')
-regex_n = re.compile(r'.*?\n.*?')
-
-
-
-args1 = args[0].split('\n')   #(','.join(str(arg) for arg in args)).split('\n')
-#args2 = args1.split('\n')
-#if re.findall(regex_r, args):
-#    print "REEEEEE"
-#    args_split = [ arg.split('\r') for arg in args ][0]
-#
-#if re.findall(regex_n, args):
-#re.findall(regex_n, args)    
-
-#args_split = [ arg.replace('\n',' ') for arg in args ]
-#    print "NNNNEEEEEE"
-        
+    regex_r = re.compile(r'.*?\r.*?')
+    regex_n = re.compile(r'.*?\n.*?')
 
 
 
-#args_split = [ arg.split('\n') for arg in args ][0]
- #.split('r')[1:]
-#args = args[:]
-#args.split('\n')[:]
-#spl = str(args[:]).split('\n')
+    args1 = args[0].split('\n')   #(','.join(str(arg) for arg in args)).split('\n')
+    #args2 = args1.split('\n')
+    #if re.findall(regex_r, args):
+    #    print "REEEEEE"
+    #    args_split = [ arg.split('\r') for arg in args ][0]
+    #
+    #if re.findall(regex_n, args):
+    #re.findall(regex_n, args)    
 
-try:
-    if len(args1) >= 2:
-        styleslist = args1
-        print "HELLO Greater 2"
-        print len(styleslist)
-        
-    elif len(args1) == 1:
-        ponum = args[0] #sys.argv[1]#ys.argv[1]#args_split #sys.argv[1]
-        print ponum
-        styleslist = sqlQuery_GetStyleVendor_ByPO(ponum)
-        #print stylesDict
-#        #ponum = '119071'
-except OSError:
-    print "Enter at least PO Number as 1st Arg or Nothing will Happen"
-#
-#if ponum:
-#    stylesDict = sqlQuery_GetStyleVendor_ByPO(ponum)
-#
-#
-#print len(args1)
-#stylesDict = sqlQuery_GetStyleVendor_ByPO(ponum)
-#
-#if type(styles) == 'dict':
+    #args_split = [ arg.replace('\n',' ') for arg in args ]
+    #    print "NNNNEEEEEE"
+            
 
 
 
-#for k,v in styles.iteritems():
-for style in styleslist:
+    #args_split = [ arg.split('\n') for arg in args ][0]
+     #.split('r')[1:]
+    #args = args[:]
+    #args.split('\n')[:]
+    #spl = str(args[:]).split('\n')
 
-    netsrv101_url = 'ftp://imagedrop:imagedrop0@netsrv101.l3.bluefly.com//mnt/images/images/'
-    colorstyle = str(style)
-    ext_PNG     = '.png'
-    ext_JPG     = '.jpg'
-
-    #colorstyle = str(v[val]) + ".jpg"
-    #vendor_stripped = k
-    netsrv101_url_file = os.path.join(netsrv101_url, colorstyle[:4], colorstyle + ext_PNG)
-#try:
-    #error_check = urllib.urlopen(netsrv101_url_file)
-    #urlcode_value = error_check.getcode()
-    #print urlcode_value
-    #try: #if urlcode_value == 200:
-    colorstyle_file = os.path.join(os.path.abspath(os.curdir), colorstyle + ext_PNG)
     try:
-        url_download_file(netsrv101_url_file, colorstyle_file)
-    
-        alt = 0   
-        for x in range(1,6):
-            try:
-                alt = x   
-                ext_ALT = '_alt0{0}{1}'.format(str(alt),ext_PNG)
-                colorstylealt = colorstyle + ext_ALT
-                colorstyle_filealt = os.path.join(os.path.abspath(os.curdir), colorstylealt)
-                
-                netsrv101_url_filealt = os.path.join(netsrv101_url, colorstyle[:4], colorstylealt)
-                
-                #error_check = urllib.urlopen(netsrv101_url_filealt)
-                #urlcode_value = error_check.getcode()
-                #if urlcode_value == 200:
-                if url_download_file(netsrv101_url_filealt, colorstyle_filealt):
-                    url_download_file(netsrv101_url_filealt, colorstyle_filealt)
-            except IOError:
-                pass        
-    except IOError:
-        pass   
+        if len(args1) >= 2:
+            styleslist = args1
+            print "HELLO Greater 2"
+            print len(styleslist)
+            
+        elif len(args1) == 1:
+            ponum = args1 # args[0] #sys.argv[1]#ys.argv[1]#args_split #sys.argv[1]
+            print ponum
+            styleslist = sqlQuery_GetStyleVendor_ByPO(ponum)
+            #print stylesDict
+    #        #ponum = '119071'
+    except OSError:
+        print "Enter at least PO Number as 1st Arg or Nothing will Happen"
+    #
+    #if ponum:
+    #    stylesDict = sqlQuery_GetStyleVendor_ByPO(ponum)
+    #
+    #
+    #print len(args1)
+    #stylesDict = sqlQuery_GetStyleVendor_ByPO(ponum)
+    #
+    #if type(styles) == 'dict':
+
+
+
+    #for k,v in styles.iteritems():
+    for style in styleslist:
+
+        netsrv101_url = 'ftp://imagedrop:imagedrop0@netsrv101.l3.bluefly.com//mnt/images/images/'
+        colorstyle = str(style)
+        ext_PNG     = '.png'
+        ext_JPG     = '.jpg'
+
+        #colorstyle = str(v[val]) + ".jpg"
+        #vendor_stripped = k
+        netsrv101_url_file = os.path.join(netsrv101_url, colorstyle[:4], colorstyle + ext_PNG)
+    #try:
+        #error_check = urllib.urlopen(netsrv101_url_file)
+        #urlcode_value = error_check.getcode()
+        #print urlcode_value
+        #try: #if urlcode_value == 200:
+        colorstyle_file = os.path.join(os.path.abspath(os.curdir), colorstyle + ext_PNG)
+        try:
+            url_download_file(netsrv101_url_file, colorstyle_file)
+        
+            alt = 0   
+            for x in range(1,6):
+                try:
+                    alt = x   
+                    ext_ALT = '_alt0{0}{1}'.format(str(alt),ext_PNG)
+                    colorstylealt = colorstyle + ext_ALT
+                    colorstyle_filealt = os.path.join(os.path.abspath(os.curdir), colorstylealt)
+                    
+                    netsrv101_url_filealt = os.path.join(netsrv101_url, colorstyle[:4], colorstylealt)
+                    
+                    #error_check = urllib.urlopen(netsrv101_url_filealt)
+                    #urlcode_value = error_check.getcode()
+                    #if urlcode_value == 200:
+                    if url_download_file(netsrv101_url_filealt, colorstyle_filealt):
+                        url_download_file(netsrv101_url_filealt, colorstyle_filealt)
+                except IOError:
+                    pass        
+        except IOError:
+            pass
+
+
+if __name__ == "__main__":
+    main()
+
 #    print netsrv101_url_filealt
 #print netsrv101_url_file
 
