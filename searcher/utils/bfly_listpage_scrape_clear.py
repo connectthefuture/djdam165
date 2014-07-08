@@ -14,7 +14,7 @@ def url_get_links(targeturl):
     ## Return list of unique links
     return list(set(linklist))
 
-bfly_url
+
 
 def return_versioned_urls(text):
     import os,sys,re
