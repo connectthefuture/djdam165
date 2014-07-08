@@ -1,5 +1,6 @@
 #!/usr/bin/env python
- 
+ # -*- coding: utf-8 -*-
+
 def subproc_pad_to_x480(file,destdir):
     import subprocess, os
     

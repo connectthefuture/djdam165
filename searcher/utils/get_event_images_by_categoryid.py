@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 def event_styles_by_categoryid(categoryid):
     import sqlalchemy
@@ -104,56 +105,59 @@ def subproc_pad_to_x480(file,destdir):
 
 ################# RUN ###########################
 ################# RUN ###########################
+def main():
+    import sys,os,re,ftplib
+    #import PythonMagick as Magick
+    categoryid = sys.argv[1]
 
-import sys,os,re,ftplib
-#import PythonMagick as Magick
-categoryid = sys.argv[1]
+    ## Get the Styles within this event
+    event_styles = event_styles_by_categoryid(categoryid)
+    count = 0
 
-## Get the Styles within this event
-event_styles = event_styles_by_categoryid(categoryid)
-count = 0
+    prodimages_share = '/home/johnb/Share/PRODIMAGES_OUTPUT'
 
-prodimages_share = '/home/johnb/Share/PRODIMAGES_OUTPUT'
-
-### Iterate list and Download Files from Netsrv101
-for k,v in event_styles.iteritems():
-    event_id = v['event_id']
-    colorstyle = str(k)
-    hashdir = colorstyle[:4]
-    colorstyle_file = colorstyle + ".png"
-    remotedir = "/mnt/images/images"
-    remotepath = os.path.join(remotedir, hashdir, colorstyle_file)
-    destdir = os.path.join(prodimages_share, 'event_' + str(event_id))
-    destpath = os.path.join(destdir, colorstyle_file)
-    
-    if os.path.isdir(destdir):
-        pass
-    else:
-        try:
-            os.makedirs(destdir, 16877)
-        except OSError:
+    ### Iterate list and Download Files from Netsrv101
+    for k,v in event_styles.iteritems():
+        event_id = v['event_id']
+        colorstyle = str(k)
+        hashdir = colorstyle[:4]
+        colorstyle_file = colorstyle + ".png"
+        remotedir = "/mnt/images/images"
+        remotepath = os.path.join(remotedir, hashdir, colorstyle_file)
+        destdir = os.path.join(prodimages_share, 'event_' + str(event_id))
+        destpath = os.path.join(destdir, colorstyle_file)
+        
+        if os.path.isdir(destdir):
             pass
+        else:
+            try:
+                os.makedirs(destdir, 16877)
+            except OSError:
+                pass
 
-    try:
-        getbinary_ftp_netsrv101(remotepath, outfile=destpath)
-        print "Successfully Downloaded {0}".format(destpath)
-        count += 1
-        print "Files Downloaded: {0}".format(count)
-    except:
-        print "{0} Does Not Exist".format(remotepath)
-        pass
-    ## weddavLogin="https://imagedrop:imagedrop0@file3.bluefly.corp/ImageDrop/"
+        try:
+            getbinary_ftp_netsrv101(remotepath, outfile=destpath)
+            print "Successfully Downloaded {0}".format(destpath)
+            count += 1
+            print "Files Downloaded: {0}".format(count)
+        except:
+            print "{0} Does Not Exist".format(remotepath)
+            pass
+        ## weddavLogin="https://imagedrop:imagedrop0@file3.bluefly.corp/ImageDrop/"
 
 
-print "Total Files Downloaded: {0}".format(count)
-#
+    print "Total Files Downloaded: {0}".format(count)
+    #
 
-### Now that Files have downloaded, change dirs to dload folder and pad images using subproc + ImageMagick Then load the _l
-os.chdir(destdir)
-for f in os.listdir(destdir):
-    padded_file = subproc_pad_to_x480(f,destdir)
-    ## Uncomment below to have padded file autoload after padding
-    #upload_to_imagedrop(padded_file)
-    
+    ### Now that Files have downloaded, change dirs to dload folder and pad images using subproc + ImageMagick Then load the _l
+    os.chdir(destdir)
+    for f in os.listdir(destdir):
+        padded_file = subproc_pad_to_x480(f,destdir)
+        ## Uncomment below to have padded file autoload after padding
+        #upload_to_imagedrop(padded_file)
+
+if __name__ == "__main__":
+    main()
+      
 
      

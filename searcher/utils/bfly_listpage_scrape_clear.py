@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 def url_get_links(targeturl):
     import os,re,sys,requests

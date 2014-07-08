@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
@@ -34,66 +35,67 @@ def send_gmail(to, subject, text, attach):
    mailServer.close()
 
 ################# RUN ##################
+def main():
 
-import re,os,sys
-
-
-gmail_user = "john.bragato@gmail.com"
-gmail_pwd = "yankee17"
-
-#for arg in sys.argv[1]:
-#    print arg
-#    toaddrs_list = []
-#    pattern_email = re.compile(r'.+[@].+[.].+')
-#    to_emailargs = re.findall(pattern_email, arg)
-#    if to_emailargs:
-#        for line in to_emailargs:
-#            toaddrs_list.append(line)
-#    else:
-#        print "Fail"
-#
+  import re,os,sys
 
 
-## Test for HTML File is at sys.argv[3] to insert as Body of email
-try:
-    if sys.argv[2]:
-        test = sys.argv[2]
-        if os.path.isfile(test):
-            bodyfile    = sys.argv[2]
-            msgsubj     = "The Daily Completion Manifesto"
-### Try to make body of message render HTML
-            try:
-                msgbody     = open(bodyfile, 'rb').read()
-            except NameError:
-                msgbody      = "NameErrorTestBody"
-#                msgsubj      = "File: {0} was attached ByPython".format(os.path.basename(sys.argv[1]))
-#                toaddrs      = "john.bragato@bluefly.com"
-            if sys.argv[3]:
-                toaddrs     = "john.bragato@bluefly.com"
-            else:
-			    toaddrs     = "john.bragato@bluefly.com"
-        else:
-			toaddrs     = sys.argv[2]
-			msgbody     = "TestBody"
-			msgsubj     = "SentByPython"
-except IndexError:
-    toaddrs     = "john.bragato@bluefly.com"
-    msgsubj    = "File: {0} was attached ByPython".format(os.path.basename(sys.argv[1]))
-    msgbody     = "TestBody"
+  gmail_user = "john.bragato@gmail.com"
+  gmail_pwd = "yankee17"
 
-## Test for HTML File to insert as Body of email
+  #for arg in sys.argv[1]:
+  #    print arg
+  #    toaddrs_list = []
+  #    pattern_email = re.compile(r'.+[@].+[.].+')
+  #    to_emailargs = re.findall(pattern_email, arg)
+  #    if to_emailargs:
+  #        for line in to_emailargs:
+  #            toaddrs_list.append(line)
+  #    else:
+  #        print "Fail"
+  #
 
 
+  ## Test for HTML File is at sys.argv[3] to insert as Body of email
+  try:
+      if sys.argv[2]:
+          test = sys.argv[2]
+          if os.path.isfile(test):
+              bodyfile    = sys.argv[2]
+              msgsubj     = "The Daily Completion Manifesto"
+  ### Try to make body of message render HTML
+              try:
+                  msgbody     = open(bodyfile, 'rb').read()
+              except NameError:
+                  msgbody      = "NameErrorTestBody"
+  #                msgsubj      = "File: {0} was attached ByPython".format(os.path.basename(sys.argv[1]))
+  #                toaddrs      = "john.bragato@bluefly.com"
+              if sys.argv[3]:
+                  toaddrs     = "john.bragato@bluefly.com"
+              else:
+  			    toaddrs     = "john.bragato@bluefly.com"
+          else:
+  			toaddrs     = sys.argv[2]
+  			msgbody     = "TestBody"
+  			msgsubj     = "SentByPython"
+  except IndexError:
+      toaddrs     = "john.bragato@bluefly.com"
+      msgsubj    = "File: {0} was attached ByPython".format(os.path.basename(sys.argv[1]))
+      msgbody     = "TestBody"
+
+  ## Test for HTML File to insert as Body of email
+
+  ## Include file as first arg as an attachment to mail
+  try:
+      attachfile   = sys.argv[1]
+      if os.path.isfile(attachfile):
+          send_gmail(toaddrs, msgsubj, msgbody, attachfile)
+      else:
+          send_gmail(toaddrs, msgsubj, msgbody, "NotAfile")
+  except:
+      print "Failed to Send File. Make Sure a valid file is your 1st Arg"
 
 
+if __name__ == "__main__":
+    main()
 
-
-## Include file as first arg as an attachment to mail
-try:
-    attachfile   = sys.argv[1]
-    if os.path.isfile(attachfile):
-        send_gmail(toaddrs, msgsubj, msgbody, attachfile)
-    else:
-        send_gmail(toaddrs, msgsubj, msgbody, "NotAfile")
-except:
-    print "Failed to Send File. Make Sure a valid file is your 1st Arg"

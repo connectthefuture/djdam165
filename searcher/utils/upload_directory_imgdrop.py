@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 ##### Upload tmp_loading dir to imagedrop via FTP using Pycurl  #####
 def pycurl_upload_imagedrop(img):
@@ -65,71 +66,76 @@ def upload_to_imagedrop(img):
 #[ shutil.move(file, os.path.join(tmp_loading, os.path.basename(file))) for file in load_jpgs ]
 
 ## UPLOAD FTP with PyCurl everything in tmp_loading
-import os, sys, re, csv, shutil, glob
-regex_coded = re.compile(r'^.+?/[1-9][0-9]{8}_[1-6]\.[JjPpNnGg]{3}$')
-regex_alt = re.compile(r'^.+?/[1-9][0-9]{8}_\w+?0[1-6]\.[JjPpNnGg]{3}$')
-regex_valid_style = re.compile(r'^.+?/[1-9][0-9]{8}_?.*?\.[JjPpNnGg]{3}$')
+def main():
+    import os, sys, re, csv, shutil, glob
+    regex_coded = re.compile(r'^.+?/[1-9][0-9]{8}_[1-6]\.[JjPpNnGg]{3}$')
+    regex_alt = re.compile(r'^.+?/[1-9][0-9]{8}_\w+?0[1-6]\.[JjPpNnGg]{3}$')
+    regex_valid_style = re.compile(r'^.+?/[1-9][0-9]{8}_?.*?\.[JjPpNnGg]{3}$')
 
-try:
-    root_dir = sys.argv[1]
-except:
-    root_dir = os.path.abspath('.')
-    
-archive_uploaded = os.path.join(root_dir, 'uploaded')
-tmp_failed = os.path.join(root_dir, 'failed_upload')
-try:
-    os.makedirs(archive_uploaded, 16877)
-except:
-    pass
+    try:
+        root_dir = sys.argv[1]
+    except:
+        root_dir = os.path.abspath('.')
+        
+    archive_uploaded = os.path.join(root_dir, 'uploaded')
+    tmp_failed = os.path.join(root_dir, 'failed_upload')
+    try:
+        os.makedirs(archive_uploaded, 16877)
+    except:
+        pass
 
-try:
-    os.makedirs(tmp_failed, 16877)
-except:
-    pass
+    try:
+        os.makedirs(tmp_failed, 16877)
+    except:
+        pass
 
-import time
-upload_tmp_loading = glob.glob(os.path.join(root_dir, '*.*g'))
-for upload_file in upload_tmp_loading:
-    #### UPLOAD upload_file via ftp to imagedrop using Pycurl
-    ## Then rm loading tmp dir
-    if regex_valid_style.findall(upload_file):
-        try:
-            code = pycurl_upload_imagedrop(upload_file)
-            if code == '200':
-                shutil.move(upload_file, archive_uploaded)
-                print "1stTryOK"
-            elif code:
-                print code, upload_file
-                time.sleep(float(.3))
-                try:
-                    ftpload_to_imagedrop(upload_file)
+    import time
+    upload_tmp_loading = glob.glob(os.path.join(root_dir, '*.*g'))
+    for upload_file in upload_tmp_loading:
+        #### UPLOAD upload_file via ftp to imagedrop using Pycurl
+        ## Then rm loading tmp dir
+        if regex_valid_style.findall(upload_file):
+            try:
+                code = pycurl_upload_imagedrop(upload_file)
+                if code == '200':
+                    shutil.move(upload_file, archive_uploaded)
+                    print "1stTryOK"
+                elif code:
+                    print code, upload_file
+                    time.sleep(float(.3))
+                    try:
+                        ftpload_to_imagedrop(upload_file)
+                        print "Uploaded {}".format(upload_file)
+                        time.sleep(float(.3))
+                        shutil.move(upload_file, archive_uploaded)
+                    except:
+                        shutil.move(upload_file, tmp_failed)
+                        pass
+                else:
                     print "Uploaded {}".format(upload_file)
                     time.sleep(float(.3))
                     shutil.move(upload_file, archive_uploaded)
-                except:
+            except shutil.Error:
+                try:
                     shutil.move(upload_file, tmp_failed)
+                except:
                     pass
-            else:
-                print "Uploaded {}".format(upload_file)
-                time.sleep(float(.3))
-                shutil.move(upload_file, archive_uploaded)
-        except shutil.Error:
-            try:
+            except OSError:
+                print "Error moving Finals to Arch {}".format(file)
                 shutil.move(upload_file, tmp_failed)
-            except:
                 pass
-        except OSError:
-            print "Error moving Finals to Arch {}".format(file)
+        else:
             shutil.move(upload_file, tmp_failed)
-            pass
-    else:
-        shutil.move(upload_file, tmp_failed)
 
-try:
-    if sys.argv[2]:
-        finaldir = os.path.abspath(sys.argv[2])
-        for f in glob.glob(os.path.join(archive_uploaded, '*.*g')):
-            shutil.move(f, finaldir)
-except:
-    pass
-        
+    try:
+        if sys.argv[2]:
+            finaldir = os.path.abspath(sys.argv[2])
+            for f in glob.glob(os.path.join(archive_uploaded, '*.*g')):
+                shutil.move(f, finaldir)
+    except:
+        pass
+
+if __name__ == "__main__":
+    main()
+
+            
