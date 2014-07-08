@@ -8,6 +8,18 @@
 {% block content %}
 
 <table class="table-bordered table-striped" style="width: 250px;">
+{% if results %}
+{% for result in results %}
+
+    <tr>
+    <a href="{{ result }}">
+    <td>{{ result }}</td>
+    </a>
+    </tr>
+
+{% endif %}
+{% endfor %}
+
 {% for style in styles %}
     <tr>
     <td>{{ style }}</td>
