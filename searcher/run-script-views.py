@@ -30,7 +30,14 @@ def script_runner_home_page(request):
 
     try:
         script_selected = request.GET['script_name']
-        if script_selected == 'newAll_Sites_CacheClear.py':
+        if script_selected == 'download_server_imgs_byPOorStyleList.py':
+            styles = ' '.join(styles)
+            if len(styles) < 6:
+                po = styles.strip(' ')
+                res = subprocess.call(['utils/', script_selected, po)
+            else:
+                res = subprocess.call(['utils/', script_selected, styles)
+        elif script_selected == 'newAll_Sites_CacheClear.py':
             styles = ' '.join(styles)
             res = subprocess.call(['utils/', script_selected, styles)
         elif script_selected == 'bfly_listpage_scrape_clear.py' and len(styles) = 1:
