@@ -29,7 +29,7 @@ def script_runner_home_page(request):
         return HttpResponseRedirect(message=message, redirect_to='#')
 
     try:
-        script_selected = request.POST['script_name']
+        script_selected = request.GET['script_name']
         if script_selected == 'newAll_Sites_CacheClear.py':
             styles = ' '.join(styles)
             res = subprocess.call(['utils/', script_selected, styles)

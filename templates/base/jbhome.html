@@ -178,7 +178,7 @@
                         {# block modal_body %} {% endblock #}
                         <div class="row">
                         <div class="col-sm-12 col-md-12">
-                        <form class="navbar-form" enctype="multipart/form-data" method="POST" action="searcher/runscripts/script_runner_home">
+                        <form class="navbar-form" enctype="multipart/form-data" method="GET" action="searcher/runscripts/script_runner_home">
                             {% csrf_token %}
 
                             <div class="form-group form-horizontal">

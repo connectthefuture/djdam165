@@ -328,7 +328,7 @@ urlpatterns += patterns('',
                         ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += patterns('',
-                        url(r'^runscripts/script_runner_home/?$',
+                        url(r'^runscripts/script_runner_home/?.*?$',
                             'searcher.run-script-views.script_runner_home_page',
                             name='script_runner',)
                         )
