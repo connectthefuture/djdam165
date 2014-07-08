@@ -14,7 +14,7 @@ def url_get_links(targeturl):
     ## Return list of unique links
     return list(set(linklist))
 
-
+bfly_url
 
 def return_versioned_urls(text):
     import os,sys,re
@@ -167,195 +167,198 @@ def send_purge_request_edgecast(mediaPath):
             
             
 ############ RUN ###########
+def main():
+    import sys,re,os
 
-import sys,re,os
-
-alturl = 'altimage.ms'
+    alturl = 'altimage.ms'
 
 
-#catid = get_catid_from_eventid(eventid)
-## Join Catid to BC Url
-#url_catid = 'http://www.belleandclive.com/browse/sales/details.jsp?categoryId=' + catid
-#url_catid = 'http://www.belleandclive.com/browse/sales/details.jsp?categoryId=' + catid
+    #catid = get_catid_from_eventid(eventid)
+    ## Join Catid to BC Url
+    #url_catid = 'http://www.belleandclive.com/browse/sales/details.jsp?categoryId=' + catid
+    #url_catid = 'http://www.belleandclive.com/browse/sales/details.jsp?categoryId=' + catid
 
-#www.bluefly.com/Harrison-pink-check-classic-fit-dress-shirt/p/323108302/detail.fly
+    #www.bluefly.com/Harrison-pink-check-classic-fit-dress-shirt/p/323108302/detail.fly
 
-#url_colorstyle_pdp = 'http://www.belleandclive.com/browse/product.jsp?id=' + colorstyle
+    #url_colorstyle_pdp = 'http://www.belleandclive.com/browse/product.jsp?id=' + colorstyle
 
-## Get all Img links on PDP and append only the primary image urls and versions
-## Then tack the generated urls for edgecast to list
-list_urllist = []
-edgecast_listurls = []
-regex = re.compile(r'http:.+?ver=[1-9][0-9]?[0-9]?')
+    ## Get all Img links on PDP and append only the primary image urls and versions
+    ## Then tack the generated urls for edgecast to list
+    list_urllist = []
+    edgecast_listurls = []
+    regex = re.compile(r'http:.+?ver=[1-9][0-9]?[0-9]?')
 
-# How many list page styles to create list page to scrape from 96 is one full page
-try:
-    num_styles = sys.argv[1]
-except IndexError:
-    num_styles = '96'
-    pass
-
-# num_styles = '1000'
-#urls_to_scrape = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp={0}&cp=2&sosc=true'.format(num_styles)
-regex_url = re.compile(r'http://www\.[bB][eElL].+')
-
-if num_styles.isdigit():
+    # How many list page styles to create list page to scrape from 96 is one full page
     try:
-        arg = sys.argv[2]
-        if arg.isdigit() and len(arg) < 2:
-            page = sys.argv[2]
-            bfly_url = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp={0}&cp={1}&sosc=true'.format(num_styles, page)
-        elif re.findall(regex_url, arg):
-            url = arg
-            try:
-                order = sys.argv[3]
-                bfly_url = '{0}?so={1}&vl=l&ppp={2}&cp=1&sosc=true'.format(url,order,num_styles)
-            except IndexError:
-                bfly_url = '{0}?so=new&vl=l&ppp={1}&cp=1&sosc=true'.format(url,num_styles)
-        else:
-            dept = arg.replace(' ','-').replace('_','-').replace('&','').lower()
-            bfly_url = 'http://www.bluefly.com/designer-{0}?so=new&vl=l&ppp={1}&cp=1&sosc=true'.format(dept,num_styles)
-            try:
-                val = sys.argv[3]
-                val = val.replace(' ','-').replace('_','-').replace('&','').lower()
-                apparel = '/apparel/'
-                if dept == 'mens':
-                    bfly_url = 'http://www.bluefly.com/{0}{3}designer-{1}?so=new&vl=l&ppp={2}&cp=1&sosc=true'.format(dept,val,num_styles,apparel) 
-                else:
-                    bfly_url = 'http://www.bluefly.com/{0}/designer-{1}?so=new&vl=l&ppp={2}&cp=1&sosc=true'.format(dept,val,num_styles)       
-            except IndexError:
-                print 'Using Default New Arrivals URL with {} Styles'.format(num_styles)
-                bfly_url = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp={0}&cp=1&sosc=true'.format(num_styles)
-                pass
-    except:
-        print 'Using Default New Arrivals URL with {} Styles'.format(num_styles)
-        bfly_url = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp={0}&cp=1&sosc=true'.format(num_styles)
+        num_styles = sys.argv[1]
+    except IndexError:
+        num_styles = '96'
         pass
 
-else:
-    try:
-        arg = sys.argv[1]
-        if re.findall(regex_url, arg):
-            bfly_url = arg
-        elif arg == 'designer' or arg == 'D' or arg == 'brand':
-            slug = 'designer'
-            try:
-                brand = sys.argv[2]
-                brand = brand.replace(' ','-').replace('_','-').replace('&','').lower()
+    # num_styles = '1000'
+    #urls_to_scrape = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp={0}&cp=2&sosc=true'.format(num_styles)
+    regex_url = re.compile(r'http://www\.[bB][eElL].+')
+    bfly_url = ''
+    if num_styles.isdigit():
+        try:
+            arg = sys.argv[2]
+            if arg.isdigit() and len(arg) < 2:
+                page = sys.argv[2]
+                bfly_url = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp={0}&cp={1}&sosc=true'.format(num_styles, page)
+            elif re.findall(regex_url, arg):
+                url = arg
                 try:
-                    num_styles = sys.argv[3]
-                    q = '?so=new&vl=l&ppp={0}&cp=1'.format(num_styles)
-                    bfly_url = 'http://www.bluefly.com/{0}/{1}{2}'.format(slug,brand, q)
+                    order = sys.argv[3]
+                    bfly_url = '{0}?so={1}&vl=l&ppp={2}&cp=1&sosc=true'.format(url,order,num_styles)
                 except IndexError:
-                    bfly_url = 'http://www.bluefly.com/{0}/{1}'.format(slug,brand)
-            
-            except IndexError:
-                print 'Using Default New Arrivals URL with 48 Styles'
-                bfly_url = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp=48&cp=1&sosc=true'
-                pass
-    except IndexError:
-        print 'Using Default New Arrivals URL with 48 Styles'
-        bfly_url = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp=48&cp=1&sosc=true'
-        pass
+                    bfly_url = '{0}?so=new&vl=l&ppp={1}&cp=1&sosc=true'.format(url,num_styles)
+            else:
+                dept = arg.replace(' ','-').replace('_','-').replace('&','').lower()
+                bfly_url = 'http://www.bluefly.com/designer-{0}?so=new&vl=l&ppp={1}&cp=1&sosc=true'.format(dept,num_styles)
+                try:
+                    val = sys.argv[3]
+                    val = val.replace(' ','-').replace('_','-').replace('&','').lower()
+                    apparel = '/apparel/'
+                    if dept == 'mens':
+                        bfly_url = 'http://www.bluefly.com/{0}{3}designer-{1}?so=new&vl=l&ppp={2}&cp=1&sosc=true'.format(dept,val,num_styles,apparel) 
+                    else:
+                        bfly_url = 'http://www.bluefly.com/{0}/designer-{1}?so=new&vl=l&ppp={2}&cp=1&sosc=true'.format(dept,val,num_styles)       
+                except IndexError:
+                    print 'Using Default New Arrivals URL with {} Styles'.format(num_styles)
+                    bfly_url = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp={0}&cp=1&sosc=true'.format(num_styles)
+                    pass
+        except:
+            print 'Using Default New Arrivals URL with {} Styles'.format(num_styles)
+            bfly_url = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp={0}&cp=1&sosc=true'.format(num_styles)
+            pass
 
-print 'Scraping -->' + bfly_url
-found_links = ''
+    else:
+        try:
+            arg = sys.argv[1]
+            if re.findall(regex_url, arg):
+                bfly_url = arg
+            elif arg == 'designer' or arg == 'D' or arg == 'brand':
+                slug = 'designer'
+                try:
+                    brand = sys.argv[2]
+                    brand = brand.replace(' ','-').replace('_','-').replace('&','').lower()
+                    try:
+                        num_styles = sys.argv[3]
+                        q = '?so=new&vl=l&ppp={0}&cp=1'.format(num_styles)
+                        bfly_url = 'http://www.bluefly.com/{0}/{1}{2}'.format(slug,brand, q)
+                    except IndexError:
+                        bfly_url = 'http://www.bluefly.com/{0}/{1}'.format(slug,brand)
+                
+                except IndexError:
+                    print 'Using Default New Arrivals URL with 48 Styles'
+                    bfly_url = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp=48&cp=1&sosc=true'
+                    pass
+        except IndexError:
+            print 'Using Default New Arrivals URL with 48 Styles'
+            bfly_url = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp=48&cp=1&sosc=true'
+            pass
 
-found_links = url_get_links(bfly_url)
+    print 'Scraping -->' + bfly_url
+    found_links = ''
 
-colorstyles = []
-for link in found_links:
-    list_urllist.append(link)
-    colorstyle=link.split('/prodImage.ms?productCode=')[-1][:9]
-    if colorstyle.isdigit():
-        colorstyles.append(colorstyle)
-        ## Create list page urls for Edgecast
-        oldlistpg      =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=157&height=188'.format(colorstyle)
-        newlistpg      =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=251&height=300'.format(colorstyle)
-        pdpg           =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=340&height=408'.format(colorstyle)
-        pmlistpg       =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=50&height=60&ver=null'.format(colorstyle)
-        pmeventimg     =   'http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom85.ms?img={0}.pct&outputx=200&outputy=240&level=1&ver=null'.format(colorstyle)				
-        email_img1     =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=140&height=182'.format(colorstyle)
-        email_img2     =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=200&height=250'.format(colorstyle)
+    found_links = url_get_links(bfly_url)
 
-        edgecast_listurls.append(oldlistpg)
-        edgecast_listurls.append(newlistpg)
-        edgecast_listurls.append(pdpg)
-        edgecast_listurls.append(pmlistpg)
-        edgecast_listurls.append(pmeventimg)
-        edgecast_listurls.append(email_img1)
-        edgecast_listurls.append(email_img2)
+    colorstyles = []
+    for link in found_links:
+        list_urllist.append(link)
+        colorstyle=link.split('/prodImage.ms?productCode=')[-1][:9]
+        if colorstyle.isdigit():
+            colorstyles.append(colorstyle)
+            ## Create list page urls for Edgecast
+            oldlistpg      =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=157&height=188'.format(colorstyle)
+            newlistpg      =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=251&height=300'.format(colorstyle)
+            pdpg           =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=340&height=408'.format(colorstyle)
+            pmlistpg       =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=50&height=60&ver=null'.format(colorstyle)
+            pmeventimg     =   'http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom85.ms?img={0}.pct&outputx=200&outputy=240&level=1&ver=null'.format(colorstyle)				
+            email_img1     =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=140&height=182'.format(colorstyle)
+            email_img2     =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=200&height=250'.format(colorstyle)
 
-colorstyles = list(set(sorted(colorstyles)))
-clrversions = query_version_number(colorstyles)
+            edgecast_listurls.append(oldlistpg)
+            edgecast_listurls.append(newlistpg)
+            edgecast_listurls.append(pdpg)
+            edgecast_listurls.append(pmlistpg)
+            edgecast_listurls.append(pmeventimg)
+            edgecast_listurls.append(email_img1)
+            edgecast_listurls.append(email_img2)
 
-for colorstyle in colorstyles:
-    version = clrversions.get(colorstyle)
-    if version:
-        ### ZOOM HI REZ
-        pdpZOOM   = 'http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom85.ms?img={0}.pct&outputx=1800&outputy=2160&level=1&ver={1}'.format(colorstyle, version)
-        edgecast_listurls.append(pdpZOOM)
-        testurl='http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={0}_alt01.jpg&w=75&h=89&ver={1}'.format(colorstyle, version)
-        ### ALT 1
-        if testurl in edgecast_listurls:
-            pdpalt01z = 'http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom85.ms?img={0}_alt01.pct&outputx=1800&outputy=2160&level=1&ver={1}'.format(colorstyle, version)
-            edgecast_listurls.append(pdpalt01z)
-            pdpalt01l = 'http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom85.ms?img={0}_alt01.pct&outputx=583&outputy=700&level=1&ver={1}'.format(colorstyle, version)
-            edgecast_listurls.append(pdpalt01l)
-            print "SUCCESS1"
-            #'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=340&height=408'.format(colorstyle)
+    colorstyles = list(set(sorted(colorstyles)))
+    clrversions = query_version_number(colorstyles)
 
-## Parse urllist returning only versioned List page images
-#versioned_links = return_versioned_urls(list_urllist)
+    for colorstyle in colorstyles:
+        version = clrversions.get(colorstyle)
+        if version:
+            ### ZOOM HI REZ
+            pdpZOOM   = 'http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom85.ms?img={0}.pct&outputx=1800&outputy=2160&level=1&ver={1}'.format(colorstyle, version)
+            edgecast_listurls.append(pdpZOOM)
+            testurl='http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={0}_alt01.jpg&w=75&h=89&ver={1}'.format(colorstyle, version)
+            ### ALT 1
+            if testurl in edgecast_listurls:
+                pdpalt01z = 'http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom85.ms?img={0}_alt01.pct&outputx=1800&outputy=2160&level=1&ver={1}'.format(colorstyle, version)
+                edgecast_listurls.append(pdpalt01z)
+                pdpalt01l = 'http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom85.ms?img={0}_alt01.pct&outputx=583&outputy=700&level=1&ver={1}'.format(colorstyle, version)
+                edgecast_listurls.append(pdpalt01l)
+                print "SUCCESS1"
+                #'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=340&height=408'.format(colorstyle)
 
-#print versioned_links
-#count = 0
-#if len(versioned_links) <= 5000:
-for k,v in clrversions.iteritems():
-    try:
-        colorstyle = k
-        version = v
-        POSTURL_ALLSITES = "http://clearcache.bluefly.corp/ClearAll2.php"
-        POSTURL_BFY = "http://clearcache.bluefly.corp/BFClear2.php"
-        POSTURL_Mobile = "http://clearcache.bluefly.corp/BFMobileClear2.php"
-        #send_purge_request_localis(colorstyle,version,POSTURL_BFY)
-        #send_purge_request_localis(colorstyle,version,POSTURL_Mobile)
-        send_purge_request_localis(colorstyle,version,POSTURL_ALLSITES)
-            #except:
-            #    print sys.stderr().read()
-    except IndexError:
-        pass
-    #csv_write_datedOutfile(url_purge)
+    ## Parse urllist returning only versioned List page images
+    #versioned_links = return_versioned_urls(list_urllist)
 
-## Now clear links from the generated urls
-#generated_links = return_cleaned_bfly_urls(edgecast_listurls)
-
-#print generated_links
-count = 0
-if len(edgecast_listurls) <= 12000:
-
-    #regex = re.compile(r'(.+?=)([0-9]{9})(.+?)(ver=[0-9][0-9]?[0-9]?[0-9]?)')
-
-### DO NOT NEED TO CLEAR IS SERVERS SINCE ABOVE CLEARS ALL BASED ON STYLE AND VERSION, NOT URL
-#
-#    for url_purge_local in edgecast_listurls:
-#        colorstyle = re.findall(regex, url_purge_local[0])
-#        colorstyle = colorstyle.pop()[1]
-#        version  = re.findall(regex, url_purge_local[0])
-#        version = version.pop()[-1].split('=')[-1]
-#        #print "{0} and version num {1}".format(colorstyle,version)
-#        #try:
-#        send_purge_request_localis(colorstyle,version)
-        #except:
-        #    print sys.stderr().read()
-####
-    for url_purge in set(sorted(edgecast_listurls)):
-        send_purge_request_edgecast(url_purge)
+    #print versioned_links
+    #count = 0
+    #if len(versioned_links) <= 5000:
+    for k,v in clrversions.iteritems():
+        try:
+            colorstyle = k
+            version = v
+            POSTURL_ALLSITES = "http://clearcache.bluefly.corp/ClearAll2.php"
+            POSTURL_BFY = "http://clearcache.bluefly.corp/BFClear2.php"
+            POSTURL_Mobile = "http://clearcache.bluefly.corp/BFMobileClear2.php"
+            #send_purge_request_localis(colorstyle,version,POSTURL_BFY)
+            #send_purge_request_localis(colorstyle,version,POSTURL_Mobile)
+            send_purge_request_localis(colorstyle,version,POSTURL_ALLSITES)
+                #except:
+                #    print sys.stderr().read()
+        except IndexError:
+            pass
         #csv_write_datedOutfile(url_purge)
 
-else:
-    print "Failed -- Over 12000 URLs Submitted"    
+    ## Now clear links from the generated urls
+    #generated_links = return_cleaned_bfly_urls(edgecast_listurls)
+
+    #print generated_links
+    count = 0
+    if len(edgecast_listurls) <= 12000:
+
+        #regex = re.compile(r'(.+?=)([0-9]{9})(.+?)(ver=[0-9][0-9]?[0-9]?[0-9]?)')
+
+    ### DO NOT NEED TO CLEAR IS SERVERS SINCE ABOVE CLEARS ALL BASED ON STYLE AND VERSION, NOT URL
+    #
+    #    for url_purge_local in edgecast_listurls:
+    #        colorstyle = re.findall(regex, url_purge_local[0])
+    #        colorstyle = colorstyle.pop()[1]
+    #        version  = re.findall(regex, url_purge_local[0])
+    #        version = version.pop()[-1].split('=')[-1]
+    #        #print "{0} and version num {1}".format(colorstyle,version)
+    #        #try:
+    #        send_purge_request_localis(colorstyle,version)
+            #except:
+            #    print sys.stderr().read()
+    ####
+        for url_purge in set(sorted(edgecast_listurls)):
+            send_purge_request_edgecast(url_purge)
+            #csv_write_datedOutfile(url_purge)
+
+    else:
+        print "Failed -- Over 12000 URLs Submitted"    
 
 
 #print edgecast_listurls
+
+if __name__ == "__main__":
+    main()
 
