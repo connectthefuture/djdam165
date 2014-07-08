@@ -15,7 +15,8 @@ from django.http import request, response
 
 from djdam.settings import MEDIA_ROOT, MEDIA_URL
 import os, sys
-from utils import newAll_Sites_CacheClear, meckPM_localLoginSave, bflyurl_scrape_return_styles_only, bfly_listpage_scrape_clear
+from utils import newAll_Sites_CacheClear, meckPM_localLoginSave, bflyurl_scrape_return_styles_only, bfly_listpage_scrape_clear, download_server_imgs_byPOorStyleList
+
 
 def script_runner_home_page(request):
     import subprocess
@@ -33,7 +34,7 @@ def script_runner_home_page(request):
         if script_selected == 'download_server_imgs_byPOorStyleList.py':
             styles = ' '.join(styles)
             if len(styles) < 6:
-                po = styles.strip(' ')
+                po = ''.join(styles)
                 res = subprocess.call(['utils/', script_selected, po)
             else:
                 res = subprocess.call(['utils/', script_selected, styles)
