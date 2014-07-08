@@ -178,7 +178,7 @@
                         {# block modal_body %} {% endblock #}
                         <div class="row">
                         <div class="col-sm-12 col-md-12">
-                        <form class="navbar-form" enctype="multipart/form-data" method="GET" action="searcher/runscripts/script_runner_home">
+                        <form class="navbar-form" placeholder="Enter Style List or PO or URL and choose action below" enctype="multipart/form-data" method="GET" action="/searcher/runscripts/script_runner_home">
                             {% csrf_token %}
 
                             <div class="form-group form-horizontal">
@@ -188,6 +188,9 @@
                                         <select name="script_name" id="multiselect">
                                             <option value="newAll_Sites_CacheClear.py">Clear Cache using Delimited List
                                                 - Preferably Space Delimited
+                                            </option>
+                                            <option value="download_server_imgs_byPOorStyleList.py">Download Images from Server
+                                                - Enter PO or Style List
                                             </option>
                                             <option value="meckPM_localLoginSave.py">Resave a List of Styles to Validate
                                                 Completion
