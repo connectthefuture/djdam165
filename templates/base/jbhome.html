@@ -3,7 +3,9 @@
 {% load django-bootstrap-toolkit %}
 {% endcomment %}
 {% block page_title %}Flim Flam Dam{% endblock %}
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js"></script>
 {#{% block css %}#}
 {#<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/navbar.css">#}
 {#<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/navbar-fixed-top.css">#}
@@ -256,9 +258,55 @@
                         <li class="active"><a href="http://pm.bluefly.corp">PM</a></li>
                         <li><a href="http://clearcache.bluefly.corp">ClearCache</a></li>
                         <li><a href="http://tools.l3.bluefly.com">theTool</a></li>
-                        <li>
-                            <a href="http://prodimages.ny.bluefly.com:8082/siteshome/Reports/event_incomplete_14days.html">The
-                                Lavender Report</a></li>
+                        <li class="active" style="color: #89a5e2">
+                            <a href="http://prodimages.ny.bluefly.com:8082/siteshome/Reports/event_incomplete_14days.html">
+                                The Lavender Report
+
+                                <div class="col-sm-3 col-md-3">
+                                    <!-- Button trigger modal -->
+
+                                    <button class="btn btn-info btn-md" href="http://prodimages.ny.bluefly.com:8082/siteshome/Reports/event_incomplete_14days.html" data-toggle="modal" data-target="#myModalLavender">
+                                        The Lavender Report
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModalLavender" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times; </button>
+                                                    <a><h3 class="modal-title" id="myModalLabel" style="font-family: DejaVu Serif, serif">
+                                                        <span class="glyphicon glyphicon-globe"></span> Browsing The Lavender Report... </h3></a>
+                                                    {# block modal_body %}{% endblock #}
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    {# block modal_body %} {% endblock #}
+                                                    <form class="navbar-form navbar-right" enctype="multipart/form-data" method="GET"
+                                                          action="searcher/findall/outtakes">
+                                                        {% csrf_token %}
+
+                                                        <button type="reset" class="btn btn-primary" name="reset" id="reset"><span
+                                                                class="glyphicon glyphicon-refresh"></span> Reload
+                                                        </button>
+                                                    </form>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-warning">Save changes</button>
+                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal Fade and End-->
+                                </div>
+                            </a>
+                        </li>
                         <li class="active"><a href="http://prodimages.ny.bluefly.com:8082/phpmyadmin">phpMyAdmin</a>
                         </li>
                     </ul>
