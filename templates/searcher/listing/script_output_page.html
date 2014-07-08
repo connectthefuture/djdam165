@@ -1,34 +1,39 @@
 {% extends 'base/jbhome.html' %}
 
 {% block page_title %}
-    <h2><strong>Total Styles Processed using {{ script }}: {{ styles|wordcount }}</strong></h2>
+    <h2><strong>{{ script }} Results</strong></h2>
 {% endblock %}
 <body>
 
 {% block content %}
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Script Output</div>
+  <div class="panel-body">
+    <p><h2><strong>Total Styles Processed using {{ script }}: {{ styles|wordcount }}</strong></h2></p>
+  </div>
 
-<table class="table-bordered table-striped" style="width: 250px;">
+<table class="table table-bordered table-striped" style="width: 250px;">
 {% if results %}
 {% for result in results %}
-
     <tr>
     <a href="{{ result }}">
     <td>{{ result }}</td>
     </a>
     </tr>
-
-
 {% endfor %}
 {% endif %}
-
+<p>-------</p>
+{% if results %}
 {% for style in styles %}
     <tr>
     <td>{{ style }}</td>
     </tr>
 
 {% endfor %}
+{% endif %}
 </table>
-
+</div>
 {% endblock %}
 </body>
 </html>
