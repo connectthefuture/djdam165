@@ -60,12 +60,12 @@ def script_runner_home_page(request):
             url = styles.pop()
             script_selected = os.path.join('searcher/utils/', script_selected)
             # res = subprocess.call([script_selected, bfly_url=url])
-            res = bfly_listpage_scrape_clear.main(bfly_url=url)
+            res = bfly_listpage_scrape_clear.main(bfly_url=[url])
         elif script_selected == 'bflyurl_scrape_return_styles_only.py' and len(styles) == 1:
             url = styles.pop()
             script_selected = os.path.join('searcher/utils/', script_selected)
             # res = subprocess.call([script_selected, url])
-            res = bflyurl_scrape_return_styles_only.main(bfly_url=url)
+            res = bflyurl_scrape_return_styles_only.main(bfly_url=[url])
         elif len(styles) > 1:
             for style in styles:
                 if script_selected == 'meckPM_localLoginSave.py':
