@@ -34,13 +34,16 @@ def script_runner_home_page(request):
     try:
         script_selected = request.GET['script_name']
         if script_selected == 'download_server_imgs_byPOorStyleList.py':
-            styles = ' '.join(styles)
-            if len(styles) < 6:
+            if len(styles) <= 6:
                 ponum = ''.join(styles)
                 script_selected = os.path.join('searcher/utils/', script_selected)
                 # res = subprocess.call([script_selected, ponum=ponum])
                 res = download_server_imgs_byPOorStyleList.main(ponum=ponum)
             else:
+                if len(styles) > 9:
+                    styles = ' '.join(styles)
+                else:
+                    styles = [styles]
                 script_selected = os.path.join('searcher/utils/', script_selected)
                 # res = subprocess.call([script_selected, styles_list=styles])
                 res = download_server_imgs_byPOorStyleList.main(styles_list=styles)
