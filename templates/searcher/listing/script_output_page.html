@@ -10,7 +10,7 @@
   <!-- Default panel contents -->
   <div class="panel-heading">Script Output</div>
   <div class="panel-body">
-    <p><h2><strong>Total Styles Processed using {{ script }}: {{ styles|wordcount }}</strong></h2></p>
+    <p><h2><strong>Total Styles Processed using {{ script|slice:"-1:" }}: {{ styles|wordcount }}</strong></h2></p>
   </div>
 
 <table class="table table-bordered table-striped" style="width: 250px;">
