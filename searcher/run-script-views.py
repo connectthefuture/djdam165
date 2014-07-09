@@ -37,27 +37,27 @@ def script_runner_home_page(request):
             styles = ' '.join(styles)
             if len(styles) < 6:
                 po = ''.join(styles)
-                script_selected = os.path.join('utils/', script_selected)
+                script_selected = os.path.join('searcher/utils/', script_selected)
                 res = subprocess.call([script_selected, po])
             else:
-                script_selected = os.path.join('utils/', script_selected)
+                script_selected = os.path.join('searcher/utils/', script_selected)
                 res = subprocess.call([script_selected, styles])
         elif script_selected == 'newAll_Sites_CacheClear.py':
             styles = ' '.join(styles)
-            script_selected = os.path.join('utils/', script_selected)
+            script_selected = os.path.join('searcher/utils/', script_selected)
             res = subprocess.call([script_selected, styles])
         elif script_selected == 'bfly_listpage_scrape_clear.py' and len(styles) == 1:
             url = styles.pop()
-            script_selected = os.path.join('utils/', script_selected)
+            script_selected = os.path.join('searcher/utils/', script_selected)
             res = subprocess.call([script_selected, url])
         elif script_selected == 'bflyurl_scrape_return_styles_only.py' and len(styles) == 1:
             url = styles.pop()
-            script_selected = os.path.join('utils/', script_selected)
+            script_selected = os.path.join('searcher/utils/', script_selected)
             res = subprocess.call([script_selected, url])
         elif len(styles) > 1:
             for style in styles:
                 if script_selected == 'meckPM_localLoginSave.py':
-                    script_selected = os.path.join('utils/', script_selected)
+                    script_selected = os.path.join('searcher/utils/', script_selected)
                     res = subprocess.call([script_selected, style])
                 
 
