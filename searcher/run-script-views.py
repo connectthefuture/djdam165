@@ -51,7 +51,7 @@ def script_runner_home_page(request):
             if len(styles) < 10:
                 styles = [styles]
             else:
-                styles = ' '.join(styles)
+                styles = ''.join(styles)
             script_selected = os.path.join('searcher/utils/', script_selected)
             # res = subprocess.call([script_selected, styles_list=styles])
             res = newAll_Sites_CacheClear.main(styles_list=styles)
