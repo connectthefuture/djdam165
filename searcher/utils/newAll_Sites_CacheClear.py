@@ -165,7 +165,6 @@ def main(styles_list=None):
         colorstyle_list = sys.argv[1:]
     else:
         colorstyle_list = styles_list
-
     alturl = 'altimage.ms'
 
 
