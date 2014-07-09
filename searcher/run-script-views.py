@@ -20,6 +20,18 @@ import os, sys, re, glob
 from .utils import newAll_Sites_CacheClear, meckPM_localLoginSave, bflyurl_scrape_return_styles_only, bfly_listpage_scrape_clear, download_server_imgs_byPOorStyleList
 
 
+import time
+from django.http import StreamingHttpResponse
+
+def stream_response_generator():
+    for x in range(1,11):
+        yield '{} <br /> {}'.format(x, ' ' * 1024)
+        time.sleep(1)
+
+def stream_response(request):
+    response = StreamingHttpResponse(stream_response_generator())
+    return response
+
 def script_runner_home_page(request):
     import subprocess
     styles = []
@@ -85,7 +97,7 @@ def script_runner_home_page(request):
         # abs_exec_scriptpath = os.path.join('/usr/local/batchRunScripts/python', 'script_selected')
         # results = subprocess.check_output([abs_exec_scriptpath, styles[:]]) # will then include results in return dict
 
-        return render(request, 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res })
+        return render(stream_response(request), 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res })
     else:
         message = 'Sorry, You Must have Done Something Wrong. Please check your input Data and try again.'
         return HttpResponseRedirect(message=message, redirect_to='/')
