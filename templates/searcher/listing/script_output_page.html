@@ -27,8 +27,10 @@
 {% if styles %}
 {% for style in styles %}
     <tr>
-    <td>{{ style }}</td>
-    <td><span class="glyphicon glyphicon-thumbs-up"></span> Was Processed</td>
+    <a href="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={{ style }}&width=251&height=300">
+    <td><strong>{{ style }}</strong></td></a>
+    <a href="http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom.ms?productCode={{ style }}&width=1800&height=2160">
+    <td><span class="glyphicon glyphicon-thumbs-up"></span> Was Processed</td></a>
     </tr>
 
 {% endfor %}
