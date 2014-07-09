@@ -24,10 +24,11 @@
 {% endfor %}
 {% endif %}
 <p>-------</p>
-{% if results %}
+{% if styles %}
 {% for style in styles %}
     <tr>
     <td>{{ style }}</td>
+    <td><span class="glyphicon glyphicon-thumbs-up"></span> Was Processed</td>
     </tr>
 
 {% endfor %}
