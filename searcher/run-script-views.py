@@ -14,7 +14,7 @@ from django.shortcuts import render
 from django.http import request, response
 
 from djdam.settings import MEDIA_ROOT, MEDIA_URL
-import os, sys
+import os, sys, re, glob
 # from djdam.searcher.utils.newAll_Sites_CacheClear import main as newAll_Sites_CacheClear
 from .utils import newAll_Sites_CacheClear, meckPM_localLoginSave, bflyurl_scrape_return_styles_only, bfly_listpage_scrape_clear, download_server_imgs_byPOorStyleList
 
@@ -36,22 +36,28 @@ def script_runner_home_page(request):
             styles = ' '.join(styles)
             if len(styles) < 6:
                 po = ''.join(styles)
-                res = subprocess.call(['utils/', script_selected, po])
+                script_selected = os.path.join('utils/', script_selected)
+                res = subprocess.call([script_selected, po])
             else:
-                res = subprocess.call(['utils/', script_selected, styles])
+                script_selected = os.path.join('utils/', script_selected)
+                res = subprocess.call([script_selected, styles])
         elif script_selected == 'newAll_Sites_CacheClear.py':
             styles = ' '.join(styles)
-            res = subprocess.call(['utils/', script_selected, styles])
+            script_selected = os.path.join('utils/', script_selected)
+            res = subprocess.call([script_selected, styles])
         elif script_selected == 'bfly_listpage_scrape_clear.py' and len(styles) == 1:
             url = styles.pop()
-            res = subprocess.call(['utils/', script_selected, url])
+            script_selected = os.path.join('utils/', script_selected)
+            res = subprocess.call([script_selected, url])
         elif script_selected == 'bflyurl_scrape_return_styles_only.py' and len(styles) == 1:
             url = styles.pop()
-            res = subprocess.call(['utils/', script_selected, url])
+            script_selected = os.path.join('utils/', script_selected)
+            res = subprocess.call([script_selected, url])
         elif len(styles) > 1:
             for style in styles:
                 if script_selected == 'meckPM_localLoginSave.py':
-                    res = subprocess.call(['utils/', script_selected, style])
+                    script_selected = os.path.join('utils/', script_selected)
+                    res = subprocess.call([script_selected, style])
                 
 
         print script_selected
