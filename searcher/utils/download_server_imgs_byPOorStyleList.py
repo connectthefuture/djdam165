@@ -77,63 +77,36 @@ def url_download_file(url,filepath):
 
 
 #### Run ###
-def main():
+def main(ponum=None,args=None):
     import os,sys, urllib
 
-    args = sys.argv[1:]
+    if not ponum and not args:
+        args= sys.argv[1:]
 
-    regex_r = re.compile(r'.*?\r.*?')
-    regex_n = re.compile(r'.*?\n.*?')
+        regex_r = re.compile(r'.*?\r.*?')
+        regex_n = re.compile(r'.*?\n.*?')
 
-
-
-    args1 = args[0].split('\n')   #(','.join(str(arg) for arg in args)).split('\n')
-    #args2 = args1.split('\n')
-    #if re.findall(regex_r, args):
-    #    print "REEEEEE"
-    #    args_split = [ arg.split('\r') for arg in args ][0]
-    #
-    #if re.findall(regex_n, args):
-    #re.findall(regex_n, args)    
-
-    #args_split = [ arg.replace('\n',' ') for arg in args ]
-    #    print "NNNNEEEEEE"
-            
-
-
-
-    #args_split = [ arg.split('\n') for arg in args ][0]
-     #.split('r')[1:]
-    #args = args[:]
-    #args.split('\n')[:]
-    #spl = str(args[:]).split('\n')
+        args1 = args[0].split('\n')   #(','.join(str(arg) for arg in args)).split('\n')
 
     try:
-        if len(args1) >= 2:
-            styleslist = args1
+        if len(args1) >= 2 and not ponum:
+            styleslist = ''.join(args1)
             print "HELLO Greater 2"
             print len(styleslist)
-            
-        elif len(args1) == 1:
+
+        elif len(args1) == 1 and not ponum:
             ponum = args1 # args[0] #sys.argv[1]#ys.argv[1]#args_split #sys.argv[1]
             print ponum
             styleslist = sqlQuery_GetStyleVendor_ByPO(ponum)
-            #print stylesDict
-    #        #ponum = '119071'
+            # print stylesDict
+            # ponum = '119071'
+        else:
+            styleslist = sqlQuery_GetStyleVendor_ByPO(ponum)
+
     except OSError:
         print "Enter at least PO Number as 1st Arg or Nothing will Happen"
-    #
-    #if ponum:
-    #    stylesDict = sqlQuery_GetStyleVendor_ByPO(ponum)
-    #
-    #
-    #print len(args1)
-    #stylesDict = sqlQuery_GetStyleVendor_ByPO(ponum)
-    #
-    #if type(styles) == 'dict':
 
-
-
+        #spl = str(args[:]).split('\n')
     #for k,v in styles.iteritems():
     for style in styleslist:
 

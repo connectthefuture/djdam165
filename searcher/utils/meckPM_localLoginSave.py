@@ -213,7 +213,7 @@ class PMbflyMyBrowser(MyBrowser, PrettifyHandler):
 ###########################
 ###########################
 ###########################
-def main():
+def main(styles_list=None):
     import mechanize, cookielib
     import os,sys,re,glob
 
@@ -234,12 +234,12 @@ def main():
     # User-Agent (this is cheating, ok?)
     #br.addheaders = [('User-agent',
     #                  'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
-
-    try:
-        styles_list = sys.argv[1:]
-    except:
-        styles_list = ['336844201','336842001','336841901', '336841801','336841701', '336841601','336841501']
-        pass
+    if not styles_list:
+        try:
+            styles_list = sys.argv[1:]
+        except:
+            styles_list = ['336844201','336842001','336841901', '336841801','336841701', '336841601','336841501']
+            pass
 
     ## First Login with the already supplied creds
     br.login_pm()

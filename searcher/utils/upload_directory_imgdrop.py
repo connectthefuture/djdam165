@@ -66,17 +66,17 @@ def upload_to_imagedrop(img):
 #[ shutil.move(file, os.path.join(tmp_loading, os.path.basename(file))) for file in load_jpgs ]
 
 ## UPLOAD FTP with PyCurl everything in tmp_loading
-def main():
+def main(root_dir=None):
     import os, sys, re, csv, shutil, glob
     regex_coded = re.compile(r'^.+?/[1-9][0-9]{8}_[1-6]\.[JjPpNnGg]{3}$')
     regex_alt = re.compile(r'^.+?/[1-9][0-9]{8}_\w+?0[1-6]\.[JjPpNnGg]{3}$')
     regex_valid_style = re.compile(r'^.+?/[1-9][0-9]{8}_?.*?\.[JjPpNnGg]{3}$')
+    if not root_dir:
+        try:
+            root_dir = sys.argv[1]
+        except:
+            root_dir = os.path.abspath('.')
 
-    try:
-        root_dir = sys.argv[1]
-    except:
-        root_dir = os.path.abspath('.')
-        
     archive_uploaded = os.path.join(root_dir, 'uploaded')
     tmp_failed = os.path.join(root_dir, 'failed_upload')
     try:

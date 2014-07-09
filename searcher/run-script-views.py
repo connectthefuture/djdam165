@@ -36,30 +36,35 @@ def script_runner_home_page(request):
         if script_selected == 'download_server_imgs_byPOorStyleList.py':
             styles = ' '.join(styles)
             if len(styles) < 6:
-                po = ''.join(styles)
+                ponum = ''.join(styles)
                 script_selected = os.path.join('searcher/utils/', script_selected)
-                res = subprocess.call([script_selected, po])
+                # res = subprocess.call([script_selected, ponum=ponum])
+                res = download_server_imgs_byPOorStyleList(ponum=ponum)
             else:
                 script_selected = os.path.join('searcher/utils/', script_selected)
-                res = subprocess.call([script_selected, styles])
+                # res = subprocess.call([script_selected, styles_list=styles])
+                res = download_server_imgs_byPOorStyleList(styles_list=styles)
         elif script_selected == 'newAll_Sites_CacheClear.py':
             styles = ' '.join(styles)
             script_selected = os.path.join('searcher/utils/', script_selected)
-            res = subprocess.call([script_selected, styles])
+            # res = subprocess.call([script_selected, styles_list=styles])
+            res = newAll_Sites_CacheClear(styles_list=styles)
         elif script_selected == 'bfly_listpage_scrape_clear.py' and len(styles) == 1:
             url = styles.pop()
             script_selected = os.path.join('searcher/utils/', script_selected)
-            res = subprocess.call([script_selected, url])
+            # res = subprocess.call([script_selected, bfly_url=url])
+            res = bfly_listpage_scrape_clear(bfly_url=url)
         elif script_selected == 'bflyurl_scrape_return_styles_only.py' and len(styles) == 1:
             url = styles.pop()
             script_selected = os.path.join('searcher/utils/', script_selected)
-            res = subprocess.call([script_selected, url])
+            # res = subprocess.call([script_selected, url])
+            res = bflyurl_scrape_return_styles_only(bfly_url=url)
         elif len(styles) > 1:
             for style in styles:
                 if script_selected == 'meckPM_localLoginSave.py':
                     script_selected = os.path.join('searcher/utils/', script_selected)
-                    res = subprocess.call([script_selected, style])
-                
+                    # res = subprocess.call([script_selected, style])
+                    res = meckPM_localLoginSave(styles_list=styles)
 
         print script_selected
     except IndexError:

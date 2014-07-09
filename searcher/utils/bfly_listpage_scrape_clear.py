@@ -167,7 +167,7 @@ def send_purge_request_edgecast(mediaPath):
             
             
 ############ RUN ###########
-def main():
+def main(bfly_url=None):
     import sys,re,os
 
     alturl = 'altimage.ms'
@@ -198,8 +198,8 @@ def main():
     # num_styles = '1000'
     #urls_to_scrape = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp={0}&cp=2&sosc=true'.format(num_styles)
     regex_url = re.compile(r'http://www\.[bB][eElL].+')
-    bfly_url = ''
-    if num_styles.isdigit():
+
+    if num_styles.isdigit() and not bfly_url:
         try:
             arg = sys.argv[2]
             if arg.isdigit() and len(arg) < 2:
@@ -232,7 +232,7 @@ def main():
             bfly_url = 'http://www.bluefly.com/new_arrivals?so=new&vl=l&ppp={0}&cp=1&sosc=true'.format(num_styles)
             pass
 
-    else:
+    elif not bfly_url:
         try:
             arg = sys.argv[1]
             if re.findall(regex_url, arg):

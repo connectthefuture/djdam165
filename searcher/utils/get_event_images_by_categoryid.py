@@ -105,10 +105,11 @@ def subproc_pad_to_x480(file,destdir):
 
 ################# RUN ###########################
 ################# RUN ###########################
-def main():
+def main(categoryid=None):
     import sys,os,re,ftplib
     #import PythonMagick as Magick
-    categoryid = sys.argv[1]
+    if not categoryid:
+        categoryid = sys.argv[1]
 
     ## Get the Styles within this event
     event_styles = event_styles_by_categoryid(categoryid)

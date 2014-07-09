@@ -159,9 +159,12 @@ def send_purge_request_edgecast(mediaPath):
             
             
 ############ RUN ###########
-def main():
+def main(styles_list=None):
     import sys,re,os
-    colorstyle_list = sys.argv[1:]
+    if not styles_list:
+        colorstyle_list = sys.argv[1:]
+    else:
+        colorstyle_list = styles_list
 
     alturl = 'altimage.ms'
 
@@ -170,8 +173,6 @@ def main():
     ## Join Catid to BC Url
     #url_catid = 'http://www.belleandclive.com/browse/sales/details.jsp?categoryId=' + catid
     #url_catid = 'http://www.belleandclive.com/browse/sales/details.jsp?categoryId=' + catid
-
-
 
     #www.bluefly.com/Harrison-pink-check-classic-fit-dress-shirt/p/323108302/detail.fly
 

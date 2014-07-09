@@ -328,7 +328,30 @@ urlpatterns += patterns('',
                         ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += patterns('',
-                        url(r'^runscripts/script_runner_home/?.*?$',
-                            'searcher.run-script-views.script_runner_home_page',
-                            name='script_runner',)
-                        )
+
+    url(r'^runscripts/script_runner_home/?.*?$',
+        'searcher.run-script-views.script_runner_home_page',
+        name='script_runner'),
+
+    url(r'^searcher/utils/meckPM_localLoginSave.py/?.*?(?P<styles_list>.+)$',
+        'searcher.run-script-views.script_runner_home_page',
+        name='meckPM_localLoginSave'),
+
+    url(r'^searcher/utils/download_server_imgs_byPOorStyleList.py/?.*?(?P<ponum>\d+)$',
+        'searcher.run-script-views.script_runner_home_page',
+        name='download_server_imgs_byPOorStyleList'),
+
+    url(r'^searcher/utils/newAll_Sites_CacheClear.py/?.*?(?P<styles_list>.+)$',
+        'searcher.run-script-views.script_runner_home_page',
+        name='newAll_Sites_CacheClear'),
+
+    url(r'^searcher/utils/bfly_listpage_scrape_clear.py/?.*?(?P<bfly_url>.+)$',
+        'searcher.run-script-views.script_runner_home_page',
+        name='bfly_listpage_scrape_clear'),
+
+    url(r'^searcher/utils/bflyurl_scrape_return_styles_only/?.*?(?P<bfly_url>.+)$',
+        'searcher.run-script-views.script_runner_home_page',
+        name='bflyurl_scrape_return_styles_only'),
+
+)
+
