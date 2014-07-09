@@ -224,7 +224,7 @@
                                         </div>
 
                             </div>
-                            <button type="submit" class="btn btn-primary btn-sm" name="submitScriptName" id="submit"><span
+                            <button type="submit" class="btn btn-primary btn-sm" name="submit" id="submit"><span
                                     class="glyphicon glyphicon-exclamation-sign"></span> Run Script
                             </button>
 
@@ -281,15 +281,14 @@
                         <li class="active" style="color: black">
                             <div class="container">
                                 <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6 col-lg-12">
                                     <!-- Button trigger modal -->
 
-                                    <button class="btn btn-primary btn-md"  style="color: #baade2;background-color: " href="http://prodimages.ny.bluefly.com:8082/siteshome/Reports/event_incomplete_14days.html" data-toggle="modal" data-target="#myModalLavender">
+                                    <button class="btn btn-primary btn-md"  style="color: black; background-color: #baade2" href="http://prodimages.ny.bluefly.com:8082/siteshome/Reports/event_incomplete_14days.html" data-toggle="modal" data-target="#myModalLavender">
                                         The Lavender Report
                                     </button>
                                     <!-- Modal -->
-                                    <div class="modal" id="myModalLavender" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                         aria-hidden="true">
+                                    <div class="modal" id="myModalLavender" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -300,10 +299,8 @@
                                                 </div>
                                                 <div class="modal-body">
 
-                                                    <form class="navbar-form navbar-right" enctype="multipart/form-data" method="GET"
-                                                          action="searcher/findall/outtakes">
+                                                    <form class="navbar-form navbar-right" enctype="multipart/form-data" method="GET" action="#">
                                                         {% csrf_token %}
-
                                                         <button type="reset" class="btn btn-primary" name="reset" id="reset"><span
                                                                 class="glyphicon glyphicon-refresh"></span> Reload
                                                         </button>
@@ -324,7 +321,7 @@
                                 </div> <!-- Close Col sm6 md12 -->
                             </div> <!-- Close Row -->
                             </div> <!-- Close Container -->
-
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-2">
