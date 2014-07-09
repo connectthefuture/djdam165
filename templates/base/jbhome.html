@@ -350,6 +350,16 @@ $(document.body).animate({
 }, 2000);
 </script>
 
+<script>
+(function($) {
+    $(document).ready(function() {
+         $('html, body').animate({
+           'scrollTop':   $('#tweak_search_new').offset().top
+         }, 2000);
+    });
+})(jQuery);
+</script>
+
 {##}
 {#<script>#}
 {#      $('#daterange-container').find('.input-daterange').datepicker({#}
