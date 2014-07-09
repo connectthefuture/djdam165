@@ -77,10 +77,10 @@ def url_download_file(url,filepath):
 
 
 #### Run ###
-def main(ponum=None,args=None):
+def main(ponum=None,args=None,styles_list=None):
     import os,sys, urllib
 
-    if not ponum and not args:
+    if not ponum and not args and not styles_list:
         args= sys.argv[1:]
 
         regex_r = re.compile(r'.*?\r.*?')
@@ -89,26 +89,26 @@ def main(ponum=None,args=None):
         args1 = args[0].split('\n')   #(','.join(str(arg) for arg in args)).split('\n')
 
     try:
-        if len(args1) >= 2 and not ponum:
-            styleslist = ''.join(args1)
+        if len(args1) >= 2 and not ponum and not styles_list:
+            styles_list = ''.join(args1)
             print "HELLO Greater 2"
             print len(styleslist)
 
-        elif len(args1) == 1 and not ponum:
+        elif len(args1) == 1 and not ponum and not styles_list:
             ponum = args1 # args[0] #sys.argv[1]#ys.argv[1]#args_split #sys.argv[1]
             print ponum
-            styleslist = sqlQuery_GetStyleVendor_ByPO(ponum)
+            styles_list = sqlQuery_GetStyleVendor_ByPO(ponum)
             # print stylesDict
             # ponum = '119071'
-        else:
-            styleslist = sqlQuery_GetStyleVendor_ByPO(ponum)
+        elif not styles_list:
+            styles_list = sqlQuery_GetStyleVendor_ByPO(ponum)
 
     except OSError:
         print "Enter at least PO Number as 1st Arg or Nothing will Happen"
 
         #spl = str(args[:]).split('\n')
     #for k,v in styles.iteritems():
-    for style in styleslist:
+    for style in styles_list:
 
         netsrv101_url = 'ftp://imagedrop:imagedrop0@netsrv101.l3.bluefly.com//mnt/images/images/'
         colorstyle = str(style)

@@ -39,32 +39,32 @@ def script_runner_home_page(request):
                 ponum = ''.join(styles)
                 script_selected = os.path.join('searcher/utils/', script_selected)
                 # res = subprocess.call([script_selected, ponum=ponum])
-                res = download_server_imgs_byPOorStyleList(ponum=ponum)
+                res = download_server_imgs_byPOorStyleList.main(ponum=ponum)
             else:
                 script_selected = os.path.join('searcher/utils/', script_selected)
                 # res = subprocess.call([script_selected, styles_list=styles])
-                res = download_server_imgs_byPOorStyleList(styles_list=styles)
+                res = download_server_imgs_byPOorStyleList.main(styles_list=styles)
         elif script_selected == 'newAll_Sites_CacheClear.py':
             styles = ' '.join(styles)
             script_selected = os.path.join('searcher/utils/', script_selected)
             # res = subprocess.call([script_selected, styles_list=styles])
-            res = newAll_Sites_CacheClear(styles_list=styles)
+            res = newAll_Sites_CacheClear.main(styles_list=styles)
         elif script_selected == 'bfly_listpage_scrape_clear.py' and len(styles) == 1:
             url = styles.pop()
             script_selected = os.path.join('searcher/utils/', script_selected)
             # res = subprocess.call([script_selected, bfly_url=url])
-            res = bfly_listpage_scrape_clear(bfly_url=url)
+            res = bfly_listpage_scrape_clear.main(bfly_url=url)
         elif script_selected == 'bflyurl_scrape_return_styles_only.py' and len(styles) == 1:
             url = styles.pop()
             script_selected = os.path.join('searcher/utils/', script_selected)
             # res = subprocess.call([script_selected, url])
-            res = bflyurl_scrape_return_styles_only(bfly_url=url)
+            res = bflyurl_scrape_return_styles_only.main(bfly_url=url)
         elif len(styles) > 1:
             for style in styles:
                 if script_selected == 'meckPM_localLoginSave.py':
                     script_selected = os.path.join('searcher/utils/', script_selected)
                     # res = subprocess.call([script_selected, style])
-                    res = meckPM_localLoginSave(styles_list=styles)
+                    res = meckPM_localLoginSave.main(styles_list=styles)
 
         print script_selected
     except IndexError:
