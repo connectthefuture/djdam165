@@ -89,7 +89,7 @@ def send_purge_request_localis(colorstyle, version, POSTURL):
         
         head_contenttype = 'Content-Type: application/x-www-form-urlencoded'
         head_content_len= "Content-length: {0}".format(str(len(data)))
-        #head_accept = 'Accept: text/html'
+        head_xfrencode= 'Transfer-Encoding: chunked'
         head_accept = 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
         head_useragent = 'User-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:20.0) Gecko/20100101 Firefox/20.0'
         head_referer = 'Referer: {0}'.format(POSTURL_Referer)
@@ -101,7 +101,7 @@ def send_purge_request_localis(colorstyle, version, POSTURL):
         c.setopt(pycurl.FORBID_REUSE, 1)
         c.setopt(pycurl.FRESH_CONNECT, 1)
         c.setopt(pycurl.POSTFIELDS, data)
-        c.setopt(pycurl.HTTPHEADER, [head_useragent, head_referer, head_contenttype, head_accept, head_content_len])
+        c.setopt(pycurl.HTTPHEADER, [head_useragent, head_referer, head_xfrencode, head_contenttype, head_accept, head_content_len])
         #c.setopt(c.POSTFIELDS, POSTDATA)
         c.setopt(c.VERBOSE, True)
         c.perform()
@@ -111,7 +111,7 @@ def send_purge_request_localis(colorstyle, version, POSTURL):
         #head_content_len= "Content-length: {0}".format(str(len(POSTDATA)))
         #head_accept = 'Accept: application/json'
         #head_contenttype = 'Content-Type: application/json'
-
+        return "Successfully Sent Local Purge Request for --> Style: {0} Ver: {1}".format(colorstyle, version)
 
 
 def send_purge_request_edgecast(mediaPath):
@@ -151,6 +151,7 @@ def send_purge_request_edgecast(mediaPath):
             c.perform()
             c.close()
             print "Successfully Sent Purge Request for --> {0}".format(mediaPath)
+            return "Successfully Sent Purge Request for --> {0}".format(mediaPath) 
         except pycurl.error, error:
             errno, errstr = error
             print 'An error occurred: ', errstr
