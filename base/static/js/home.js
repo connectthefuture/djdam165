@@ -2,6 +2,20 @@
 * Created by relic7 on 6/30/14.
 */
  
+// ajax form entry on home page modal
+$(document).ready(function() {
+$('#searchSubmit').click(function() {
+    q = $('#input_list').val();
+    $('#results').html('&nbsp;').load('{% url 'searcher.run-script-views.script_runner' %}?q=' + q);
+    });
+});
+ 
+$(document).ajaxStart(function() {
+    $('#spinner').show();
+    }).ajaxStop(function() {
+    $('#spinner').hide();
+});
+
 //// Date picker popup calendar 
 $('#daterange-container').find('.input-daterange').datepicker({
           todayBtn: true,
