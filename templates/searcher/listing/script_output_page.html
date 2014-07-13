@@ -1,16 +1,15 @@
 {% extends 'base/jbhome.html' %}
 
 {% block page_title %}
-    <h2><strong>{{ script }} Results</strong></h2>
 {% endblock %}
 <body>
 
 {% block content %}
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">Script Output</div>
+  <div class="panel-heading">    <h2><strong>{{ script }} Results</strong></h2></div>
   <div class="panel-body">
-    <p><h2><strong>Total Styles Processed using {{ script|slice:"-1:" }}: {{ styles|wordcount }}</strong></h2></p>
+    <p><h2><strong>Total Styles Processed using {{ script|slice:"-15:" }}: {{ styles|wordcount }}</strong></h2></p>
   </div>
 
 <table class="table table-bordered table-striped" style="width: 250px;">
