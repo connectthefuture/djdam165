@@ -60,6 +60,7 @@ def script_runner_home_page(request):
                 script_selected = os.path.join('searcher/utils/', script_selected)
                 # res = subprocess.call([script_selected, styles_list=styles])
                 res = download_server_imgs_byPOorStyleList.main(styles_list=styles)
+
         elif script_selected == 'newAll_Sites_CacheClear.py':
             if len(styles) < 10:
                 styles = [styles]

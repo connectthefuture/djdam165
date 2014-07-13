@@ -77,7 +77,7 @@ def url_download_file(url,filepath):
 
 
 #### Run ###
-def main(ponum=None,args=None,styles_list=None):
+def main(destdir=None,ponum=None,args=None,styles_list=None):
     import os,sys, urllib
 
     if not ponum and not args and not styles_list:
@@ -88,11 +88,13 @@ def main(ponum=None,args=None,styles_list=None):
 
         args1 = args[0].split('\n')   #(','.join(str(arg) for arg in args)).split('\n')
 
+    if args:
+        args1 = args[0].split('\n')
     try:
         if len(args1) >= 2 and not ponum and not styles_list:
             styles_list = ''.join(args1)
             print "HELLO Greater 2"
-            print len(styleslist)
+            print len(styles_list)
 
         elif len(args1) == 1 and not ponum and not styles_list:
             ponum = args1 # args[0] #sys.argv[1]#ys.argv[1]#args_split #sys.argv[1]
@@ -123,7 +125,7 @@ def main(ponum=None,args=None,styles_list=None):
         #urlcode_value = error_check.getcode()
         #print urlcode_value
         #try: #if urlcode_value == 200:
-        colorstyle_file = os.path.join(os.path.abspath(os.curdir), colorstyle + ext_PNG)
+        colorstyle_file = os.path.join(destdir, colorstyle + ext_PNG)
         try:
             url_download_file(netsrv101_url_file, colorstyle_file)
         
@@ -133,7 +135,7 @@ def main(ponum=None,args=None,styles_list=None):
                     alt = x   
                     ext_ALT = '_alt0{0}{1}'.format(str(alt),ext_PNG)
                     colorstylealt = colorstyle + ext_ALT
-                    colorstyle_filealt = os.path.join(os.path.abspath(os.curdir), colorstylealt)
+                    colorstyle_filealt = os.path.join(destdir, colorstylealt)
                     
                     netsrv101_url_filealt = os.path.join(netsrv101_url, colorstyle[:4], colorstylealt)
                     
