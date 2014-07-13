@@ -3,6 +3,22 @@
  */
  
  
+// ajax form entry on home page modal
+$(document).ready(function() {
+$('#searchSubmit').click(function() {
+    q = $('#input_list').val();
+    $('#results').html('&nbsp;').load('{% url 'searcher.run-script-views.script_runner' %}?q=' + q);
+    });
+});
+ 
+$(document).ajaxStart(function() {
+    $('#spinner').show();
+    }).ajaxStop(function() {
+    $('#spinner').hide();
+});
+
+/////
+ 
 /////
 $(document).ready(function() {
     $("#override_input_list").change(function () {
