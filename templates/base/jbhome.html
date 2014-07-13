@@ -178,20 +178,20 @@
                         {# block modal_body %} {% endblock #}
                         <div class="row">
                         <div class="col-sm-12 col-md-12">
-                        <form class="navbar-form" placeholder="Enter Style List or PO or URL and choose action below" enctype="multipart/form-data" method="GET" action="/searcher/runscripts/script_runner_home">
+                        <form class="navbar-form" enctype="multipart/form-data" method="GET" action="/searcher/runscripts/script_runner_home">
                             {% csrf_token %}
 
                             <div class="form-group form-horizontal">
                                 {# <input type="text" class="form-control" name="colorstyle" id="colorstyle" placeholder="Search"> #}
-
-                                <input type="text" style="box-sizing:border-box" class="form-control" name="input_list">
+                                <input type="hidden" name="ajaxresponse" id="ajaxresponse">
+                                <input type="text" placeholder="Enter Style List or PO or URL and choose action below" style="box-sizing:border-box" class="form-control" name="input_list">
                                         <div class="list-group">
                                         <select name="script_name" id="multiselect">
                                             <option value="newAll_Sites_CacheClear.py"  selected=selected>
-                                                <a href="#" class="list-group-item list-group-item-success">
+{#                                                <a href="#" class="list-group-item list-group-item-success">#}
                                                     <span class="label label-primary">
                                                     Clear Cache using Delimited List
-                                                - Preferably Space Delimited</span></a>
+                                                - Preferably Space Delimited</span>
                                             </option>
                                             <option value="download_server_imgs_byPOorStyleList.py">
                                                 <a href="#" class="list-group-item list-group-item-success">
