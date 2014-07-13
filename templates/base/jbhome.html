@@ -178,13 +178,14 @@
                         {# block modal_body %} {% endblock #}
                         <div class="row">
                         <div class="col-sm-12 col-md-12">
-                        <form class="navbar-form" enctype="multipart/form-data" method="GET" action="/searcher/runscripts/script_runner_home">
+                        <form class="navbar-form" id="script_run_form" enctype="multipart/form-data" method="GET" action="#">
                             {% csrf_token %}
 
                             <div class="form-group form-horizontal">
                                 {# <input type="text" class="form-control" name="colorstyle" id="colorstyle" placeholder="Search"> #}
                                 <input type="hidden" name="ajaxresponse" id="ajaxresponse">
                                 <input type="text" placeholder="Enter Style List or PO or URL and choose action below" style="box-sizing:border-box" class="form-control" name="input_list">
+                                        <div class="script-result"><\div>
                                         <div class="list-group">
                                             <label for="multiselect">
                                             ScriptSelection
