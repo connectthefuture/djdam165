@@ -327,6 +327,8 @@ urlpatterns += patterns('',
                             name='fileupload'),
                         ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+
+## Script Running from Modal Forms on HomePg
 urlpatterns += patterns('',
 
     url(r'^runscripts/script_runner_home/?.*?$',
