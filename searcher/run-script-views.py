@@ -18,7 +18,7 @@ from djdam.settings import MEDIA_ROOT, MEDIA_URL
 import os, sys, re, glob
 # from djdam.searcher.utils.newAll_Sites_CacheClear import main as newAll_Sites_CacheClear
 
-from .utils import newAll_Sites_CacheClear, meckPM_localLoginSave, bflyurl_scrape_return_styles_only, bfly_list page_scrape_clear, download_server_imgs_byPOorStyleList
+from .utils import newAll_Sites_CacheClear, meckPM_localLoginSave, bflyurl_scrape_return_styles_only, bfly_listpage_scrape_clear, download_server_imgs_byPOorStyleList
 
 
 import time
