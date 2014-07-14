@@ -321,6 +321,7 @@ def main(bfly_url=None):
             #send_purge_request_localis(colorstyle,version,POSTURL_BFY)
             #send_purge_request_localis(colorstyle,version,POSTURL_Mobile)
             send_purge_request_localis(colorstyle,version,POSTURL_ALLSITES)
+            yield colorstyle
                 #except:
                 #    print sys.stderr().read()
         except IndexError:
