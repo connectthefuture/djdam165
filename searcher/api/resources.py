@@ -258,7 +258,7 @@ class ViewExcelToolDuplicateVendorStyleResource(ModelResource):
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         queryset = ViewExcelToolDuplicateVendorStyle.objects.all()
         detail_uri_name = 'colorstyle'
-        resource_name = 'view-excel-tool-duplicate-vendor-style'
+        resource_name = 'duplicate-vendor-style'
         allowed_methods = ['get','post']
         detail_allowed_methods = ['get','post']
         list_allowed_methods = ['get','post']
@@ -270,15 +270,17 @@ class ViewExcelToolDuplicateVendorStyleResource(ModelResource):
         }
 
 
+    def dispatch(self, request_type, request, **kwargs):
+        colorstyle = kwargs.pop('colorstyle')
+        kwargs['colorstyle'] = get_object_or_404(ExcelToolDataResource, colorstyle=colorstyle)
+        return super(ViewExcelToolDuplicateVendorStyleResource, self).dispatch(request_type, request, **kwargs)
+
+
     def get_object_list(self, request):
         vendor_style = request.POST['vendor_style']
-        colorstyle   = request.POST['colorstyle']
-        return super(ViewExcelToolDuplicateVendorStyleResource, self).get_object_list(request).filter(vendor_style__exact=vendor_style)
-
-    # def dispatch(self, request_type, request, **kwargs):
-    #     colorstyle = kwargs.pop('colorstyle')
-    #     kwargs['excel-tool-data'] = get_object_or_404(ExcelToolDataResource, colorstyle=colorstyle)
-    #     return super(ViewExcelToolDuplicateVendorStyleResource, self).dispatch(request_type, request, **kwargs)
+        colorstyle = request.POST['colorstyle']
+        return super(ViewExcelToolDuplicateVendorStyleResource, self).get_object_list(request).filter(
+            vendor_style__exact=vendor_style)
 
     # def prepend_urls(self):
     #     return [url(r"^(?P<'excel-tool-data'>%s)/(?P<colorstyle>[\w\d_.-]+)/$" % self._meta.exceltooldata,

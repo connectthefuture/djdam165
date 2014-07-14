@@ -72,12 +72,16 @@ v1_api.register(ProductSnapshotLiveResource())
 # #
 # productsnapshotlive_resource = ProductSnapshotLiveResource()
 #
+# TASTYPIE API URLS
+#
+
 urlpatterns = patterns('',
     # ...more URLconf bits here...
     # Then add:
     #(r'^api/', include(v1_api.urls)),
     (r'^api/v1/pmdata/(?P<colorstyle>\d{9})/?', include(ProductSnapshotLiveResource().urls)),
     (r'^api/v1/excel-tool-data/(?P<colorstyle>\d{9})/?', include(ExcelToolDataResource().urls)),
+    (r'^api/v1/duplicate-vendor-style/(?P<colorstyle>\d{9})/?', include(ViewExcelToolDuplicateVendorStyleResource().urls)),
     (r'^api/v1/offshore-style/(?P<colorstyle>\d{9})/?', include(OffshoreStatusResource().urls)),
     (r'^api/v1/offshore-sent/(?P<colorstyle>\d{9})/?', include(OffshoreStatusSentOnlyResource().urls)),
     (r'^api/', include(v1_api.urls)),
