@@ -264,7 +264,7 @@ class ViewExcelToolDuplicateVendorStyleResource(ModelResource):
         list_allowed_methods = ['get','post']
         filtering = {
             'colorstyle': ALL,
-            'vendor_style': ALL,
+            'vendor_style': ('exact', 'startswith',),  #ALL,
             #'modify_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
             'color_group_id': ALL_WITH_RELATIONS,
         }

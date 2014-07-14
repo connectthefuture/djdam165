@@ -17,6 +17,11 @@ $(document).ajaxStart(function() {
     $('#spinner').hide();
 });
 
+
+$(document).ready(function(){
+//   $("#mutiple").multiselect();
+    $("select").multiselect().multiselectfilter();
+});
 /////
  
 /////
