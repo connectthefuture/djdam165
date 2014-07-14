@@ -133,9 +133,7 @@ class ProductSnapshotLiveResource(ModelResource):
 
     def prepend_urls(self):
                 return [
-                    url(r"^(?P<pmdata>{0})/(?P<colorstyle>[\d]+)/$".format(self._meta.exceltooldata),
-                        self.wrap_view('dispatch_detail'),
-                        name="api_dispatch_detail"),
+                    url(r"^(?P<pmdata>{0})/(?P<colorstyle>[\d]+)/$".format(self._meta.exceltooldata), self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
                 ]
 
 

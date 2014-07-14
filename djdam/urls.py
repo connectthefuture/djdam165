@@ -38,6 +38,7 @@ from django.conf.urls import * ##import defaults
     ############################################################################################################
 
 # Tastypie API Resouce URLs
+#from django.conf.urls import *
 from django.conf.urls import *
 from tastypie.api import Api
 from searcher.api.resources import SelectedFilesResource, ProductSnapshotLiveResource, ExcelToolDataResource, ViewExcelToolDuplicateVendorStyleResource, OffshoreStatusResource, OffshoreStatusSentOnlyResource, UserResource
@@ -48,13 +49,10 @@ from searcher.api.resources import ProductionRawCp1DataResource, ProductionRawCp
 v1_api = Api(api_name='v1')
 v1_api.register(UserResource())
 v1_api.register(SelectedFilesResource())
-v1_api.register(ProductSnapshotLiveResource())
+#v1_api.register(ProductSnapshotLiveResource())
 
 v1_api.register(OffshoreStatusResource())
 v1_api.register(OffshoreStatusSentOnlyResource())
-
-v1_api.register(ExcelToolDataResource())
-v1_api.register(ViewExcelToolDuplicateVendorStyleResource())
 
 v1_api.register(PushPhotoselectsResource())
 v1_api.register(Zimages1PhotoselectsResource())
@@ -65,21 +63,26 @@ v1_api.register(ProductionRawCp1DataResource())
 v1_api.register(ProductionRawCp1PreSelectResource())
 v1_api.register(ProductionRawCp1SelectResource())
 
+v1_api.register(ExcelToolDataResource())
+v1_api.register(ViewExcelToolDuplicateVendorStyleResource())
+
 # #viewexceltoolduplicatevendorstyle_resource = ViewExcelToolDuplicateVendorStyleResource()
 # from searcher.api.resources import ProductSnapshotLiveResource
 # #
 # productsnapshotlive_resource = ProductSnapshotLiveResource()
 #
-# urlpatterns = patterns('',
-#     # ...more URLconf bits here...
-#     # Then add:
-#     #(r'^api/api/v1/pmdata/(?P<colorstyle>\d{9})/', include(ProductSnapshotLiveResource().urls)),
-#     (r'^api/', include(v1_api.urls)),
-# )
-
 urlpatterns = patterns('',
+    # ...more URLconf bits here...
+    # Then add:
+    #(r'^api/v1/pmdata/(?P<colorstyle>\d{9})/', include(ProductSnapshotLiveResource().urls)),
+    #(r'^api/', include(v1_api.urls)),
+    (r'^api/', include(v1_api.urls))
+)
+
+urlpatterns += patterns('',
                        ## Admin -> dj admin tools actions and other admin config routing,
                        #  must load prior to django Admin loading
+                       (r'^api/', include(v1_api.urls)),
                        url(r'^admin_tools/', include('admin_tools.urls')),
                        url(r'^adminactions/', include('adminactions.urls')),
                        # Uncomment the next line to enable the admin:
