@@ -119,35 +119,54 @@ class ProductSnapshotLiveResource(ModelResource):
         list_allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get', 'post', 'put', 'delete']
         resource_name = 'pmdata'
+        detail_uri_name = 'colorstyle'
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
 
         # to have generated url go to searcher/api not root url/api
         #resource_name = 'searcher/pmdata'
         #authorization = DjangoAuthorization()
-        filtering = {
-            'slug': ALL,
-            'user': ALL_WITH_RELATIONS,
-            'created': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
-            'gender': ALL,
-        }
+        # filtering = {
+        #     'slug': ALL,
+        #     'user': ALL_WITH_RELATIONS,
+        #     'created': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
+        #     'gender': ALL,
+        # }
 
-    def prepend_urls(self):
-                return [
-                    url(r"^(?P<pmdata>{0})/(?P<colorstyle>[\d]+)/$".format(self._meta.exceltooldata), self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
-                ]
+    def dispatch(self, request_type, request, **kwargs):
+        colorstyle = kwargs.pop('colorstyle')
+        kwargs['colorstyle'] = get_object_or_404(ProductSnapshotLive, colorstyle=colorstyle)
+        return super(ProductSnapshotLiveResource, self).dispatch(request_type, request, **kwargs)
+
+    # def prepend_urls(self):
+    #             return [
+    #                 url(r"^(?P<pmdata>{0})/(?P<colorstyle>{1})/$".format(self._meta.exceltooldata), self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
+    #             ]
 
 
 class OffshoreStatusResource(ModelResource):
     class Meta:
-        #resource_name = 'offshore_style'
+        resource_name = 'offshore-style'
         queryset = OffshoreStatus.objects.all()
         allowed_methods = ['get', 'post', 'put']
+        detail_uri_name = 'colorstyle'
+
+    def dispatch(self, request_type, request, **kwargs):
+        colorstyle = kwargs.pop('colorstyle')
+        kwargs['colorstyle'] = get_object_or_404(OffshoreStatus, colorstyle=colorstyle)
+        return super(OffshoreStatusResource, self).dispatch(request_type, request, **kwargs)
+
 
 class OffshoreStatusSentOnlyResource(ModelResource):
     class Meta:
         resource_name = 'offshore-sent'
         queryset = OffshoreStatus.objects.all().exclude(send_dt=None).filter(return_dt=None)
         allowed_methods = ['get', 'post']
+        detail_uri_name = 'colorstyle'
+
+    def dispatch(self, request_type, request, **kwargs):
+        colorstyle = kwargs.pop('colorstyle')
+        kwargs['colorstyle'] = get_object_or_404(OffshoreStatus, colorstyle=colorstyle)
+        return super(OffshoreStatusSentOnlyResource, self).dispatch(request_type, request, **kwargs)
 
 
 ### Raw Capture 1 data
@@ -184,11 +203,12 @@ class ProductionRawCp1SelectResource(ModelResource):
 
 
 class ExcelToolDataResource(ModelResource):
-    exceltooldata = ''#fields.ForeignKey(ExcelToolDataResource, 'view_excel_tool_duplicate_vendor_style')
+    #exceltooldata = ''#fields.ForeignKey(ExcelToolDataResource, 'view_excel_tool_duplicate_vendor_style')
 
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'excel-tool-data'
+        detail_uri_name = 'colorstyle'
         #authorization = Authorization()
         queryset = ExcelToolData.objects.all() #.filter(vendor_style__icontains='')
         allowed_methods = ['get','post']
@@ -208,19 +228,25 @@ class ExcelToolDataResource(ModelResource):
     #                                                                              name="api_dispatch_detail"),
     #         ]
 
-    def get_object_list(self, request):
-        vendor_style = request.POST['vendor_style']
-        colorstyle   = request.POST['colorstyle']
-        input_list   = request.POST['input_list']
 
-        if input_list:
-            return super(ExcelToolDataResource, self).get_object_list(request).filter(colorstyle__in=input_list)
-        elif vendor_style:
-            return super(ExcelToolDataResource, self).get_object_list(request).filter(vendor_style__icontains=vendor_style)
-        elif colorstyle:
-            return super(ExcelToolDataResource, self).get_object_list(request).filter(colorstyle__exact=colorstyle)
-        else:
-            return super(ExcelToolDataResource, self).get_object_list(request).filter(vendor_style__in=input_list)
+    def dispatch(self, request_type, request, **kwargs):
+        colorstyle = kwargs.pop('colorstyle')
+        kwargs['colorstyle'] = get_object_or_404(ExcelToolData, colorstyle=colorstyle)
+        return super(ExcelToolDataResource, self).dispatch(request_type, request, **kwargs)
+
+    # def get_object_list(self, request):
+    #     vendor_style = request.POST['vendor_style']
+    #     colorstyle   = request.POST['colorstyle']
+    #     input_list   = request.POST['input_list']
+    #
+    #     if input_list:
+    #         return super(ExcelToolDataResource, self).get_object_list(request).filter(colorstyle__in=input_list)
+    #     elif vendor_style:
+    #         return super(ExcelToolDataResource, self).get_object_list(request).filter(vendor_style__icontains=vendor_style)
+    #     elif colorstyle:
+    #         return super(ExcelToolDataResource, self).get_object_list(request).filter(colorstyle__exact=colorstyle)
+    #     else:
+    #         return super(ExcelToolDataResource, self).get_object_list(request).filter(vendor_style__in=input_list)
 
 
 from django.shortcuts import get_object_or_404
@@ -231,8 +257,8 @@ class ViewExcelToolDuplicateVendorStyleResource(ModelResource):
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         queryset = ViewExcelToolDuplicateVendorStyle.objects.all()
-
-        resource_name = 'view_excel_tool_duplicate_vendor_style'
+        detail_uri_name = 'colorstyle'
+        resource_name = 'view-excel-tool-duplicate-vendor-style'
         allowed_methods = ['get','post']
         detail_allowed_methods = ['get','post']
         list_allowed_methods = ['get','post']

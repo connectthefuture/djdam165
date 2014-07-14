@@ -49,7 +49,6 @@ from searcher.api.resources import ProductionRawCp1DataResource, ProductionRawCp
 v1_api = Api(api_name='v1')
 v1_api.register(UserResource())
 v1_api.register(SelectedFilesResource())
-#v1_api.register(ProductSnapshotLiveResource())
 
 v1_api.register(OffshoreStatusResource())
 v1_api.register(OffshoreStatusSentOnlyResource())
@@ -66,6 +65,8 @@ v1_api.register(ProductionRawCp1SelectResource())
 v1_api.register(ExcelToolDataResource())
 v1_api.register(ViewExcelToolDuplicateVendorStyleResource())
 
+v1_api.register(ProductSnapshotLiveResource())
+
 # #viewexceltoolduplicatevendorstyle_resource = ViewExcelToolDuplicateVendorStyleResource()
 # from searcher.api.resources import ProductSnapshotLiveResource
 # #
@@ -74,9 +75,13 @@ v1_api.register(ViewExcelToolDuplicateVendorStyleResource())
 urlpatterns = patterns('',
     # ...more URLconf bits here...
     # Then add:
-    #(r'^api/v1/pmdata/(?P<colorstyle>\d{9})/', include(ProductSnapshotLiveResource().urls)),
     #(r'^api/', include(v1_api.urls)),
-    (r'^api/', include(v1_api.urls))
+    (r'^api/v1/pmdata/(?P<colorstyle>\d{9})/?', include(ProductSnapshotLiveResource().urls)),
+    (r'^api/v1/excel-tool-data/(?P<colorstyle>\d{9})/?', include(ExcelToolDataResource().urls)),
+    (r'^api/v1/offshore-style/(?P<colorstyle>\d{9})/?', include(OffshoreStatusResource().urls)),
+    (r'^api/v1/offshore-sent/(?P<colorstyle>\d{9})/?', include(OffshoreStatusSentOnlyResource().urls)),
+    (r'^api/', include(v1_api.urls)),
+
 )
 
 urlpatterns += patterns('',

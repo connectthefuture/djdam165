@@ -126,6 +126,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'searcher.utils.Tastypie_Default_Format.TastyJSONMiddleware',
 )
 
 ROOT_URLCONF = 'djdam.urls'
@@ -388,6 +389,8 @@ ADMIN_TOOLS_THEMING_CSS = 'css/theming.css'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 ## REST FRAMEWORK SETTINGS
+TASTYPIE_DEFAULT_FORMATS = ['json']
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'PAGINATE_BY': 10
