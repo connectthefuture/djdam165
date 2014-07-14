@@ -275,12 +275,12 @@ class ViewExcelToolDuplicateVendorStyleResource(ModelResource):
         kwargs['colorstyle'] = get_object_or_404(ExcelToolData, colorstyle=colorstyle)
         return super(ViewExcelToolDuplicateVendorStyleResource, self).dispatch(request_type, request, **kwargs)
 
-
-    def get_object_list(self, request):
-        vendor_style = request.POST['vendor_style']
-        colorstyle = request.POST['colorstyle']
-        return super(ViewExcelToolDuplicateVendorStyleResource, self).get_object_list(request).filter(
-            vendor_style__exact=vendor_style)
+    #
+    # def get_object_list(self, request):
+    #     vendor_style = request.POST['vendor_style']
+    #     colorstyle = request.POST['colorstyle']
+    #     return super(ViewExcelToolDuplicateVendorStyleResource, self).get_object_list(request).filter(
+    #         vendor_style__exact=vendor_style)
 
     # def prepend_urls(self):
     #     return [url(r"^(?P<'excel-tool-data'>%s)/(?P<colorstyle>[\w\d_.-]+)/$" % self._meta.exceltooldata,
