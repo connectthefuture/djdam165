@@ -70,14 +70,14 @@ v1_api.register(ProductionRawCp1SelectResource())
 # #
 # productsnapshotlive_resource = ProductSnapshotLiveResource()
 #
-# urlpatterns = patterns('',
-#     # ...more URLconf bits here...
-#     # Then add:
-#     #(r'^api/api/v1/pmdata/(?P<colorstyle>\d{9})/', include(ProductSnapshotLiveResource().urls)),
-#     (r'^api/', include(v1_api.urls)),
-# )
-
 urlpatterns = patterns('',
+    # ...more URLconf bits here...
+    # Then add:
+    #(r'^api/api/v1/pmdata/(?P<colorstyle>\d{9})/', include(ProductSnapshotLiveResource().urls)),
+    (r'^api/', include(v1_api.urls)),
+)
+
+urlpatterns += patterns('',
                        ## Admin -> dj admin tools actions and other admin config routing,
                        #  must load prior to django Admin loading
                        url(r'^admin_tools/', include('admin_tools.urls')),
