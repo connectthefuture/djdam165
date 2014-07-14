@@ -4,13 +4,13 @@
  
  
 // ajax form entry on home page modal
-$(document).ready(function() {
-$('#searchSubmit').click(function() {
-    q = $('#input_list').val();
-    $('#results').html('&nbsp;').load('{% url 'searcher.run-script-views.script_runner' %}?q=' + q);
-    });
-});
- 
+//$(document).ready(function() {
+//$('#searchSubmit').click(function() {
+//    q = $('#input_list').val();
+//    $('#results').html('&nbsp;').load('{% url 'searcher.run-script-views.script_runner' %}?q=' + q);
+//    });
+//});
+//
 $(document).ajaxStart(function() {
     $('#spinner').show();
     }).ajaxStop(function() {
@@ -18,10 +18,81 @@ $(document).ajaxStart(function() {
 });
 
 
-$(document).ready(function(){
-//   $("#mutiple").multiselect();
-    $("select").multiselect().multiselectfilter();
-});
+//$(document).ready(function() {
+//    var $colorstyle;
+//    $colorstyle = $('#input_list');
+//    $('#submitAjax').click(function() {
+//    var jqxhr =
+//        $.ajax({
+//            url: "/api/v1/pmdata/" + $colorstyle,
+//            dataType: 'json',
+//            data: {
+//                colorstyle : $colorstyle
+//            }
+//        })
+//    .success (function(response) { $('#script-result').html(response)})
+//    .error   (function()     { alert("Error")   ; })
+//        });
+////});
+//
+//
+//var callback = $("#callback");
+//$.ajax({
+//    click: function (event, ui) {
+//        var values = $.map(ui.inputs, function (checkbox) {
+//            return checkbox.value;
+//        }).join(", ");
+//
+//
+//        $callback.html("Checkboxes " + (ui.checked ? "checked" : "unchecked") + ": " + values);
+//    }
+//});
+
+//$(document).ready(function(){
+////   $("#mutiple").multiselect();
+//    $("select").multiselect().multiselectfilter();
+//});
+
+/// prevent refresh ajax
+// $('#myFormSubmit{{ image.pk }}').click(function(e){
+//      e.preventDefault();
+//      alert($('#myField{{ image.pk }}').val());
+//
+//      $.post('http://path/to/post',
+//         $('#myForm{{ image.pk }}').serialize(),
+//         function(data, status, xhr){
+//           // do something here with response;
+//         });
+//
+//});
+
+
+/// multiselect widget in modal
+//$(document).ready(function () {
+//    var el = $("select").multiselect(),
+//        disabled = $('#disabled'),
+//        selected = $('#selected'),
+//        newItem = $('#newItem');
+//
+//    $("#add").click(function () {
+//        var v = newItem.val(), opt = $('<option />', {
+//            value: v,
+//            text: v
+//        });
+//
+//        if (disabled.is(':checked')) {
+//            opt.attr('disabled', 'disabled');
+//        }
+//        if (selected.is(':checked')) {
+//            opt.attr('selected', 'selected');
+//        }
+//
+//        opt.appendTo(el);
+//
+//        el.multiselect('refresh');
+//    });
+//});
+
 /////
  
 /////

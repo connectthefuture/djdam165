@@ -3,13 +3,13 @@
 */
  
 // ajax form entry on home page modal
-$(document).ready(function() {
-$('#searchSubmit').click(function() {
-    q = $('#input_list').val();
-    $('#results').html('&nbsp;').load('{% url 'searcher.run-script-views.script_runner' %}?q=' + q);
-    });
-});
- 
+//$(document).ready(function() {
+//$('#searchSubmit').click(function() {
+//    q = $('#input_list').val();
+//    $('#results').html('&nbsp;').load('{% url 'searcher.run-script-views.script_runner' %}?q=' + q);
+//    });
+//});
+//
 $(document).ajaxStart(function() {
     $('#spinner').show();
     }).ajaxStop(function() {
@@ -22,7 +22,7 @@ $("#input_list_form").submit(function() {
     //var url = 'http://prodimages.ny.bluefly.com/api/v1/excel-tool-data/'; // the script where you handle the form input.
     // var url = 'http://prodimages.ny.bluefly.com/searcher/ajax/colorstyle/';
     //var url = '{% url 'searcher:views-ajax_colorstyle_search' %}';
-    var url = 'searcher/runscripts/script_runner_home';
+    var url = '/api/v1/' + $("#input_list");
     $.ajax({
            type: "get",
            url: url,
@@ -70,12 +70,10 @@ $( "#datepicker" ).datepicker();
         // Use Dojo/jQueryUI/YUI/Closure to create one,
         // then dynamically replace that <input> element.
         }
-</script>
-<script>
+
 $('form #checkbox').is(':checked');
-</script>
-<script>
+
 var checkedValues = $('input:checkbox:checked').map(function() {
         return this.value;
 }).get();
-</script>
+

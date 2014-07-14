@@ -1,0 +1,129 @@
+<div class="col-sm-3 col-md-3" xmlns="http://www.w3.org/1999/html">
+    <!-- Button trigger modal -->
+    <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModalMulti">dummy baton</button>
+    <!-- Modal -->
+    <div class="modal fade" id="myModalMulti" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times; </button>
+                    <a><h3 class="modal-title" id="myModalLabel" style="font-family: DejaVu Serif, serif"><span
+                            class="glyphicon glyphicon-globe"></span> A Captivating Title </h3></a>
+                    {# block modal_body %}{% endblock #}
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <div class="modal-body">
+                            <a><h3 style="font-family: DejaVu Serif, serif"><span
+                                    class="glyphicon glyphicon-certificate"></span> Your Favorite Form </h3>
+                            </a>
+                            {# block modal_body %} {% endblock #}
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <form class="navbar-form" id="input_list_form" enctype="multipart/form-data" method="GET" action="#">
+                                        {% csrf_token %}
+
+                                        <div class="form-group form-horizontal">
+                                            {# <input type="text" class="form-control" name="colorstyle" id="colorstyle" placeholder="Search"> #}
+                                            <input type="hidden" name="ajaxresponse" id="ajaxresponse">
+                                            <input type="text" placeholder="Enter Something Useful" class="form-control" name="input_list">
+                                            <input type="text" id="newItem" />
+                                            <input type="button" id="add" value="Add" />
+                                            <p>
+                                            <label style="margin-right:8px"><input type="checkbox" id="selected" /> Selected?</label>
+                                            <label><input type="checkbox" id="disabled" /> Disabled?</label>
+                                            </p>
+
+                                            <div class="script-result"></div>
+                                            <div class="spinner"></div>
+                                            <div id="callback"></div>
+                                            <div class="list-group">
+                                                <label for="multiselect">
+                                                    SuperMultiSelect
+                                                </label>
+                                                <select name="multiselect" multiple="multiple" id="multiselect">
+                                                    <option class="list-group-item list-group-item-success"
+                                                            value="" selected=selected>
+                                                    </option>
+                                                    <option class="list-group-item list-group-item-success"
+                                                            value="">
+                                                    </option>
+                                                    <option class="list-group-item list-group-item-success"
+                                                            value="">
+                                                    </option>
+                                                    <option class="list-group-item list-group-item-success"
+                                                            value="">
+                                                    </option>
+                                                    <option class="list-group-item list-group-item-success"
+                                                            value="">
+                                                    </option>
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-sm" name="submit"
+                                                id="submit"><span
+                                                class="glyphicon glyphicon-exclamation-sign"></span>Submit
+                                        </button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-sm" name="submit" id="submitAjax">mister clean</button>
+                    {#  <span class="glyphicon glyphicon-exclamation-sign"></span> Run Script</button> #}
+                    {#<button type="button" class="btn btn-warning">Save changes</button>#}
+                    {#<button type="submit" class="btn btn-success">Submit</button>#}
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal End -->
+    <!-- /.modal Fade -->
+
+    {% comment %}
+        <form action="/make_select/" method="post">{% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" value="Submit" />
+        </form>
+        {% endcomment %}
+{#<script>#}
+{#var $colorstyle = $('#input_list');#}
+{#$('#submitAjax').click(function(e){#}
+{#      e.preventDefault();#}
+{#      alert($('#input_list').val());#}
+{#      $.get("http://prodimages.ny.bluefly.com/api/v1/pmdata/$",#}
+{#         $('#modal_form_multi').serialize(),#}
+{#         function(data, status, xhr){#}
+{#           // do something here with response;#}
+{#         });#}
+{##}
+{# });#}
+{#</script>#}
+
+<script>
+var $colorstyle = $('#input_list');
+    $('#submitAjax').click(function() {
+        $.ajax({
+            url: "/api/v1/pmdata/" + $colorstyle,
+            dataType: 'json',
+            data: {
+                colorstyle : $colorstyle
+            }
+        })
+    .success (function(response) {
+            $('#newItem').html(response + $colorstyle)
+        })
+    .error   (function()     { alert("Error")   ; })
+});
+
+</script>
+</div><!-- Closes LAST modal col in middle-main row  -->
