@@ -272,7 +272,7 @@ class ViewExcelToolDuplicateVendorStyleResource(ModelResource):
 
     def dispatch(self, request_type, request, **kwargs):
         colorstyle = kwargs.pop('colorstyle')
-        kwargs['colorstyle'] = get_object_or_404(ExcelToolDataResource, colorstyle=colorstyle)
+        kwargs['colorstyle'] = get_object_or_404(ExcelToolData, colorstyle=colorstyle)
         return super(ViewExcelToolDuplicateVendorStyleResource, self).dispatch(request_type, request, **kwargs)
 
 
