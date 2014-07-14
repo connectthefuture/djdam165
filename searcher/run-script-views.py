@@ -12,7 +12,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.http import request, response
-from django.template import RequestContext
+#from django.template import RequestContext
 
 from djdam.settings import MEDIA_ROOT, MEDIA_URL
 import os, sys, re, glob
