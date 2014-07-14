@@ -12,12 +12,13 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.http import request, response
+from django.template import RequestContext
 
 from djdam.settings import MEDIA_ROOT, MEDIA_URL
 import os, sys, re, glob
 # from djdam.searcher.utils.newAll_Sites_CacheClear import main as newAll_Sites_CacheClear
 
-from .utils import newAll_Sites_CacheClear, meckPM_localLoginSave, bflyurl_scrape_return_styles_only, bfly_listpage_scrape_clear, download_server_imgs_byPOorStyleList
+from .utils import newAll_Sites_CacheClear, meckPM_localLoginSave, bflyurl_scrape_return_styles_only, bfly_list page_scrape_clear, download_server_imgs_byPOorStyleList
 
 
 import time
@@ -102,8 +103,8 @@ def script_runner_home_page(request):
         # abs_exec_scriptpath = os.path.join('/usr/local/batchRunScripts/python', 'script_selected')
         # results = subprocess.check_output([abs_exec_scriptpath, styles[:]]) # will then include results in return dict
 
-        #return render_to_response('listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res})
-        return render(request, 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res })
+        return render_to_response('listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res}, context_instance=RequestContext(request))
+        #return render(request, 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res })
 
     else:
         message = 'Sorry, You Must have Done Something Wrong. Please check your input Data and try again.'
