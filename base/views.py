@@ -40,9 +40,10 @@ def testjsonform(request):
         colorstyle = '321424701' #request.GET['data__0']
         pass
     #try:
-    pmdata = requests.get(os.path.join(pmdata_url, colorstyle) + '/').json()
-    #except:
-    #    return
+    try:
+        pmdata = requests.get(os.path.join(pmdata_url, colorstyle) + '/').json()
+    except:
+        return
     json = [pmdata['colorstyle'],
             pmdata['po_number'],
             pmdata['vendor_style'],
