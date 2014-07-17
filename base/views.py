@@ -37,6 +37,6 @@ def testjsonform(request):
         # validate and save
         pass
 
-    template = 'djdam/base/test_json_form.html'
+    template = 'base/test_json_form.html'
     context = RequestContext(request, {'form': form})
     return render_to_response(template, context)
