@@ -33,7 +33,7 @@ pmdata_url = '/api/v1/pmdata'
 
 def testjsonform(request):
     import requests,os
-    colorstyle = request.GET['colorstyle']
+    colorstyle = request.GET['data__0']
     try:
         pmdata = requests.get(os.path.join(pmdata_url, colorstyle))
     except:
