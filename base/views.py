@@ -28,7 +28,7 @@ def testhome(request):
 # -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from forms import testJSONForm
+from searcher.forms import testJSONForm
 
 def testjsonform(request):
     json = ['a', 'b', 'c']
