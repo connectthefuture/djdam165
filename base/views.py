@@ -35,7 +35,7 @@ def testjsonform(request):
     import requests,os
     colorstyle = '321424701' #request.GET['data__0']
     #try:
-    pmdata = requests.get(os.path.join(pmdata_url, colorstyle) + '/')
+    pmdata = requests.get(os.path.join(pmdata_url, colorstyle) + '/').text
     #except:
     #    return
     json = [pmdata['colorstyle'],
