@@ -13,8 +13,9 @@ urlpatterns = patterns('base.views',
                        url(r'^bootstrapshell/$', 'bootstrapshell', name='bootstrapshell'),
                        url(r'^bootstrap3shell/$', 'bootstrap3shell', name='bootstrap3shell'),
                        url(r'^testhome/?$', 'testhome', name='jbtesthome'),
+                       url(r'^testjsonform/?$', 'testjsonform', name='testjsonform'),
 
-                       )
+)
 
 urlpatterns += patterns('searcher.views',
                        url(r'^selected_index/?.*?$','selected_index',  name='selected_index'),

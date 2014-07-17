@@ -557,3 +557,12 @@ class UploadForm(ModelForm):
                   #'file',
                   #'ext',
         #)
+
+# -*- coding: utf-8 -*-
+from django import forms
+from searcher.widgets import SplitJSONWidget
+
+
+class testJSONForm(forms.Form):
+    attrs = {'class': 'special', 'size': '40'}
+    data = forms.CharField(widget=SplitJSONWidget(attrs=attrs, debug=True))
