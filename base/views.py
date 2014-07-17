@@ -33,11 +33,12 @@ pmdata_url = 'http://prodimages.ny.bluefly.com/api/v1/pmdata'
 
 def testjsonform(request):
     import requests,os
-    if request.GET['input_list']:
+    try:
+        #request.GET['input_list']
         colorstyle = request.GET['input_list']
-    else:
+    except:
         colorstyle = '321424701' #request.GET['data__0']
-
+        pass
     #try:
     pmdata = requests.get(os.path.join(pmdata_url, colorstyle) + '/').json()
     #except:
