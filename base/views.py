@@ -29,7 +29,7 @@ def testhome(request):
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from searcher.forms import testJSONForm
-pmdata_url = '/api/v1/pmdata'
+pmdata_url = 'http://prodimages.ny.bluefly.com/api/v1/pmdata'
 
 def testjsonform(request):
     import requests,os
