@@ -38,13 +38,13 @@ def testjsonform(request):
     pmdata = requests.get(os.path.join(pmdata_url, colorstyle) + '/')
     #except:
     #    return
-    json = [pmdata.colorstyle,
-            pmdata.po_number,
-            pmdata.vendor_style,
-            pmdata.product_type,
-            pmdata.product_subtype,
-            pmdata.color,
-            pmdata.brand]
+    json = [pmdata['colorstyle'],
+            pmdata['po_number'],
+            pmdata['vendor_style'],
+            pmdata['product_type'],
+            pmdata['product_subtype'],
+            pmdata['color'],
+            pmdata['brand']]
     form = testJSONForm(request.GET or None, initial={'data': json})
     if form.is_valid():
         # validate and save
