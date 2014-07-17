@@ -12,10 +12,29 @@
         {% endfor %}
         <hr/>
         List of:
-            <form action="" method="get">
+            <form id="myFormSubmit" action="" method="get">
+                <input name="input_list" type="text" id="inputajax">
                 {% csrf_token %}
-                {{ form.as_p}}
+                {{ form.as_p }}
                 <input type="submit" value="Submit" />
             </form>
     </body>
+
+<script>
+
+
+/// prevent refresh ajax
+$('#myFormSubmit{{ image.pk }}').click(function(e){
+      var $inputdata = $('#inputajax');
+      e.preventDefault();
+      alert($('#myField{{ image.pk }}').val());
+
+      $.post('http://prodimages.ny.bluefly.com/api/v1/pmdata/' + $inputdata,
+         $('#myFormSubmit').serialize(),
+         function(data, status, xhr){
+           // do something here with response;
+         });
+
+});
+</script>
 </html>
