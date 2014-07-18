@@ -12,29 +12,43 @@
         {% endfor %}
         <hr/>
         List of:
-            <form id="myFormSubmit" action="" method="get">
-                <input name="input_list" type="text" id="inputajax">
+            <form class="" id="myFormSubmit" action="" method="get">
+                <textarea name="input_list" id="inputajax">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form.as_ul }}
                 <input type="submit" value="Submit" />
             </form>
-    </body>
+            <div id="results"></div>
 
-<script>
-
-
-/// prevent refresh ajax
+{% comment %}/// prevent refresh ajax
 $('#myFormSubmit{{ image.pk }}').click(function(e){
       var $inputdata = $('#inputajax');
       e.preventDefault();
       alert($('#myField{{ image.pk }}').val());
 
       $.post('http://prodimages.ny.bluefly.com/api/v1/pmdata/' + $inputdata,
-         $('#myFormSubmit').serialize(),
+//         $('#myFormSubmit').serialize(),
          function(data, status, xhr){
            // do something here with response;
          });
 
-});
+});{% endcomment %}
+
+
+<script>
+  function showValues() {
+    var fields;
+      fields = $(":input").serializeArray();
+    $( "#results" ).empty();
+    jQuery.each( fields, function( i, field ) {
+                                  $( "#results" ).append( field.value + " " );
+    });
+  }
+
+  $( ":checkbox, :radio" ).click( showValues );
+  $( "select" ).change( showValues );
+  showValues();
 </script>
+</body>
+
 </html>

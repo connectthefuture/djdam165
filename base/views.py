@@ -25,11 +25,12 @@ def testhome(request):
     return render(request, 'base/jbtesthome.html',)
 
 
-# -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from searcher.forms import testJSONForm
 pmdata_url = 'http://prodimages.ny.bluefly.com/api/v1/pmdata'
+localpmdata_url = 'http://localhost:9000/api/v1/pmdata'
+
 
 def testjsonform(request):
     import requests,os
@@ -43,7 +44,9 @@ def testjsonform(request):
     try:
         pmdata = requests.get(os.path.join(pmdata_url, colorstyle) + '/').json()
     except:
-        return
+        pmdata = requests.get(os.path.join(localpmdata_url, colorstyle) + '/').json()
+    #except:
+    #    return
     json = [pmdata['colorstyle'],
             pmdata['po_number'],
             pmdata['vendor_style'],
