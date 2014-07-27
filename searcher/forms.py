@@ -564,5 +564,5 @@ from searcher.widgets import SplitJSONWidget
 
 
 class testJSONForm(forms.Form):
-    attrs = {'class': 'special', 'size': '40'}
+    attrs = {'class': 'navbar-form', 'size': '40'}
     data = forms.CharField(widget=SplitJSONWidget(attrs=attrs, debug=True))

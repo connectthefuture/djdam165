@@ -1575,3 +1575,58 @@ def ajax_colorstyle_search(request,q=None,sq=None):
 #         {'documents': documents, 'form': form},
 #         context_instance=RequestContext(request)
 #     )
+
+####################
+####################################################
+####################################################
+#### Django --> REST Framework
+#######################################################
+# ###################
+####################################################
+####################
+###
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from searcher.serializers import UserSerializer, GroupSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+####################################################
+############
+####################################################
+####################################################
+############
+####################################################
+
+from searcher.models import PostReadyOriginal, ProductSnapshotLive
+from searcher.serializers import PostReadyOriginalSerializer, ProductSnapshotLiveSerializer
+
+
+class PostReadyOriginalViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows PostReadyOriginal to be viewed or edited.
+    """
+    queryset = PostReadyOriginal.objects.all()
+    serializer_class = PostReadyOriginalSerializer
+
+
+class ProductSnapshotLiveViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows ProductSnapshotLive to be viewed or edited.
+    """
+    queryset = ProductSnapshotLive.objects.all()
+    serializer_class = ProductSnapshotLiveSerializer
