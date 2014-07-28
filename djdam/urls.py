@@ -172,8 +172,8 @@ router.register(r'post-ready-original', views.PostReadyOriginalViewSet)
 router.register(r'pmdata', views.ProductSnapshotLiveViewSet)
 router.register(r'excel-tool-data', views.ExcelToolDataViewSet)
 
-# router.register(r'supplier-ingest', views.SupplierIngestViewSet)
-# router.register(r'supplier-ingest-404', views.SupplierIngest404ViewSet)
+router.register(r'supplier-ingest', views.SupplierIngestViewSet)
+router.register(r'supplier-ingest-404', views.SupplierIngest404ViewSet)
 
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
