@@ -27,7 +27,7 @@ from searcher.models import SupplierIngest
 class SupplierIngestSerializer(serializers.HyperlinkedModelSerializer):
    class Meta:
        model = SupplierIngest
-       fields = ('colorstyle', 'vendor_name','vendor_brand', 'vendor_style', 'image_number', 'image_url', 'image_type', 'modified_dt')
+       fields = ('colorstyle', 'vendor_name','vendor_brand', 'vendor_style', 'alt', 'image_url', 'image_type', 'modified_dt')
 
 from searcher.models import SupplierIngest404
 class SupplierIngest404Serializer(serializers.HyperlinkedModelSerializer):
