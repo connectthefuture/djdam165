@@ -359,8 +359,9 @@ class SupplierIngest(models.Model):
 
     def get_http_status_code(self):
         import requests
-        code = requests.status_code
-        return code
+        r = requests.get(self)
+        self.code = r.status_code
+        return self.code
 
     # def get_absolute_url(self):
     #    return reversed('postready-detail', kwargs={'pk': self.pk})
