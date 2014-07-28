@@ -34,5 +34,5 @@ def get_http_status_code(request):
 
 def suppliers(request):
     table = SupplierIngest.objects.all()
-    #RequestConfig(request).configure(table)
+    RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
