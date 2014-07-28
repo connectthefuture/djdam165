@@ -27,3 +27,4 @@ urlpatterns += patterns('searcher.views',
 #)
 
 urlpatterns += patterns('searcher.tables',url(r'^suppliers/?$','suppliers'))
+
