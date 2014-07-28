@@ -25,3 +25,5 @@ urlpatterns += patterns('searcher.views',
 #                        (r'^media/(?P<path>.*)$', 'django.views.static.serve',
 #                         {'document_root': MEDIA_ROOT}),
 #)
+
+urlpatterns += patterns('searcher.tables',url(r'^suppliers$','suppliers'))
