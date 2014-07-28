@@ -28,7 +28,7 @@ from django_tables2   import RequestConfig
 def get_http_status_code(request):
     import requests
 
-    r = requests.get(request.G)
+    r = requests.get(request)
     code = r.status_code
     return code
 
