@@ -9,7 +9,7 @@ import itertools
 class SupplierIngestTable(tables.Table):
     vendor_name  =  tables.Column()
     vendor_brand =  tables.Column()
-    image_url	 =	tables.URLColumn('supplier_detail',args=[A('image_url')])
+    image_url	 =	tables.URLColumn()  #'supplier_detail',args=[A('image_url')])
     alt			 =	tables.Column()
     image_type 	 = 	tables.Column()
 
