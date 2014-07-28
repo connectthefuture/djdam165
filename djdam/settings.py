@@ -82,10 +82,11 @@ INSTALLED_APPS = (# '',
     'compressor',
     #'debug_toolbar_user_panel',#
 
-    # bootstrap and other toolkits for widgets etc.
+    # bootstrap and other toolkits for widgets tables forms etc.
     'bootstrap3',
     'bootstrap_toolkit',
     'crispy_forms',
+    'django_tables2',
     # 'floppyforms',
 
     # Database migrations
