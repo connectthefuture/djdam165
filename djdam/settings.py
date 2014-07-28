@@ -119,16 +119,6 @@ INSTALLED_APPS = (# '',
     #'autocomplete',
 )
 
-MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'searcher.utils.Tastypie_Default_Format.TastyJSONMiddleware',
-)
-
 ROOT_URLCONF = 'djdam.urls'
 
 WSGI_APPLICATION = 'djdam.wsgi.application'
@@ -181,6 +171,17 @@ USE_L10N = True
 USE_TZ = True
 
 
+MIDDLEWARE_CLASSES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'searcher.utils.Tastypie_Default_Format.TastyJSONMiddleware',
+)
+
+
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
     os.path.join(BASE_DIR, 'templates/searcher'),
@@ -190,6 +191,22 @@ TEMPLATE_DIRS = (
 )
 
 
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+#     'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+)
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'john.bragato@gmail.com'
