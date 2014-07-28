@@ -26,4 +26,4 @@ urlpatterns += patterns('searcher.views',
 #                         {'document_root': MEDIA_ROOT}),
 #)
 
-urlpatterns += patterns('searcher.tables',url(r'^suppliers$','suppliers'))
+urlpatterns += patterns('searcher.tables',url(r'^suppliers/?$','suppliers'))
