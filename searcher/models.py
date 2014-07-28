@@ -378,7 +378,7 @@ class SupplierIngest404(models.Model):
     colorstyle = models.CharField(primary_key=True, max_length=9)
     error_code = models.CharField(max_length=5, blank=True)
     modified_dt = models.DateTimeField(blank=True, null=True)
-    holding = models.ForeignKey(SupplierIngest.get_http_status_code) # models.CharField(max_length=100, blank=True)
+#    holding = models.ForeignKey(SupplierIngest,to_field=) # models.CharField(max_length=100, blank=True)
 
     class Meta:
         #managed = True
