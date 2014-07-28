@@ -26,13 +26,13 @@ class ExcelToolDataSerializer(serializers.HyperlinkedModelSerializer):
 from searcher.models import SupplierIngest
 class SupplierIngestSerializer(serializers.HyperlinkedModelSerializer):
    class Meta:
-        model = SupplierIngest
+       model = SupplierIngest
        fields = ('colorstyle', 'vendor_name','vendor_brand', 'vendor_style', 'image_number', 'image_url', 'image_type', 'modified_dt')
 
 from searcher.models import SupplierIngest404
 class SupplierIngest404Serializer(serializers.HyperlinkedModelSerializer):
    class Meta:
-        model = SupplierIngest404
+       model = SupplierIngest404
        fields = ('colorstyle','alt', 'error_code', 'image_url', 'modified_dt')
 
 
