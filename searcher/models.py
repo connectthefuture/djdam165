@@ -333,6 +333,58 @@ class Album(models.Model):
 
 ######## File6
 
+class SupplierIngest(models.Model):
+    colorstyle = models.CharField(primary_key=True, max_length=9)
+    vendor_style = models.CharField(max_length=49)
+    po_number = models.CharField(max_length=7)
+    version = models.CharField(max_length=10)
+    vendor_name = models.CharField(max_length=70)
+    vendor_brand = models.CharField(max_length=70)
+    bfly_product_path = models.CharField(max_length=90)
+    image_url = models.CharField(max_length=150, blank=True)
+    alt = models.CharField(max_length=1, blank=True)
+    image_download_valid = models.CharField(max_length=5, blank=True)
+    ingest_style_id = models.CharField(max_length=10, blank=True)
+    copy_ready_dt = models.DateField(blank=True, null=True)
+    image_ready_dt = models.DateField(blank=True, null=True)
+    production_complete_dt = models.DateField(blank=True, null=True)
+    active = models.CharField(max_length=5)
+    create_dt = models.DateField(blank=True, null=True)
+    modified_dt = models.DateField(blank=True, null=True)
+    start_dt = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'supplier_ingest'
+
+    def get_http_status_code(self):
+        import requests
+        code = requests.status_code
+        return code
+
+    # def get_absolute_url(self):
+    #    return reversed('postready-detail', kwargs={'pk': self.pk})
+
+    unique_together = ('vendor_style', 'alt')
+    ordering = ['-colorstyle']
+
+    def __unicode__(self):
+        return self.file_path
+
+class SupplierIngest404(models.Model):
+    colorstyle = models.CharField(primary_key=True, max_length=9)
+    error_code = models.CharField(max_length=5, blank=True)
+    modified_dt = models.DateTimeField(blank=True, null=True)
+    holding = models.CharField(max_length=100, blank=True)
+    class Meta:
+        managed = True
+        db_table = 'supplier_ingest_404'
+
+
+    def __unicode__(self):
+        return self.file_path
+
+
 class PostReadyConsignment(models.Model):
     sql_id = models.BigIntegerField(primary_key=True)
     colorstyle = models.CharField(max_length=9)
