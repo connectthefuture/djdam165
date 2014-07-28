@@ -1641,19 +1641,19 @@ class ExcelToolDataViewSet(viewsets.ModelViewSet):
 
 
 
-#from searcher.models import SupplierIngest, SupplierIngest404
-#from searcher.serializers import SupplierIngestSerializer, SupplierIngest404Serializer
+from searcher.models import SupplierIngest, SupplierIngest404
+from searcher.serializers import SupplierIngestSerializer, SupplierIngest404Serializer
 
-# class SupplierIngestViewSet(viewsets.ModelViewSet):
-#     """
-#     API endpoint that allows SupplierIngest to be viewed or edited.
-#     """
-#     queryset = SupplierIngest.objects.all()
-#     serializer_class = SupplierIngestSerializer
-#
-# class SupplierIngest404ViewSet(viewsets.ModelViewSet):
-#     """
-#     API endpoint that allows SupplierIngest404 to be viewed or edited.
-#     """
-#     queryset = SupplierIngest404.objects.all()
-#     serializer_class = SupplierIngest404Serializer
+class SupplierIngestViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows SupplierIngest to be viewed or edited.
+    """
+    queryset = SupplierIngest.objects.all()
+    serializer_class = SupplierIngestSerializer
+
+class SupplierIngest404ViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows SupplierIngest404 to be viewed or edited.
+    """
+    queryset = SupplierIngest404.objects.all()
+    serializer_class = SupplierIngest404Serializer
