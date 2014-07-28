@@ -33,6 +33,6 @@ def get_http_status_code(request):
     return code
 
 def suppliers(request):
-    table = SupplierIngestTable(SupplierIngest.objects.all())
-    RequestConfig(request).configure(table)
+    table = SupplierIngest.objects.all()
+    #RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
