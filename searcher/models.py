@@ -354,9 +354,10 @@ class SupplierIngest(models.Model):
     start_dt = models.DateField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'supplier_ingest'
 
+    @property
     def get_http_status_code(self):
         import requests
         r = requests.get(self)
@@ -372,15 +373,16 @@ class SupplierIngest(models.Model):
     def __unicode__(self):
         return self.file_path
 
+
 class SupplierIngest404(models.Model):
     colorstyle = models.CharField(primary_key=True, max_length=9)
     error_code = models.CharField(max_length=5, blank=True)
     modified_dt = models.DateTimeField(blank=True, null=True)
-    holding = models.CharField(max_length=100, blank=True)
-    class Meta:
-        managed = True
-        db_table = 'supplier_ingest_404'
+    holding = models.ForeignKey(SupplierIngest.get_http_status_code) # models.CharField(max_length=100, blank=True)
 
+    class Meta:
+        #managed = True
+        db_table = 'supplier_ingest_404'
 
     def __unicode__(self):
         return self.file_path
