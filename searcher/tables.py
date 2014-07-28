@@ -15,7 +15,8 @@ class SupplierIngestTable(tables.Table):
     class Meta:
         model = SupplierIngest
         # add class="paleblue" to <table> tag
-        attrs = {"class": "paleblue"}
+        # attrs = {"class": "paleblue"}
+        attrs = {"class": "table table-responsive"}
 
 
 
