@@ -1,6 +1,7 @@
 __author__ = 'johnb'
 
 import django_tables2 as tables
+from django_tables2 import RequestConfig, SingleTableView, A
 from searcher.models import SupplierIngest
 import itertools
 
@@ -8,7 +9,7 @@ import itertools
 class SupplierIngestTable(tables.Table):
     vendor_name  =  tables.Column()
     vendor_brand =  tables.Column()
-    image_url	 =	tables.URLColumn()
+    image_url	 =	tables.URLColumn('supplier_detail',args=[A('image_url')])
     alt			 =	tables.Column()
     image_type 	 = 	tables.Column()
 
