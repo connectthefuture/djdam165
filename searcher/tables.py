@@ -29,6 +29,21 @@ class SupplierIngestTable(tables.Table):
         # attrs = {"class": "paleblue"}
         attrs = {"class": "table table-responsive"}
 
+##
+from django.views.generic import TemplateView
+class SupplierIngestTableView(TemplateView):
+    template_name = 'tables/supplier-ingest-detail.html'
+
+    def get_queryset(self, **kwargs):
+        return SupplierIngest.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(SupplierIngestTableView, self).get_context_data(**kwargs)
+        RequestConfig(self.request).configure(table)
+        context['filter'] = filter
+        context['table'] = table
+        return context
+
 
 ##### Table VIEWS ####
 from django.shortcuts import render
@@ -52,6 +67,8 @@ def suppliers(request):
 def supplier_detail(request,vendor_name=None):
     if not vendor_name:
         vendor_name = request.get()['vendor_name']
+
+
     table = SupplierIngestTable(SupplierIngest.objects.all().filter(vendor_name__icontains=vendor_name))
     RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
