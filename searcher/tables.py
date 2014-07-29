@@ -30,7 +30,6 @@ class SupplierIngestTable(tables.Table):
         attrs = {"class": "table table-responsive"}
 
 
-
 ##### Table VIEWS ####
 from django.shortcuts import render
 from django_tables2   import RequestConfig, SingleTableView, A
@@ -43,14 +42,16 @@ def get_http_status_code(request):
     code = r.status_code
     return code
 
+
 def suppliers(request):
     table = SupplierIngestTable(SupplierIngest.objects.all())
     RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
 
+
 def supplier_detail(request,vendor_name=None):
     if not vendor_name:
-        vendor_name = request.GET['vendor_name']
+        vendor_name = request.get()['vendor_name']
     table = SupplierIngestTable(SupplierIngest.objects.all().filter(vendor_name__icontains=vendor_name))
     RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
