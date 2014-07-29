@@ -48,8 +48,9 @@ def suppliers(request):
     RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
 
-def supplier_detail(request):
-    vendor_name = request.GET['vendor_name']
+def supplier_detail(request,vendor_name=None):
+    if not vendor_name:
+        vendor_name = request.GET['vendor_name']
     table = SupplierIngestTable(SupplierIngest.objects.all().filter(vendor_name__icontains=vendor_name))
     RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
