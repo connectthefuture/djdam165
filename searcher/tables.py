@@ -27,22 +27,22 @@ class SupplierIngestTable(tables.Table):
         model = SupplierIngest
         # add class="paleblue" to <table> tag
         # attrs = {"class": "paleblue"}
-        attrs = {"class": "table table-responsive"}
+        attrs = {"class": "table-responsive"}
 
 ##
-from django.views.generic import TemplateView
-class SupplierIngestTableView(TemplateView):
-    template_name = 'tables/supplier-ingest-detail.html'
-
-    def get_queryset(self, **kwargs):
-        return SupplierIngest.objects.all()
-
-    def get_context_data(self, **kwargs):
-        context = super(SupplierIngestTableView, self).get_context_data(**kwargs)
-        RequestConfig(self.request).configure(table)
-        context['filter'] = filter
-        context['table'] = table
-        return context
+# from django.views.generic import TemplateView
+# class SupplierIngestTableView(TemplateView):
+#     template_name = 'tables/supplier-ingest-detail.html'
+#
+#     def get_queryset(self, **kwargs):
+#         return SupplierIngest.objects.all()
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(SupplierIngestTableView, self).get_context_data(**kwargs)
+#         RequestConfig(self.request).configure(table)
+#         context['filter'] = filter
+#         context['table'] = table
+#         return context
 
 
 ##### Table VIEWS ####
@@ -64,12 +64,15 @@ def suppliers(request):
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
 
 
-def supplier_detail(request,vendor_name=None):
-    if not vendor_name:
+def supplier_detail(request,vendor_brand=None,vendor_name=None):
+    if not vendor_name and not vendor_brand:
         vendor_name = request.get()['vendor_name']
+        table = SupplierIngestTable(SupplierIngest.objects.all().filter(vendor_name__icontains=vendor_name))
 
+    elif vendor_brand:
+        vendor_brand = request.get()['vendor_brand']
+        table = SupplierIngestTable(SupplierIngest.objects.all().filter(vendor_brand__icontains=vendor_brand))
 
-    table = SupplierIngestTable(SupplierIngest.objects.all().filter(vendor_name__icontains=vendor_name))
     RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
 
