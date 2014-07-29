@@ -29,5 +29,5 @@ urlpatterns += patterns('searcher.views',
 urlpatterns += patterns('searcher.tables',url(r'^suppliers/?$','suppliers'))
 
 urlpatterns += patterns('searcher.tables',
-    url('suppliers/(\d+)/?', 'suppliers', name='supplier_detail')
+    url('suppliers/(?P<vendor_name>\w+)/?', 'suppliers', name='supplier_detail')
 )
