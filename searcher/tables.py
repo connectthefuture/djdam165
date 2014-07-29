@@ -73,7 +73,7 @@ def supplier_detail(request,vendor_brand=None,vendor_name=None):
         vendor_brand = request.get()['vendor_brand']
         table = SupplierIngestTable(SupplierIngest.objects.all().filter(vendor_brand__icontains=vendor_brand))
 
-    else:
+    elif vendor_name:
         table = SupplierIngestTable(SupplierIngest.objects.all())
     
     RequestConfig(request).configure(table)
