@@ -74,8 +74,8 @@ def supplier_detail(request,vendor_brand=None,vendor_name=None):
         table = SupplierIngestTable(SupplierIngest.objects.all().filter(vendor_brand__icontains=vendor_brand))
 
     elif vendor_name:
-        table = SupplierIngestTable(SupplierIngest.objects.all())
-    
+        table = SupplierIngestTable(SupplierIngest.objects.all().filter(vendor_name__icontains=vendor_name))
+
     RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
 
