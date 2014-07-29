@@ -66,11 +66,9 @@ def suppliers(request):
 
 def supplier_detail(request,vendor_brand=None,vendor_name=None):
     if not vendor_name and not vendor_brand:
-        vendor_name = request.get()['vendor_name']
+        vendor_name = request.get['vendor_name']
         table = SupplierIngestTable(SupplierIngest.objects.all().filter(vendor_name__icontains=vendor_name))
-
     elif vendor_brand and not vendor_name:
-        vendor_brand = request.get()['vendor_brand']
         table = SupplierIngestTable(SupplierIngest.objects.all().filter(vendor_brand__icontains=vendor_brand))
 
     elif vendor_name:
