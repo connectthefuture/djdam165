@@ -106,14 +106,20 @@ from searcher.models import SupplierIngest
 
 class FilteredSingleTableView(SingleTableView):
   def get_table_data(self):
-    f = filters.MyFilter(self.request.GET, queryset = SupplierIngest.objects.all() , request=self.request )
+    f = SupplierIngestFilter(self.request.GET, queryset = SupplierIngest.objects.all() , request=self.request )
     return f
 
   def get_context_data(self, **kwargs):
     context = super(FilteredSingleTableView, self).get_context_data(**kwargs)
-    f = filters.MyFilter(self.request.GET, queryset = SupplierIngest.objects.all() , request=self.request )
+    f = SupplierIngestFilter(self.request.GET, queryset = SupplierIngest.objects.all() , request=self.request )
     context['form'] = f.form
     return context
+
+
+from django.shortcuts import render_to_response
+def supplier_filter(request):
+    f = SupplierIngestFilter(request.GET, queryset=SupplierIngest.objects.all())
+    return render_to_response('searcher/tables/supplier-ingest-detail.html', {'filter': f})
 
 
 # class FilteredSingleTableView(SingleTableView):

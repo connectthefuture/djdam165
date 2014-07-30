@@ -1658,7 +1658,3 @@ class SupplierIngest404ViewSet(viewsets.ModelViewSet):
     queryset = SupplierIngest404.objects.all()
     serializer_class = SupplierIngest404Serializer
 
-from tables import SupplierIngestFilter
-def supplier_filter(request):
-    f = SupplierIngestFilter(request.GET, queryset=SupplierIngest.objects.all())
-    return render_to_response('searcher/tables/supplier-ingest-detail.html', {'filter': f})
