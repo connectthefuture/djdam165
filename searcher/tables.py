@@ -79,6 +79,58 @@ def supplier_detail(request,vendor_brand=None,vendor_name=None):
 
 
 
+######## Filtered ####
+import django_filters
+class SupplierIngestFilter(django_filters.FilterSet):
+    class Meta:
+        model = SupplierIngest
+        fields = ['vendor_name','vendor_brand','alt']
+
+    def __init__(self, *args, **kwargs):
+        super(SupplierIngestFilter, self).__init__(*args, **kwargs)
+        self.filters['vendor_name'].extra.update(
+            {'empty_label': 'All Vendors'})
+        self.filters['vendor_brand'].extra.update(
+            {'empty_label': 'All Brands'})
+        self.filters['alt'].extra.update(
+            {'empty_label': 'All Image Kinds'})
+
+# class MyFilter(django_filters.FilterSet):
+#   field1 = django_filters.CharFilter()
+#   field2 = django_filters.CharFilter()
+
+
+from django_tables2 import SingleTableView
+from searcher.models import SupplierIngest
+
+
+class FilteredSingleTableView(SingleTableView):
+  def get_table_data(self):
+    f = filters.MyFilter(self.request.GET, queryset = SupplierIngest.objects.all() , request=self.request )
+    return f
+
+  def get_context_data(self, **kwargs):
+    context = super(FilteredSingleTableView, self).get_context_data(**kwargs)
+    f = filters.MyFilter(self.request.GET, queryset = SupplierIngest.objects.all() , request=self.request )
+    context['form'] = f.form
+    return context
+
+
+# class FilteredSingleTableView(SingleTableView):
+#   def get_table_data(self):
+#     data= SupplierIngest.objects.all
+#     if self.request.GET.get('field1'):
+#       data = data.filter(field1=self.request.GET.get('field1') )
+#     if self.request.GET.get('field1'):
+#       data = data.filter(field1=self.request.GET.get('field1') )
+#     return data
+#
+#     def get_context_data(self, **kwargs):
+#       context = super(FilteredSingleTableView, self).get_context_data(**kwargs)
+#       context['form'] = forms.MyFilterForm(self.request.user, self.request.GET)
+#       return context
+
+
 class SupplierIngestList(SingleTableView):
     model = SupplierIngest
     table_class = SupplierIngestTable

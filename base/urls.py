@@ -31,5 +31,16 @@ urlpatterns += patterns('searcher.tables',url(r'^suppliers/?$','suppliers'))
 urlpatterns += patterns('searcher.tables',
     url(r'^suppliers/(?P<vendor_name>\w+)/?$', 'supplier_detail'),
     url(r'^suppliers/brand/(?P<vendor_brand>\w+)/?$', 'supplier_detail'),
+    url(r'^suppliers/filter/?.*?$', 'supplier_filter'),
 
 )
+
+from searcher.tables import FilteredSingleTableView,SupplierIngestTable
+from searcher.models import SupplierIngest
+
+urlpatterns += patterns('searcher.tables',url(r'^filtered/.*?$', FilteredSingleTableView.as_view(
+                                                table_class = SupplierIngestTable,
+                                                model= SupplierIngest,
+                                                template_name ='tables/supplier-ingest-detail.html',
+                                                table_pagination={ "per_page":50 } )) ,
+                                                name='filtered_single_table_view')
