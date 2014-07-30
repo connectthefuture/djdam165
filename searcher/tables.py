@@ -108,6 +108,8 @@ class SupplierIngestFilter(django_filters.FilterSet):
 #   field2 = django_filters.CharFilter()
 
 
+######## Filtered Views #######
+
 from django_tables2 import SingleTableView
 from searcher.models import SupplierIngest
 
