@@ -82,9 +82,14 @@ def supplier_detail(request,vendor_brand=None,vendor_name=None):
 ######## Filtered ####
 import django_filters
 class SupplierIngestFilter(django_filters.FilterSet):
+    # vendor_name  = django_filters.AllValuesFilter()
+    vendor_brand = django_filters.MultipleChoiceFilter()
+    alt          = django_filters.RangeFilter()
+
     class Meta:
         model = SupplierIngest
         fields = ['vendor_name','vendor_brand','alt']
+        order_by = ['vendor_name','vendor_brand','alt','colorstyle']
 
     def __init__(self, *args, **kwargs):
         super(SupplierIngestFilter, self).__init__(*args, **kwargs)
@@ -95,8 +100,11 @@ class SupplierIngestFilter(django_filters.FilterSet):
         self.filters['alt'].extra.update(
             {'empty_label': 'All Image Kinds'})
 
-# class MyFilter(django_filters.FilterSet):
+# class MySupplierFilter(django_filters.FilterSet):
 #   field1 = django_filters.CharFilter()
+#   field2 = django_filters.CharFilter()
+#   field2 = django_filters.CharFilter()
+#   field2 = django_filters.CharFilter()
 #   field2 = django_filters.CharFilter()
 
 
