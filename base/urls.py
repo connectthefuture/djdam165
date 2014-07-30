@@ -42,5 +42,6 @@ urlpatterns += patterns('searcher.tables',url(r'^filtered/.*?$', FilteredSingleT
                                                 table_class = SupplierIngestTable,
                                                 model= SupplierIngest,
                                                 template_name ='tables/supplier-ingest-detail.html',
-                                                table_pagination={ "per_page":50 } )) ,
-                                                name='filtered_single_table_view')
+                                                table_pagination={ "per_page":50 } ))
+)
+                                               # name='filtered_single_table_view')
