@@ -118,6 +118,7 @@ INSTALLED_APPS = (# '',
 
     # Local ajaxsearch app, referenced via appname
     'ajaxsearch',
+    'ajax_select',
     #'autocomplete',
 )
 
@@ -414,3 +415,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'PAGINATE_BY': 20
 }
+
+
+### AUTOCOMPLETE django-ajax-selects
+# define the lookup channels in use on the site
+# AJAX_LOOKUP_CHANNELS = {
+#     #  simple: search Person.objects.filter(name__icontains=q)
+#     'person'  : {'model': 'example.person', 'search_field': 'name'},
+#     # define a custom lookup channel
+#     'song'   : ('example.lookups', 'SongLookup')
+# }
