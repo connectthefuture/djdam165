@@ -189,6 +189,6 @@ urlpatterns += patterns('',
 from django.http import HttpResponseRedirect
 
 urlpatterns = patterns('',
-    url(r'^favicon.ico/$', lambda x: HttpResponseRedirect(settings.STATIC_URL+'ico/favicon.ico')), #google chrome favicon fix
+    url(r'^favicon.ico/$', lambda x: HttpResponseRedirect(djdam.settings.STATIC_URL+'ico/favicon.ico')), #google chrome favicon fix
 )
 
