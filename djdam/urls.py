@@ -21,9 +21,7 @@ def bad(request):
     """ Simulates a server error """
     1 / 0
 
-### Generic Vendor ListView Render Below with url pattern
-from django.conf.urls import * ##import defaults
-
+### Generic Vendor ListView Render Below with url pattern ###
     ############################################################################################################
                       ##################  ROOT URL CONF ###########################
                       ## 1###  ALL REQUESTS TO DJANGO ROUTE FROM            #######
@@ -91,7 +89,7 @@ urlpatterns = patterns('',
 urlpatterns += patterns('',
                        ## Admin -> dj admin tools actions and other admin config routing,
                        #  must load prior to django Admin loading
-                       (r'^api/', include(v1_api.urls)),
+                       ## (r'^api/', include(v1_api.urls)),
                        url(r'^admin_tools/', include('admin_tools.urls')),
                        url(r'^adminactions/', include('adminactions.urls')),
                        # Uncomment the next line to enable the admin:
@@ -185,3 +183,12 @@ urlpatterns += patterns('',
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )
+
+#################################################################################
+##  Favicon loading for Firefox and Chrome from non default /favicon.ico location
+from django.http import HttpResponseRedirect
+
+urlpatterns = patterns('',
+    url(r'^favicon.ico/$', lambda x: HttpResponseRedirect(settings.STATIC_URL+'ico/favicon.ico')), #google chrome favicon fix
+)
+
