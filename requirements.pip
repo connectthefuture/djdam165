@@ -30,22 +30,26 @@ Pillow
 SQLAlchemy
 # mysql-connector-python==0.3.2-devel
 MySQL-python # ==1.2.4b4
-# cx-Oracle  #==5.1.2
+cx-Oracle  #==5.1.2
 django-redis
+bcrypt
 
 ## RESTful stuff
 django-tastypie
 djangorestframework
 
-## upload with ajax
+## upload with AJAX
 django-ajax-upload-widget
 ajaxuploader
+django-ajax-selects  # ==1.3.4
 
 # Google Stuff
 googleapi
 
 # Other Utils
 beautifulsoup4
+html5lib
+dropbox
 #decorator==3.3.2
 distribute
 #docutils==0.11
@@ -75,6 +79,8 @@ django_compressor
 #lxml
 xlrd
 xlwt
+django-tables2
+django-filter
 #pyatom==1.3
 
 
@@ -90,7 +96,7 @@ bleach
 #raven
 
 # Celery: Message queue
-#celery
+celery
 django-celery
 #docutils
 
@@ -118,5 +124,3 @@ South
 
 # Feature testing
 #django-waffle
-
-

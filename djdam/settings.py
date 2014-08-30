@@ -87,7 +87,7 @@ INSTALLED_APPS = (# '',
     'bootstrap_toolkit',
     'crispy_forms',
     'django_tables2',
-    # 'django_filters',
+    'django_filters',
     # 'floppyforms',
 
     # Database migrations
