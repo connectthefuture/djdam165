@@ -4,7 +4,6 @@
 
 from django.conf.urls import url, patterns, include
 from base import views
-from djdam.settings import MEDIA_ROOT
 
 
 urlpatterns = patterns('base.views',
