@@ -48,6 +48,7 @@ urlpatterns += patterns('searcher.tables',url(r'^filtered/.*?$', FilteredSingleT
 #################################################################################
 ##  Favicon loading for Firefox and Chrome from non default /favicon.ico location
 from django.http import HttpResponseRedirect
+from django.views.generic import RedirectView
 
 urlpatterns += patterns('',
     url(r'^favicon\.ico/$', RedirectView.as_view(url='/static/ico/favicon.ico') , name='favicon'),
