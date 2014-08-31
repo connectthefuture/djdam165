@@ -48,6 +48,7 @@ googleapi
 
 # Other Utils
 mechanize
+pycurl
 requests
 BeautifulSoup
 beautifulsoup4
