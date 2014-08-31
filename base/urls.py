@@ -44,3 +44,15 @@ urlpatterns += patterns('searcher.tables',url(r'^filtered/.*?$', FilteredSingleT
                                                 table_pagination={ "per_page":50 } ))
 )
                                                # name='filtered_single_table_view')
+
+#################################################################################
+##  Favicon loading for Firefox and Chrome from non default /favicon.ico location
+from django.http import HttpResponseRedirect
+
+urlpatterns += patterns('',
+    url(r'^favicon\.ico/$', RedirectView.as_view(url='/static/ico/favicon.ico') , name='favicon'),
+    url(r'^favicon\.ico/$', lambda x: HttpResponseRedirect('/static/ico/favicon.ico')), #google chrome favicon fix
+    # url(r'^favicon\.ico/$', lambda x: HttpResponseRedirect(settings.STATIC_URL+'ico/favicon.ico')), #google chrome favicon fix
+    # url(r'^favicon.ico$', RedirectView.as_view(url='/static/ico/favicon.ico', # Just for ease of use.
+    #                     settings.STATIC_URL+'ico/favicon.ico')
+    )

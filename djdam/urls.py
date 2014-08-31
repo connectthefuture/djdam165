@@ -183,12 +183,3 @@ urlpatterns += patterns('',
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )
 
-#################################################################################
-##  Favicon loading for Firefox and Chrome from non default /favicon.ico location
-from django.http import HttpResponseRedirect
-
-urlpatterns += patterns('',
-    url(r'^favicon.ico/$', lambda x: HttpResponseRedirect(settings.STATIC_URL+'ico/favicon.ico')), #google chrome favicon fix
-    url(r'^favicon.ico$', RedirectView.as_view(url='/static/ico/favicon.ico', # Just for ease of use.
-                        settings.STATIC_URL+'ico/favicon.ico')
-    )
