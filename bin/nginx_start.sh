@@ -9,7 +9,7 @@ set -e
 
 
 export NAME="djdam_nginx" # Name of the application
-export DJANGODIR=/home/johnb/virtualenvs/DJDAM/src/djdam/ # Django project directory
+export DJANGODIR=/home/johnb/virtualenvs/DJDAM/src/ # Django project directory
 export PYTHONDIR=/home/johnb/virtualenvs/DJDAM/bin/ # Django project directory
 export SOCKFILE=$DJANGODIR/var/run/gunicorn.sock # we will communicte using this unix socket
 export LOGFILE=$DJANGODIR/var/log/gunicorn/searcher.log
