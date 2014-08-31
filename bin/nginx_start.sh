@@ -24,7 +24,7 @@ echo "Starting $NAME"
 
 # Activate the virtual environment
 cd $DJANGODIR
-source ../../bin/activate
+# source ../../bin/activate
 
 # Create the run directory if it doesn't exist
 RUNDIR=$(dirname $SOCKFILE)
