@@ -188,7 +188,7 @@ urlpatterns += patterns('',
 ##  Favicon loading for Firefox and Chrome from non default /favicon.ico location
 from django.http import HttpResponseRedirect
 
-urlpatterns = patterns('',
+urlpatterns += patterns('',
     url(r'^favicon.ico/$', lambda x: HttpResponseRedirect(settings.STATIC_URL+'ico/favicon.ico')), #google chrome favicon fix
 )
 
