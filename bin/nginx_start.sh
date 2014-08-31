@@ -9,22 +9,22 @@ set -e
 
 
 export NAME="djdam_nginx" # Name of the application
-export DJANGODIR=/home/johnb/vm/djangodam/src/ # Django project directory
-export PYTHONDIR=/home/johnb/vm/djangodam/bin/ # Django project directory
+export DJANGODIR=/home/johnb/virtualenvs/DJDAM/src/djdam/ # Django project directory
+export PYTHONDIR=/home/johnb/virtualenvs/DJDAM/bin/ # Django project directory
 export SOCKFILE=$DJANGODIR/var/run/gunicorn.sock # we will communicte using this unix socket
 export LOGFILE=$DJANGODIR/var/log/gunicorn/searcher.log
 export LOGDIR=$(dirname $LOGFILE)
 export USER=www-data # the user to run as
 export GROUP=www-data # the group to run as
 export NUM_WORKERS=5 # how many worker processes should Gunicorn spawn
-export DJANGO_SETTINGS_MODULE=djdam.settings #.local # which settings file should Django use
+export DJANGO_SETTINGS_MODULE=settings.local # which settings file should Django use
 export DJANGO_WSGI_MODULE=djdam.wsgi # WSGI module name
 
 echo "Starting $NAME"
 
 # Activate the virtual environment
 cd $DJANGODIR
-source ../bin/activate
+source ../../bin/activate
 
 # Create the run directory if it doesn't exist
 RUNDIR=$(dirname $SOCKFILE)
