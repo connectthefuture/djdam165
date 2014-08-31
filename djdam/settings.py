@@ -76,6 +76,7 @@ INSTALLED_APPS = (# '',
     'django.contrib.humanize',
     'django.contrib.syndication',
     'django.contrib.staticfiles',
+    'django.contrib.redirects,
     # Third-party apps, patches, fixes
     'djcelery',  #
     # 'debug_toolbar',  #
@@ -181,6 +182,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'searcher.utils.Tastypie_Default_Format.TastyJSONMiddleware',
 )
 
