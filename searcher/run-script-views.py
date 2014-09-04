@@ -39,7 +39,7 @@ def script_runner_home_page(request):
     script_selected = ''
     res = ''
     try:
-        styles = request.GET['input_list']
+        styles = request.GET['input_list'].split(' ')
         print styles  
     except:
         
@@ -52,7 +52,7 @@ def script_runner_home_page(request):
     try:
         script_selected = request.GET['script_name']
         if script_selected == 'download_server_imgs_byPOorStyleList.py':
-            if len(styles) <= 6:
+            if type(styles) == str and len(styles) <= 6:
                 ponum = ''.join(styles)
                 script_selected = os.path.join('searcher/utils/', script_selected)
                 # res = subprocess.call([script_selected, ponum=ponum])
@@ -70,10 +70,13 @@ def script_runner_home_page(request):
             if len(styles) < 10:
                 styles = [styles]
             else:
-                styles = ''.join(styles)
+                styles = styles # ''.join(styles)
             script_selected = os.path.join('searcher/utils/', script_selected)
             # res = subprocess.call([script_selected, styles_list=styles])
-            res = newAll_Sites_CacheClear.main(styles_list=styles)
+            res = []
+            for style in styles:
+                r  = newAll_Sites_CacheClear.main(styles_list=styles)
+                res.append(r)
         elif script_selected == 'bfly_listpage_scrape_clear.py' and len(styles) == 1:
             url = styles.pop()
             script_selected = os.path.join('searcher/utils/', script_selected)
