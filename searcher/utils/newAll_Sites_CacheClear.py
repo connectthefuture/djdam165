@@ -13,7 +13,7 @@ def query_version_number(colorstyle):
     for row in result:
         style_info = {}
         try:
-            style_info['version'] = row['version']
+            style_info['version'] = str(row['version'])
             # Convert Colorstyle to string then set as KEY
             styles[str(row['colorstyle'])] = style_info
         except:
