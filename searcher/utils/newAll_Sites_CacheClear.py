@@ -12,10 +12,12 @@ def query_version_number(colorstyle):
     styles = {}
     for row in result:
         style_info = {}
-        style_info['version'] = row['version']
-        # Convert Colorstyle to string then set as KEY
-        styles[str(row['colorstyle'])] = style_info
-
+        try:
+            style_info['version'] = row['version']
+            # Convert Colorstyle to string then set as KEY
+            styles[str(row['colorstyle'])] = style_info
+        except:
+            pass
     connection.close()
     return styles
 
@@ -187,7 +189,11 @@ def main(styles_list=None):
     for colorstyle in colorstyle_list:
         bflypdp_url = "http://www.bluefly.com/Bluefly-generic-pdp-slug/p/{0}/detail.fly".format(colorstyle)
         found_links = url_get_links(bflypdp_url)
-        version =  query_version_number(colorstyle)[colorstyle]['version']
+        try:
+            version =  query_version_number(colorstyle)[colorstyle]['version']
+            version = str(version)
+        except:
+            version = '1'
         ## static standard urls
         oldlistpg   =   'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=157&height=188'.format(colorstyle)
         newlistpg = 'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=251&height=300'.format(colorstyle)
