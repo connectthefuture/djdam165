@@ -132,12 +132,12 @@ WSGI_APPLICATION = 'djdam.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'www_django',
-        'USER': 'root',
-        'PASSWORD': 'mysql',
-        'HOST': '127.0.0.1',
-        'PORT': '3301',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '',
+        'PORT': '',
         #'OPTIONS': {
         #    'init_command': 'SET storage_engine=InnoDB',
         #    'charset' : 'utf8',
@@ -427,3 +427,11 @@ REST_FRAMEWORK = {
 #     # define a custom lookup channel
 #     'song'   : ('example.lookups', 'SongLookup')
 # }
+
+
+
+### Heroku PGSQL Setup
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+
