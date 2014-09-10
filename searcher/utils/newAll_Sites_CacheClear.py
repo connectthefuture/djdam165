@@ -162,7 +162,7 @@ def send_purge_request_edgecast(mediaPath):
             
             
 ############ RUN ###########
-def main(styles_list=styles_list):
+def main(styles_list=styles_list.split()):
     import sys,re,os
     # if not styles_list:
     #     colorstyle_list = unicode(sys.argv[1:]).split(' ')
@@ -188,7 +188,7 @@ def main(styles_list=styles_list):
     regex = re.compile(r'http:.+?ver=[1-9][0-9]?[0-9]?')
     print colorstyle_list
 
-    for colorstyle in colorstyle_list:
+    for colorstyle in colorstyle_list.split():
         bflypdp_url = "http://www.bluefly.com/Bluefly-generic-pdp-slug/p/{0}/detail.fly".format(colorstyle)
         found_links = url_get_links(bflypdp_url)
         try:
