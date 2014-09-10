@@ -167,7 +167,7 @@ def main(styles_list=None):
     if not styles_list:
         colorstyle_list = unicode(sys.argv[1:]).split(' ')
     else:
-        colorstyle_list = styles_list
+        colorstyle_list = unicode(styles_list[1:].split(' ')
     alturl = 'altimage.ms'
 
 
