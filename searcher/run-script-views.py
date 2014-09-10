@@ -51,7 +51,8 @@ def script_runner_home_page(request):
             return HttpResponseRedirect(message=message, redirect_to='#')
 
     try:
-        script_selected = request.GET['script_name']
+        if request.GET.get('script_selected'):
+                script_selected = request.GET['script_name']
         if script_selected == 'download_server_imgs_byPOorStyleList.py':
             if type(styles) == str and len(styles) <= 6:
                 ponum = ''.join(styles)
