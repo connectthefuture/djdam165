@@ -186,7 +186,7 @@ def main(styles_list=None):
     edgecast_listurls = []
     regex = re.compile(r'http:.+?ver=[1-9][0-9]?[0-9]?')
 
-    for colorstyle in colorstyle_list:
+    for colorstyle in colorstyle_list.split():
         bflypdp_url = "http://www.bluefly.com/Bluefly-generic-pdp-slug/p/{0}/detail.fly".format(colorstyle)
         found_links = url_get_links(bflypdp_url)
         try:
