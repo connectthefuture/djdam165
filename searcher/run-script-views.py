@@ -68,9 +68,11 @@ def script_runner_home_page(request):
 
         elif script_selected == 'newAll_Sites_CacheClear.py':
             if len(styles) < 10:
-                styles = [styles]
+                styles = list(set(str(styles).split()))
+                # re.split(r'\d{9}', styles)
             else:
-                styles = styles # ''.join(styles)
+                styles = list(set(str(styles).split()))
+                #styles = styles # ''.join(styles)
             script_selected = os.path.join('searcher/utils/', script_selected)
             # res = subprocess.call([script_selected, styles_list=styles])
             res = []
