@@ -67,11 +67,15 @@ def script_runner_home_page(request):
                 res = download_server_imgs_byPOorStyleList.main(styles_list=styles)
 
         elif script_selected == 'newAll_Sites_CacheClear.py':
-            if len(styles) < 10:
-                styles = list(set(str(styles).split()))
+            if len(styles) < 10 and type(styles) != list:
+                regex_colorstyle=re.compile(r'(\d{9})')
+                styles = list(set([ n for n in regex_colorstyle.split(f) if n.strip(' ') ]))
+                #styles = list(set(str(styles).split()))
                 # re.split(r'\d{9}', styles)
             else:
-                styles = list(set(str(styles).split()))
+                #styles = list(set(str(styles).split()))
+                regex_colorstyle=re.compile(r'(\d{9})')
+                styles = list(set([ n for n in regex_colorstyle.split(f) if n.strip(' ') ]))
                 #styles = styles # ''.join(styles)
             script_selected = os.path.join('searcher/utils/', script_selected)
             # res = subprocess.call([script_selected, styles_list=styles])
