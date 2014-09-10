@@ -44,7 +44,8 @@ def script_runner_home_page(request):
     except:
         
         try:
-            styles= request.GET()['input_list']
+            if request.GET.get('input_list'):
+                styles= request.GET['input_list']
         except IndexError:        
             message = 'You submitted an empty list of styles. Please try again.'
             return HttpResponseRedirect(message=message, redirect_to='#')
