@@ -81,7 +81,7 @@ def script_runner_home_page(request):
             # res = subprocess.call([script_selected, styles_list=styles])
             res = []
             for style in styles:
-                r  = newAll_Sites_CacheClear.main(styles_list=styles)
+                r  = newAll_Sites_CacheClear.main(styles_list=style)
                 res.append(r)
         elif script_selected == 'bfly_listpage_scrape_clear.py' and len(styles) == 1:
             url = styles.pop()
