@@ -112,6 +112,7 @@ def script_runner_home_page(request):
 
     if script_selected and styles:
         print 'ENTER SUBPROC'
+        print styles
         import subprocess
         ## Run the script here
         # abs_exec_scriptpath = os.path.join('/usr/local/batchRunScripts/python', 'script_selected')
