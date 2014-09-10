@@ -46,6 +46,7 @@ def script_runner_home_page(request):
         try:
             if request.GET.get('input_list'):
                 styles= request.GET['input_list']
+                print styles
         except IndexError:        
             message = 'You submitted an empty list of styles. Please try again.'
             return HttpResponseRedirect(redirect_to='#')
@@ -53,6 +54,7 @@ def script_runner_home_page(request):
     try:
         if request.GET.get('script_selected'):
                 script_selected = request.GET['script_name']
+                print script_selected
         if script_selected == 'download_server_imgs_byPOorStyleList.py':
             if type(styles) == str and len(styles) <= 6:
                 ponum = ''.join(styles)
@@ -98,13 +100,13 @@ def script_runner_home_page(request):
                     # res = subprocess.call([script_selected, style])
                     res = meckPM_localLoginSave.main(styles_list=styles)
 
-        print script_selected
+        print script_selected, "SCRIPT"
     except IndexError:
         message = 'You Didnt Select a Script to run. Please try again.'
         return HttpResponseRedirect(redirect_to='/')
 
     if script_selected and styles:
-        print 'ENTER SUBPROC'
+        print 'ENTER SUBPROCSS'
         import subprocess
         ## Run the script here
         # abs_exec_scriptpath = os.path.join('/usr/local/batchRunScripts/python', 'script_selected')
@@ -115,4 +117,4 @@ def script_runner_home_page(request):
 
     else:
         message = 'Sorry, You Must have Done Something Wrong. Please check your input Data and try again.'
-        return HttpResponseRedirect(redirect_to='/')
+        return HttpResponseRedirect(redirect_to='#')
