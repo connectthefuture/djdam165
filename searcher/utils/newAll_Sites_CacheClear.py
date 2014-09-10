@@ -167,7 +167,8 @@ def main(styles_list=None):
     if not styles_list:
         colorstyle_list = unicode(sys.argv[1:]).split(' ')
     else:
-        colorstyle_list = unicode(styles_list[1:].split(' ')
+        regex_colorstyle=re.compile(r'(\d{9})')
+        colorstyle_list = list(set([ n for n in regex_colorstyle.split(str(styles_list)) if n.strip(' ') ]))
     alturl = 'altimage.ms'
 
 
@@ -185,8 +186,9 @@ def main(styles_list=None):
     pdp_urllist = []
     edgecast_listurls = []
     regex = re.compile(r'http:.+?ver=[1-9][0-9]?[0-9]?')
+    print colorstyle_list
 
-    for colorstyle in colorstyle_list.split():
+    for colorstyle in colorstyle_list:
         bflypdp_url = "http://www.bluefly.com/Bluefly-generic-pdp-slug/p/{0}/detail.fly".format(colorstyle)
         found_links = url_get_links(bflypdp_url)
         try:
