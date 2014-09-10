@@ -162,13 +162,13 @@ def send_purge_request_edgecast(mediaPath):
             
             
 ############ RUN ###########
-def main(styles_list=styles_list.split()):
+def main(styles_list=None):
     import sys,re,os
-    # if not styles_list:
-    #     colorstyle_list = unicode(sys.argv[1:]).split(' ')
-    # else:
-    #     regex_colorstyle=re.compile(r'(\d{9})')
-    #     colorstyle_list = list(set([ n for n in regex_colorstyle.split(str(styles_list)) if n.strip(' ') ]))
+    if not styles_list:
+        colorstyle_list = unicode(sys.argv[1:]).split(' ')
+    else:
+        regex_colorstyle=re.compile(r'(\d{9})')
+        colorstyle_list = list(set([ n for n in regex_colorstyle.split(str(styles_list)) if n.strip(' ') ]))
     alturl = 'altimage.ms'
 
 
@@ -186,9 +186,8 @@ def main(styles_list=styles_list.split()):
     pdp_urllist = []
     edgecast_listurls = []
     regex = re.compile(r'http:.+?ver=[1-9][0-9]?[0-9]?')
-    print colorstyle_list
 
-    for colorstyle in colorstyle_list.split():
+    for colorstyle in colorstyle_list:
         bflypdp_url = "http://www.bluefly.com/Bluefly-generic-pdp-slug/p/{0}/detail.fly".format(colorstyle)
         found_links = url_get_links(bflypdp_url)
         try:

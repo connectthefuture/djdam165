@@ -44,7 +44,7 @@ def script_runner_home_page(request):
     except:
         
         try:
-            styles = request.GET['styles_list'].split(' ')
+            styles = request.GET['input_list'].split(' ')
             #styles= request.GET('q')
         except IndexError:        
             message = 'You submitted an empty list of styles. Please try again.'
