@@ -39,7 +39,7 @@ def script_runner_home_page(request):
     script_selected = ''
     res = ''
     try:
-        styles = request.GET['input_list'].split(' ')
+        styles = str(request.GET['input_list'])
         print styles  
     except:
         
