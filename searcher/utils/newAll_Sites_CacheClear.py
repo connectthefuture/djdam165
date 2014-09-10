@@ -162,13 +162,13 @@ def send_purge_request_edgecast(mediaPath):
             
             
 ############ RUN ###########
-def main(styles_list=None):
+def main(styles_list=styles_list):
     import sys,re,os
-    if not styles_list:
-        colorstyle_list = unicode(sys.argv[1:]).split(' ')
-    else:
-        regex_colorstyle=re.compile(r'(\d{9})')
-        colorstyle_list = list(set([ n for n in regex_colorstyle.split(str(styles_list)) if n.strip(' ') ]))
+    # if not styles_list:
+    #     colorstyle_list = unicode(sys.argv[1:]).split(' ')
+    # else:
+    #     regex_colorstyle=re.compile(r'(\d{9})')
+    #     colorstyle_list = list(set([ n for n in regex_colorstyle.split(str(styles_list)) if n.strip(' ') ]))
     alturl = 'altimage.ms'
 
 
