@@ -48,7 +48,7 @@ def script_runner_home_page(request):
                 styles= request.GET['input_list']
         except IndexError:        
             message = 'You submitted an empty list of styles. Please try again.'
-            return HttpResponseRedirect(message=message, redirect_to='#')
+            return HttpResponseRedirect(str(message), redirect_to='#')
 
     try:
         if request.GET.get('script_selected'):
@@ -101,7 +101,7 @@ def script_runner_home_page(request):
         print script_selected
     except IndexError:
         message = 'You Didnt Select a Script to run. Please try again.'
-        return HttpResponseRedirect(message=message, redirect_to='/')
+        return HttpResponseRedirect(str(message), redirect_to='/')
 
     if script_selected and styles:
         print 'ENTER SUBPROC'
@@ -115,4 +115,4 @@ def script_runner_home_page(request):
 
     else:
         message = 'Sorry, You Must have Done Something Wrong. Please check your input Data and try again.'
-        return HttpResponseRedirect(message=message, redirect_to='/')
+        return HttpResponseRedirect(str(message), redirect_to='/')
