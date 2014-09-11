@@ -121,8 +121,10 @@ def script_runner_home_page(request):
         pool = multiprocessing.Pool(4)
         while True:
             results = pool.map(newAll_Sites_CacheClear.main,processes)
-            yield str(results)
-        
+            try:
+                yield str(results)
+            except:
+                pass
         print results
         #return render_to_response('listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res}, context_instance=RequestContext(request))
         return render(request, 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': results })
