@@ -162,7 +162,7 @@ def send_purge_request_edgecast(mediaPath):
             
             
 ############ RUN ###########
-def main(styles_list=None):
+def main(styles_list):
     import sys,re,os
     if not styles_list:
         colorstyle_list = unicode(sys.argv[1:]).split(' ')
@@ -380,7 +380,7 @@ def main(styles_list=None):
                 #send_purge_request_localis(colorstyle,version,POSTURL_BC)
                 #send_purge_request_localis(colorstyle,version,POSTURL_Mobile)
                 
-                yield url_purge_local
+                #yield url_purge_local
                 #except:
                 #    print sys.stderr().read()
             except IndexError:
