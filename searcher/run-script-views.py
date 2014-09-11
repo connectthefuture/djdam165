@@ -114,8 +114,8 @@ def script_runner_home_page(request):
         abs_exec_scriptpath = os.path.join('/usr/local/batchRunScripts/python', os.path.abspath(script_selected))
         results = subprocess.check_output([abs_exec_scriptpath, ' '.join(styles)]) # will then include results in return dict
 
-        return render_to_response('listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res}, context_instance=RequestContext(request))
-        #return render(request, 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res })
+        #return render_to_response('listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res}, context_instance=RequestContext(request))
+        return render(request, 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res })
 
     else:
         message = 'Sorry, You Must have Done Something Wrong. Please check your input Data and try again.'
