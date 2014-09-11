@@ -112,20 +112,20 @@ def script_runner_home_page(request):
         import subprocess
         ## Run the script here
         processes = []
-        #for style in styles:
-        abs_exec_scriptpath = os.path.join('/usr/local/batchRunScripts/python', os.path.abspath(script_selected))
-            #processes.append(abs_exec_scriptpath)
-        results = subprocess.call([abs_exec_scriptpath, ' '.join(styles)]) # will then include results in return dict
+        for style in styles:
+            abs_exec_scriptpath = os.path.join('/usr/local/batchRunScripts/python', os.path.abspath(script_selected))
+            processes.append(style)
+        #results = subprocess.call([abs_exec_scriptpath, ' '.join(styles)]) # will then include results in return dict
         
-        # import multiprocessing
-        # pool = multiprocessing.Pool(4)
-        # results = pool.map(newAll_Sites_CacheClear.main,processes)
-        # print results
-        # # close the pool and wait for the work to finish
-        # pool.close()
-        # print 'PoolClose'
-        # pool.join()
-        # print 'PoolJoin'
+        import multiprocessing
+        pool = multiprocessing.Pool(4)
+        results = pool.map(newAll_Sites_CacheClear.main,processes)
+        print results
+        # close the pool and wait for the work to finish
+        pool.close()
+        print 'PoolClose'
+        pool.join()
+        print 'PoolJoin'
 
         #return render_to_response('listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res}, context_instance=RequestContext(request))
         return render(request, 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': results })
