@@ -412,6 +412,7 @@ def main(styles_list):
     #            send_purge_request_localis(colorstyle,version,POSTURL_Mobile)
                 pass
         for url_purge in versioned_links:
+            print 'URLPURGE ',url_purge 
             send_purge_request_edgecast(url_purge[0])
             #csv_write_datedOutfile(url_purge)
 
