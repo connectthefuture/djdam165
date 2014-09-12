@@ -168,7 +168,8 @@ def main(styles_list):
         colorstyle_list = unicode(sys.argv[1:]).split(' ')
     else:
         regex_colorstyle=re.compile(r'(\d{9})')
-        colorstyle_list = list(set([ n for n in regex_colorstyle.split(str(styles_list)) if n.strip(' ') ]))
+        #colorstyle_list = list(set([ n for n in regex_colorstyle.split(str(styles_list)) if n.strip(' ') ]))
+        colorstyle_list = styles_list
     alturl = 'altimage.ms'
 
     print colorstyle_list
