@@ -172,7 +172,7 @@ def main(styles_list):
         colorstyle_list = styles_list
     alturl = 'altimage.ms'
 
-    print styles_list
+    print colorstyle_list
     #catid = get_catid_from_eventid(eventid)
     ## Join Catid to BC Url
     #url_catid = 'http://www.belleandclive.com/browse/sales/details.jsp?categoryId=' + catid
@@ -189,6 +189,7 @@ def main(styles_list):
     regex = re.compile(r'http:.+?ver=[1-9][0-9]?[0-9]?')
 
     for colorstyle in colorstyle_list:
+        print colorstyle
         bflypdp_url = "http://www.bluefly.com/Bluefly-generic-pdp-slug/p/{0}/detail.fly".format(colorstyle)
         found_links = url_get_links(bflypdp_url)
         try:
