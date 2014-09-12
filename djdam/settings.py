@@ -79,7 +79,7 @@ INSTALLED_APPS = (# '',
     'django.contrib.redirects',
     # Third-party apps, patches, fixes
     'djcelery',  #
-    'debug_toolbar',  #
+    #'debug_toolbar',  #
     'compressor',
     #'debug_toolbar_user_panel',#
 
