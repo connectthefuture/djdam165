@@ -112,10 +112,10 @@ def script_runner_home_page(request):
         print styles, script_selected, res
         import subprocess
         ## Run the script here
-        processes = []
-        for style in styles:
-            abs_exec_scriptpath = os.path.join('/usr/local/batchRunScripts/python', os.path.abspath(script_selected))
-            processes.append(style)
+        # processes = []
+        # for style in styles:
+        #     abs_exec_scriptpath = os.path.join('/usr/local/batchRunScripts/python', os.path.abspath(script_selected))
+        #     processes.append(style)
         #results = subprocess.call([abs_exec_scriptpath, ' '.join(styles)]) # will then include results in return dict
 
 
@@ -123,7 +123,7 @@ def script_runner_home_page(request):
         import multiprocessing
         pool = multiprocessing.Pool(4)
         if script_selected == 'newAll_Sites_CacheClear.py':
-            results = pool.map(newAll_Sites_CacheClear.main,processes)
+            results = pool.map(newAll_Sites_CacheClear.main, list(styles))
             print results
         # elif script_selected == 'bfly_listpage_scrape_clear':
         #     results = pool.map(bfly_listpage_scrape_clear.main,processes)
