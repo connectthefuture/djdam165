@@ -171,7 +171,7 @@ def main(styles_list):
         colorstyle_list = list(set([ n for n in regex_colorstyle.split(str(styles_list)) if n.strip(' ') ]))
     alturl = 'altimage.ms'
 
-
+    print colorstyle_list
     #catid = get_catid_from_eventid(eventid)
     ## Join Catid to BC Url
     #url_catid = 'http://www.belleandclive.com/browse/sales/details.jsp?categoryId=' + catid
