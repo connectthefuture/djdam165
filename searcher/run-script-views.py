@@ -119,6 +119,7 @@ def script_runner_home_page(request):
         #     processes.append(style)
         #results = subprocess.call([abs_exec_scriptpath, ' '.join(styles)]) # will then include results in return dict
 
+
         #styles = list(set(sorted(styles)))
         ## Run the Selected scripts        
         import multiprocessing
