@@ -125,8 +125,8 @@ def script_runner_home_page(request):
         pool = multiprocessing.Pool(4)
         print styles
         if script_selected == 'newAll_Sites_CacheClear.py':
-            results = pool.map(newAll_Sites_CacheClear.main, styles)
-            print results
+            pool.map(newAll_Sites_CacheClear.main, [styles])
+            results =res
         # elif script_selected == 'bfly_listpage_scrape_clear':
         #     results = pool.map(bfly_listpage_scrape_clear.main,processes)
         #     print results
