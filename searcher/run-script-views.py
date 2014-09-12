@@ -126,7 +126,6 @@ def script_runner_home_page(request):
         print styles
         if script_selected == 'newAll_Sites_CacheClear.py':
             pool.map(newAll_Sites_CacheClear.main, [styles])
-            results =res
         # elif script_selected == 'bfly_listpage_scrape_clear':
         #     results = pool.map(bfly_listpage_scrape_clear.main,processes)
         #     print results
@@ -137,8 +136,7 @@ def script_runner_home_page(request):
         #     results = pool.map(download_server_imgs_byPOorStyleList.main,processes)
         #     print results
         elif script_selected == 'meckPM_localLoginSave.py':
-            results = pool.map(meckPM_localLoginSave.main,processes)
-            print results
+            pool.map(meckPM_localLoginSave.main,[styles])
         # print results
         # close the pool and wait for the work to finish
         pool.close()
@@ -146,10 +144,9 @@ def script_runner_home_page(request):
         pool.join()
         print 'PoolJoin'
         
-        if not results:
-            results = res
+        
         #return render_to_response('listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res}, context_instance=RequestContext(request))
-        return render(request, 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': results })
+        return render(request, 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res })
 
     else:
         message = 'Sorry, You Must have Done Something Wrong. Please check your input Data and try again.'
