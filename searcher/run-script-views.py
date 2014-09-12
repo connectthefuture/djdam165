@@ -51,6 +51,8 @@ def script_runner_home_page(request):
         except IndexError:        
             message = 'You submitted an empty list of styles. Please try again.'
             return HttpResponseRedirect(redirect_to='#')
+    if len(styles) >= 9 and type(styles) == str:
+        styles = list(set(sorted(styles.split(' '))))
 
     try:
         if request.GET.get('script_name'):
@@ -118,12 +120,12 @@ def script_runner_home_page(request):
         #     processes.append(style)
         #results = subprocess.call([abs_exec_scriptpath, ' '.join(styles)]) # will then include results in return dict
 
-
+        styles = list(set(sorted(styles.split())))
         ## Run the Selected scripts        
         import multiprocessing
         pool = multiprocessing.Pool(4)
         if script_selected == 'newAll_Sites_CacheClear.py':
-            results = pool.map(newAll_Sites_CacheClear.main, list(styles))
+            results = pool.map(newAll_Sites_CacheClear.main, styles)
             print results
         # elif script_selected == 'bfly_listpage_scrape_clear':
         #     results = pool.map(bfly_listpage_scrape_clear.main,processes)
