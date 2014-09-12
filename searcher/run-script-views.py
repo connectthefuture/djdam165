@@ -120,7 +120,8 @@ def script_runner_home_page(request):
         import multiprocessing
         pool = multiprocessing.Pool(4)
         results = pool.map(newAll_Sites_CacheClear.main,processes)
-        print results
+        results
+        # print results
         # close the pool and wait for the work to finish
         pool.close()
         print 'PoolClose'
