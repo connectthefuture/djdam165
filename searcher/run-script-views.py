@@ -34,7 +34,7 @@ def stream_response(request):
     return response
 
 def script_runner_home_page(request):
-    import subprocess
+    import subprocess,re
     styles = []
     script_selected = ''
     res = ''
@@ -43,7 +43,7 @@ def script_runner_home_page(request):
         styles = str(request.GET['input_list'])
         print styles  
     except:
-        
+
         try:
             if request.GET.get('input_list'):
                 styles= request.GET['input_list']
@@ -51,13 +51,14 @@ def script_runner_home_page(request):
         except IndexError:        
             message = 'You submitted an empty list of styles. Please try again.'
             return HttpResponseRedirect(redirect_to='#')
-    if len(styles) >= 9 and type(styles) == str:
-        styles = list(set(sorted(styles.split(' '))))
+    regex9 = re.compile('^http.*$')
+    if not regex9.findall(styles):
+        styles = list(set(sorted(styles)))
 
     try:
         if request.GET.get('script_name'):
-                script_selected = request.GET['script_name']
-                print script_selected
+            script_selected = request.GET['script_name']
+            print script_selected
         if script_selected == 'download_server_imgs_byPOorStyleList.py':
             if type(styles) == str and len(styles) <= 6:
                 ponum = ''.join(styles)
