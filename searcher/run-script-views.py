@@ -38,6 +38,7 @@ def script_runner_home_page(request):
     styles = []
     script_selected = ''
     res = ''
+    results = ''
     try:
         styles = str(request.GET['input_list'])
         print styles  
@@ -94,7 +95,7 @@ def script_runner_home_page(request):
             script_selected = os.path.join('searcher/utils', script_selected)
             # res = subprocess.call([script_selected, url])
             res = bflyurl_scrape_return_styles_only.main(bfly_url=[url])
-        elif script_selected == 'meckPM_localLoginSave.py':  # and len(styles) > 1:
+        elif script_selected == 'meckPM_localLoginSave.py' and len(styles) > 1:
             for style in styles:
                 if script_selected == 'meckPM_localLoginSave.py':
                     script_selected = os.path.join('searcher/utils', script_selected)
@@ -142,7 +143,9 @@ def script_runner_home_page(request):
         print 'PoolClose'
         pool.join()
         print 'PoolJoin'
-
+        
+        if not results:
+            results = res
         #return render_to_response('listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res}, context_instance=RequestContext(request))
         return render(request, 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': results })
 
