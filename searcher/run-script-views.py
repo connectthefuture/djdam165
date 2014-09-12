@@ -34,7 +34,7 @@ def stream_response(request):
     return response
 
 def script_runner_home_page(request):
-    import subprocess,re
+    import subprocess
     styles = []
     script_selected = ''
     res = ''
@@ -43,7 +43,7 @@ def script_runner_home_page(request):
         styles = str(request.GET['input_list'])
         print styles  
     except:
-
+        
         try:
             if request.GET.get('input_list'):
                 styles= request.GET['input_list']
@@ -51,11 +51,8 @@ def script_runner_home_page(request):
         except IndexError:        
             message = 'You submitted an empty list of styles. Please try again.'
             return HttpResponseRedirect(redirect_to='#')
-
-    #regex9 = re.compile('^http.*$')
-    #if not regex9.findall(styles):
-    styles = list(set(sorted(styles)))
-
+    if len(styles) >= 9 and type(styles) == str:
+        styles = list(set(sorted(styles.split())))
     try:
         if request.GET.get('script_name'):
             script_selected = request.GET['script_name']
@@ -115,7 +112,6 @@ def script_runner_home_page(request):
         print 'ENTER SUBPROCSS'
         print styles, script_selected, res
         import subprocess
-
         ## Run the script here
         # processes = []
         # for style in styles:
@@ -123,10 +119,7 @@ def script_runner_home_page(request):
         #     processes.append(style)
         #results = subprocess.call([abs_exec_scriptpath, ' '.join(styles)]) # will then include results in return dict
 
-        #regex9 = re.compile('^http.*$')
-        #if not regex9.findall(styles):
-        styles = list(set(sorted(styles)))
-
+        styles = list(set(sorted(styles.split())))
         ## Run the Selected scripts        
         import multiprocessing
         pool = multiprocessing.Pool(4)
