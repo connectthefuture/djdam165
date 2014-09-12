@@ -52,9 +52,9 @@ def script_runner_home_page(request):
             message = 'You submitted an empty list of styles. Please try again.'
             return HttpResponseRedirect(redirect_to='#')
 
-    regex9 = re.compile('^http.*$')
-    if not regex9.findall(styles):
-        styles = list(set(sorted(styles)))
+    #regex9 = re.compile('^http.*$')
+    #if not regex9.findall(styles):
+    styles = list(set(sorted(styles)))
 
     try:
         if request.GET.get('script_name'):
@@ -123,9 +123,9 @@ def script_runner_home_page(request):
         #     processes.append(style)
         #results = subprocess.call([abs_exec_scriptpath, ' '.join(styles)]) # will then include results in return dict
 
-        regex9 = re.compile('^http.*$')
-        if not regex9.findall(styles):
-            styles = list(set(sorted(styles)))
+        #regex9 = re.compile('^http.*$')
+        #if not regex9.findall(styles):
+        styles = list(set(sorted(styles)))
 
         ## Run the Selected scripts        
         import multiprocessing
