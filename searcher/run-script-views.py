@@ -70,20 +70,20 @@ def script_runner_home_page(request):
                 # res = subprocess.call([script_selected, styles_list=styles])
                 res = download_server_imgs_byPOorStyleList.main(styles_list=styles)
 
-        elif script_selected == 'newAll_Sites_CacheClear.py':
-            if len(styles) < 10:
-                styles = list(set(str(styles).split()))
-                # re.split(r'\d{9}', styles)
-            else:
-                styles = list(set(str(styles).split()))
-                #styles = styles # ''.join(styles)
-            script_selected = os.path.join('searcher/utils', script_selected)
-            # res = subprocess.call([script_selected, styles_list=styles])
-            res = []
-            for style in styles:
-                r  = style
-                res.append(r)
-            #map(newAll_Sites_CacheClear.main, res)
+        # elif script_selected == 'newAll_Sites_CacheClear.py':
+        #     if len(styles) < 10:
+        #         styles = list(set(str(styles).split()))
+        #         # re.split(r'\d{9}', styles)
+        #     else:
+        #         styles = list(set(str(styles).split()))
+        #         #styles = styles # ''.join(styles)
+        #     script_selected = os.path.join('searcher/utils', script_selected)
+        #     # res = subprocess.call([script_selected, styles_list=styles])
+        #     res = []
+        #     for style in styles:
+        #         r  = style
+        #         res.append(r)
+        #     #map(newAll_Sites_CacheClear.main, res)
         elif script_selected == 'bfly_listpage_scrape_clear.py' and len(styles) == 1:
             url = styles.pop()
             script_selected = os.path.join('searcher/utils', script_selected)
@@ -94,7 +94,7 @@ def script_runner_home_page(request):
             script_selected = os.path.join('searcher/utils', script_selected)
             # res = subprocess.call([script_selected, url])
             res = bflyurl_scrape_return_styles_only.main(bfly_url=[url])
-        elif len(styles) > 1:
+        elif script_selected == 'meckPM_localLoginSave.py':  # and len(styles) > 1:
             for style in styles:
                 if script_selected == 'meckPM_localLoginSave.py':
                     script_selected = os.path.join('searcher/utils', script_selected)
@@ -116,11 +116,26 @@ def script_runner_home_page(request):
             abs_exec_scriptpath = os.path.join('/usr/local/batchRunScripts/python', os.path.abspath(script_selected))
             processes.append(style)
         #results = subprocess.call([abs_exec_scriptpath, ' '.join(styles)]) # will then include results in return dict
-        
+
+
+        ## Run the Selected scripts        
         import multiprocessing
         pool = multiprocessing.Pool(4)
-        results = pool.map(newAll_Sites_CacheClear.main,processes)
-        results
+        if script_selected == 'newAll_Sites_CacheClear':
+            results = pool.map(newAll_Sites_CacheClear.main,processes)
+            print results
+        # elif script_selected == 'bfly_listpage_scrape_clear':
+        #     results = pool.map(bfly_listpage_scrape_clear.main,processes)
+        #     print results
+        # elif script_selected == 'bflyurl_scrape_return_styles_only':
+        #     results = pool.map(bflyurl_scrape_return_styles_only.main,processes)
+        #     print results
+        # elif script_selected == 'download_server_imgs_byPOorStyleList':
+        #     results = pool.map(download_server_imgs_byPOorStyleList.main,processes)
+        #     print results
+        elif script_selected == 'meckPM_localLoginSave':
+            results = pool.map(meckPM_localLoginSave.main,processes)
+            print results
         # print results
         # close the pool and wait for the work to finish
         pool.close()
