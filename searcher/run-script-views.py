@@ -123,7 +123,7 @@ def script_runner_home_page(request):
         ## Run the Selected scripts        
         import multiprocessing
         pool = multiprocessing.Pool(4)
-        print styles
+        styles = [styles]
         if script_selected == 'newAll_Sites_CacheClear.py':
             pool.map(newAll_Sites_CacheClear.main, styles)
         # elif script_selected == 'bfly_listpage_scrape_clear':
