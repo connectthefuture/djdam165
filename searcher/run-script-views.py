@@ -125,7 +125,7 @@ def script_runner_home_page(request):
         pool = multiprocessing.Pool(4)
         print styles
         if script_selected == 'newAll_Sites_CacheClear.py':
-            pool.map(newAll_Sites_CacheClear.main, [styles])
+            pool.map(newAll_Sites_CacheClear.main, styles)
         # elif script_selected == 'bfly_listpage_scrape_clear':
         #     results = pool.map(bfly_listpage_scrape_clear.main,processes)
         #     print results
@@ -136,7 +136,7 @@ def script_runner_home_page(request):
         #     results = pool.map(download_server_imgs_byPOorStyleList.main,processes)
         #     print results
         elif script_selected == 'meckPM_localLoginSave.py':
-            pool.map(meckPM_localLoginSave.main,[styles])
+            pool.map(meckPM_localLoginSave.main,styles)
         # print results
         # close the pool and wait for the work to finish
         pool.close()
