@@ -152,8 +152,8 @@ def send_purge_request_edgecast(mediaPath):
         try:
             c.perform()
             c.close()
-            yield "Successfully Sent Purge Request for --> {0}".format(mediaPath)
-            return #"Successfully Sent Purge Request for --> {0}".format(mediaPath)
+            #yield "Successfully Sent Purge Request for --> {0}".format(mediaPath)
+            return "Successfully Sent Purge Request for --> {0}".format(mediaPath)
         except pycurl.error, error:
             errno, errstr = error
             print 'An error occurred: ', errstr
