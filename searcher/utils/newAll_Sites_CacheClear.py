@@ -172,7 +172,7 @@ def main(styles_list):
         colorstyle_list = styles_list
     alturl = 'altimage.ms'
 
-    print colorstyle_list
+    print styles_list
     #catid = get_catid_from_eventid(eventid)
     ## Join Catid to BC Url
     #url_catid = 'http://www.belleandclive.com/browse/sales/details.jsp?categoryId=' + catid
