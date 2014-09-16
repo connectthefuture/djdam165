@@ -148,7 +148,7 @@ class SupplierIngestResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
-        resource_name = 'suppler-ingest'
+        resource_name = 'supplier-ingest'
         # authorization= Authorization()
         queryset = SupplierIngest.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
