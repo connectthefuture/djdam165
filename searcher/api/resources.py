@@ -191,7 +191,7 @@ class SupplierIngestImagesResource(ModelResource):
             'vendor_name': ALL,
         }
 
-
+    # ###  !!!  DO NOT NEED DISPATCH OVERRIDE WHEN USING THE URL CONF TO ROUTE REQUESTS !!!! ### #
     # def dispatch(self, request_type, request, **kwargs):
     #     colorstyle = kwargs.pop('colorstyle')
     #     alt        = kwargs.pop('alt')
