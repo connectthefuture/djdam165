@@ -21,12 +21,12 @@ def get_file_path(instance, filename):
 
 ##################################################
 class Product(models.Model):
-    colorstyle   = models.CharField(max_length=9)
+    product_info   = models.ManyToManyField('searcher.ProductSnapshotLive')
     vendor_style = models.CharField(max_length=60)
     vendor_brand = models.CharField(max_length=60)
     vendor_name  = models.CharField(max_length=60)
     #image_source = models.CharField(max_length=70, default="internal")
-    #images = models.ManyToManyField(Image)
+    images = models.ManyToManyField('Image')
 
     class Meta:
         db_table = 'imgadjust_product'
@@ -50,7 +50,7 @@ class ImageType(models.Model):
 
 ##################################################
 class ImageSource(models.Model):
-    colorstyle      = models.ForeignKey(Product)
+    colorstyle      = models.ForeignKey('searcher.ProductSnapshotLive')
     source_url      = models.URLField(max_length=170, default="internal")
     supplier_ingest = models.ManyToManyField('searcher.SupplierIngest')
     
