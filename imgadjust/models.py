@@ -1,4 +1,5 @@
-models.py
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 ################################################################
 #   UPLOAD Image Class Handler Model
@@ -28,7 +29,7 @@ class Product(models.Model):
     #image_source = models.CharField(max_length=70, default="internal")
     #images = models.ManyToManyField(Image)
     images      = models.ManyToManyField(Image)
-    
+
     class Meta:
         db_table = 'product'
 
