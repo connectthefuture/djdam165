@@ -89,7 +89,6 @@ urlpatterns = patterns('',
     # (r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9}[_a-z0-9]{2,7}?)/?(?P<alt>\d{1,5})?/?', include(SupplierIngestImagesResource().urls)),
     (r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9})(?P<alt>[_a-z0-9]{2,7}?)/?', include(SupplierIngestImagesResource().urls)),
     (r'^api/', include(v1_api.urls)),
-
 )
 
 urlpatterns += patterns('',
