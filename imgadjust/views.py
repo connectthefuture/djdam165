@@ -7,7 +7,8 @@ from django.shortcuts import render
 
 from models import Product, ImageType, Image
 from django.shortcuts import render_to_response, get_object_or_404
-from django.tempalate import RequestContext
+from django.template import RequestContext
+
 def index(request):
     try:  
         colorstyle = request.get()['inputColorstyle']
