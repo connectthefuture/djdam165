@@ -192,12 +192,12 @@ class SupplierIngestImagesResource(ModelResource):
         }
 
 
-    def dispatch(self, request_type, request, **kwargs):
-        colorstyle = kwargs.pop('colorstyle')
-        alt        = kwargs.pop('alt')
-        kwargs['colorstyle'] = get_object_or_404(SupplierIngestImages, colorstyle=colorstyle)
-        kwargs['alt'] = get_object_or_404(SupplierIngestImages, alt=alt)
-        return super(SupplierIngestImagesResource, self).dispatch(request_type, request, **kwargs)
+    # def dispatch(self, request_type, request, **kwargs):
+    #     colorstyle = kwargs.pop('colorstyle')
+    #     alt        = kwargs.pop('alt')
+    #     kwargs['colorstyle'] = get_object_or_404(SupplierIngestImages, colorstyle=colorstyle)
+    #     kwargs['alt'] = get_object_or_404(SupplierIngestImages, alt=alt)
+    #     return super(SupplierIngestImagesResource, self).dispatch(request_type, request, **kwargs)
 
 
 class OffshoreStatusResource(ModelResource):
