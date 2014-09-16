@@ -144,7 +144,7 @@ class Image(models.Model):
         return os.path.abspath(tmp_path)
 
     fs = FileSystemStorage(base_url='/upload/', location='{MEDIA_ROOT}uploads'.format(MEDIA_ROOT=MEDIA_ROOT))
-    uploaded_image = models.ImageField(upload_to=super("Image", fs.path(tmpimage().split('/')[-1])), blank=True, null=True, height_field="height", width_field="width")
+    uploaded_image = models.ImageField(upload_to=super("Image", fs.path(tmpimage).split('/')[-1]), blank=True, null=True, height_field="height", width_field="width")
 
     def images(self):
         lst = [x.uploaded_image.name for x in self.uploaded_image.all()]
