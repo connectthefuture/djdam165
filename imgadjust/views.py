@@ -13,21 +13,21 @@ def index(request):
         colorstyle = request.get()['inputColorstyle']
     except:
         colorstyle = '%%'
-    return render_to_response('main-display-select.html', {
+    return render_to_response('imgadjust/base/main-display-select.html', {
         'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
         'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         'images': Image.objects.all()[:6]
     })
 
 def swap_images(request, slug):
-    return render_to_response('swap-images-confirm.html', {
+    return render_to_response('imgadjust/base/swap-images-confirm.html', {
         'post': get_object_or_404(Product, slug=slug)
     })
 
 def add_replace_images(request, slug):
     Style = get_object_or_404(Product, slug=slug)
     Alt   = get_object_or_404(ImageType, slug=slug)
-    return render_to_response('add-replace-images-confirm.html', {
+    return render_to_response('imgadjust/base/add-replace-images-confirm.html', {
         'Style': Style,
         'Alt': Alt,
         'image': Product.objects.filter(Style=Style).filter(Alt=Alt)[:5]
@@ -35,7 +35,7 @@ def add_replace_images(request, slug):
 
 def delete_images(request, slug):
     alt = get_object_or_404(ImageType, slug=slug)
-    return render_to_response('delete-images-confirm.html', {
+    return render_to_response('imgadjust/base/delete-images-confirm.html', {
         'alt': alt,
         'styles': Product.objects.filter(alt=alt)[:5]
     })
