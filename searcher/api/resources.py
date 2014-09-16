@@ -38,7 +38,7 @@ from tastypie import fields
 ## Data Models
 from searcher.models import SelectedFiles, ProductSnapshotLive, OffshoreStatus, ProductionRawCp1Data, ExcelToolData, ViewExcelToolDuplicateVendorStyle
 ## File Models
-from searcher.models import Zimages1Photoselects, PostReadyOriginal, PushPhotoselects, ProductionRawZimages
+from searcher.models import Zimages1Photoselects, PostReadyOriginal, PushPhotoselects, ProductionRawZimages, SupplierIngest
 from tastypie.throttle import BaseThrottle, CacheThrottle
 
 ## User and Session Resources
@@ -58,7 +58,7 @@ class SelectedFilesResource(ModelResource):
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'files-user-selected'
-        authorization= Authorization()
+        # authorization= Authorization()
         queryset = SelectedFiles.objects.all()
         allowed_methods = ['get', 'post', 'put']
         detail_allowed_methods = ['get']
@@ -70,7 +70,7 @@ class ProductionRawZimagesResource(ModelResource):
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'raw-fullsize'
-        authorization= Authorization()
+        # authorization= Authorization()
         queryset = ProductionRawZimages.objects.all()
         allowed_methods        = ['get', 'post']
         list_allowed_methods = ['get', 'post']
@@ -82,7 +82,7 @@ class PushPhotoselectsResource(ModelResource):
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'selects-push'
-        authorization= Authorization()
+        # authorization= Authorization()
         queryset = PushPhotoselects.objects.all()
         allowed_methods = ['get', 'post', 'put']
         detail_allowed_methods = ['get']
@@ -92,7 +92,7 @@ class Zimages1PhotoselectsResource(ModelResource):
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'selects-thumb'
-        authorization= Authorization()
+        # authorization= Authorization()
         queryset =  Zimages1Photoselects.objects.all()
         allowed_methods        = ['get', 'post']
         list_allowed_methods = ['get', 'post']
@@ -103,7 +103,7 @@ class PostReadyOriginalResource(ModelResource):
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'selects-fullsize'
-        authorization= Authorization()
+        # authorization= Authorization()
         queryset =  PostReadyOriginal.objects.all()
         allowed_methods        = ['get', 'post']
         list_allowed_methods = ['get', 'post']
@@ -141,6 +141,35 @@ class ProductSnapshotLiveResource(ModelResource):
     #             return [
     #                 url(r"^(?P<pmdata>{0})/(?P<colorstyle>{1})/$".format(self._meta.exceltooldata), self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
     #             ]
+
+
+### Supplier Ingestion Data incl Vendor Image Urls
+class SupplierIngestResource(ModelResource):
+    # user = fields.ForeignKey(UserResource, 'user')
+    class Meta:
+        serializer = Serializer(formats=['json', 'jsonp', 'xml'])
+        resource_name = 'suppler-ingest'
+        # authorization= Authorization()
+        queryset = SupplierIngest.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
+        allowed_methods = ['get', 'post']
+        detail_allowed_methods = ['get']
+        excludes = ['active', 'create_dt', 'start_dt']
+        filtering = {
+            'colorstyle': ALL_WITH_RELATIONS,
+            'alt': ALL_WITH_RELATIONS,
+            'vendor_style': ALL,
+            'modify_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
+            'po_number': ALL,
+        }
+
+
+        def dispatch(self, request_type, request, **kwargs):
+            colorstyle = kwargs.pop('colorstyle')
+            alt        = kwargs.pop('alt')
+            kwargs['colorstyle'] = get_object_or_404(SupplierIngest, colorstyle=colorstyle)
+            kwargs['alt'] = get_object_or_404(SupplierIngest, alt=alt)
+            return super(SupplierIngestResource, self).dispatch(request_type, request, **kwargs)
+
 
 
 class OffshoreStatusResource(ModelResource):

@@ -42,6 +42,7 @@ from tastypie.api import Api
 from searcher.api.resources import SelectedFilesResource, ProductSnapshotLiveResource, ExcelToolDataResource, ViewExcelToolDuplicateVendorStyleResource, OffshoreStatusResource, OffshoreStatusSentOnlyResource, UserResource
 from searcher.api.resources import PushPhotoselectsResource, Zimages1PhotoselectsResource, PostReadyOriginalResource, ProductionRawZimagesResource
 from searcher.api.resources import ProductionRawCp1DataResource, ProductionRawCp1PreSelectResource, ProductionRawCp1SelectResource
+from searcher.api.resources import SupplierIngestResource
 
 
 v1_api = Api(api_name='v1')
@@ -64,6 +65,7 @@ v1_api.register(ExcelToolDataResource())
 v1_api.register(ViewExcelToolDuplicateVendorStyleResource())
 
 v1_api.register(ProductSnapshotLiveResource())
+v1_api.register(SupplierIngestResource())
 
 # #viewexceltoolduplicatevendorstyle_resource = ViewExcelToolDuplicateVendorStyleResource()
 # from searcher.api.resources import ProductSnapshotLiveResource
@@ -82,6 +84,7 @@ urlpatterns = patterns('',
     (r'^api/v1/duplicate-vendor-style/(?P<colorstyle>\d{9})/?', include(ViewExcelToolDuplicateVendorStyleResource().urls)),
     (r'^api/v1/offshore-style/(?P<colorstyle>\d{9})/?', include(OffshoreStatusResource().urls)),
     (r'^api/v1/offshore-sent/(?P<colorstyle>\d{9})/?', include(OffshoreStatusSentOnlyResource().urls)),
+    (r'^api/v1/supplier-ingest/(?P<colorstyle>\d{9})/(?P<alt>\d{1,5})/?', include(SupplierIngestResource().urls)),
     (r'^api/', include(v1_api.urls)),
 
 )
