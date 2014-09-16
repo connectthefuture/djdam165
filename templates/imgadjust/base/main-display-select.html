@@ -23,6 +23,7 @@
         {% csrf_token %}
         <div class="form-group">
           <input type="text" class="form-control" name="inputColorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
+          <p></p>
         </div>
         <button type="submit" class="btn btn-default btn-sm" name="submit" id="colorstyle_search_all">
           <span class="glyphicon glyphicon-search"></span> Search</button>
@@ -34,6 +35,17 @@
 <script>
 $('input[name="inputColorstyle"]').val('some value');
 </script>
+
+<script>
+$( "input" )
+  .keyup(function() {
+    var value = $( this ).val();
+    $( "p" ).text( value );
+  })
+  .keyup();
+</script>
+
+
 
 {% if styles %}
 {% regroup styles|dictsort:"colorstyle" by style as colorstyles %}
