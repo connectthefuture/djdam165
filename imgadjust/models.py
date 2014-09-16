@@ -11,14 +11,11 @@ from django.db import models
 from django.core.files.storage import FileSystemStorage
 from djdam.settings import MEDIA_ROOT
 
-fs = FileSystemStorage(location='/media/uploads')
-
 def get_file_path(instance, filename):
     import uuid
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
     return os.path.join('uploads/', filename)
-
 
 class Product(models.Model):
     colorstyle   = models.CharField(max_length=9)
@@ -72,48 +69,47 @@ class Image(models.Model):
     image_size = models.CharField(max_length=2, choices=IMAGE_SIZES)
     image_format = models.CharField(max_length=4, choices=IMAGE_FORMATS)
     colorstyle = models.ForeignKey(Product, to_field='colorstyle', related_name='images_colorstyle')
-    alt        = models.ForeignKey(ImageType, to_field='alt', related_name='images_alt')
-    source_url = models.
+    source_url = models.ForeignKey(Product, to_field='image_source')
     
-
-    fs = FileSystemStorage(base_url='/images/', location='/media/uploads')
-    uploaded_img = models.ImageField(upload_to=upload_filepath, blank=True, null=True, height_field="height", width_field="width")
-
     class Meta:
         db_table = 'image'
         #unique_together = ('brand', 'vendor_style',)
         #ordering = ['-colorstyle']
-
-
-	def images(self):
-        lst = [x.uploaded_img.name for x in self.uploaded_img.all()]
-        lst = ["<a href='/media/uploads/{1}'>{0}</a>".format(x, x.split('/')[-1]) for x in lst]
-        return ', '.join(lst)
-    images.allow_tags = True
-
 
     def get_absolute_url(self):
         #from django.core.urlresolvers import reverse
         #return reverse('people.views.details', args=[str(self.id)])
         absurl = 'http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=251&height=300'.format(self.colorstyle)
         if int(self.alt) > 1:
-            absalt = 'http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={0}_alt0{1}.jpg&w=120&h=144'.format(self.colorstyle, str(int(self.alt) - int()))
+            absalt = 'http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={0}_alt0{1}.jpg&w=120&h=144'.format(self.colorstyle, str(int(self.alt) - int(1)))
             absurl = absalt
         else:
             pass
         return absurl
 
-
     def alt0(self):
-        return "_alt0{0}".format(str(int(self.alt) - int()))
+        return "_alt0{0}".format(str(int(self.alt) - int(1)))
 
     def _get_absolute_url(self):
-        return "/{0}/{1}/{2}/{3}".format(MEDIA_ROOT, self.colorstyle, self.alt, self.image_format)
+        return "/{0}/images/{1}/{2}/{3}".format(MEDIA_ROOT, self.colorstyle, self.alt, self.image_format)
 
 #       #(Whilst this code is correct and simple, it may not be the most portable way to write this kind of method. The reverse() function is usually the best approach.)
 #
 #     def get_absolute_url(self):
 #         from django.core.urlresolvers import reverse
 #         return reverse('images.views.details', args=[str(self.id)])
+
+
+    ## Image Upload Handling
+    fs = FileSystemStorage(base_url='/upload/', location='{MEDIA_ROOT}uploads'.format(MEDIA_ROOT=MEDIA_ROOT))
+    uploaded_image = models.ImageField(upload_to=upload_filepath, blank=True, null=True, height_field="height", width_field="width")
+
+    def images(self):
+        lst = [x.uploaded_image.name for x in self.uploaded_image.all()]
+        lst = ["<a href='/media/uploads/{1}'>{0}</a>".format(x, x.split('/')[-1]) for x in lst]
+        return ', '.join(lst)
+    images.allow_tags = True
+
+    #########################
 
 
