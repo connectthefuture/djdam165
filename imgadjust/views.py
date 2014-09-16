@@ -7,7 +7,7 @@ from django.shortcuts import render
 
 from models import Product, ImageType, Image
 from django.shortcuts import render_to_response, get_object_or_404
-
+from django.tempalate import RequestContext
 def index(request):
     try:  
         colorstyle = request.get()['inputColorstyle']
@@ -17,12 +17,12 @@ def index(request):
         'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
         'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         'images': Image.objects.all()[:6]
-    })
+    }, context_instance=RequestContext(request))
 
 def swap_images(request, slug):
     return render_to_response('imgadjust/base/swap-images-confirm.html', {
         'post': get_object_or_404(Product, slug=slug)
-    })
+    },context_instance=RequestContext(request))
 
 def add_replace_images(request, slug):
     Style = get_object_or_404(Product, slug=slug)
@@ -31,14 +31,14 @@ def add_replace_images(request, slug):
         'Style': Style,
         'Alt': Alt,
         'image': Product.objects.filter(Style=Style).filter(Alt=Alt)[:5]
-    })
+    },context_instance=RequestContext(request))
 
 def delete_images(request, slug):
     alt = get_object_or_404(ImageType, slug=slug)
     return render_to_response('imgadjust/base/delete-images-confirm.html', {
         'alt': alt,
         'styles': Product.objects.filter(alt=alt)[:5]
-    })
+    },context_instance=RequestContext(request))
 
 
 
