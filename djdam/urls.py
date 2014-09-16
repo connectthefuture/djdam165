@@ -106,6 +106,7 @@ urlpatterns += patterns('',
 
                        ### Load Other Apps Url Confs
                        url(r'^searcher/', include('searcher.urls')),
+                       url(r'^imgadjust/', include('imgadjust.urls')),
                        ## New Url Confs
                        url(r'^assets/', include('digassets.urls')),
                        url(r'^ajaxsearch/', include('ajaxsearch.urls')),
