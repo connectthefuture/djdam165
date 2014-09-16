@@ -194,6 +194,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates/uploader'),
     os.path.join(BASE_DIR, 'templates/ajaxsearch'),
     os.path.join(BASE_DIR, 'templates/accounts'),
+    os.path.join(BASE_DIR, 'templates/imgadjust'),
 )
 
 
