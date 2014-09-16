@@ -20,14 +20,14 @@ def index(request):
     })
 
 def swap-images(request, slug):   
-    return render_to_response('swap-images.html', {
+    return render_to_response('swap-images-confirm.html', {
         'post': get_object_or_404(Product, slug=slug)
     })
 
 def add-replace-images(request, slug):
     Style = get_object_or_404(Product, slug=slug)
     Alt   = get_object_or_404(ImageType, slug=slug)
-    return render_to_response('add-replace-images.html', {
+    return render_to_response('add-replace-images-confirm.html', {
         'Style': Style,
         'Alt': Alt,
         'image': Product.objects.filter(Style=Style).filter(Alt=Alt)[:5]
@@ -35,7 +35,7 @@ def add-replace-images(request, slug):
 
 def delete-images(request, slug):
     alt = get_object_or_404(ImageType, slug=slug)
-    return render_to_response('delete.html', {
+    return render_to_response('delete-images-confirm.html', {
         'alt': alt,
         'styles': Product.objects.filter(alt=alt)[:5]
     })
