@@ -19,12 +19,12 @@ def index(request):
         'images': Image.objects.all().filter(colorstyle__exact=colorstyle)[:6]
     })
 
-def swap-images(request, slug):   
+def swap_images(request, slug):
     return render_to_response('swap-images-confirm.html', {
         'post': get_object_or_404(Product, slug=slug)
     })
 
-def add-replace-images(request, slug):
+def add_replace_images(request, slug):
     Style = get_object_or_404(Product, slug=slug)
     Alt   = get_object_or_404(ImageType, slug=slug)
     return render_to_response('add-replace-images-confirm.html', {
@@ -33,7 +33,7 @@ def add-replace-images(request, slug):
         'image': Product.objects.filter(Style=Style).filter(Alt=Alt)[:5]
     })
 
-def delete-images(request, slug):
+def delete_images(request, slug):
     alt = get_object_or_404(ImageType, slug=slug)
     return render_to_response('delete-images-confirm.html', {
         'alt': alt,

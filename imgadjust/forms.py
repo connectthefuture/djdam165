@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms import layout, bootstrap
 
-from models import UploadedImage
+from uploader.models import UploadedImage
 from ajax_upload.widgets import AjaxClearableFileInput
 
 
@@ -78,7 +78,7 @@ from django import forms
 
 from ajax_upload.widgets import AjaxClearableFileInput
 
-from models import UploadedImage
+from uploader.models import UploadedImage
 
 
 class UploadedImageFormAlt(forms.ModelForm):

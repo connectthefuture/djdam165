@@ -10,6 +10,7 @@
 from django.db import models
 from django.core.files.storage import FileSystemStorage
 from djdam.settings import MEDIA_ROOT
+import os
 
 def get_file_path(instance, filename):
     import uuid
@@ -121,12 +122,12 @@ class Image(models.Model):
         return "/{0}/images/{1}/{2}/{3}".format(MEDIA_ROOT, self.colorstyle, self.alt, self.image_format)
 
     #########################
-    PROTOCOL = 'http'
-    NETSRV101_IMAGES_ROOT = 'netsrv101.l3.bluefly.com//mnt/images/images'
-    IMG_FORMAT = 'PNG'
     def _get_server_url_png(self):
+        PROTOCOL = 'http'
+        NETSRV101_IMAGES_ROOT = 'netsrv101.l3.bluefly.com//mnt/images/images'
+        IMG_FORMAT = 'PNG'
         return "{0}://{1}/{2}/{3}{4}.{5}".format(PROTOCOL, NETSRV101_IMAGES_ROOT, self.colorstyle[:4], self.colorstyle, self.alt0, IMG_FORMAT.lower())
-    server_url = property(_get_server_url)
+    server_url = property(_get_server_url_png)
 
 #       #(Whilst this code is correct and simple, it may not be the most portable way to write this kind of method. The reverse() function is usually the best approach.)
 #
@@ -143,7 +144,7 @@ class Image(models.Model):
         return os.path.abspath(tmp_path)
 
     fs = FileSystemStorage(base_url='/upload/', location='{MEDIA_ROOT}uploads'.format(MEDIA_ROOT=MEDIA_ROOT))
-    uploaded_image = models.ImageField(upload_to=upload_filepath, blank=True, null=True, height_field="height", width_field="width")
+    uploaded_image = models.ImageField(upload_to=super("Image", fs.path(tmpimage().split('/')[-1])), blank=True, null=True, height_field="height", width_field="width")
 
     def images(self):
         lst = [x.uploaded_image.name for x in self.uploaded_image.all()]

@@ -7,8 +7,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('imgadjust.views',
     url(r'^$', 'index', name='index'),
-    url(r'^swap-images/$', 'swap-images', name='swap-images'),
-    url(r'^add-replace-images/$', 'add-replace-images', name='add-replace-images'),
-    url(r'^delete-images/$', 'delete-images', name='delete-images'),
+    url(r'^swap-images/$', 'swap_images', name='swap-images'),
+    url(r'^add-replace-images/$', 'add_replace_images', name='add-replace-images'),
+    url(r'^delete-images/$', 'delete_images', name='delete-images'),
 )
 
