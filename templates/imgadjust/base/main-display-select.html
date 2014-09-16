@@ -177,11 +177,3 @@
 
 </div>
 {% endblock %}
-{% block js %} 
-  $('#myFormSubmit{{ image.pk }}').click(function(e){ 
-      e.preventDefault(); alert($('#myField{{ image.pk }}').val());
-        /* $.post('/img-adjust/', $('#myForm{{ image.pk }}').serialize(), function(data, status, xhr){ 
-        // do something here with response; }); 
-        */ 
-      }); 
-{% endblock %}
