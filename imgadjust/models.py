@@ -17,40 +17,64 @@ def get_file_path(instance, filename):
     filename = "%s.%s" % (uuid.uuid4(), ext)
     return os.path.join('uploads/', filename)
 
+
+##################################################
 class Product(models.Model):
     colorstyle   = models.CharField(max_length=9)
     vendor_style = models.CharField(max_length=60)
     vendor_brand = models.CharField(max_length=60)
     vendor_name  = models.CharField(max_length=60)
-    image_source = models.URLField(max_length=170, default="internal")
     #image_source = models.CharField(max_length=70, default="internal")
     #images = models.ManyToManyField(Image)
-    images      = models.ManyToManyField(Image)
 
     class Meta:
         db_table = 'product'
 
     def __unicode__(self):
-        if self.image_source == 'internal': 
-            return self.colorstyle
-        else:
-            return self.image_source
+        return self.colorstyle
 
+
+##################################################
 class ImageType(models.Model):
     colorstyle  = models.CharField(max_length=9)
     alt         = models.IntegerField()
-    images      = models.ManyToManyField(Image)
+    # images      = models.ManyToManyField(Image)
     
     class Meta:
-        db_table = 'style'
+        db_table = 'image_type'
 
     def __unicode__(self):
         return self.alt
 
+
+##################################################
+class ImageSource(models.Model):
+    colorstyle      = models.ForeignKey(Product)
+    source_url      = models.URLField(max_length=170, default="internal")
+    supplier_ingest = models.ManyToManyField('searcher.SupplierIngest')
+    
+    class Meta:
+        db_table = 'image_source'
+
+    def __unicode__(self):
+        return self.source_url    
+
+
+# class Car(models.Model):
+#     manufacturer = models.ForeignKey('Manufacturer')
+#     # ...
+
+# class Manufacturer(models.Model):
+#     # ...
+#     pass
+
+# class Car(models.Model):
+#     manufacturer = models.ForeignKey('production.Manufacturer')
+
+
+##################################################
 ### file storage
 from django.core.files.storage import FileSystemStorage
-from djdam.settings import MEDIA_ROOT
-
 class Image(models.Model):
     from djdam.settings import MEDIA_ROOT
     IMAGE_SIZES = (
@@ -68,8 +92,8 @@ class Image(models.Model):
     name = models.CharField(max_length=60)
     image_size = models.CharField(max_length=2, choices=IMAGE_SIZES)
     image_format = models.CharField(max_length=4, choices=IMAGE_FORMATS)
-    colorstyle = models.ForeignKey(Product, to_field='colorstyle', related_name='images_colorstyle')
-    source_url = models.ForeignKey(Product, to_field='image_source')
+    colorstyle = models.ForeignKey(Product)
+    source_url = models.ForeignKey(ImageSource)
     
     class Meta:
         db_table = 'image'
@@ -88,10 +112,21 @@ class Image(models.Model):
         return absurl
 
     def alt0(self):
-        return "_alt0{0}".format(str(int(self.alt) - int(1)))
+        if int(self.alt) - int(1):
+            return "_alt0{0}".format(str(int(self.alt) - int(1)))
+        else:
+            return None
 
     def _get_absolute_url(self):
         return "/{0}/images/{1}/{2}/{3}".format(MEDIA_ROOT, self.colorstyle, self.alt, self.image_format)
+
+    #########################
+    PROTOCOL = 'http'
+    NETSRV101_IMAGES_ROOT = 'netsrv101.l3.bluefly.com//mnt/images/images'
+    IMG_FORMAT = 'PNG'
+    def _get_server_url_png(self):
+        return "{0}://{1}/{2}/{3}{4}.{5}".format(PROTOCOL, NETSRV101_IMAGES_ROOT, self.colorstyle[:4], self.colorstyle, self.alt0, IMG_FORMAT.lower())
+    server_url = property(_get_server_url)
 
 #       #(Whilst this code is correct and simple, it may not be the most portable way to write this kind of method. The reverse() function is usually the best approach.)
 #
@@ -99,8 +134,14 @@ class Image(models.Model):
 #         from django.core.urlresolvers import reverse
 #         return reverse('images.views.details', args=[str(self.id)])
 
-
     ## Image Upload Handling
+    def tmpimage(self):
+        from django.core.files import File
+        tmp_path = '/tmp/{0}{1}_tmp'.format(self.colorstyle, self.alt0)
+        f = open(tmp_path)
+        tmpimage = File(f)
+        return os.path.abspath(tmp_path)
+
     fs = FileSystemStorage(base_url='/upload/', location='{MEDIA_ROOT}uploads'.format(MEDIA_ROOT=MEDIA_ROOT))
     uploaded_image = models.ImageField(upload_to=upload_filepath, blank=True, null=True, height_field="height", width_field="width")
 
@@ -110,6 +151,8 @@ class Image(models.Model):
         return ', '.join(lst)
     images.allow_tags = True
 
-    #########################
 
+##################################################
+
+##################################################
 
