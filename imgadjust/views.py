@@ -18,7 +18,9 @@ def index(request):
     return render_to_response('imgadjust/base/main-display-select.html', {
         #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
         'styles': ProductSnapshotLive.objects.all().filter(colorstyle__exact=colorstyle),
-        'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
+        #'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
+        'alts'  : ProductSnapshotLive.objects.all().filter(colorstyle__exact=colorstyle)[:6],
+        'query' : colorstyle,
         'images': Image.objects.all()[:6]
     }, context_instance=RequestContext(request))
 
