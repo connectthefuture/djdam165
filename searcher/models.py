@@ -274,7 +274,7 @@ class Note(models.Model):
     note_type = models.CharField(max_length=20,)
     note_body = models.CharField(max_length=255,)
     note_date = models.DateField(max_length=12,)
-    isselect = models.BooleanField()
+    isselect = models.BooleanField(default=False)
     user = models.ForeignKey(AuthUser)
 
 
