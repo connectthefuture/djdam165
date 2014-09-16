@@ -6,6 +6,7 @@ from django.shortcuts import render
 # Create your views here.
 
 from models import Product, ImageType, Image
+from searcher.models import ProductSnapshotLive
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
@@ -15,7 +16,8 @@ def index(request):
     except:
         colorstyle = '%%'
     return render_to_response('imgadjust/base/main-display-select.html', {
-        'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
+        #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
+        'styles': ProductSnapshotLive.objects.all().filter(colorstyle__exact=colorstyle),
         'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         'images': Image.objects.all()[:6]
     }, context_instance=RequestContext(request))
