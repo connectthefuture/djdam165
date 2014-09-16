@@ -93,7 +93,7 @@ class Image(models.Model):
     name = models.CharField(max_length=60)
     image_size = models.CharField(max_length=2, choices=IMAGE_SIZES)
     image_format = models.CharField(max_length=4, choices=IMAGE_FORMATS)
-    colorstyle = models.ForeignKey(Product)
+    colorstyle = models.ForeignKey('searcher.ProductSnapshotLive')
     source_url = models.ForeignKey(ImageSource)
     
     class Meta:
