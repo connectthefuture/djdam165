@@ -176,7 +176,7 @@ class SupplierIngestImagesResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
-        resource_name = 'suppler-ingest-images'
+        resource_name = 'supplier-ingest-images'
         # authorization= Authorization()
         queryset = SupplierIngest.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
