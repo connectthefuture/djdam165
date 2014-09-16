@@ -1,0 +1,187 @@
+{% extends "_layouts/base.html" %} {# #} 
+{% block page_title %}
+<title>Product Image Adjustments</title>
+{% endblock %} 
+{% comment %}
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+  body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+  }
+</style>
+{% endcomment %}
+{% block content %}
+<div class="container">
+  
+  <div class="row">
+    <div class="col-md-5 col-md-pull-1">
+      <form enctype="multipart/form-data" method="POST" class="form-inline" action="/imgadjust/">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" class="form-control" name="inputColorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
+        </div>
+        <button type="submit" class="btn btn-default btn-sm" name="submit" id="colorstyle_search_all">
+          <span class="glyphicon glyphicon-search"></span> Search</button>
+      </form>
+      <hr>
+    </div>
+  </div>
+
+{% if images %}
+{% regroup images|dictsort:"colorstyle" by style as colorstyles %}
+
+{%for style in colorstyles %}
+ 
+  <div class="row">
+    
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-8 col-md-pull-1">
+          <label for="action" class="control-label input-group">Action</label>
+          <div class="btn-group btn-group-xs" data-toggle="buttons">
+            <label class="btn active btn-primary">
+              <input type="radio" name="action" value="keep">Keep Image</label>
+            <label class="btn btn-primary">
+              <input type="radio" name="action" value="switch">Switch Image Slot</label>
+            <label class="btn btn-primary">
+              <input type="radio" name="action" value="replace">Replace Image</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-2">
+        <h3><i class="fa fa-star text-center">&nbsp;</i>Primary</h3>
+        <img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={{ image.colorstyle }}&width=251&height=300" class="img-rounded" width="120" height="144" alt="Primary">
+        <p></p>
+        <p>
+          <select class="form-control" name="img1" id="img-location">
+            <option selected="selected">Primary Image</option>
+            <option>Alt-1/Back</option>
+            <option>Alt-2/Side</option>
+            <option>Alt-3</option>
+            <option>Alt-4</option>
+            <option>Alt-5</option>
+          </select></p>
+        <p><a class="btn btn-primary" href="#">Submit Changes &raquo;</a></p>
+      </div>
+
+      {% if image.alt == 2 %}
+      <div class="col-md-2">
+        <h3 class="text-center">Alt-1/Back</h3>
+        <img href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144" src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
+        <p></p>
+        <p>
+          <select class="form-control" name="img2" id="img-location">
+            <option>Primary Image</option>
+            <option selected="selected">Alt-1/Back</option>
+            <option>Alt-2/Side</option>
+            <option>Alt-3</option>
+            <option>Alt-4</option>
+            <option>Alt-5</option>
+          </select></p>
+        <p><a class="btn btn-primary" href="#">Submit Changes &raquo;</a></p>
+      </div>
+      {% endif %}
+
+      {% if image.alt == 3 %}
+      <div class="col-md-2">
+        <h3 class="text-center">Alt-2/Side</h3>
+        <img href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144" src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
+        <p></p>
+        <p>
+          <select class="form-control" name="img3" id="img-location">
+            <option>Primary Image</option>
+            <option>Alt-1/Back</option>
+            <option selected="selected">Alt-2/Side</option>
+            <option>Alt-3</option>
+            <option>Alt-4</option>
+            <option>Alt-5</option>
+          </select></p>
+        <p><a class="btn btn-primary" href="#">Submit Changes &raquo;</a></p>
+      </div>
+      {% endif %}
+
+      {% if image.alt == 4 %}
+      <div class="col-md-2">
+        <h3 class="text-center">Alt-3&nbsp;</h3>
+        <img href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144" src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
+        <p></p>
+        <p>
+        <select class="form-control" name="img4" id="img-location">
+          <option>Primary Image</option>
+          <option>Alt-1/Back</option>
+          <option>Alt-2/Side</option>
+          <option selected="selected">Alt-3</option>
+          <option>Alt-4</option>
+          <option>Alt-5</option>
+        </select></p>
+        <p></p>
+        <p><a class="btn btn-primary" href="#">Submit Changes &raquo;</a></p>
+      </div>
+    {% endif %}
+
+    {% if image.alt == 5 %}
+      <div class="col-md-2">
+        <h3 class="text-center">Alt-4&nbsp;</h3>
+        <img href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144" src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
+        <p></p>
+        <p>
+          <select class="form-control" name="img5" id="img-location">
+            <option>Primary Image</option>
+            <option>Alt-1/Back</option>
+            <option>Alt-2/Side</option>
+            <option>Alt-3</option>
+            <option selected="selected">Alt-4</option>
+            <option>Alt-5</option>
+          </select></p>
+        <p><a class="btn btn-primary" href="#">Submit Changes &raquo;</a></p>
+      </div>
+    {% endif %}
+
+    {% if image.alt == 6 %}
+      <div class="col-md-2">
+        <h3 class="text-center">Alt-5&nbsp;</h3>
+        <img href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144" src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
+        <p></p>
+        <p>
+          <select class="form-control" name="img6" id="img-location">
+            <option>Primary Image</option>
+            <option>Alt-1/Back</option>
+            <option>Alt-2/Side</option>
+            <option>Alt-3</option>
+            <option>Alt-4</option>
+            <option selected="selected">Alt-5</option>
+          </select></p>
+        <p>
+          <button class="btn btn-primary btn-md" href="#">Submit Changes &raquo;</button></p>
+      </div>
+    {% endif %}
+
+    </div>
+  </div>
+
+{% endfor %}
+
+{% else %}
+{% block confirm %}
+    <h3>Please Enter a Valid Style</h3>
+{% endblock %}
+{% endif %}
+
+</div>
+{% endblock %}
+{% block js %} 
+  $('#myFormSubmit{{ image.pk }}').click(function(e){ 
+      e.preventDefault(); alert($('#myField{{ image.pk }}').val());
+        /* $.post('/img-adjust/', $('#myForm{{ image.pk }}').serialize(), function(data, status, xhr){ 
+        // do something here with response; }); 
+        */ 
+      }); 
+{% endblock %}
