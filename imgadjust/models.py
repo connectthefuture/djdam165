@@ -136,15 +136,16 @@ class Image(models.Model):
 #         return reverse('images.views.details', args=[str(self.id)])
 
     ## Image Upload Handling
-    def tmpimage(self):
+    def _tmpimage(self):
         from django.core.files import File
         tmp_path = '/tmp/{0}{1}_tmp'.format(self.colorstyle, self.alt0)
         f = open(tmp_path)
         tmpimage = File(f)
         return os.path.abspath(tmp_path)
+    tmpimage = property(_tmpimage)
 
     fs = FileSystemStorage(base_url='/upload/', location='{MEDIA_ROOT}uploads'.format(MEDIA_ROOT=MEDIA_ROOT))
-    uploaded_image = models.ImageField(upload_to=super("Image", fs.path(tmpimage).split('/')[-1]), blank=True, null=True, height_field="height", width_field="width")
+    uploaded_image = models.ImageField(upload_to=tmpimage, blank=True, null=True, height_field="height", width_field="width")
 
     def images(self):
         lst = [x.uploaded_image.name for x in self.uploaded_image.all()]
