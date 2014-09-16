@@ -11,7 +11,7 @@ from django.template import RequestContext
 
 def index(request):
     try:  
-        colorstyle = request.get()['inputColorstyle']
+        colorstyle = str(request.GET['inputColorstyle'])
     except:
         colorstyle = '%%'
     return render_to_response('imgadjust/base/main-display-select.html', {
