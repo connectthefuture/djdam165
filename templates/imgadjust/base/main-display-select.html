@@ -31,6 +31,10 @@
     </div>
   </div>
 
+<script>
+$('input[name="inputColorstyle"]').val('some value');
+</script>
+
 {% if styles %}
 {% regroup styles|dictsort:"colorstyle" by style as colorstyles %}
 
