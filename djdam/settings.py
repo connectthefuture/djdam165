@@ -111,6 +111,7 @@ INSTALLED_APPS = (# '',
 
     # Local apps, referenced via appname
     'searcher',
+    'imgadjust',
     # 'uploader',
     # 'accounts',
 

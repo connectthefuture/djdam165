@@ -152,6 +152,7 @@ from django.views.generic import RedirectView
 
 urlpatterns += patterns('',
                         (r'^searcher/', include('searcher.urls')),
+                        (r'^imgadjust/', include('imgadjust.urls')),
                         (r'^$', RedirectView.as_view(url='/searcher/list/')), # Just for ease of use.
                         ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
