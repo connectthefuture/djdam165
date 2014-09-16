@@ -388,6 +388,33 @@ class SupplierIngest404(models.Model):
         return self.file_path
 
 
+class SupplierIngestImages(models.Model):
+    id = models.IntegerField(primary_key=True)
+    file_name = models.CharField(unique=True, max_length=20)
+    colorstyle = models.CharField(max_length=9)
+    vendor_style = models.CharField(max_length=55)
+    po_number = models.CharField(max_length=9)
+    version = models.CharField(max_length=4)
+    vendor_name = models.CharField(max_length=50)
+    bfly_product_path = models.CharField(max_length=100)
+    image_url = models.CharField(max_length=150)
+    alt = models.CharField(max_length=5)
+    image_download_valid = models.CharField(max_length=5)
+    ingest_style_id = models.CharField(max_length=25)
+    modified_dt = models.DateField()
+    bfly_local_src = models.CharField(max_length=100)
+    bfly_zoom_src = models.CharField(max_length=150)
+    bfly_zoom_site = models.CharField(max_length=150)
+    bfly_listpage_site = models.CharField(max_length=150)
+    bfly_pdp_site = models.CharField(max_length=150)
+    class Meta:
+        managed = False
+        db_table = 'supplier_ingest_images'
+        ordering = ['-colorstyle', 'alt']
+
+    def __unicode__(self):
+        return self.file_name
+
 class PostReadyConsignment(models.Model):
     sql_id = models.BigIntegerField(primary_key=True)
     colorstyle = models.CharField(max_length=9)
