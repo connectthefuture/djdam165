@@ -367,7 +367,7 @@ class SupplierIngest(models.Model):
     # def get_absolute_url(self):
     #    return reversed('postready-detail', kwargs={'pk': self.pk})
 
-    unique_together = ('vendor_style', 'alt')
+    unique_together = ('colorstyle', 'alt')
     ordering = ['-colorstyle']
 
     def __unicode__(self):
