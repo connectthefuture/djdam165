@@ -29,7 +29,7 @@ class Product(models.Model):
     #images = models.ManyToManyField(Image)
 
     class Meta:
-        db_table = 'product'
+        db_table = 'imgadjust_product'
 
     def __unicode__(self):
         return self.colorstyle
@@ -42,7 +42,7 @@ class ImageType(models.Model):
     # images      = models.ManyToManyField(Image)
     
     class Meta:
-        db_table = 'image_type'
+        db_table = 'imgadjust_image_type'
 
     def __unicode__(self):
         return self.alt
@@ -55,7 +55,7 @@ class ImageSource(models.Model):
     supplier_ingest = models.ManyToManyField('searcher.SupplierIngest')
     
     class Meta:
-        db_table = 'image_source'
+        db_table = 'imgadjust_image_source'
 
     def __unicode__(self):
         return self.source_url    
@@ -97,7 +97,7 @@ class Image(models.Model):
     source_url = models.ForeignKey(ImageSource)
     
     class Meta:
-        db_table = 'image'
+        db_table = 'imgadjust_image'
         #unique_together = ('brand', 'vendor_style',)
         #ordering = ['-colorstyle']
 
