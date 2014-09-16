@@ -38,7 +38,7 @@ from tastypie import fields
 ## Data Models
 from searcher.models import SelectedFiles, ProductSnapshotLive, OffshoreStatus, ProductionRawCp1Data, ExcelToolData, ViewExcelToolDuplicateVendorStyle
 ## File Models
-from searcher.models import Zimages1Photoselects, PostReadyOriginal, PushPhotoselects, ProductionRawZimages, SupplierIngest
+from searcher.models import Zimages1Photoselects, PostReadyOriginal, PushPhotoselects, ProductionRawZimages, SupplierIngest, SupplierIngestImages
 from tastypie.throttle import BaseThrottle, CacheThrottle
 
 ## User and Session Resources
@@ -163,13 +163,41 @@ class SupplierIngestResource(ModelResource):
         }
 
 
-        def dispatch(self, request_type, request, **kwargs):
-            colorstyle = kwargs.pop('colorstyle')
-            alt        = kwargs.pop('alt')
-            kwargs['colorstyle'] = get_object_or_404(SupplierIngest, colorstyle=colorstyle)
-            kwargs['alt'] = get_object_or_404(SupplierIngest, alt=alt)
-            return super(SupplierIngestResource, self).dispatch(request_type, request, **kwargs)
+    def dispatch(self, request_type, request, **kwargs):
+        colorstyle = kwargs.pop('colorstyle')
+        alt        = kwargs.pop('alt')
+        kwargs['colorstyle'] = get_object_or_404(SupplierIngest, colorstyle=colorstyle)
+        kwargs['alt'] = get_object_or_404(SupplierIngest, alt=alt)
+        return super(SupplierIngestResource, self).dispatch(request_type, request, **kwargs)
 
+
+### Supplier Ingestion Data incl Vendor Image Urls
+class SupplierIngestImagesResource(ModelResource):
+    # user = fields.ForeignKey(UserResource, 'user')
+    class Meta:
+        serializer = Serializer(formats=['json', 'jsonp', 'xml'])
+        resource_name = 'suppler-ingest'
+        # authorization= Authorization()
+        queryset = SupplierIngest.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
+        allowed_methods = ['get', 'post']
+        detail_allowed_methods = ['get']
+        excludes = ['active', 'create_dt', 'start_dt']
+        #fields = ['file_name', 'colorstyle', 'alt', 'image_url','bfly_local_src', 'bfly_zoom_src' ]
+        filtering = {
+            'colorstyle': ALL,
+            'alt': ALL,
+            'vendor_style': ALL,
+            'modified_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
+            'vendor_name': ALL,
+        }
+
+
+    def dispatch(self, request_type, request, **kwargs):
+        colorstyle = kwargs.pop('colorstyle')
+        alt        = kwargs.pop('alt')
+        kwargs['colorstyle'] = get_object_or_404(SupplierIngestImages, colorstyle=colorstyle)
+        kwargs['alt'] = get_object_or_404(SupplierIngestImages, alt=alt)
+        return super(SupplierIngestImagesResource, self).dispatch(request_type, request, **kwargs)
 
 
 class OffshoreStatusResource(ModelResource):
