@@ -12,11 +12,11 @@ def index(request):
     try:  
         colorstyle = request.get()['inputColorstyle']
     except:
-        colorstyle = ''
+        colorstyle = '%%'
     return render_to_response('main-display-select.html', {
         'styles': Product.objects.all().filter(colorstyle__exact=colorstyle),
         'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
-        'images': Image.objects.all().filter(colorstyle__exact=colorstyle)[:6]
+        'images': Image.objects.all().filter(colorstyle__icontains=colorstyle)[:6]
     })
 
 def swap_images(request, slug):
