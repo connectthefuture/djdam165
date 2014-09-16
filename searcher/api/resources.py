@@ -193,7 +193,7 @@ class SupplierIngestImagesResource(ModelResource):
 
 
     def dispatch(self, request_type, request, **kwargs):
-        colorstyle = kwargs.pop('file_name')[:9]
+        colorstyle = kwargs.pop('colorstyle')
         alt        = kwargs.pop('alt')
         kwargs['colorstyle'] = get_object_or_404(SupplierIngestImages, colorstyle=colorstyle)
         kwargs['alt'] = get_object_or_404(SupplierIngestImages, alt=alt)
