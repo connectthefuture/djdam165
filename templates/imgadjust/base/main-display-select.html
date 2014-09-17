@@ -57,10 +57,10 @@ $("#formSearchStyle").submit(function() {
 </script>
 
 
-{% if styles %}
-{% regroup styles|dictsort:"colorstyle" by style as colorstyles %}
+{% if images %}
+{% regroup images|dictsort:"file_name" by image as colorstyles %}
 
-{%for style in colorstyles %}
+{%for image in colorstyles %}
  
   <div class="row">
     
