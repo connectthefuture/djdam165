@@ -21,7 +21,7 @@ def index(request, colorstyle=None, alt=None):
         except:
             colorstyle = '%%'
 
-    m = request.META[:-1]
+    m = request.META['IP_ADDRESS']
     return render_to_response('imgadjust/base/main-display-select.html', {
         #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
         'images': SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle),
