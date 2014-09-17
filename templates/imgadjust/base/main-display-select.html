@@ -74,21 +74,21 @@ jqxhr.always(function() {
 });
 
 {% endcomment %}
-
 <script>
-
   $( ":submit" ).click(function() {
   var inputColorstyle = $( '#inputColorstyle' ).val();
   var inputAlt = inputColorstyle.split("_")[-1];
-  $.getJSON( "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/", { colorstyle: inputColorstyle, alt: inputAlt })
-
+  $.getJSON( "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/", {
+      colorstyle: inputColorstyle,
+      alt: inputAlt
+  })
   .done(function( json ) {
     console.log( "JSON Data: " + json.colorstyle[ 0 ] );
   })
   .fail(function( jqxhr, textStatus, error ) {
                   var err = textStatus + ", " + error;
                   console.log("Request Failed: " + err);
-              })
+  })
   .always(function() {
   alert( "second complete" );
 });
@@ -117,7 +117,7 @@ $( "form" ).submit(function( event ) {
   })
     .done(function( data ) {
       $.each( data.items, function( i, item ) {
-                                                {% comment %}$( "<img>" ).attr( "src", item.media.m ).appendTo( "#searchResults" );{% endcomment %}        
+                                                {% comment %}$( "<img>" ).attr( "src", item.media.m ).appendTo( "#searchResults" );{% endcomment %}
       $( "<img>" ).attr( "src", item.image_url).appendTo( "#searchResults" );
         if ( i === 6 ) {
           return false;
@@ -133,15 +133,15 @@ $("#formSearchStyle").submit(function() {
     var inputColorstyle = $( '#inputColorstyle' ).val();
     var inputAlt = inputColorstyle.split("_")[-1];
     var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
-    var res = {}
+    var res = {};
     $.ajax({
            type: "get",
            url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/",
            dataType: "json",
            data:  { colorstyle: inputColorstyle, alt: inputAlt },
            // $(inputColorstyle + "/" + inputAlt).serialize(), // serializes the form's elements.
-           success: function(data) {
-                    alert("Wow Lookie Here " + data); // show response from the python script.
+           success: function(res) {
+                    alert("Wow Lookie Here " + res); // show response from the python script.
                     }
          });
 
