@@ -6,22 +6,29 @@ from django.shortcuts import render
 # Create your views here.
 
 from models import Product, ImageType, Image
-from searcher.models import ProductSnapshotLive
+from searcher.models import ProductSnapshotLive, SupplierIngestImages, SupplierIngest
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+
 
 def index(request):
     try:  
         colorstyle = str(request.GET['inputColorstyle'])
     except:
-        colorstyle = '%%'
+        try:
+            colorstyle = str(request.GET['colorstyle'])
+        except:
+            colorstyle = '%%'
+
+
     return render_to_response('imgadjust/base/main-display-select.html', {
         #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
-        'styles': ProductSnapshotLive.objects.all().filter(colorstyle__exact=colorstyle),
+        'images': SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle),
         #'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
-        'alts'  : ProductSnapshotLive.objects.all().filter(colorstyle__exact=colorstyle)[:6],
+        #'alts'  : SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         'query' : colorstyle,
-        'images': Image.objects.all()[:6]
+        #'images': Image.objects.all()[:6]
+        #'images': Image.objects.all()[:6]
     }, context_instance=RequestContext(request))
 
 def swap_images(request, slug):

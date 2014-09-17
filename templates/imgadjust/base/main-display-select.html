@@ -19,13 +19,13 @@
   
   <div class="row">
     <div class="col-md-5 col-md-pull-1">
-      <form enctype="application/x-www-form-urlencoded" method="get" action="#" id="{{ image.pk }}" class="form-inline">
+      <form enctype="application/x-www-form-urlencoded" method="get" action="#" id="formSearchStyle" class="form-inline">
         {% csrf_token %}
         <div class="form-group">
           <input type="text" class="form-control" name="inputColorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
           <p></p>
         </div>
-        <button type="submit" class="btn btn-default btn-sm" name="submit" id="colorstyle_search_all">
+        <button type="submit" class="btn btn-default btn-sm" name="submit">
           <span class="glyphicon glyphicon-search"></span> Search</button>
       </form>
       <hr>
@@ -33,7 +33,33 @@
   </div>
 
 <script>
-$('input[name="inputColorstyle"]').val('some value');
+$('form #checkbox').is(':checked');
+
+    var checkedValues = $('input:checkbox:checked').map(function() {
+        return this.value;
+}).get();
+</script>
+
+<script>
+$("#formSearchStyle").submit(function() {
+
+    //var url = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/'; // the script where you handle the form input.
+    // var url = 'http://prodimages.ny.bluefly.com/searcher/ajax/colorstyle/';
+    //var url = '{% url 'imgadjust:views-index' %}';
+    //var url = '/api/v1/supplier-ingest-images/' + $("#colorstyle") + '/' + $("#alt") ;
+    var url = '/api/v1/supplier-ingest-images/'
+    //+ $("#inputColorstyle");
+    $.ajax({
+           type: "get",
+           url: url,
+           data: $("#inputColorstyle").serialize(), // serializes the form's elements.
+           success: function(data) {
+                    alert('Wow Lookie Here ' + data); // show response from the python script.
+                    }
+         });
+
+    return false; // avoid to execute the actual submit of the form.
+});
 </script>
 
 <script>
