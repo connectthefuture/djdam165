@@ -1,6 +1,6 @@
 {% extends '_layouts/base.html' %} {# #}
 {% block page_title %}
-<title>Product Image Adjustments</title>
+<title xmlns="http://www.w3.org/1999/html">Product Image Adjustments</title>
 {% endblock %} 
 {% comment %}
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -23,14 +23,19 @@
         {% csrf_token %}
         <div class="form-group">
           <input type="text" class="form-control" name="inputColorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
+          <textarea id="inputColorstyle" placeholder="Paste Multi-Delimited"></textarea>
+
           <p></p>
         </div>
-        <button type="submit" class="btn btn-default btn-sm" name="submit" id="submit" >
-          <span class="glyphicon glyphicon-search"></span> Search</button>
+        <button class="btn btn-default btn-sm" id="search" ><span class="glyphicon glyphicon-search"></span> SearchStyles</button>
+        <button class="btn btn-warning btn-sm" id="submit" type="submit" ><span class="glyphicon glyphicon-search"></span> Submit Form</button>
       </form>
       <hr>
+      <div id="searchResults"></div>
     </div>
   </div>
+
+
 
 <script>
 $('form #checkbox').is(':checked');
@@ -40,15 +45,100 @@ $('form #checkbox').is(':checked');
 }).get();
 </script>
 
+{% comment %}
+
+<script>
+
+    var supplierImageAPI = '/api/v1/supplier-ingest-images/';
+    var jqxhr = $.ajax( supplierImageAPI )
+  .done(function() {
+    alert( "success" );
+  })
+  .fail(function() {
+    alert( "error" );
+  })
+  .always(function() {
+    alert( "complete" );
+  });
+
+// Perform other work here ...
+
+// Set another completion function for the request above
+jqxhr.always(function() {
+  alert( "second complete" );
+});
+</script>
+
+  $( "#other" ).click(function() {
+  $( "#target" ).keypress();
+});
+
+{% endcomment %}
+
+<script>
+
+  $( ":submit" ).click(function() {
+  var inputColorstyle = $( '#inputColorstyle' ).val();
+  var inputAlt = inputColorstyle.split("_")[-1];
+  $.getJSON( "/api/v1/supplier-ingest-images/", { colorstyle: inputColorstyle, alt: inputAlt })
+
+  .done(function( json ) {
+    console.log( "JSON Data: " + json.colorstyle[ 0 ] );
+  })
+  .fail(function( jqxhr, textStatus, error ) {
+                  var err = textStatus + ", " + error;
+                  console.log("Request Failed: " + err);
+              })
+  .always(function() {
+  alert( "second complete" );
+});
+});
+</script>
+
+{% comment %}
+  <script>
+var allInputs = $( ":input" );
+var formChildren = $( "form > *" );
+$( "#messages" ).text( "Found " + allInputs.length + " inputs and the form has " +
+  formChildren.length + " children." );
+
+$( "form" ).submit(function( event ) {
+  event.preventDefault();
+});
+  </script>
+{% endcomment %}
+
+<script>
+(function() {
+  var supplierImageAPI = "/api/v1/supplier-ingest-images/";
+  $.getJSON( supplierImageAPI, {
+    tags: "",
+    tagmode: "any",
+    format: "json",
+    processDate: false
+  })
+    .done(function( data ) {
+      $.each( data.items, function( i, item ) {
+                                                {% comment %}$( "<img>" ).attr( "src", item.media.m ).appendTo( "#searchResults" );{% endcomment %}        
+      $( "<img>" ).attr( "src", item.image_url).appendTo( "#searchResults" );
+        if ( i === 6 ) {
+          return false;
+        }
+      });
+    });
+})();
+</script>
+
+'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site',
 <script>
 $("#formSearchStyle").submit(function() {
-    var url = '/api/v1/supplier-ingest-images/'
+    var url = "/api/v1/supplier-ingest-images/"
     $.ajax({
            type: "get",
            url: url,
            data: $("#inputColorstyle").serialize(), // serializes the form's elements.
            success: function(data) {
-                    alert('Wow Lookie Here ' + data); // show response from the python script.
+                    alert("Wow Lookie Here " + data); // show response from the python script.
                     }
          });
 
@@ -57,7 +147,7 @@ $("#formSearchStyle").submit(function() {
 </script>
 
 
-{% if images %}
+{% comment %}{% if images %}{% endcomment %}
 {% regroup images|dictsort:"file_name" by image as colorstyles %}
 
 {%for image in colorstyles %}
@@ -112,8 +202,10 @@ $("#formSearchStyle").submit(function() {
             <option>Alt-4</option>
             <option>Alt-5</option>
           </select></p>
-        <p><a class="btn btn-primary" href="#">Submit Changes &raquo;</a></p>
-      </div>
+        <p>
+          <input type="radio" class="btn btn-primary btn-md" id="submit6">Confirm Changes &raquo;
+        </p>
+      </div>      </div>
       {% endif %}
 
       {% if image.alt == 3 %}
@@ -130,8 +222,10 @@ $("#formSearchStyle").submit(function() {
             <option>Alt-4</option>
             <option>Alt-5</option>
           </select></p>
-        <p><a class="btn btn-primary" href="#">Submit Changes &raquo;</a></p>
-      </div>
+        <p>
+          <button class="btn btn-primary btn-md" id="submit3">Submit Changes &raquo;</button></p>
+        </p>
+      </div>      </div>
       {% endif %}
 
       {% if image.alt == 4 %}
@@ -149,7 +243,10 @@ $("#formSearchStyle").submit(function() {
           <option>Alt-5</option>
         </select></p>
         <p></p>
-        <p><a class="btn btn-primary" href="#">Submit Changes &raquo;</a></p>
+        <p>
+          <button class="btn btn-primary btn-md" id="submit4">Submit Changes &raquo;</button></p>
+        </p>
+      </div>
       </div>
     {% endif %}
 
@@ -167,7 +264,9 @@ $("#formSearchStyle").submit(function() {
             <option selected="selected">Alt-4</option>
             <option>Alt-5</option>
           </select></p>
-        <p><a class="btn btn-primary" href="#">Submit Changes &raquo;</a></p>
+        <p>
+          <button class="btn btn-primary btn-md" id="submit5">Submit Changes &raquo;</button></p>
+        </p>
       </div>
     {% endif %}
 
@@ -186,7 +285,7 @@ $("#formSearchStyle").submit(function() {
             <option selected="selected">Alt-5</option>
           </select></p>
         <p>
-          <button class="btn btn-primary btn-md" href="#">Submit Changes &raquo;</button></p>
+          <button class="btn btn-primary btn-md" id="submit6">Submit Changes &raquo;</button></p>
       </div>
     {% endif %}
 
@@ -195,11 +294,11 @@ $("#formSearchStyle").submit(function() {
 
 {% endfor %}
 
-{% else %}
+{#{% else %}#}
 {% block confirm %}
     <h3>Please Enter a Valid Style</h3>
 {% endblock %}
-{% endif %}
+{% comment %}{% endif %}{% endcomment %}
 
 </div>
 {% endblock %}
