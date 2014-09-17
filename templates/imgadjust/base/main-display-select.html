@@ -138,7 +138,7 @@ $("#formSearchStyle").submit(function() {
     var res = {}
     $.ajax({
            type: "get",
-           url: url,
+           url: "/api/v1/supplier-ingest-images/",
            dataType: "json",
            data:  { colorstyle: inputColorstyle, alt: inputAlt },
            // $(inputColorstyle + "/" + inputAlt).serialize(), // serializes the form's elements.
