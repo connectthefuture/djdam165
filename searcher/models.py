@@ -402,10 +402,10 @@ class SupplierIngestImages(models.Model):
     image_download_valid = models.CharField(max_length=5)
     ingest_style_id = models.CharField(max_length=25)
     modified_dt = models.DateField()
-    bfly_local_src = models.CharField(max_length=100)
+    bfly_local_src = models.CharField(max_length=100, blank=True, null=True)
     bfly_zoom_src = models.CharField(max_length=150)
     bfly_zoom_site = models.CharField(max_length=150)
-    bfly_listpage_site = models.CharField(max_length=150)
+    bfly_list_site = models.CharField(max_length=150)
     bfly_pdp_site = models.CharField(max_length=150)
     class Meta:
         managed = False
