@@ -131,11 +131,11 @@ class ProductSnapshotLiveResource(ModelResource):
         #     'created': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
         #     'gender': ALL,
         # }
-
-    def dispatch(self, request_type, request, **kwargs):
-        colorstyle = kwargs.pop('colorstyle')
-        kwargs['colorstyle'] = get_object_or_404(ProductSnapshotLive, colorstyle=colorstyle)
-        return super(ProductSnapshotLiveResource, self).dispatch(request_type, request, **kwargs)
+    #
+    # def dispatch(self, request_type, request, **kwargs):
+    #     colorstyle = kwargs.pop('colorstyle')
+    #     kwargs['colorstyle'] = get_object_or_404(ProductSnapshotLive, colorstyle=colorstyle)
+    #     return super(ProductSnapshotLiveResource, self).dispatch(request_type, request, **kwargs)
 
     # def prepend_urls(self):
     #             return [
