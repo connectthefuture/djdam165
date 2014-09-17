@@ -49,7 +49,7 @@ $('form #checkbox').is(':checked');
 
 <script>
 
-    var supplierImageAPI = '/api/v1/supplier-ingest-images/';
+    var supplierImageAPI = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/';
     var jqxhr = $.ajax( supplierImageAPI )
   .done(function() {
     alert( "success" );
@@ -80,7 +80,7 @@ jqxhr.always(function() {
   $( ":submit" ).click(function() {
   var inputColorstyle = $( '#inputColorstyle' ).val();
   var inputAlt = inputColorstyle.split("_")[-1];
-  $.getJSON( "/api/v1/supplier-ingest-images/", { colorstyle: inputColorstyle, alt: inputAlt })
+  $.getJSON( "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/", { colorstyle: inputColorstyle, alt: inputAlt })
 
   .done(function( json ) {
     console.log( "JSON Data: " + json.colorstyle[ 0 ] );
@@ -110,7 +110,7 @@ $( "form" ).submit(function( event ) {
 
 <script>
 (function() {
-  var supplierImageAPI = "/api/v1/supplier-ingest-images/";
+  var supplierImageAPI = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
   $.getJSON( supplierImageAPI, {
     format: "json",
     processDate: false
@@ -132,11 +132,11 @@ $( "form" ).submit(function( event ) {
 $("#formSearchStyle").submit(function() {
     var inputColorstyle = $( '#inputColorstyle' ).val();
     var inputAlt = inputColorstyle.split("_")[-1];
-    var url = "/api/v1/supplier-ingest-images/";
+    var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
     var res = {}
     $.ajax({
            type: "get",
-           url: "/api/v1/supplier-ingest-images/",
+           url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/",
            dataType: "json",
            data:  { colorstyle: inputColorstyle, alt: inputAlt },
            // $(inputColorstyle + "/" + inputAlt).serialize(), // serializes the form's elements.
