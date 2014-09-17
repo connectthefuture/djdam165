@@ -13,20 +13,21 @@ from django.template import RequestContext
 
 def index(request, colorstyle=None, alt=None):
     try:  
-        colorstyle = str(request.GET['inputColorstyle'])
+        colorstyle = request.GET['inputColorstyle']
     except:
         try:
-            colorstyle = str(request.GET['colorstyle'])
+            colorstyle = request.POST['inputColorstyle']
+            alt        = request.POST['inputAlt']
         except:
             colorstyle = '%%'
 
-
+    m = request.META[:-1]
     return render_to_response('imgadjust/base/main-display-select.html', {
         #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
         'images': SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle),
         #'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         #'alts'  : SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)[:6],
-        'query' : colorstyle # + alt,
+        'query' : m, # + alt,
         #'images': Image.objects.all()[:6]
         #'images': Image.objects.all()[:6]
     }, context_instance=RequestContext(request))

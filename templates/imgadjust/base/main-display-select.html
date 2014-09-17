@@ -187,6 +187,8 @@
 
 {% endfor %}
 
+    <div id="metainfo"></div>
+
 {#{% else %}#}
 {% block confirm %}
     <h3>Please Enter a Valid Style</h3>
@@ -204,12 +206,11 @@ $('form #checkbox').is(':checked');
 }).get();
 </script>
 
-{% comment %}
 
 <script>
 
-    var supplierImageAPI = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/';
-    var jqxhr = $.ajax( supplierImageAPI )
+  var supplierImageAPI = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/';
+  var jqxhr = $.ajax( supplierImageAPI )
   .done(function() {
     alert( "success" );
   })
@@ -228,13 +229,12 @@ jqxhr.always(function() {
 });
 </script>
 
-  $( "#other" ).click(function() {
+  $( "#for" ).click(function() {
   $( "#target" ).keypress();
 });
 
-{% endcomment %}
 <script>
-  $( ":submit" ).click(function() {
+  $( ":input" ).blur(function() {
   var inputColorstyle = $( '#inputColorstyle' ).val();
   var inputAlt = inputColorstyle.split("_")[-1];
   $.getJSON( "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/", {
