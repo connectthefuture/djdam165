@@ -26,9 +26,10 @@
           <textarea class="form-control" name="inputColorstyleList" id="inputColorstyleList" placeholder="Paste Multi-Delimited"></textarea>
 
           <p></p>
-        </div>
         <button class="btn btn-default btn-sm" id="search" ><span class="glyphicon glyphicon-search"></span> SearchStyles</button>
         <button class="btn btn-warning btn-sm" id="submit" type="submit" name="submit"><span class="glyphicon glyphicon-search"></span> Submit Form</button>
+        </div>
+
       </form>
       <hr>
 
@@ -197,6 +198,16 @@
 
 </div>
 
+<script>
+  function showValues() {
+    var str = $( "form.input.text" ).serialize();
+    $( "#results" ).text( str );
+  }
+  $( "input[type='checkbox'], input[type='radio']" ).on( "click", showValues );
+  $( "select" ).on( "change", showValues );
+  showValues();
+</script>
+
 
 <script>
 $('form #checkbox').is(':checked');
@@ -208,7 +219,6 @@ $('form #checkbox').is(':checked');
 
 
 <script>
-
   var supplierImageAPI = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/';
   var jqxhr = $.ajax( supplierImageAPI )
   .done(function() {
@@ -222,16 +232,13 @@ $('form #checkbox').is(':checked');
   });
 
 // Perform other work here ...
-
 // Set another completion function for the request above
-jqxhr.always(function() {
-  alert( "second complete" );
-});
+    jqxhr.always(function() {
+      alert( "second complete" );
+    });
 </script>
 
-  $( "#for" ).click(function() {
-  $( "#target" ).keypress();
-});
+{#   $( "#for" ).click(function() {  $( "#target" ).keypress();  }); #}
 
 <script>
   $( ":input" ).blur(function() {
@@ -268,7 +275,7 @@ $( "form" ).submit(function( event ) {
 {% endcomment %}
 
 <script>
-(function() {
+function showValues() {
   var supplierImageAPI = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
   $.getJSON( supplierImageAPI, {
     format: "json",
@@ -283,7 +290,7 @@ $( "form" ).submit(function( event ) {
         }
       });
     });
-});
+};
 </script>
 
 {#'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site',#}
