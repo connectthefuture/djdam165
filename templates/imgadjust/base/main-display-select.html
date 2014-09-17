@@ -52,10 +52,10 @@ $("#formSearchStyle").submit(function() {
                     }
          });
 
-    //return false; // avoid to execute the actual submit of the form.
+    return false; // avoid to execute the actual submit of the form.
 });
 </script>
-
+{# 
 <script>
 $( "input" )
   .keyup(function() {
@@ -64,7 +64,7 @@ $( "input" )
   })
   .keyup();
 </script>
-
+ #}
 
 
 {% if styles %}
