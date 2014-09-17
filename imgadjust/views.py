@@ -26,7 +26,7 @@ def index(request, colorstyle=None, alt=None):
         'images': SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle),
         #'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         #'alts'  : SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)[:6],
-        'query' : colorstyle + alt,
+        'query' : colorstyle # + alt,
         #'images': Image.objects.all()[:6]
         #'images': Image.objects.all()[:6]
     }, context_instance=RequestContext(request))
