@@ -177,12 +177,14 @@ class SupplierIngestImagesResource(ModelResource):
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'supplier-ingest-images'
+        detail_uri_name = 'file_name'
         # authorization= Authorization()
         queryset = SupplierIngest.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
+        list_allowed_methods = ['get']
         detail_allowed_methods = ['get']
         # excludes = ['active', 'create_dt', 'start_dt']
-        fields = ['file_name', 'colorstyle', 'alt', 'vendor_style', 'vendor_name', 'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site', 'modified_dt' ]
+        #fields = ['file_name', 'colorstyle', 'alt', 'vendor_style', 'vendor_name', 'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site', 'modified_dt' ]
         filtering = {
             'colorstyle': ALL,
             'alt': ALL,
