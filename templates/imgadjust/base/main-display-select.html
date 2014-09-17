@@ -23,7 +23,7 @@
         {% csrf_token %}
         <div class="form-group">
           <input type="text" class="form-control" name="inputColorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
-          <textarea class="form-control" name="inputColorstyle" id="inputColorstyleList" placeholder="Paste Multi-Delimited"></textarea>
+          <textarea class="form-control" name="inputColorstyleList" id="inputColorstyleList" placeholder="Paste Multi-Delimited"></textarea>
 
           <p></p>
         </div>
@@ -112,8 +112,6 @@ $( "form" ).submit(function( event ) {
 (function() {
   var supplierImageAPI = "/api/v1/supplier-ingest-images/";
   $.getJSON( supplierImageAPI, {
-    tags: "",
-    tagmode: "any",
     format: "json",
     processDate: false
   })
@@ -142,8 +140,8 @@ $("#formSearchStyle").submit(function() {
            dataType: "json",
            data:  { colorstyle: inputColorstyle, alt: inputAlt },
            // $(inputColorstyle + "/" + inputAlt).serialize(), // serializes the form's elements.
-           success: function(res) {
-                    alert("Wow Lookie Here " + res); // show response from the python script.
+           success: function(data) {
+                    alert("Wow Lookie Here " + data); // show response from the python script.
                     }
          });
 
