@@ -42,13 +42,7 @@ $('form #checkbox').is(':checked');
 
 <script>
 $("#formSearchStyle").submit(function() {
-
-    //var url = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/'; // the script where you handle the form input.
-    // var url = 'http://prodimages.ny.bluefly.com/searcher/ajax/colorstyle/';
-    //var url = '{% url 'imgadjust:views-index' %}';
-    //var url = '/api/v1/supplier-ingest-images/' + $("#colorstyle") + '/' + $("#alt") ;
     var url = '/api/v1/supplier-ingest-images/'
-    //+ $("#inputColorstyle");
     $.ajax({
            type: "get",
            url: url,
