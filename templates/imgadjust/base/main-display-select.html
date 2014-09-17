@@ -129,13 +129,14 @@ $( "form" ).submit(function( event ) {
 })();
 </script>
 
-'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site',
+{#'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site',#}
 <script>
 $("#formSearchStyle").submit(function() {
     var url = "/api/v1/supplier-ingest-images/"
     $.ajax({
            type: "get",
            url: url,
+           dataType: "json"
            data: $("#inputColorstyle").serialize(), // serializes the form's elements.
            success: function(data) {
                     alert("Wow Lookie Here " + data); // show response from the python script.
