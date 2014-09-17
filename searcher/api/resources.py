@@ -182,7 +182,7 @@ class SupplierIngestImagesResource(ModelResource):
         allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get']
         # excludes = ['active', 'create_dt', 'start_dt']
-        fields = ['file_name', 'colorstyle', 'alt', 'vendor_style', 'vendor_name', 'image_url','bfly_local_src', 'bfly_zoom_src',  'bfly_list_site', 'modified_dt' ]
+        fields = ['file_name', 'colorstyle', 'alt', 'vendor_style', 'vendor_name', 'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site', 'modified_dt' ]
         filtering = {
             'colorstyle': ALL,
             'alt': ALL,

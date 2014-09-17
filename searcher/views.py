@@ -3,8 +3,8 @@
 
 
 # Create your views here.
-from kombu.transport import django
-from string import join
+#from kombu.transport import django
+#from string import join
 from searcher.models import PostReadyOriginal
 
 import os, re
