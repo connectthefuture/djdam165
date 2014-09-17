@@ -113,8 +113,8 @@ $(document).ready(function() {
 
 ///// Input colorstyle AJAX get return to output vendor style
 $(document).ready(function() {
-    $("#input_colorstyle").blur(function () {
-        $.post("http://prodimages.ny.bluefly.com/api/v1/excel-tool-data/" + $("#input_colorstyle").val() + "/?format=json",
+    $("#inputColorstyle").blur(function () {
+        $.post("http://prodimages.ny.bluefly.com/api/v1/excel-tool-data/" + $("#inputColorstyle").val() + "/?format=json",
         {output_vendor_style: $(this).val()},
         function (data) {
             $("#output_vendor_style").val(data);
@@ -126,7 +126,7 @@ $(document).ready(function() {
 /////
 $(document).ready(function() {
     $("#input_clrstyle").bind("change", function (e) {
-        $.getJSON("http://prodimages.ny.bluefly.com/api/v1/excel-view-vendorstyle-lookup/" + $("#input_colorstyle").val() + "/?format=json",
+        $.getJSON("http://prodimages.ny.bluefly.com/api/v1/excel-view-vendorstyle-lookup/" + $("#inputColorstyle").val() + "/?format=json",
         function (data) {
             $.each(data, function (i, item) {
                 if (item.field == "output_colorstyle") {
@@ -165,7 +165,7 @@ $(document).ready(function() {
 /////  Input POnumber
 $(document).ready(function() {
     $("#po_number").bind("change", function (e) {
-        $.getJSON("http://prodimages.ny.bluefly.com/api/v1/excel-view-vendorstyle-lookup/" + $("#input_colorstyle").val() + "/?format=json",
+        $.getJSON("http://prodimages.ny.bluefly.com/api/v1/excel-view-vendorstyle-lookup/" + $("#inputColorstyle").val() + "/?format=json",
                 {colorstyle: $(this).val()}, function (data) {
                     $("#colorstyle").val(data.colorstyle);
                     $("#vendor_style").val(data.vendor_style);

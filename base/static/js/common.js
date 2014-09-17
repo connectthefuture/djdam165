@@ -127,12 +127,9 @@ function unSelectAll(selectObj) {
 function doNothing() {
 }
 
-
-
 /*
 DATE AND FORM RELATED FUNCTIONS Bootstrap and jQuery
 */
-
 
 /* Pretty/Friendly URL rewrite for Submitting to Django url Conf */
 $("form .navbar-form").submit(function() {
@@ -153,9 +150,9 @@ $("form .navbar-form").submit(function() {
  * author: unknown
  **/
 function checkEmail(src) {
-     var regex = new RegExp("^([a-z0-9_]|\\-|\\.)+@(([a-z0-9_]|\\-)+\\.)+[a-z]{2,4}\$");
-     return regex.test(src);
-
+    var regex = new RegExp("^([a-z0-9_]|\\-|\\.)+@(([a-z0-9_]|\\-)+\\.)+[a-z]{2,4}\$");
+    return regex.test(src);
+}
 
 
 /**

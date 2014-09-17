@@ -24,7 +24,7 @@
         <div class="form-group">
           <input type="text" class="form-control" name="inputColorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
           <textarea class="form-control" name="inputColorstyleList" id="inputColorstyleList" placeholder="Paste Multi-Delimited"></textarea>
-
+            <button class="btn btn-danger btn-sm" id="buttonClear" ></button>
           <p></p>
         <button class="btn btn-default btn-sm" id="search" ><span class="glyphicon glyphicon-search"></span> SearchStyles</button>
         <button class="btn btn-warning btn-sm" id="submit" type="submit" name="submit"><span class="glyphicon glyphicon-search"></span> Submit Form</button>
@@ -197,123 +197,24 @@
 {% comment %}{% endif %}{% endcomment %}
 
 </div>
-
 <script>
-  function showValues() {
-    var str = $( "form.input.text" ).serialize();
-    $( "#results" ).text( str );
-  }
-  $( "input[type='checkbox'], input[type='radio']" ).on( "click", showValues );
-  $( "select" ).on( "change", showValues );
-  showValues();
-</script>
-
-
-<script>
-$('form #checkbox').is(':checked');
-
-    var checkedValues = $('input:checkbox:checked').map(function() {
-        return this.value;
-}).get();
-</script>
-
-
-<script>
-  var supplierImageAPI = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/';
-  var jqxhr = $.ajax( supplierImageAPI )
-  .done(function() {
-    alert( "success" );
-  })
-  .fail(function() {
-    alert( "error" );
-  })
-  .always(function() {
-    alert( "complete" );
-  });
-
-// Perform other work here ...
-// Set another completion function for the request above
-    jqxhr.always(function() {
-      alert( "second complete" );
-    });
-</script>
-
-{#   $( "#for" ).click(function() {  $( "#target" ).keypress();  }); #}
-
-<script>
-  $( ":input" ).blur(function() {
-  var inputColorstyle = $( '#inputColorstyle' ).val();
-  var inputAlt = inputColorstyle.split("_")[-1];
-  $.getJSON( "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/", {
-      colorstyle: inputColorstyle,
-      alt: inputAlt
-  })
-  .done(function( json ) {
-    console.log( "JSON Data: " + json.colorstyle[ 0 ] );
-  })
-  .fail(function( jqxhr, textStatus, error ) {
-                  var err = textStatus + ", " + error;
-                  console.log("Request Failed: " + err);
-  })
-  .always(function() {
-  alert( "second complete" );
-});
-});
-</script>
-
-{% comment %}
-  <script>
-var allInputs = $( ":input" );
-var formChildren = $( "form > *" );
-$( "#messages" ).text( "Found " + allInputs.length + " inputs and the form has " +
-  formChildren.length + " children." );
-
-$( "form" ).submit(function( event ) {
-  event.preventDefault();
-});
-  </script>
-{% endcomment %}
-
-<script>
-function showValues() {
-  var supplierImageAPI = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
-  $.getJSON( supplierImageAPI, {
-    format: "json",
-    processDate: false
-  })
-    .done(function( data ) {
-      $.each( data.items, function( i, item ) {
-                                                {% comment %}$( "<img>" ).attr( "src", item.media.m ).appendTo( "#searchResults" );{% endcomment %}
-      $( "<img>" ).attr( "src", item.image_url).appendTo( "#searchResults" );
-        if ( i === 6 ) {
-          return false;
+var clearSearchCriteria = function(){
+        var elm;
+        var elements = document.forms[0].elements;  //document.forms[0] = the first form in the html document
+        for( i=0, elm; elm=elements[i++]; ) {       //iterate each elements array and put a single element in variable elm to process
+            if (elm.type == "text") {               //check the type of elm.type (if type = text or select then reset it)
+                elm.value ='';
+            } else if(elm.type == "select-one") {   //if type = dropdown
+                elm.selectedIndex = 0;
+            }else if(elm.type =="textarea"){
+                elm.value ='';
+            }
         }
-      });
-    });
-};
+   };
+
+$('#buttonClear').click(clearSearchCriteria);
+   $(' :input.form-group ').click(function(event){
+           clearSearchCriteria();
+   });
 </script>
-
-{#'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site',#}
-<script>
-$("#formSearchStyle").submit(function() {
-    var inputColorstyle = $( '#inputColorstyle' ).val();
-    var inputAlt = inputColorstyle.split("_")[-1];
-    var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
-    var res = {};
-    $.ajax({
-           type: "POST",
-           url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/",
-           dataType: "json",
-           data:  { colorstyle: inputColorstyle, alt: inputAlt },
-           // $(inputColorstyle + "/" + inputAlt).serialize(), // serializes the form's elements.
-           success: function(res) {
-                    alert("Wow Lookie Here " + res); // show response from the python script.
-                    }
-         });
-
-    return false; // avoid to execute the actual submit of the form.
-});
-</script>
-
-
 {% endblock %}
