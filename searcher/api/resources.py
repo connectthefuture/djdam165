@@ -155,20 +155,20 @@ class SupplierIngestResource(ModelResource):
         detail_allowed_methods = ['get']
         excludes = ['active', 'create_dt', 'start_dt']
         filtering = {
-            'colorstyle': ALL_WITH_RELATIONS,
-            'alt': ALL_WITH_RELATIONS,
+            'colorstyle': ALL,
+            'alt': ALL,
             'vendor_style': ALL,
             'modify_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
             'po_number': ALL,
         }
 
 
-    def dispatch(self, request_type, request, **kwargs):
-        colorstyle = kwargs.pop('colorstyle')
-        alt        = kwargs.pop('alt')
-        kwargs['colorstyle'] = get_object_or_404(SupplierIngest, colorstyle=colorstyle)
-        kwargs['alt'] = get_object_or_404(SupplierIngest, alt=alt)
-        return super(SupplierIngestResource, self).dispatch(request_type, request, **kwargs)
+    # def dispatch(self, request_type, request, **kwargs):
+    #     colorstyle = kwargs.pop('colorstyle')
+    #     alt        = kwargs.pop('alt')
+    #     kwargs['colorstyle'] = get_object_or_404(SupplierIngest, colorstyle=colorstyle)
+    #     kwargs['alt'] = get_object_or_404(SupplierIngest, alt=alt)
+    #     return super(SupplierIngestResource, self).dispatch(request_type, request, **kwargs)
 
 
 ### Supplier Ingestion Data incl Vendor Image Urls
