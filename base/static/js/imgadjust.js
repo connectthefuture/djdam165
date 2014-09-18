@@ -99,7 +99,7 @@ function submitSearchStyle () {
         var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
         var res = {};
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/",
             dataType: "json",
             data: { colorstyle: inputColorstyle, alt: inputAlt },
