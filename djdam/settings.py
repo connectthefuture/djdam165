@@ -398,7 +398,7 @@ DEBUG_TOOLBAR_CONFIG = {
 DEBUG_TOOLBAR_PANELS = (
     #'debug_toolbar_user_panel.panels.UsersPanel',
     'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    'debug_toolbar.panels.cache.CachePanel',
+    # 'debug_toolbar.panels.cache.CachePanel',
     'debug_toolbar.panels.versions.VersionsPanel',
     'debug_toolbar.panels.timer.TimerPanel',
     'debug_toolbar.panels.settings.SettingsPanel',
