@@ -47,10 +47,14 @@ TEMPLATE_DEBUG = True
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['*']
-
 # All hosts allowed
+ALLOWED_HOSTS = ['*']
+# No hosts allowed
 # ALLOWED_HOSTS = []
+
+## Must be set for Debug toolbar
+INTERNAL_IPs = ('127.0.0.1',)
+
 
 # Application definition
 
@@ -79,7 +83,7 @@ INSTALLED_APPS = (# '',
     'django.contrib.redirects',
     # Third-party apps, patches, fixes
     'djcelery',  #
-    #'debug_toolbar',  #
+    'debug_toolbar',  #
     'compressor',
     #'debug_toolbar_user_panel',#
 
