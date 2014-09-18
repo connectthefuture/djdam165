@@ -104,8 +104,8 @@ function submitSearchStyle () {
             dataType: "json",
             data: { colorstyle: inputColorstyle, alt: inputAlt },
             // $(inputColorstyle + "/" + inputAlt).serialize(), // serializes the form's elements.
-            success: function (res) {
-                alert("Wow Lookie Here " + res); // show response from the python script.
+            success: function () {
+                alert("Wow Lookie Here " + data); // show response from the python script.
             }
         });
 
