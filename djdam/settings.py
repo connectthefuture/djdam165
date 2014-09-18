@@ -86,8 +86,8 @@ INSTALLED_APPS = (# '',
     #'compressor',
 
     ## Debug toolbar
-    'debug_toolbar',  #
-    'debug_toolbar_htmltidy'
+    'debug_toolbar',
+    'debug_toolbar_htmltidy',
     #'debug_toolbar_user_panel',#
 
     # bootstrap and other toolkits for widgets tables forms etc.
@@ -410,6 +410,7 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.redirects.RedirectsPanel',
     'debug_toolbar.panels.logger.LoggingPanel',
     'debug_toolbar.panels.profiling.ProfilingPanel',
+    'debug_toolbar_htmltidy.panels.HTMLTidyDebugPanel',
 
 )
 
