@@ -11,7 +11,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
 
-def index(request, inputColorstyle=None, inputAlt=None):
+def index(request, colorstyle=None, alt=None):
     try:  
         colorstyle = request.GET['inputColorstyle']
     except:
