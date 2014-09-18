@@ -107,6 +107,7 @@ urlpatterns += patterns('',
                        ## End admin configs
                        #url(r'^', include('debug_toolbar_user_panel.urls')),
 
+
                        ### Load Base Site urls incl HomePage
                        url(r'', include('base.urls')),
 
@@ -120,6 +121,10 @@ urlpatterns += patterns('',
                        #url(r'^ajax/', include('searcher.urls')),
                        #    url(r'^images/', include('images.urls')),
                        #    url(r'^photo/', include('photo.urls')),
+
+                       # # Debug tool bar html tidy panel
+                       url(r'^', include('debug_toolbar_htmltidy.urls')),
+
                        ### Direct Bad requests to Someting
                        url(r'^bad/$', bad),
                        #url(r'^vendors/$', list_detail.object_list, vendor_info),
