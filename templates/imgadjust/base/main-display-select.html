@@ -68,26 +68,26 @@
     <div class="row">
       <div class="col-md-2">
         <h3><i class="fa fa-star text-center">&nbsp;</i>Primary</h3>
-        <img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={{ q }}&width=251&height=300" class="img-rounded" width="120" height="144" alt="Primary">
-        <p></p>
-        <p>
-          <select class="form-control" name="img1" id="img-location">
+        <a href="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={{ q }}&width=251&height=300" > <img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={{ q }}&width=251&height=300" class="img-rounded" width="120" height="144" alt="Primary">
+        </a><p></p>
+            <label for="img-location"></label>
+            <select class="form-control" name="img1" id="img-location">
             <option selected="selected">Primary Image</option>
             <option>Alt-1/Back</option>
             <option>Alt-2/Side</option>
             <option>Alt-3</option>
             <option>Alt-4</option>
             <option>Alt-5</option>
-          </select></p>
+          </select>
         <p><a class="btn btn-primary" href="#">Submit Changes &raquo;</a></p>
       </div>
 
       {% if image.alt == 2 %}
       <div class="col-md-2">
         <h3 class="text-center">Alt-1/Back</h3>
-        <img href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144" src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
-        <p></p>
-        <p>
+        <a href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144">
+            <img src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
+        </a><p></p>
           <select class="form-control" name="img2" id="img-location">
             <option>Primary Image</option>
             <option selected="selected">Alt-1/Back</option>
@@ -95,19 +95,17 @@
             <option>Alt-3</option>
             <option>Alt-4</option>
             <option>Alt-5</option>
-          </select></p>
-        <p>
+          </select>
           <input type="radio" class="btn btn-primary btn-md" id="submit6">Confirm Changes &raquo;
-        </p>
-      </div>      </div>
+      </div>
       {% endif %}
 
       {% if image.alt == 3 %}
       <div class="col-md-2">
         <h3 class="text-center">Alt-2/Side</h3>
-        <img href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144" src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
-        <p></p>
-        <p>
+        <a href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144">
+            <img src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
+        </a><p></p>
           <select class="form-control" name="img3" id="img-location">
             <option>Primary Image</option>
             <option>Alt-1/Back</option>
@@ -115,19 +113,17 @@
             <option>Alt-3</option>
             <option>Alt-4</option>
             <option>Alt-5</option>
-          </select></p>
-        <p>
-          <button class="btn btn-primary btn-md" id="submit3">Submit Changes &raquo;</button></p>
-        </p>
+          </select>
+          <button class="btn btn-primary btn-md" id="submit3">Submit Changes &raquo;</button>
       </div>      </div>
-      {% endif %}
+    {% endif %}
 
       {% if image.alt == 4 %}
       <div class="col-md-2">
         <h3 class="text-center">Alt-3&nbsp;</h3>
-        <img href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144" src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
-        <p></p>
-        <p>
+        <a href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144">
+            <img src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
+        </a><p></p>
         <select class="form-control" name="img4" id="img-location">
           <option>Primary Image</option>
           <option>Alt-1/Back</option>
@@ -135,21 +131,18 @@
           <option selected="selected">Alt-3</option>
           <option>Alt-4</option>
           <option>Alt-5</option>
-        </select></p>
+        </select>
         <p></p>
-        <p>
-          <button class="btn btn-primary btn-md" id="submit4">Submit Changes &raquo;</button></p>
-        </p>
-      </div>
+          <button class="btn btn-primary btn-md" id="submit4">Submit Changes &raquo;</button>
       </div>
     {% endif %}
 
     {% if image.alt == 5 %}
       <div class="col-md-2">
         <h3 class="text-center">Alt-4&nbsp;</h3>
-        <img href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144" src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
+        <a href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144">
+          <img src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}"></a>
         <p></p>
-        <p>
           <select class="form-control" name="img5" id="img-location">
             <option>Primary Image</option>
             <option>Alt-1/Back</option>
@@ -157,19 +150,17 @@
             <option>Alt-3</option>
             <option selected="selected">Alt-4</option>
             <option>Alt-5</option>
-          </select></p>
-        <p>
-          <button class="btn btn-primary btn-md" id="submit5">Submit Changes &raquo;</button></p>
-        </p>
+          </select>
+          <button class="btn btn-primary btn-md" id="submit5">Submit Changes &raquo;</button>
       </div>
     {% endif %}
 
     {% if image.alt == 6 %}
       <div class="col-md-2">
         <h3 class="text-center">Alt-5&nbsp;</h3>
-        <img href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144" src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
-        <p></p>
-        <p>
+        <a href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144">
+            <img src="{{ image.get_absolute_url }}" class="img-rounded" width="120" height="144" alt="{{ image.alt0 }}">
+        </a><p></p>
           <select class="form-control" name="img6" id="img-location">
             <option>Primary Image</option>
             <option>Alt-1/Back</option>
@@ -177,14 +168,10 @@
             <option>Alt-3</option>
             <option>Alt-4</option>
             <option selected="selected">Alt-5</option>
-          </select></p>
-        <p>
-          <button class="btn btn-primary btn-md" id="submit6">Submit Changes &raquo;</button></p>
+          </select>
+          <button class="btn btn-primary btn-md" id="submit6">Submit Changes &raquo;</button>
       </div>
     {% endif %}
-
-    </div>
-  </div>
 
 {% endfor %}
 
@@ -195,8 +182,9 @@
     <h3>Please Enter a Valid Style</h3>
 {% endblock %}
 {% comment %}{% endif %}{% endcomment %}
-
 </div>
+</div>
+
 <script>
 var clearSearchCriteria = function(){
         var elm;
@@ -214,12 +202,14 @@ var clearSearchCriteria = function(){
 
 $('#buttonClear').click(clearSearchCriteria);
    $(' :input.form-group ').click(function(event){
-           clearSearchCriteria();
+           clearSearchCriteria(event);
    });
 </script>
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>
+{% comment %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+{% endcomment %}
 
 {% endblock %}
