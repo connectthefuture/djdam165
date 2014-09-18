@@ -393,7 +393,7 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 #
 DEBUG_TOOLBAR_PANELS = (
-    'debug_toolbar_user_panel.panels.UsersPanel',
+    #'debug_toolbar_user_panel.panels.UsersPanel',
     'debug_toolbar.panels.version.VersionsPanel',
     'debug_toolbar.panels.timer.TimerPanel',
     'debug_toolbar.panels.settings_vars.SettingsPanel',
@@ -402,7 +402,7 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.template.TemplatesPanel',
     'debug_toolbar.panels.sql.SQLPanel',
     'debug_toolbar.panels.signals.SignalsPanel',
-    #'debug_toolbar.panels.logger.LoggingPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
 
 )
 
