@@ -218,8 +218,14 @@ $('#buttonClear').click(clearSearchCriteria);
            clearSearchCriteria(event);
    });
 </script>
+<script type="text/javascript">
+$( "button" ).click(function() {
+  var text = $( this ).text();
+  $( "input" ).val( text );
+});
+</script>
 
-<script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>
 <script type="text/javascript">
 // Make the request
 $.get('/api/v1/supplier-ingest-images/', function(data) {
@@ -227,7 +233,7 @@ $.get('/api/v1/supplier-ingest-images/', function(data) {
     // Our JSON contains several dictionaries for each breed of dog,
     // and we want to construct an HTML table row for each
     // First, lets get the table body which we'll add the rows to
-    $inputQuery = $("#").find('tbody');
+    $inputQuery = $("#colorstyle").val();
     $tbody = $("#vendor_name_table").find('tbody');
     // next, iterate through the JSON array
     $.each(data, function() {
@@ -241,10 +247,10 @@ $.get('/api/v1/supplier-ingest-images/', function(data) {
             $col.text(key+":"+value);
             // append the column to the row
             $row.append($col);
-        }
+        })
         // append the row to the table body
         $tbody.append($row);
-    }
+    })
 });
 
 
