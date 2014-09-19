@@ -22,7 +22,7 @@
       <form enctype="multipart/form-data" method="get" id="formSearchStyle" class="form-inline">
         {% csrf_token %}
         <div class="form-group">
-          <input type="text" class="form-control" name="inputColorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
+          <input type="text" class="form-control" name="color" id="inputColorstyle" placeholder="Search Colorstyle">
             <input type="number" class="form-control" name="inputAlt" id="inputAlt" placeholder="Search ImgNumber">
             <input type="file" class="form-control" name="inputFile" id="inputFile" placeholder="LoadFile">
             <textarea class="form-control" name="inputColorstyleList" id="inputColorstyleList" placeholder="Paste Multi-Delimited"></textarea>
@@ -47,13 +47,13 @@
 
 <iframe name='hiddeniframe' id='supplier_data_iframe'  scrolling='no' frameborder='0' style='display:none'></iframe>
 
-<form id="getSupplierJson" name="getSupplierJson" action="/api/v1/supplier-ingest-images/{{result.colorstyle}}" method="POST" target='hiddeniframe'>
+<form id="getSupplierJson" name="getSupplierJson" method="POST" target='hiddeniframe'>
 <input type="text" class="form-control" name="iframeColorstyle" id="iframeColorstyle" placeholder="LoadFile">
 
 <table>
     <tbody id="vendor_name_table"></tbody>
 </table>
-
+</form>
 {% comment %}{% if images %}{% endcomment %}
 {#{% regroup images|dictsort:"file_name" by image as images %}#}
 
@@ -227,6 +227,7 @@ $.get('/api/v1/supplier-ingest-images/', function(data) {
     // Our JSON contains several dictionaries for each breed of dog,
     // and we want to construct an HTML table row for each
     // First, lets get the table body which we'll add the rows to
+    $inputQuery = $("#").find('tbody');
     $tbody = $("#vendor_name_table").find('tbody');
     // next, iterate through the JSON array
     $.each(data, function() {
