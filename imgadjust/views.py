@@ -9,7 +9,7 @@ from models import Product, ImageType, Image
 from searcher.models import ProductSnapshotLive, SupplierIngestImages, SupplierIngest
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-
+import json
 
 def index(request, colorstyle=None, alt=None):
     try:  
@@ -22,14 +22,19 @@ def index(request, colorstyle=None, alt=None):
             colorstyle = '%%'
 
     m = request.META #
+    apiurl = '/api/v1/supplier-ingest-images/' + colorstyle
+    if alt:
+        apiurl = '/api/v1/supplier-ingest-images/' + colorstyle + '/' + alt + '/'
+    return_data = json.dumps(apiurl)
+    decoded_json = json.loads(return_data)
+
     return render_to_response('imgadjust/base/main-display-select.html', {
         #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
         'images': SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle),
         #'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         #'alts'  : SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         'query' : m.items(), # + alt,
-        #'images': Image.objects.all()[:6]
-        #'images': Image.objects.all()[:6]
+        'results': decoded_json['Result']
     }, context_instance=RequestContext(request),
     )
 ## locals()
