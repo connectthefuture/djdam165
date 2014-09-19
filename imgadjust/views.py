@@ -30,7 +30,9 @@ def index(request, colorstyle=None, alt=None):
         'query' : m.items(), # + alt,
         #'images': Image.objects.all()[:6]
         #'images': Image.objects.all()[:6]
-    }, context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request),
+    )
+## locals()
 
 def swap_images(request, slug):
     return render_to_response('imgadjust/base/swap-images-confirm.html', {

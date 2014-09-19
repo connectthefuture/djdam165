@@ -11,7 +11,8 @@ urlpatterns = patterns('imgadjust.views',
     url(r'^swap-images/$', 'swap_images', name='swap-images'),
     url(r'^add-replace-images/$', 'add_replace_images', name='add-replace-images'),
     url(r'^delete-images/$', 'delete_images', name='delete-images'),
-    url(r'^.*?$', 'index', name='index2'),
+    url(r'^(?P<colorstyle>\d{9})?/?(?P<alt>\d{1,5})?/?$', 'index', name='indexStyAlt'),
+    url(r'^/?.*?(?P<inputColorstyle>.+)?$', 'index', name='indexSty'),
     url(r'^$', 'index', name='index'),
 
 )
