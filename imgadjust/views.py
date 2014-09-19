@@ -10,6 +10,7 @@ from searcher.models import ProductSnapshotLive, SupplierIngestImages, SupplierI
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 import json
+from django.core import serializers
 
 def index(request, colorstyle=None, alt=None):
     try:  
@@ -31,14 +32,14 @@ def index(request, colorstyle=None, alt=None):
 
     return_data = json.dumps(apiurl)
     decoded_json = json.loads(return_data)
-
+    results = serializers.deserialize("json", return_data.content, ensure_ascii=False)
     return render_to_response('imgadjust/base/main-display-select.html', {
         #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
         'images': SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle),
         #'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         #'alts'  : SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         'query' : m.items(), # + alt,
-        'results': return_data
+        'results': results
     }, context_instance=RequestContext(request),
     )
 ## locals()
