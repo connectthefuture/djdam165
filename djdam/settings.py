@@ -415,6 +415,9 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.logging.LoggingPanel',
 )
 
+### New Relic Monitoring Services Env Var for Startup script
+NEW_RELIC_CONFIG_FILE='newrelic.ini'
+
 
 #
 ## Customize Admin interface with Admin Tools
