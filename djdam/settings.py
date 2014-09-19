@@ -416,7 +416,7 @@ DEBUG_TOOLBAR_PANELS = (
 )
 
 ### New Relic Monitoring Services Env Var for Startup script
-NEW_RELIC_CONFIG_FILE='newrelic.ini'
+# NEW_RELIC_CONFIG_FILE='newrelic.ini'
 
 
 #
