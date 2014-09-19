@@ -86,9 +86,11 @@ INSTALLED_APPS = (# '',
     'compressor',
 
     ## Debug toolbar
-    'debug_toolbar',
+    # 'debug_toolbar.apps.DebugToolbarConfig',  ## Uncomment for >= Django 1.7
+    'debug_toolbar',  ## Uncomment for <= Django 1.6
     'debug_toolbar_htmltidy',
     #'debug_toolbar_user_panel',#
+
 
     # bootstrap and other toolkits for widgets tables forms etc.
     'bootstrap3',
@@ -412,6 +414,9 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.settings.SettingsPanel',
     'debug_toolbar.panels.logging.LoggingPanel',
 )
+
+### New Relic Monitoring Services Env Var for Startup script
+NEW_RELIC_CONFIG_FILE='newrelic.ini'
 
 
 #
