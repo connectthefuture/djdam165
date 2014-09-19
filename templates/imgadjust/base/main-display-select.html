@@ -228,6 +228,8 @@ $( "button" ).click(function() {
 {#    <script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>#}
 <script type="text/javascript">
 // Make the request
+var $inputQuery;
+$inputQuery = $("#colorstyle").val();
 $.get('/api/v1/supplier-ingest-images/', function(data) {
     // data is the response data. In this case, our JSON
     // Our JSON contains several dictionaries for each breed of dog,
