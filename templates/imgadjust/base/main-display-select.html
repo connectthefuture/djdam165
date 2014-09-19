@@ -45,9 +45,13 @@
      {% endfor %}
     </ul>
 
+<iframe name='hiddeniframe' id='supplier_data_iframe'  scrolling='no' frameborder='0' style='display:none'></iframe>
+
+<form id="getSupplierJson" name="getSupplierJson" action="/api/v1/supplier-ingest-images/{{result.colorstyle}}" method="POST" target='hiddeniframe'>
+<input type="text" class="form-control" name="iframeColorstyle" id="iframeColorstyle" placeholder="LoadFile">
 
 <table>
-    <tbody id=""
+    <tbody id="vendor_name_table"></tbody>
 </table>
 
 {% comment %}{% if images %}{% endcomment %}
