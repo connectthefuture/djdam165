@@ -26,6 +26,9 @@ def index(request, colorstyle=None, alt=None):
     apiurl = '/api/v1/supplier-ingest-images/' + '334588501'
     if alt:
         apiurl = '/api/v1/supplier-ingest-images/' + colorstyle + '/' + alt + '/'
+    else:
+        pass
+
     return_data = json.dumps(apiurl)
     decoded_json = json.loads(return_data)
 
