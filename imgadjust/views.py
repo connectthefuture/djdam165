@@ -13,7 +13,7 @@ import json
 
 def index(request, colorstyle=None, alt=None):
     try:  
-        colorstyle = request.GET['inputColorstyle']
+        colorstyle = request.GET['colorstyle']
     except:
         try:
             colorstyle = request.POST['inputColorstyle']
