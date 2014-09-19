@@ -6,7 +6,10 @@ from django.utils.translation import ugettext_lazy as _
 
 
 def upload_to(instance, filename):
-    return '/'.join(['images', unicode(instance.pk), filename])
+    if not unicode(instance.alt):
+        return '/'.join(['uploads', unicode(instance.colorstyle), filename])
+    else:
+        return '/'.join(['uploads', unicode(instance.colorstyle), unicode(instance.alt), filename])
 
 
 class UploadedImage(models.Model):
