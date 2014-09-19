@@ -46,6 +46,9 @@
     </ul>
 
 
+<table>
+    <tbody id=""
+</table>
 
 {% comment %}{% if images %}{% endcomment %}
 {#{% regroup images|dictsort:"file_name" by image as images %}#}
@@ -213,6 +216,34 @@ $('#buttonClear').click(clearSearchCriteria);
 </script>
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>
+<script type="text/javascript">
+// Make the request
+$.get('/api/v1/supplier-ingest-images/', function(data) {
+    // data is the response data. In this case, our JSON
+    // Our JSON contains several dictionaries for each breed of dog,
+    // and we want to construct an HTML table row for each
+    // First, lets get the table body which we'll add the rows to
+    $tbody = $("#vendor_name_table").find('tbody');
+    // next, iterate through the JSON array
+    $.each(data, function() {
+        // create the row
+        $row = $('<tr>');
+        // iterate through each dog breed's attributes and create a column for each key, value pair
+        $.each(this, function(key, value) {
+            // create the column
+            $col = $('<td>');
+            // add text to the column
+            $col.text(key+":"+value);
+            // append the column to the row
+            $row.append($col);
+        }
+        // append the row to the table body
+        $tbody.append($row);
+    }
+});
+
+
+</script>
 {% comment %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
