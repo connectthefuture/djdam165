@@ -354,6 +354,17 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 # BROKER_VHOST = 'django'
 # CELERY_RESULT_BACKEND = 'amqp'
 
+## New Celery Implementation
+# import djcelery
+# djcelery.setup_loader()
+#
+# BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+
+
 
 # Enable these options for memcached
 CACHE_BACKEND= "memcached://127.0.0.1:11211/"
