@@ -40,7 +40,11 @@
   </div>
 
 
-<div id="searchResults"></div>
+    <ul id="results">
+     {% for result in results %}
+     <li>Result{{ forloop.counter }}: {{ result.colorstyle }}, {{ result.image_url }}, {{ result.vendor_name }}</li>
+     {% endfor %}
+    </ul>
 
 
 
