@@ -46,6 +46,7 @@ def get_file_path(instance, filename):
 ##################################################
 class Product(models.Model):
     product_info   = models.ManyToManyField('searcher.ProductSnapshotLive')
+    slug = models.SlugField(max_length=100, unique=True)
     vendor_style = models.CharField(max_length=60)
     vendor_brand = models.CharField(max_length=60)
     vendor_name  = models.CharField(max_length=60)
@@ -58,10 +59,13 @@ class Product(models.Model):
     def __unicode__(self):
         return self.colorstyle
 
+    def get_absolute_url(self):
+        return ('index', None, {'slug': self.slug})
 
 ##################################################
 class ImageType(models.Model):
     colorstyle  = models.CharField(max_length=9)
+    slug = models.SlugField(max_length=100, unique=True)
     alt         = models.IntegerField()
     # images      = models.ManyToManyField(Image)
     
