@@ -14,7 +14,7 @@ from django.core import serializers
 
 def index(request, colorstyle=None, alt=None):
     try:  
-        colorstyle = request.GET['colorstyle']
+        colorstyle = request.GET['colorstyle'][0]
     except AssertionError:
         try:
             colorstyle = request.POST['colorstyle']
