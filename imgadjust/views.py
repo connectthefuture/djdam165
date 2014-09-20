@@ -32,14 +32,14 @@ def index(request, colorstyle=None, alt=None):
 
     return_data = json.dumps(apiurl)
     decoded_json = json.loads(return_data)
-    results = serializers.deserialize("json", return_data, ensure_ascii=False)
+    #results = serializers.deserialize("json", return_data, ensure_ascii=False)
     return render_to_response('imgadjust/base/main-display-select.html', {
         #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
         'images': SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle),
         #'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         #'alts'  : SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         'query' : m.items(), # + alt,
-        'results': results.next()
+        'results': return_data.split()
     }, context_instance=RequestContext(request),
     )
 ## locals()
