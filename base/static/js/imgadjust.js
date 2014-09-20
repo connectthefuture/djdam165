@@ -94,16 +94,16 @@ function showValues() {
 //'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site',
 function submitSearchStyle () {
     $("#formSearchStyle").submit(function () {
-        var inputColorstyle = $('#inputColorstyle').val();
-        var inputAlt = inputColorstyle.split("_")[-1];
+        var colorstyle = $('#colorstyle').val();
+        var inputAlt = colorstyle.split("_")[-1];
         var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
         var res = {};
         $.ajax({
             type: "GET",
             url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/",
             dataType: "json",
-            data: { colorstyle: inputColorstyle, alt: inputAlt },
-            // $(inputColorstyle + "/" + inputAlt).serialize(), // serializes the form's elements.
+            data: { colorstyle: colorstyle, alt: inputAlt },
+            // $(colorstyle + "/" + inputAlt).serialize(), // serializes the form's elements.
             success: function () {
                 alert("Wow Lookie Here " + data); // show response from the python script.
             }
