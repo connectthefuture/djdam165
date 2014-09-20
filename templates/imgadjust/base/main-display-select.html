@@ -28,7 +28,7 @@
             <textarea class="form-control" name="inputColorstyleList" id="inputColorstyleList" placeholder="Paste Multi-Delimited"></textarea>
 {#            <button class="btn btn-danger btn-link" id="search">search</button>#}
 {#          <p></p>#}
-{#        <button class="btn btn-default btn-sm" id="submitSearchStyle" onclick="submitSearchStyle()"><span class="glyphicon glyphicon-search"></span> SearchStyles</button>#}
+        <button class="btn btn-default btn-sm" id="submitSearchStyle"><span class="glyphicon glyphicon-search"></span> SearchStyles</button>
         <button class="btn btn-warning btn-sm" id="submit" type="submit" name="submit"><span class="glyphicon glyphicon-search"></span> Submit Form</button>
         </div>
 
@@ -228,6 +228,7 @@ $( "button" ).click(function() {
 {#    <script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>#}
 <script type="text/javascript">
 // Make the request
+
 var $inputQuery;
 $inputQuery = $("#colorstyle").val();
 $.get('/api/v1/supplier-ingest-images/', function(data) {
@@ -235,7 +236,6 @@ $.get('/api/v1/supplier-ingest-images/', function(data) {
     // Our JSON contains several dictionaries for each breed of dog,
     // and we want to construct an HTML table row for each
     // First, lets get the table body which we'll add the rows to
-    $inputQuery = $("#colorstyle").val();
     $tbody = $("#vendor_name_table").find('tbody');
     // next, iterate through the JSON array
     $.each(data, function() {
