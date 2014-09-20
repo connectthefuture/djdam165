@@ -15,11 +15,11 @@ from django.core import serializers
 def index(request, colorstyle=None, alt=None):
     try:  
         colorstyle = request.GET['colorstyle']
-    except:
+    except AssertionError:
         try:
-            colorstyle = request.POST['inputColorstyle']
+            colorstyle = request.POST['colorstyle']
             alt        = request.POST['inputAlt']
-        except:
+        except AssertionError:
             colorstyle = '%%'
 
     m = request.META #
@@ -32,6 +32,7 @@ def index(request, colorstyle=None, alt=None):
 
     return_data = json.dumps(apiurl)
     decoded_json = json.loads(return_data)
+    print return_data
     #results = serializers.deserialize("json", return_data, ensure_ascii=False)
     return render_to_response('imgadjust/base/main-display-select.html', {
         #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
