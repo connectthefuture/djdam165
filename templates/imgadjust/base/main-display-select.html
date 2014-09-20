@@ -198,26 +198,7 @@
 </div>
 </div>
 
-<script>
-var clearSearchCriteria = function(){
-        var elm;
-        var elements = document.forms[0].elements;  //document.forms[0] = the first form in the html document
-        for( i=0, elm; elm=elements[i++]; ) {       //iterate each elements array and put a single element in variable elm to process
-            if (elm.type == "text") {               //check the type of elm.type (if type = text or select then reset it)
-                elm.value ='';
-            } else if(elm.type == "select-one") {   //if type = dropdown
-                elm.selectedIndex = 0;
-            }else if(elm.type =="textarea"){
-                elm.value ='';
-            }
-        }
-   };
 
-$('#buttonClear').click(clearSearchCriteria);
-   $(' :input.form-group ').click(function(event){
-           clearSearchCriteria(event);
-   });
-</script>
 <script type="text/javascript">
 $( "button" ).click(function() {
   var text = $( this ).text();
@@ -257,9 +238,7 @@ $.get('/api/v1/supplier-ingest-images/', function(data) {
 
 
 </script>
-{% comment %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
-{% endcomment %}
 
 {% endblock %}
