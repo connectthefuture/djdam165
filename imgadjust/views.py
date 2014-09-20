@@ -39,7 +39,7 @@ def index(request, colorstyle=None, alt=None):
         #'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         #'alts'  : SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         'query' : m.items(), # + alt,
-        'results': results
+        'results': results.next()
     }, context_instance=RequestContext(request),
     )
 ## locals()
