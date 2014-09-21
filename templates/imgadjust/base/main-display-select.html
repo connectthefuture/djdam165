@@ -19,7 +19,7 @@
   
   <div class="row">
     <div class="col-md-5 col-md-pull-1">
-      <form enctype="multipart/form-data" method="get" id="input_list_form" class="form-inline">
+      <form enctype="multipart/form-data" method="GET" id="input_list_form" class="form-inline">
         {% csrf_token %}
         <div class="form-group">
           <input type="text" class="form-control" name="colorstyle" id="colorstyle" placeholder="Search Colorstyle">
@@ -47,7 +47,7 @@
 
 <iframe name='hiddeniframe' id='supplier_data_iframe'  scrolling='no' frameborder='0' style='display:none'></iframe>
 
-<form id="getSupplierJson" name="getSupplierJson" method="POST" target='hiddeniframe'>
+<form id="getSupplierJson" name="getSupplierJson" method="GET" target='hiddeniframe'>
 <input type="text" class="form-control" name="iframeColorstyle" id="iframeColorstyle" placeholder="LoadFile">
 <button type="submit"></button>
 <table>
