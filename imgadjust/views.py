@@ -16,27 +16,32 @@ import json
 
 
 def index(request):
-    try:  
+    colorstyle = ''
+    alt = ''
+    try:
         colorstyle = request.GET.get('inputColorstyle')
         alt = request.GET.get('alt')
         infile = request.GET.get('infile')
         print colorstyle,alt  # ,infile
     except AssertionError:
         try:
-            colorstyle = request.POST.get('colorstyle')
-            alt        = request.POST.get('inputAlt')
+            colorstyle = request.GET.get('colorstyle')
+            alt        = request.GET.get('inputAlt')
             print colorstyle
         except AssertionError:
             colorstyle = '%%'
 
     m = request.META #
-    apiurl = '/api/v1/supplier-ingest-images/' + colorstyle
+    if colorstyle:
+        apiurl = '/api/v1/supplier-ingest-images/' + colorstyle
     #apiurl = '/api/v1/supplier-ingest-images/' + '334588501'
     if alt:
         apiurl = '/api/v1/supplier-ingest-images/' + colorstyle + '/' + alt + '/'
     else:
         pass
 
+    if not colorstyle or not alt:
+        apiurl = '/api/v1/supplier-ingest-images/' + '334588501'
     res = SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)
     request_bundle = res.build_bundle(request=request)
     queryset = res.obj_get_list(request_bundle)
