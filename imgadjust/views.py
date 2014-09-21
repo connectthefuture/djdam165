@@ -14,8 +14,10 @@ import json
 
 def index(request, colorstyle=None, alt=None):
     try:  
-        colorstyle = request.GET.get('colorstyle')
-        print colorstyle
+        colorstyle = get_object_or_404('inputColorstyle')
+        alt = get_object_or_404('inputAlt')
+        infile = get_object_or_404('inputFile')
+        print colorstyle,alt  # ,infile
     except AssertionError:
         try:
             colorstyle = request.POST.get('colorstyle')
@@ -34,7 +36,7 @@ def index(request, colorstyle=None, alt=None):
 
     return_data = json.dumps(apiurl)
     decoded_json = json.loads(return_data)
-    print return_data
+    print return_data, decoded_json
     #results = serializers.deserialize("json", return_data, ensure_ascii=False)
     return render_to_response('imgadjust/base/main-display-select.html', {
         #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
