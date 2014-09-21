@@ -9,7 +9,7 @@ from models import Product, ImageType, Image
 from searcher.models import ProductSnapshotLive, SupplierIngestImages, SupplierIngest
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-import json
+import json, requests
 from django.core import serializers
 
 
@@ -51,7 +51,7 @@ def index(request):
 
     images = serializers.serialize('json', res)
 
-    return_data = json.dumps(apiurl)
+    return_data = json.dumps(requests.get(apiurl).content)
     decoded_json = json.loads(return_data)
     print return_data, decoded_json
     #results = serializers.deserialize("json", return_data, ensure_ascii=False)
