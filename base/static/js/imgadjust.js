@@ -50,7 +50,7 @@ $(document).ready(function() {
     function submitSearchStyle() {
         $("#formSearchStyle").submit(function () {
             var colorstyle = $('#inputColorstyle').val();
-            var alt = colorstyle.split("_")[-1];
+            var alt = $('#inputColorstyle').val(); //colorstyle.split("_")[-1];
             var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
             var res = {};
             $.ajax({
@@ -94,7 +94,7 @@ $(document).ready(function() {
     function ajaxAnyInputBlur() {
         $(":input").blur(function () {
             var inputColorstyle = $('#inputColorstyle').val();
-            var inputAlt = inputColorstyle.split("_")[-1];
+            var inputAlt = $('#inputAlt').val(); //inputColorstyle.split("_")[-1];
             $.getJSON("http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/", JSON.stringify({
                 colorstyle: inputColorstyle,
                 alt: inputAlt

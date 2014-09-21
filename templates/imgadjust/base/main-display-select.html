@@ -15,6 +15,7 @@ Product Image Adjustments
 </style>
 {% endcomment %}
 {% block content %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>
 <div class="container">
   
   <div class="row">
@@ -22,9 +23,9 @@ Product Image Adjustments
       <form enctype="multipart/form-data" method="GET" id="formSearchStyle" name="formSearchStyle" class="form-inline">
         {% csrf_token %}
         <div class="form-group">
-          <input type="text" class="form-control" name="inputColorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
-          <input type="number" class="form-control" name="inputAlt" id="inputAlt" placeholder="Search ImgNumber">
-          <input type="file" class="form-control" name="inputFile" id="inputFile" placeholder="LoadFile">
+          <input type="text" class="form-control" name="colorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
+          <input type="number" class="form-control" name="alt" id="inputAlt" placeholder="Search ImgNumber">
+          <input type="file" class="form-control" name="file" id="inputFile" placeholder="LoadFile">
           <textarea rows="4" cols="10" class="form-control" name="inputColorstyleList" id="inputColorstyleList" placeholder="Paste Multi-Delimited"></textarea>
 {#            <button class="btn btn-danger btn-link" id="search">search</button>#}
 {#          <p></p>#}
@@ -35,6 +36,15 @@ Product Image Adjustments
     </div>
   </div>
 
+    <form id="getSupplierJson" name="getSupplierJson" method="GET" target='hiddeniframe'>
+    <iframe name='hiddeniframe' id='iframeSupplierData'  scrolling='no' frameborder='0' style='display:none'></iframe>
+        <input type="text" class="form-control" name="iframeColorstyle" id="iframeColorstyle" placeholder="LoadFile">
+        <button id="submitSupplierIframe" name="submit" type="submit"></button>
+        <table>
+            <tbody id="tableVendorName"></tbody>
+        </table>
+    </form>
+
     <div id="resultsSearch"></div>
     <div id="metainfo"></div>
 
@@ -44,14 +54,7 @@ Product Image Adjustments
      {% endfor %}
     </ul>
 
-    <iframe name='hiddeniframe' id='iframeSupplierData'  scrolling='no' frameborder='0' style='display:none'></iframe>
-    <form id="getSupplierJson" name="getSupplierJson" method="GET" target='hiddeniframe'>
-        <input type="text" class="form-control" name="iframeColorstyle" id="iframeColorstyle" placeholder="LoadFile">
-        <button id="submitSupplierIframe" name="submit" type="submit"></button>
-        <table>
-            <tbody id="tableVendorName"></tbody>
-        </table>
-    </form>
+
 {% comment %}{% if images %}{% endcomment %}
 {#{% regroup images|dictsort:"file_name" by image as images %}#}
 
@@ -244,8 +247,6 @@ $(document).ready(function() {
     })
 });
 </script>
-
-<script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>
 
 {% endblock %}
 
