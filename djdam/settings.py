@@ -57,7 +57,6 @@ INTERNAL_IPs = ('127.0.0.1',)
 
 
 # Application definition
-import django.contrib.admin.apps.SimpleAdminConfig
 
 INSTALLED_APPS = (# '',
     # 'admin_bootstrap',
@@ -72,8 +71,8 @@ INSTALLED_APPS = (# '',
     # Django contrib apps/admin
     'django.contrib.auth',
     'django.contrib.sites',
-    # 'django.contrib.admin',
-    'django.contrib.admin.apps.SimpleAdminConfig',
+    'django.contrib.admin',
+    #'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
