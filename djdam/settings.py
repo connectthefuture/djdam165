@@ -191,11 +191,12 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.admindocs.middleware.XFrameOptionsMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'searcher.utils.Tastypie_Default_Format.TastyJSONMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
+
 
 
 TEMPLATE_DIRS = (
