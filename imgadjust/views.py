@@ -15,10 +15,12 @@ import json
 def index(request, colorstyle=None, alt=None):
     try:  
         colorstyle = request.GET.get('colorstyle')
+        print colorstyle
     except AssertionError:
         try:
             colorstyle = request.POST.get('colorstyle')
             alt        = request.POST.get('inputAlt')
+            print colorstyle
         except AssertionError:
             colorstyle = '%%'
 
@@ -40,7 +42,8 @@ def index(request, colorstyle=None, alt=None):
         #'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         #'alts'  : SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         'query' : m.items(), # + alt,
-        'results': return_data.split()
+        'results': return_data.split()[:],
+        'locals':  locals(),
     }, context_instance=RequestContext(request),
     )
 ## locals()

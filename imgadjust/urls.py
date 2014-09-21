@@ -13,6 +13,7 @@ urlpatterns = patterns('imgadjust.views',
     url(r'^delete-images/$', 'delete_images', name='delete-images'),
     url(r'^(?P<colorstyle>\d{9})/(?P<alt>\d{1,5})/?$', 'index', name='indexStyAlt'),
     url(r'^(?P<colorstyle>\d{9})/?$', 'index', name='indexSty'),
+    url(r'^.+$', 'index', name='indexAny'),
     url(r'^$', 'index', name='index'),
 
 )

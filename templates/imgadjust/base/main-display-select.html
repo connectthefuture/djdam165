@@ -39,8 +39,8 @@ Product Image Adjustments
     <div id="metainfo"></div>
 
     <ul id="resultsBasicText">
-     {% for result in results.content %}
-     <li>Result{{ forloop.counter }}: {{ result.colorstyle }}, {{ result.image_url }}, {{ result.vendor_name }}</li>
+     {% for result in locals.items %}
+     <li>Result{{ forloop.counter }}: {{ result }}, {{ result.colorstyle }}, {{ result.image_url }}, {{ result.vendor_name }}</li>
      {% endfor %}
     </ul>
 
