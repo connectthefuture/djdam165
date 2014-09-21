@@ -95,7 +95,7 @@
         <p><a class="btn btn-primary" href="#">Submit Changes &raquo;</a></p>
       </div>
 
-      {% if image.alt == 2 %}
+    {% if image.alt == 2 %}
       <div class="col-md-2">
         <h3 class="text-center">Alt-1/Back</h3>
         <a href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144">
@@ -113,7 +113,7 @@
       </div>
       {% endif %}
 
-      {% if image.alt == 3 %}
+    {% if image.alt == 3 %}
       <div class="col-md-2">
         <h3 class="text-center">Alt-2/Side</h3>
         <a href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144">
@@ -128,10 +128,10 @@
             <option>Alt-5</option>
           </select>
           <button class="btn btn-primary btn-md" id="submit3">Submit Changes &raquo;</button>
-      </div>      </div>
+      </div>
     {% endif %}
 
-      {% if image.alt == 4 %}
+    {% if image.alt == 4 %}
       <div class="col-md-2">
         <h3 class="text-center">Alt-3&nbsp;</h3>
         <a href="http://cdn.is.bluefly.com/mgen/Bluefly/altimage.ms?img={{ image.colorstyle }}_{{ image.alt0 }}.jpg&w=120&h=144">
@@ -185,10 +185,11 @@
           <button class="btn btn-primary btn-md" id="submit6">Submit Changes &raquo;</button>
       </div>
     {% endif %}
+</div>
 
 {% endfor %}
 
-    <div id="metainfo"></div>
+<div id="metainfo"></div>
 
 {#{% else %}#}
 {% block confirm %}
@@ -244,6 +245,5 @@ $("#input_list_form").submit(function() {
 <script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>
 
 {% endblock %}
-
 
 {% endblock %}
