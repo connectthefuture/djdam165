@@ -133,7 +133,7 @@ DATE AND FORM RELATED FUNCTIONS Bootstrap and jQuery
 
 /* Pretty/Friendly URL rewrite for Submitting to Django url Conf */
 $(document).ready(function() {
-    $("form .navbar-form").submit(function () {
+    $(".navbar-form").submit(function () {
         /* Remove unwanted characters, only accept alphanumeric and space */
         var keyword = $('#searchtext').val().replace(/[^A-Za-z0-9 ]/g, '');
         /* Replace multi spaces with a single space */
