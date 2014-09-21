@@ -19,7 +19,7 @@ Product Image Adjustments
   
   <div class="row">
     <div class="col-md-5 col-md-pull-1">
-      <form enctype="multipart/form-data" method="GET" id="formSearchStyle" name="formSearchStyle" class="form-inline">
+      <form enctype="application/x-www-form-urlencoded" method="GET" id="formSearchStyle" name="formSearchStyle" class="form-inline">
         {% csrf_token %}
         <div class="form-group">
           <input type="text" class="form-control" name="inputColorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
@@ -47,7 +47,7 @@ Product Image Adjustments
     <iframe name='hiddeniframe' id='iframeSupplierData'  scrolling='no' frameborder='0' style='display:none'></iframe>
     <form id="getSupplierJson" name="getSupplierJson" method="GET" target='hiddeniframe'>
         <input type="text" class="form-control" name="iframeColorstyle" id="iframeColorstyle" placeholder="LoadFile">
-        <button type="submit"></button>
+        <button id="submitSupplierIframe" name="submit" type="submit"></button>
         <table>
             <tbody id="tableVendorName"></tbody>
         </table>

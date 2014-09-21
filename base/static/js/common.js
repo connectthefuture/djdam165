@@ -132,18 +132,57 @@ DATE AND FORM RELATED FUNCTIONS Bootstrap and jQuery
 */
 
 /* Pretty/Friendly URL rewrite for Submitting to Django url Conf */
-$("form .navbar-form").submit(function() {
-    /* Remove unwanted characters, only accept alphanumeric and space */
-    var keyword = $('#searchtext').val().replace(/[^A-Za-z0-9 ]/g,''); 
-    /* Replace multi spaces with a single space */
-    keyword = keyword.replace(/\s{2,}/g,' ');
-    /* Replace space with a '-' symbol */
-    keyword = keyword.replace(/\s/g, "-");
-    var cleanUrl = 'searcher/find/' + keyword.toLowerCase();
-    window.location = cleanUrl;
-    return false;  // Prevent default button behaviour
+$(document).ready(function() {
+    $("form .navbar-form").submit(function () {
+        /* Remove unwanted characters, only accept alphanumeric and space */
+        var keyword = $('#searchtext').val().replace(/[^A-Za-z0-9 ]/g, '');
+        /* Replace multi spaces with a single space */
+        keyword = keyword.replace(/\s{2,}/g, ' ');
+        /* Replace space with a '-' symbol */
+        keyword = keyword.replace(/\s/g, "-");
+        var cleanUrl = 'searcher/find/' + keyword.toLowerCase();
+        window.location = cleanUrl;
+        return false;  // Prevent default button behaviour
+    });
 });
 
+
+
+/**
+ * Simple script to open a popup window
+ * author: russellsimpkins@hotmail.com
+ **/
+
+$(document).ready(function() {
+    $("#submitSupplierIframe").bind( "click", function() {
+//        alert("User clicked on" + "#submitSupplierIframe".val())
+        function openPop(theURL, winName, features) {
+            if (theURL == null) theURL = "/";
+            if (winName == null) winName = "default";
+            if (features == null) features = "width=300;height=360";
+            window.open(theURL, winName, features);
+        }
+    });
+    });
+
+/**
+* Clear the textbox and dropdowns on a button click
+**/
+$(document).ready(function() {
+    function clearSearchCriteria() {
+        var elm;
+        var elements = document.forms[0].elements;  //document.forms[0] = the first form in the html document
+        for (i = 0, elm; elm = elements[i++];) {       //iterate each elements array and put a single element in variable elm to process
+            if (elm.type == "text") {               //check the type of elm.type (if type = text or select then reset it)
+                elm.value = '';
+            } else if (elm.type == "select-one") {   //if type = dropdown
+                elm.selectedIndex = 0;
+            } else if (elm.type == "textarea") {
+                elm.value = '';
+            }
+        }
+    }
+});
 
 /**
  * Email validator
@@ -153,25 +192,6 @@ function checkEmail(src) {
     var regex = new RegExp("^([a-z0-9_]|\\-|\\.)+@(([a-z0-9_]|\\-)+\\.)+[a-z]{2,4}\$");
     return regex.test(src);
 }
-
-
-/**
-* Clear the textbox and dropdowns on a button click
-**/
- function clearSearchCriteria() {
-        var elm; 
-        var elements = document.forms[0].elements;  //document.forms[0] = the first form in the html document
-        for( i=0, elm; elm=elements[i++]; ) {       //iterate each elements array and put a single element in variable elm to process
-            if (elm.type == "text") {               //check the type of elm.type (if type = text or select then reset it)
-                elm.value ='';
-            } else if(elm.type == "select-one") {   //if type = dropdown
-                elm.selectedIndex = 0;
-            }else if(elm.type =="textarea"){
-                elm.value ='';
-            }
-        }
-   }
-
 
 /**
  * Checks to see if a given variable is empty, just like in php
@@ -228,7 +248,7 @@ function checkDate( month, day, year ) {
     } else {
         return false;
     }
-}
+};
 
 /**
  * Quick and dirty trim string function. It is recursive.
@@ -240,18 +260,8 @@ function trim( str ) {
     if ( str.charAt( str.length - 1 ) == " ")
         return trim( str.substr(0, str.length - 2) );
     return str;
-}
+};
 
-/**
- * Simple script to open a popup window
- * author: russellsimpkins@hotmail.com
- **/
-function openPop(theURL,winName,features) {
-    if (theURL==null) theURL="/";
-    if (winName==null) winName="default";
-    if (features==null) features="width=400;height=400";
-  window.open(theURL,winName,features);
-}
 
 /**
  * Simple script to change address set in a drop-down menu
@@ -287,7 +297,7 @@ function getForm( id ) {
 
 
 
-/* Setup the javascript calendar popup. BFLY Example from PM */
+///* Setup the javascript calendar popup. BFLY Example from PM */
 // var start_date_cal,end_date_cal,priority_date_cal,dock_date_cal,in_receiving_date_cal,receive_date_cal,expected_date_cal,in_transit_date_cal,bfly_From_Date_cal,bfly_To_Date_cal,product_search_start_date_from_cal,product_search_start_date_to_cal;
 // function calendarInit() {
 //   start_date_cal =
