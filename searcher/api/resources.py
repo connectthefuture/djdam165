@@ -181,8 +181,8 @@ class SupplierIngestImagesResource(ModelResource):
         # authorization= Authorization()
         queryset = SupplierIngestImages.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
-        list_allowed_methods = ['get']
-        detail_allowed_methods = ['get']
+        list_allowed_methods = ['get', 'post']
+        detail_allowed_methods = ['get', 'post']
         # excludes = ['active', 'create_dt', 'start_dt']
         fields = ['file_name', 'colorstyle', 'alt', 'vendor_style', 'vendor_name', 'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site', 'modified_dt' ]
         filtering = {

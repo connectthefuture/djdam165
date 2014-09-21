@@ -12,11 +12,14 @@ from django.template import RequestContext
 import json
 # from django.core import serializers
 
+
+
+
 def index(request, colorstyle=None, alt=None):
     try:  
-        colorstyle = get_object_or_404('inputColorstyle')
-        alt = get_object_or_404('inputAlt')
-        infile = get_object_or_404('inputFile')
+        colorstyle = request.GET.get('inputColorstyle')
+        alt = request.GET.get('alt')
+        infile = request.GET.get('infile')
         print colorstyle,alt  # ,infile
     except AssertionError:
         try:
@@ -27,12 +30,23 @@ def index(request, colorstyle=None, alt=None):
             colorstyle = '%%'
 
     m = request.META #
-    # apiurl = '/api/v1/supplier-ingest-images/' + colorstyle
-    apiurl = '/api/v1/supplier-ingest-images/' + '334588501'
+    apiurl = '/api/v1/supplier-ingest-images/' + colorstyle
+    #apiurl = '/api/v1/supplier-ingest-images/' + '334588501'
     if alt:
         apiurl = '/api/v1/supplier-ingest-images/' + colorstyle + '/' + alt + '/'
     else:
         pass
+
+    res = SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)
+    request_bundle = res.build_bundle(request=request)
+    queryset = res.obj_get_list(request_bundle)
+
+    bundles = []
+    for obj in queryset:
+        bundle = res.build_bundle(obj=obj, request=request)
+        bundles.append(res.full_dehydrate(bundle, for_list=True))
+
+    images = res.serialize(None, bundles, "application/json")
 
     return_data = json.dumps(apiurl)
     decoded_json = json.loads(return_data)
@@ -40,7 +54,7 @@ def index(request, colorstyle=None, alt=None):
     #results = serializers.deserialize("json", return_data, ensure_ascii=False)
     return render_to_response('imgadjust/base/main-display-select.html', {
         #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
-        'images': SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle),
+        'images': images,
         #'alts'  : ImageType.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         #'alts'  : SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)[:6],
         'query' : m.items(), # + alt,

@@ -25,7 +25,7 @@ Product Image Adjustments
         <div class="form-group">
           <input type="text" class="form-control" name="colorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
           <input type="number" class="form-control" name="alt" id="inputAlt" placeholder="Search ImgNumber">
-          <input type="file" class="form-control" name="file" id="inputFile" placeholder="LoadFile">
+          <input type="file" class="form-control" name="infile" id="inputFile" placeholder="LoadFile">
           <textarea rows="4" cols="10" class="form-control" name="inputColorstyleList" id="inputColorstyleList" placeholder="Paste Multi-Delimited"></textarea>
 {#            <button class="btn btn-danger btn-link" id="search">search</button>#}
 {#          <p></p>#}
@@ -200,6 +200,10 @@ Product Image Adjustments
 </div>
 
 {% block extrajs %}
+<script>
+    var json = "{{results|escapejs}}";
+    var results = JSON.parse(json);
+</script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("button").click(function () {
