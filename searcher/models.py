@@ -766,16 +766,16 @@ class Images(models.Model):
     from django.core.files.storage import FileSystemStorage
     from djdam.settings import MEDIA_ROOT
 
-    upload_filepath  = str("images/" + str("{0}_{1}.png".format(colorstyle, id)))
-    upload_mediaurul = str("/images/" + str("{0}_{1}.png".format(colorstyle, id)))
+    #upload_filepath  = str("images/" + str("{0}_{1}.png".format(colorstyle, id)))
+    #upload_mediaurul = str("/images/" + str("{0}_{1}.png".format(colorstyle, id)))
 
     fs = FileSystemStorage(base_url='/images/', location='/media/uploads')
 
-    image = models.ImageField(upload_to=upload_filepath,
-                              blank=True,
-                              null=True,
-                              height_field="height",
-                              width_field="width")
+    # image = models.ImageField(upload_to=upload_filepath,
+    #                           blank=True,
+    #                           null=True,
+    #                           height_field="height",
+    #                           width_field="width")
 
     class Meta:
         db_table = 'images'
