@@ -15,12 +15,12 @@ from django.core import serializers
 
 
 
-def index(request):
+def index(request, colorstyle, alt):
     try:
         colorstyle = request.GET.get('colorstyle')
         alt = request.GET.get('alt')
         infile = request.GET.get('infile')
-        print colorstyle,alt  # ,infile
+        print colorstyle, alt  # ,infile
     except AssertionError:
         try:
             colorstyle = request.GET.get('colorstyle')
@@ -40,7 +40,7 @@ def index(request):
 
     if not colorstyle or not alt:
         apiurl = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/' + '334588501'
-    res = SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)
+    res = SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle).filter(alt__exact=alt)
     #request_bundle = res.build_bundle(request=request)
     #queryset = res.obj_get_list(request_bundle)
 
@@ -51,9 +51,9 @@ def index(request):
 
     images = serializers.serialize('json', res)
 
-    return_data = json.dumps(requests.get(apiurl).content)
+    return_data = json.dumps(requests.get(apiurl).json)
     decoded_json = json.loads(return_data)
-    print return_data, decoded_json
+    print 'ReturnData -->', return_data, decoded_json
     #results = serializers.deserialize("json", return_data, ensure_ascii=False)
     return render_to_response('imgadjust/base/main-display-select.html', {
         #'styles': Product.objects.all().filter(product_info__colorstyle__exact=colorstyle),
