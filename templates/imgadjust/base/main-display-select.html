@@ -198,7 +198,7 @@
 </div>
 </div>
 
-
+{% block extrajs %}
 <script type="text/javascript">
 $( "button" ).click(function() {
   var text = $( this ).text();
@@ -242,7 +242,10 @@ $("#input_list_form").submit(function() {
 
 
 </script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>
+
+{% endblock %}
+
 
 {% endblock %}

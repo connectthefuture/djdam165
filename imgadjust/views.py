@@ -10,7 +10,7 @@ from searcher.models import ProductSnapshotLive, SupplierIngestImages, SupplierI
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 import json
-from django.core import serializers
+# from django.core import serializers
 
 def index(request, colorstyle=None, alt=None):
     try:  
