@@ -48,12 +48,6 @@ Product Image Adjustments
     <div id="resultsSearch"></div>
     <div id="metainfo"></div>
 
-    <ul id="resultsBasicText">
-     {% for result in locals.items %}
-     <li>Result{{ forloop.counter }}: {{ result }}, {{ result.colorstyle }}, {{ result.image_url }}, {{ result.vendor_name }}</li>
-     {% endfor %}
-    </ul>
-
 
 {% comment %}{% if images %}{% endcomment %}
 {#{% regroup images|dictsort:"file_name" by image as images %}#}
@@ -198,6 +192,11 @@ Product Image Adjustments
 {% comment %}{% endif %}{% endcomment %}
 </div>
 </div>
+    <ul id="resultsBasicText">
+     {% for result in locals.items %}
+     <li>Result{{ forloop.counter }}: {{ result }}, {{ result.colorstyle }}, {{ result.alt }}, {{ result.vendor_name }}</li>
+     {% endfor %}
+    </ul>
 
 {% block extrajs %}
 <script>
