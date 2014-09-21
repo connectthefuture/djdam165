@@ -57,6 +57,7 @@ INTERNAL_IPs = ('127.0.0.1',)
 
 
 # Application definition
+import django.contrib.admin.apps.SimpleAdminConfig
 
 INSTALLED_APPS = (# '',
     # 'admin_bootstrap',
