@@ -51,7 +51,7 @@ def index(request):
     #    bundle = res.build_bundle(obj=obj, request=request)
     #    bundles.append(res.full_dehydrate(bundle, for_list=True))
 
-    images = res.items()
+    images = res
     req = requests.get(apiurl).json
     return_data = json.dumps(req)
     decoded_json = json.loads(return_data)
