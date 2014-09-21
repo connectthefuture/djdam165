@@ -14,11 +14,11 @@ from django.core import serializers
 
 def index(request, colorstyle=None, alt=None):
     try:  
-        colorstyle = request.GET['colorstyle'][0]
+        colorstyle = request.GET.get('colorstyle')
     except AssertionError:
         try:
-            colorstyle = request.POST['colorstyle']
-            alt        = request.POST['inputAlt']
+            colorstyle = request.POST.get('colorstyle')
+            alt        = request.POST.get('inputAlt')
         except AssertionError:
             colorstyle = '%%'
 
