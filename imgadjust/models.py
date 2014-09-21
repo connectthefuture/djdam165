@@ -9,26 +9,26 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 import json
 import floppyforms
-
-def upload_to(instance, filename):
-    if not unicode(instance.alt):
-        return '/'.join(['uploads', unicode(instance.colorstyle), filename])
-    else:
-        return '/'.join(['uploads', unicode(instance.colorstyle), unicode(instance.alt), filename])
-
-
-class UploadedImage(models.Model):
-    title = models.CharField(_("Title"), max_length=200)
-    image = models.ImageField(_("UploadedImage"), upload_to=upload_to, blank=True)
-    # filefield = models.FileField(('main_image'), upload_to=upload_to)
-
-    class Meta:
-        verbose_name = _("UploadedImage")
-        verbose_name_plural = _("UploadedImages")
-        ordering = ("image",)
-
-    def __unicode__(self):
-        return self.image.path
+#
+# def upload_to(instance, filename):
+#     if not unicode(instance.alt):
+#         return '/'.join(['uploads', unicode(instance.colorstyle), filename])
+#     else:
+#         return '/'.join(['uploads', unicode(instance.colorstyle), unicode(instance.alt), filename])
+#
+#
+# class UploadedImage(models.Model):
+#     title = models.CharField(_("Title"), max_length=200)
+#     image = models.ImageField(_("UploadedImage"), upload_to=upload_to, blank=True)
+#     # filefield = models.FileField(('main_image'), upload_to=upload_to)
+#
+#     class Meta:
+#         verbose_name = _("UploadedImage")
+#         verbose_name_plural = _("UploadedImages")
+#         ordering = ("image",)
+#
+#     def __unicode__(self):
+#         return self.image.path
 
 ### file storage
 
