@@ -24,10 +24,14 @@ $(document).ready(function() {
 $(document).ready(function() {
     function showValues() {
         var supplierImageAPI = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
+        var getFormInputs = $("input:text")
+        colorstyle = getFormInputs.split('_')[0]
+        alt = getFormInputs.split('_')[1]
         $.getJSON(supplierImageAPI, {
             //content: "application/json"
             format: "json",
-            processDate: false
+            processDate: false,
+            data: JSON.stringify({colorstyle: colorstyle, alt:alt})
         })
             .done(function (data) {
                 $.each(data.items, function (i, item) {
