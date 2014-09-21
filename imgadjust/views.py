@@ -15,7 +15,7 @@ import json
 
 
 
-def index(request, colorstyle=None, alt=None):
+def index(request):
     try:  
         colorstyle = request.GET.get('inputColorstyle')
         alt = request.GET.get('alt')
