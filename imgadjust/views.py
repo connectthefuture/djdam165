@@ -10,7 +10,7 @@ from searcher.models import ProductSnapshotLive, SupplierIngestImages, SupplierI
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 import json
-# from django.core import serializers
+from django.core import serializers
 
 
 
@@ -43,15 +43,15 @@ def index(request):
     if not colorstyle or not alt:
         apiurl = '/api/v1/supplier-ingest-images/' + '334588501'
     res = SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)
-    request_bundle = res.build_bundle(request=request)
-    queryset = res.obj_get_list(request_bundle)
+    #request_bundle = res.build_bundle(request=request)
+    #queryset = res.obj_get_list(request_bundle)
 
-    bundles = []
-    for obj in queryset:
-        bundle = res.build_bundle(obj=obj, request=request)
-        bundles.append(res.full_dehydrate(bundle, for_list=True))
+    #bundles = []
+    #for obj in queryset:
+    #    bundle = res.build_bundle(obj=obj, request=request)
+    #    bundles.append(res.full_dehydrate(bundle, for_list=True))
 
-    images = res.serialize(None, bundles, "application/json")
+    images = serializers.serialize('json', res)
 
     return_data = json.dumps(apiurl)
     decoded_json = json.loads(return_data)
