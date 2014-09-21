@@ -31,7 +31,7 @@ def index(request):
 
     m = request.META #
     if colorstyle:
-        apiurl = '/api/v1/supplier-ingest-images/' + colorstyle
+        apiurl = '/api/v1/supplier-ingest-images/' + colorstyle + '/'
     #apiurl = '/api/v1/supplier-ingest-images/' + '334588501'
     if alt:
         apiurl = '/api/v1/supplier-ingest-images/' + colorstyle + '/' + alt + '/'
