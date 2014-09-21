@@ -52,7 +52,7 @@ def index(request):
     #    bundles.append(res.full_dehydrate(bundle, for_list=True))
 
     images = res
-    req = requests.get(apiurl).json
+    req = requests.get(apiurl).content
     return_data = json.dumps(req)
     decoded_json = json.loads(return_data)
     print 'ReturnData -->', return_data, decoded_json
