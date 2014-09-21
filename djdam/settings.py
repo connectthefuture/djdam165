@@ -100,8 +100,8 @@ INSTALLED_APPS = (# '',
     'django_filters',
     'floppyforms',
 
-    # Database migrations
-    'south',
+    # Database migrations -- South unnecessary
+    # 'south',
 
     # Gunicorn and Servers
     'gunicorn',
