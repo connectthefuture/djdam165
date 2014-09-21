@@ -19,41 +19,39 @@ Product Image Adjustments
   
   <div class="row">
     <div class="col-md-5 col-md-pull-1">
-      <form enctype="multipart/form-data" method="GET" id="input_list_form" class="form-inline">
+      <form enctype="multipart/form-data" method="GET" id="formSearchStyle" name="formSearchStyle" class="form-inline">
         {% csrf_token %}
         <div class="form-group">
-          <input type="text" class="form-control" name="colorstyle" id="colorstyle" placeholder="Search Colorstyle">
-            <input type="number" class="form-control" name="inputAlt" id="inputAlt" placeholder="Search ImgNumber">
-            <input type="file" class="form-control" name="inputFile" id="inputFile" placeholder="LoadFile">
-            <textarea class="form-control" name="inputColorstyleList" id="inputColorstyleList" placeholder="Paste Multi-Delimited"></textarea>
+          <input type="text" class="form-control" name="inputColorstyle" id="inputColorstyle" placeholder="Search Colorstyle">
+          <input type="number" class="form-control" name="inputAlt" id="inputAlt" placeholder="Search ImgNumber">
+          <input type="file" class="form-control" name="inputFile" id="inputFile" placeholder="LoadFile">
+          <textarea rows="4" cols="10" class="form-control" name="inputColorstyleList" id="inputColorstyleList" placeholder="Paste Multi-Delimited"></textarea>
 {#            <button class="btn btn-danger btn-link" id="search">search</button>#}
 {#          <p></p>#}
-        <button class="btn btn-default btn-sm" id="submitSearchStyle"><span class="glyphicon glyphicon-search"></span> SearchStyles</button>
+{#        <button class="btn btn-default btn-sm" id="submitSearchStyle"><span class="glyphicon glyphicon-search"></span> SearchStyles</button>#}
         <button class="btn btn-warning btn-sm" id="submit" type="submit" name="submit"><span class="glyphicon glyphicon-search"></span> Submit Form</button>
         </div>
-
-      </form>
-      <hr>
-
+      </form><hr>
     </div>
   </div>
 
+    <div id="resultsSearch"></div>
+    <div id="metainfo"></div>
 
-    <ul id="results">
+    <ul id="resultsBasicText">
      {% for result in results.content %}
      <li>Result{{ forloop.counter }}: {{ result.colorstyle }}, {{ result.image_url }}, {{ result.vendor_name }}</li>
      {% endfor %}
     </ul>
 
-<iframe name='hiddeniframe' id='supplier_data_iframe'  scrolling='no' frameborder='0' style='display:none'></iframe>
-
-<form id="getSupplierJson" name="getSupplierJson" method="GET" target='hiddeniframe'>
-<input type="text" class="form-control" name="iframeColorstyle" id="iframeColorstyle" placeholder="LoadFile">
-<button type="submit"></button>
-<table>
-    <tbody id="vendor_name_table"></tbody>
-</table>
-</form>
+    <iframe name='hiddeniframe' id='iframeSupplierData'  scrolling='no' frameborder='0' style='display:none'></iframe>
+    <form id="getSupplierJson" name="getSupplierJson" method="GET" target='hiddeniframe'>
+        <input type="text" class="form-control" name="iframeColorstyle" id="iframeColorstyle" placeholder="LoadFile">
+        <button type="submit"></button>
+        <table>
+            <tbody id="tableVendorName"></tbody>
+        </table>
+    </form>
 {% comment %}{% if images %}{% endcomment %}
 {#{% regroup images|dictsort:"file_name" by image as images %}#}
 
@@ -189,7 +187,6 @@ Product Image Adjustments
 
 {% endfor %}
 
-<div id="metainfo"></div>
 
 {#{% else %}#}
 {% block confirm %}
@@ -201,19 +198,23 @@ Product Image Adjustments
 
 {% block extrajs %}
 <script type="text/javascript">
-$( "button" ).click(function() {
-  var text = $( this ).text();
-  $( "#results" ).val( text );
+$(document).ready(function() {
+    $("button").click(function () {
+        text = $(this).text();
+        $("#resultsBasicTest").val(text);
+    });
+    window.alert(text)
 });
 </script>
 
 {#    <script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>#}
 <script type="text/javascript">
 // Make the request
-$( "button#submitSearchStyle" ).click(function() {
-{#    $("#input_list_form").submit(function () {#}
+$(document).ready(function() {
+    $("button#submitSearchStyle").click(function () {
+        {#    $("#input_list_form").submit(function () {#}
         var $inputQuery;
-        inputQuery = $("#colorstyle").val();
+        inputQuery = $("#inputColorstyle").val();
         colorstyle = inputQuery.split('_')[0]
         alt = inputQuery.split('_')[1]
         $.get('/api/v1/supplier-ingest-images/' + inputQuery, function (data) {
@@ -221,7 +222,7 @@ $( "button#submitSearchStyle" ).click(function() {
             // Our JSON contains several dictionaries for each breed of dog,
             // and we want to construct an HTML table row for each
             // First, lets get the table body which we'll add the rows to
-            $tbody = $("#vendor_name_table").find('tbody');
+            $tbody = $("#tableVendorName").find('tbody');
             // next, iterate through the JSON array
             $.each(data, function () {
                 // create the row
@@ -239,9 +240,9 @@ $( "button#submitSearchStyle" ).click(function() {
                 $tbody.append($row);
             });
         });
-{#    });#}
-})
-
+        {#    });#}
+    })
+});
 </script>
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/imgadjust.js"></script>

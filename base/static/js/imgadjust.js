@@ -10,15 +10,15 @@
 //  $( "input[type='checkbox'], input[type='radio']" ).on( "click", showValues );
 //  $( "select" ).on( "change", showValues );
 //
+$(document).ready(function() {
+    function submitChecked() {
+        $('form #checkbox').is(':checked');
 
-function submitChecked () {
-$('form #checkbox').is(':checked');
-
-    var checkedValues = $('input:checkbox:checked').map(function() {
-        return this.value;
-}).get();
-}
-
+        var checkedValues = $('input:checkbox:checked').map(function () {
+            return this.value;
+        }).get();
+    }
+});
 
 //  var supplierImageAPI = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/';
 //  var jqxhr = $.ajax( supplierImageAPI )
@@ -39,27 +39,28 @@ $('form #checkbox').is(':checked');
 //    });
 
 //   $( "#for" ).click(function() {  $( "#target" ).keypress();  });
-
-function ajaxAnyInputBlur () {
-  $( ":input" ).blur(function() {
-  var inputColorstyle = $( '#inputColorstyle' ).val();
-  var inputAlt = inputColorstyle.split("_")[-1];
-  $.getJSON( "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/", {
-      colorstyle: inputColorstyle,
-      alt: inputAlt
-  })
-  .done(function( json ) {
-    console.log( "JSON Data: " + json.colorstyle[ 0 ] );
-  })
-  .fail(function( jqxhr, textStatus, error ) {
-                  var err = textStatus + ", " + error;
-                  console.log("Request Failed: " + err);
-  })
-  .always(function() {
-  alert( "second complete" );
+$(document).ready(function() {
+    function ajaxAnyInputBlur() {
+        $(":input").blur(function () {
+            var inputColorstyle = $('#inputColorstyle').val();
+            var inputAlt = inputColorstyle.split("_")[-1];
+            $.getJSON("http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/", {
+                colorstyle: inputColorstyle,
+                alt: inputAlt
+            })
+                .done(function (json) {
+                    console.log("JSON Data: " + json.colorstyle[ 0 ]);
+                })
+                .fail(function (jqxhr, textStatus, error) {
+                    var err = textStatus + ", " + error;
+                    console.log("Request Failed: " + err);
+                })
+                .always(function () {
+                    alert("second complete");
+                });
+        });
+    }
 });
-});
-}
 //
 //
 //var allInputs = $( ":input" );
@@ -73,42 +74,45 @@ function ajaxAnyInputBlur () {
 //
 
 
-
-function showValues() {
-  var supplierImageAPI = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
-  $.getJSON( supplierImageAPI, {
-    format: "json",
-    processDate: false
-  })
-    .done(function( data ) {
-      $.each( data.items, function( i, item ) {
-                                                //$( "<img>" ).attr( "src", item.media.m ).appendTo( "#searchResults" );
-      $( "<img>" ).attr( "src", item.image_url).appendTo( "#searchResults" );
-        if ( i === 6 ) {
-          return false;
-        }
-      });
-    });
-};
+$(document).ready(function() {
+    function showValues() {
+        var supplierImageAPI = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
+        $.getJSON(supplierImageAPI, {
+            format: "json",
+            processDate: false
+        })
+            .done(function (data) {
+                $.each(data.items, function (i, item) {
+                    //$( "<img>" ).attr( "src", item.media.m ).appendTo( "#searchResults" );
+                    $("<img>").attr("src", item.image_url).appendTo("#resultsSearch");
+                    if (i === 6) {
+                        return false;
+                    }
+                });
+            });
+    };
+});
 
 //'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site',
-function submitSearchStyle () {
-    $("#formSearchStyle").submit(function () {
-        var colorstyle = $('#colorstyle').val();
-        var inputAlt = colorstyle.split("_")[-1];
-        var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
-        var res = {};
-        $.ajax({
-            type: "GET",
-            url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/",
-            dataType: "json",
-            data: { colorstyle: colorstyle, alt: inputAlt },
-            // $(colorstyle + "/" + inputAlt).serialize(), // serializes the form's elements.
-            success: function () {
-                alert("Wow Lookie Here " + data); // show response from the python script.
-            }
-        });
+$(document).ready(function() {
+    function submitSearchStyle() {
+        $("#formSearchStyle").submit(function () {
+            var colorstyle = $('#colorstyle').val();
+            var inputAlt = colorstyle.split("_")[-1];
+            var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
+            var res = {};
+            $.ajax({
+                type: "GET",
+                url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/",
+                dataType: "json",
+                data: { colorstyle: colorstyle, alt: inputAlt },
+                // $(colorstyle + "/" + inputAlt).serialize(), // serializes the form's elements.
+                success: function () {
+                    alert("Wow Lookie Here " + data); // show response from the python script.
+                }
+            });
 
-        return false; // avoid to execute the actual submit of the form.
-    });
-}
+            return false; // avoid to execute the actual submit of the form.
+        });
+    }
+});
