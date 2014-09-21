@@ -15,9 +15,7 @@ from django.core import serializers
 
 
 
-def index(request):
-    colorstyle = ''
-    alt = ''
+def index(request, colorstyle=None, alt=None):
     try:
         colorstyle = request.GET.get('inputColorstyle')
         alt = request.GET.get('alt')
