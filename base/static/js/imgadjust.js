@@ -20,28 +20,36 @@ $(document).ready(function() {
     }
 });
 
+$(document).ready(function() {
+    $("body").on("click", "p", function () {
+        alert($(this).text());
+    });
+});
+
 // Show Supplier data
 $(document).ready(function() {
     function showValues() {
-        var supplierImageAPI = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
-        var getFormInputs = $("#getSupplierJson").val() || [];
-        colorstyle = getFormInputs.split('_')[0];
-        alt = getFormInputs.split('_')[1];
-        $.getJSON(supplierImageAPI, {
-            //content: "application/json"
-            format: "json",
-            processDate: false,
-            data: JSON.stringify({colorstyle: colorstyle, alt:alt})
-        })
-            .done(function (data) {
-                $.each(data.items, function (i, item) {
-                    //$( "<img>" ).attr( "src", item.media.m ).appendTo( "#searchResults" );
-                    $("<img>").attr("src", item.image_url).appendTo("#resultsSearch");
-                    if (i === 6) {
-                        return false;
-                    }
+        $("#formSearchStyle").on( "click", function () {
+            var supplierImageAPI = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
+            var getFormInputs = $("#getSupplierJson").val() || [];
+            colorstyle = getFormInputs.split('_')[0];
+            alt = getFormInputs.split('_')[1];
+            $.getJSON(supplierImageAPI, {
+                //content: "application/json"
+                format: "json",
+                processDate: false,
+                data: JSON.stringify({colorstyle: colorstyle, alt: alt})
+            })
+                .done(function (data) {
+                    $.each(data.items, function (i, item) {
+                        //$( "<img>" ).attr( "src", item.media.m ).appendTo( "#searchResults" );
+                        $("<img>").attr("src", item.image_url).appendTo("#resultsSearch");
+                        if (i === 6) {
+                            return false;
+                        }
+                    });
                 });
-            });
+        });
     };
 });
 
