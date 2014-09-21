@@ -24,9 +24,9 @@ $(document).ready(function() {
 $(document).ready(function() {
     function showValues() {
         var supplierImageAPI = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
-        var getFormInputs = $("input:text")
-        colorstyle = getFormInputs.split('_')[0]
-        alt = getFormInputs.split('_')[1]
+        var getFormInputs = $("#getSupplierJson").val() || [];
+        colorstyle = getFormInputs.split('_')[0];
+        alt = getFormInputs.split('_')[1];
         $.getJSON(supplierImageAPI, {
             //content: "application/json"
             format: "json",
@@ -49,17 +49,18 @@ $(document).ready(function() {
 $(document).ready(function() {
     function submitSearchStyle() {
         $("#formSearchStyle").submit(function () {
-            var colorstyle = $('#colorstyle').val();
-            var inputAlt = colorstyle.split("_")[-1];
+            var colorstyle = $('#inputColorstyle').val();
+            var alt = colorstyle.split("_")[-1];
             var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
             var res = {};
             $.ajax({
                 type: "GET",
                 url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/",
+                contentType: "application/json",
                 dataType: "json",
-                data: { colorstyle: colorstyle, alt: inputAlt },
-                // $(colorstyle + "/" + inputAlt).serialize(), // serializes the form's elements.
-                success: function () {
+                data: { colorstyle: colorstyle, alt: alt },
+                // $(colorstyle + "/" + alt).serialize(), // serializes the form's elements.
+                success: function (data) {
                     alert("Wow Lookie Here " + data); // show response from the python script.
                 }
             });
@@ -94,10 +95,11 @@ $(document).ready(function() {
         $(":input").blur(function () {
             var inputColorstyle = $('#inputColorstyle').val();
             var inputAlt = inputColorstyle.split("_")[-1];
-            $.getJSON("http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/", {
+            $.getJSON("http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/", JSON.stringify({
                 colorstyle: inputColorstyle,
                 alt: inputAlt
             })
+            )
                 .done(function (json) {
                     console.log("JSON Data: " + json.colorstyle[ 0 ]);
                 })
