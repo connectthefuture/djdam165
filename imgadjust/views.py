@@ -36,13 +36,15 @@ def index(request):
         apiurl = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/' + colorstyle + '/'
     #apiurl = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/' + '334588501'
     if alt:
-        apiurl = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/' + colorstyle + '/' + alt + '/'
+        apiurl = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/' + colorstyle + '/'  ## + alt + '/'
     else:
         pass
 
-    if not colorstyle or not alt:
+    if not colorstyle: ##or not alt:
         apiurl = 'http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/' + '334588501'
-    res = SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle).filter(alt__exact=alt)
+    res = SupplierIngestImages.objects.all().filter(colorstyle__exact=colorstyle)
+    if alt:
+        res = res.filter(alt__exact=alt)
     #request_bundle = res.build_bundle(request=request)
     #queryset = res.obj_get_list(request_bundle)
 
