@@ -24,8 +24,7 @@
   {# use the CDN to get bootstrap css. can not be inside compress css block #}
   {% block cdn_css %}
 {#  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/css/bootstrap.min.css">#}
-  {% endblock cdn_css %}
-
+  {% endblock %}
 
 {#    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">#}
 
@@ -40,16 +39,25 @@
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/app.css">
     {#<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/searcher/css/site_stylesheet.css">#}
     {% endcompress %}
-    
 
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
   <!-- All JavaScript at the bottom, except this Modernizr build.
        Modernizr enables HTML5 elements & feature detects for optimal performance.
        Create your own custom Modernizr build: www.modernizr.com/download/ -->
+
+  {% block jshead %}
+  <script src="{{ STATIC_URL }}js/jquery-1.10.2.js"></script>
+  <script src="{{ STATIC_URL }}js/libs/jquery-ui-1.10.4.custom.min.js"></script>
+  <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
+  <script src="{{ STATIC_URL }}js/plugins.js"></script>
+  {% endblock %}
+  {% block extrajshead %}{% endblock %}
+
   {% compress js %}
   <script src="{% static 'js/libs/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
   {% endcompress %}
+
 </head>
 <body class="{% block body_class %}{% endblock %}" {% block body_attributes %}{% endblock %}>
 {% block body %}
@@ -164,19 +172,14 @@
   {% block js %}{% endblock js %}
     {#<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>#}
     {#<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>#}
-{#    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>#}
-{#    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>#}
+    {#    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>#}
+    {#    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>#}
 
-{#  <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/libs/jquery-1.9.1.min.js"><\/script>')</script>#}
-{#  <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>#}
+    {#  <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/libs/jquery-1.9.1.min.js"><\/script>')</script>#}
+    {#  <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>#}
 
   <!-- scripts concatenated and minified via django-compressor -->
   {% compress js %}
-  <script src="{{ STATIC_URL }}js/jquery-1.10.2.js"></script>
-  <script src="{{ STATIC_URL }}js/libs/jquery-ui-1.10.4.custom.min.js"></script>
-  <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
-  <script src="{{ STATIC_URL }}js/plugins.js"></script>
-  <script src="{{ STATIC_URL }}js/main.js"></script>
   {% endcompress %}
   <!-- end compressed scripts -->
 
@@ -189,41 +192,8 @@
           todayHighlight: true
       });
 </script>
+
 {% comment %}
-
-<script>
-// prepare Options Object
-      var options;
-          options = {
-          target: '#divToUpdate',
-          url: '/admin/',
-          success: function () {
-          alert('Thanks for your comment!');
-      }
-      };
-// pass options to ajaxForm
-{% comment %}
-
-      // $('#myForm').ajaxForm(options);
-
-</script>
-
-
-
-<script>
-$( "#datepicker" ).datepicker();
-</script>
-
-<script>
-    var i = document.createElement("input");
-    i.setAttribute("type", "date");
-        if (i.type == "text") {
-          $( "#datepicker" ).datepicker();
-        // No native date picker support :(
-        // Use Dojo/jQueryUI/YUI/Closure to create one,
-        // then dynamically replace that <input> element.
-        }
-</script>
 <script>
 $('form #checkbox').is(':checked');
 </script>
@@ -232,9 +202,8 @@ var checkedValues = $('input:checkbox:checked').map(function() {
         return this.value;
 }).get();
 </script>
-
 {% endcomment %}
-  <!-- end scripts -->
+<!-- end scripts -->
 
 {% endblock %}
 

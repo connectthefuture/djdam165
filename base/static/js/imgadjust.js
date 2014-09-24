@@ -10,7 +10,8 @@
 //  $( "input[type='checkbox'], input[type='radio']" ).on( "click", showValues );
 //  $( "select" ).on( "change", showValues );
 //
-$(document).ready(function() {
+
+$(document).ready(function () {
     function submitChecked() {
         $('form #checkbox').is(':checked');
 
@@ -20,16 +21,16 @@ $(document).ready(function() {
     }
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     $("body").on("click", "p", function () {
         alert($(this).text());
     });
 });
 
 // Show Supplier data
-$(document).ready(function() {
+$(document).ready(function () {
     function showValues() {
-        $("#formSearchStyle").on( "click", function () {
+        $("#formSearchStyle").on("click", function () {
             var supplierImageAPI = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/";
             var getFormInputs = $("#getSupplierJson").val() || [];
             colorstyle = getFormInputs.split('_')[0];
@@ -54,8 +55,8 @@ $(document).ready(function() {
 });
 
 //'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site',
-$(document).ready(function() {
-    function submitSearchStyle() {
+$(document).ready(function () {
+     function submitSearchStyle() {
         $("#formSearchStyle").submit(function () {
             var colorstyle = $('#inputColorstyle').val();
             var alt = $('#inputColorstyle').val(); //colorstyle.split("_")[-1];
@@ -98,15 +99,15 @@ $(document).ready(function() {
 //    });
 
 //   $( "#for" ).click(function() {  $( "#target" ).keypress();  });
-$(document).ready(function() {
+$(document).ready(function () {
     function ajaxAnyInputBlur() {
         $(":input").blur(function () {
             var inputColorstyle = $('#inputColorstyle').val();
             var inputAlt = $('#inputAlt').val(); //inputColorstyle.split("_")[-1];
             $.getJSON("http://prodimages.ny.bluefly.com/api/v1/supplier-ingest-images/", JSON.stringify({
-                colorstyle: inputColorstyle,
-                alt: inputAlt
-            })
+                    colorstyle: inputColorstyle,
+                    alt: inputAlt
+                })
             )
                 .done(function (json) {
                     console.log("JSON Data: " + json.colorstyle[ 0 ]);

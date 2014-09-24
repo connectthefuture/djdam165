@@ -48,6 +48,8 @@ body {
                     <li><a href="admin/"><span class="glyphicon glyphicon-user"> Admin </span></a></li>
                     <li><a href="bootstrapshell/"><span class="glyphicon glyphicon-info-sign">Quickest Search </span></a></li>
             </div>
+          </form>
+        </div>
             {#</div>#}
             {#  action="admin/" method="login" id="admin-login" #}
             {#            <form id="adminlogin" class="navbar-form pull-right">#}
@@ -102,6 +104,7 @@ body {
               </ul>
 
 {% endcomment %}
+
                 </div>
                 <!--/.nav-collapse -->
             </div><!-- Close Container -->
@@ -257,39 +260,39 @@ body {
         </form>
   {% endcomment %}
         </div>
-        </div><!-- Closes Primary Middle Content Row -->
-        </div><!-- Closed Main Container -->{#   CLOSED CONTAINER#}
+    </div><!-- Closes Primary Middle Content Row -->
+</div><!-- Closed Main Container -->{#   CLOSED CONTAINER#}
 
-        <!-- Footer Section -->
-        {% block footer %}
-            <footer>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">&copy; jb-bfly_2013</div>
-                        <div class="col-md-4">
-                            <ul class="nav nav-pills">
-                                <li class="active"><a href="http://pm.bluefly.corp">PM</a></li>
-                                <li><a href="http://clearcache.bluefly.corp">ClearCache</a></li>
-                                <li><a href="http://tools.l3.bluefly.com">theTool</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <h3 class="text-right">Something Else</h3>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        {% endblock %}
+<!-- Footer Section -->
+{% block footer %}
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">&copy; jb-bfly_2013</div>
+            <div class="col-md-4">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="http://pm.bluefly.corp">PM</a></li>
+                    <li><a href="http://clearcache.bluefly.corp">ClearCache</a></li>
+                    <li><a href="http://tools.l3.bluefly.com">theTool</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3 class="text-right">Something Else</h3>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}
 
-        <!-- Javascript -->
-        <script>
-            $('#daterange-container').find('.input-daterange').datepicker({
-                todayBtn: true,
-                orientation: "auto center",
-                todayHighlight: true
-            });
-        </script>
-        {% comment %}
+<!-- Javascript -->
+<script>
+    $('#daterange-container').find('.input-daterange').datepicker({
+        todayBtn: true,
+        orientation: "auto center",
+        todayHighlight: true
+    });
+</script>
+{% comment %}
 
 <script>
 // prepare Options Object
@@ -309,18 +312,18 @@ body {
 </script>
 {% endcomment %}
 
-        {% block js %}
-            <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-            <script>
-                var i = document.createElement("input");
-                i.setAttribute("type", "date");
-                if (i.type == "text") {
-                    // No native date picker support :(
-                    // Use Dojo/jQueryUI/YUI/Closure to create one,
-                    // then dynamically replace that <input> element.
-                }
-            </script>
-        {% endblock %}
+{% block js %}
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+        var i = document.createElement("input");
+        i.setAttribute("type", "date");
+        if (i.type == "text") {
+            // No native date picker support :(
+            // Use Dojo/jQueryUI/YUI/Closure to create one,
+            // then dynamically replace that <input> element.
+        }
+    </script>
+{% endblock %}
 
-    {% endblock %}
+{% endblock %}
 
