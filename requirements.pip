@@ -30,9 +30,9 @@ Pillow
 SQLAlchemy
 # mysql-connector-python==0.3.2-devel
 MySQL-python # ==1.2.4b4
-cx-Oracle  #==5.1.2
+#cx-Oracle  #==5.1.2
 django-redis
-bcrypt
+#bcrypt
 
 ## RESTful stuff
 django-tastypie
@@ -124,7 +124,75 @@ django-debug-toolbar
 # -e git://github.com/playfire/django-debug-toolbar-user-panel#egg=django_debug_toolbar_user_panel-dev
 
 # Migrations
-South
+#South
 
 # Feature testing
 #django-waffle
+# BeautifulSoup==3.2.1
+# Cheetah==2.4.4
+# Django==1.7
+# Flask==0.10.1
+# Jinja2==2.7.3
+# Mako==1.0.0
+# Markdown==2.5
+# MarkupSafe==0.23
+# MySQL-python==1.2.5
+# Pillow==2.5.3
+# SQLAlchemy==0.9.7
+# ajaxuploader==0.3.8
+# amqp==1.4.6
+# anyjson==0.3.3
+# apiclient==1.0.2
+# argparse==1.2.1
+# beautifulsoup4==4.3.2
+# billiard==3.3.0.18
+# bleach==1.4
+celery==3.1.15
+# coverage==3.7.1
+# decorator==3.4.0
+django-admin-bootstrapped==2.0.4
+# django-admin-tools==0.5.2
+# django-adminactions==0.7
+django-ajax-selects==1.3.5
+# django-ajax-upload-widget==0.5.5
+# django-appconf==0.6
+django-bootstrap-toolkit==2.15.0
+django-bootstrap3==4.11.0
+django-celery==3.1.16
+django-compressor==1.4
+django-crispy-forms==1.4.0
+django-debug-toolbar==1.2.1
+django-dtpanel-htmltidy==0.1.1
+django-filter==0.7
+django-floppyforms==1.2.0
+django-gunicorn==0.1.1
+# django-redis==3.7.1
+django-tables2==0.15.0
+# django-tastypie==0.12.0
+djangorestframework==2.4.3
+# dropbox==2.2.0
+# gnureadline==6.3.3
+# googleapi==0.1.2
+# gunicorn==19.1.1
+# html5lib==0.999
+# httplib2==0.9
+# ipython==2.2.0
+# itsdangerous==0.24
+# kombu==3.0.23
+# mechanize==0.2.5
+# mimeparse==0.1.3
+# pycurl==7.19.5
+python-dateutil==2.2
+# python-memcached==1.53
+# pytidylib==0.2.3
+# pytz==2014.7
+# redis==2.10.3
+# requests==2.4.1
+six==1.8.0
+# sorl-thumbnail==11.12
+sqlparse==0.1.12
+# unicodecsv==0.9.4
+# urllib3==1.9.1
+# wsgiref==0.1.2
+# xlrd==0.9.3
+# xlwt==0.7.5
