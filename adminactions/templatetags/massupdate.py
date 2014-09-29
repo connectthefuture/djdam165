@@ -1,5 +1,5 @@
 from django.forms import widgets
-from django.forms.util import flatatt
+from django.forms.utils import flatatt
 from django.template import Library
 from django.utils.encoding import force_unicode
 from django.utils.html import escape, conditional_escape

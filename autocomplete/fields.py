@@ -5,7 +5,7 @@ from django import forms
 from django.utils.safestring import mark_safe
 from django.utils.encoding import force_unicode 
 from django.core.urlresolvers import reverse
-from django.forms.util import ErrorList, ValidationError
+from django.forms.utils import ErrorList, ValidationError
 
 CLIENT_CODE = """
 <input type="text" name="%s_text" id="%s_text"/>
