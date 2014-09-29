@@ -903,19 +903,23 @@ class Product(models.Model):
         return self.colorstyle
 
 
-# class SearcherProductImages(models.Model):
-#     id = models.BigIntegerField(primary_key=True)
-#     #snapshotdata = models.ForeignKey('ProductSnapshotLive')
-#     product = models.ForeignKey('Product')
-#     images = models.ForeignKey('Images')
+class ImageUpdate(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    #snapshotdata = models.ForeignKey('ProductSnapshotLive')
+    colorstyle = models.CharField(max_length=9)
+    alt = models.CharField(max_length=3, default="All")
+    create_dt   = models.DateTimeField(auto_now_add=True)
+    modify_dt   = models.DateTimeField(auto_now=True)
 
-#     class Meta:
-#         db_table = 'searcher_product_images'
-#         #unique_together = ('brand', 'vendor_style',)
-#         #ordering = ['-colorstyle']
+    class Meta:
+        db_table = 'updated_images'
+        #unique_together = ('brand', 'vendor_style',)
+        ordering = ['-modify_dt', 'colorstyle', 'alt']
 
-#     def __unicode__(self):
-#         return self.id
+    def __unicode__(self):
+        return self.id
+
+
 ##########
 from djdam.settings import MEDIA_ROOT
 import os

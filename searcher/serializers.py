@@ -4,7 +4,7 @@
 __author__ = 'johnb'
 
 from django.contrib.auth.models import User, Group
-from models import PostReadyOriginal, ProductSnapshotLive, ExcelToolData
+from models import PostReadyOriginal, ProductSnapshotLive, ExcelToolData, ImageUpdate
 from rest_framework import serializers
 
 class PostReadyOriginalSerializer(serializers.HyperlinkedModelSerializer):
@@ -34,6 +34,12 @@ class SupplierIngest404Serializer(serializers.HyperlinkedModelSerializer):
    class Meta:
        model = SupplierIngest404
        fields = ('colorstyle','alt', 'error_code', 'image_url', 'modified_dt')
+
+
+class ImageUpdateSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ImageUpdate
+        fields = ('colorstyle', 'alt', 'create_dt', 'modify_dt')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

@@ -1,198 +1,159 @@
-# This file is here because many Platforms as a Service look for
-# requirements.txt in the root directory of a project.
-###
-# Make sure to: apt-get install python-dev for _mysqlif using MySQLdb
-###
-# -r djdam/requirements/production.txt
-# Install everything that needs to be compiled
-# -r compiled.txt
-
-# Django stuff
-django
-django-crispy-forms
-django-floppyforms
-django-bootstrap3
-django-bootstrap-toolkit
-
-## Django Admin
-django-admin-bootstrapped
-django-adminactions
-django-admin_tools
-
-# Image Stuff
-Pillow
-# pyexiv2
-# PythonMagic
-
-# Other Stuff Maybe Unnecessarily Redundant
-
-# db Stuff
-SQLAlchemy
-# mysql-connector-python==0.3.2-devel
-MySQL-python # ==1.2.4b4
-#cx-Oracle  #==5.1.2
-django-redis
-#bcrypt
-
-## RESTful stuff
-django-tastypie
-djangorestframework
-
-## upload with AJAX
-django-ajax-upload-widget
-ajaxuploader
-django-ajax-selects  # ==1.3.4
-
-# Google Stuff
-googleapi
-
-# Other Utils
-mechanize
-pycurl
-requests
-BeautifulSoup
-beautifulsoup4
-html5lib
-dropbox
-#decorator==3.3.2
-distribute
-#docutils==0.11
-
-# Sys Utils / FTP
-#ftputil==2.4.2
-#ftplib
-#pycurl
-#pyinotify==0.9.4
-
 #  Virtualenv / Deployment / wsgi
-gunicorn
-#virtualenv
-#Fabric
-
-# Templates
-Markdown
-#Markup
-#simplejson
-django_compressor
-#Jinja2==2.7
-#Cheetah
-
-# Text Stuff
-#PyXML==0.8.4
-#PyYAML==3.10
-#lxml
-xlrd
-xlwt
-django-tables2
-django-filter
-#pyatom==1.3
-
-
-# Security
-bleach
-#cef
-#PAM==0.4.2
-#pyOpenSSL==0.12
-#pycrypto==2.4.1
-#oauth==1.0.1
-
-# Logging
-#raven
-
-# Celery: Message queue
-celery
-django-celery
-#docutils
-
-# L10n/i18n
-#Babel
-#-e git://github.com/clouserw/tower.git#egg=tower
-#iso8601==0.1.4
-#lptools==0.1
-
-
-# Caching
-python-memcached
-
-# Thumbs
-sorl-thumbnail
-
-# Dbugtoolbar not for prod obviously
-django-debug-toolbar
-
-# There are useful panels for debug-toolbar, but have not quite been updated yet for 1.5
 # -e git://github.com/playfire/django-debug-toolbar-user-panel#egg=django_debug_toolbar_user_panel-dev
-
-# Migrations
-#South
-
-# Feature testing
-#django-waffle
-# BeautifulSoup==3.2.1
-# Cheetah==2.4.4
-# Django==1.7
-# Flask==0.10.1
-# Jinja2==2.7.3
-# Mako==1.0.0
-# Markdown==2.5
-# MarkupSafe==0.23
-# MySQL-python==1.2.5
-# Pillow==2.5.3
-# SQLAlchemy==0.9.7
+# -r compiled.txt
+# -r djdam/requirements/production.txt
 # ajaxuploader==0.3.8
 # amqp==1.4.6
 # anyjson==0.3.3
 # apiclient==1.0.2
 # argparse==1.2.1
+# Babel
+# bcrypt
 # beautifulsoup4==4.3.2
+# BeautifulSoup==3.2.1
 # billiard==3.3.0.18
 # bleach==1.4
+# Caching
+# cef
+# Celery: Message queue
 # celery==3.1.15
+# Cheetah
 # coverage==3.7.1
+# cx-Oracle  # ==5.1.2
+# db Stuff
+# Dbugtoolbar not for prod obviously
 # decorator==3.4.0
-django-admin-bootstrapped==2.0.4
+# Django stuff
 # django-admin-tools==0.5.2
 # django-adminactions==0.7
-django-ajax-selects==1.3.5
 # django-ajax-upload-widget==0.5.5
 # django-appconf==0.6
-django-bootstrap-toolkit==2.15.0
-django-bootstrap3==4.11.0
-django-celery==3.1.16
-django-compressor==1.4
-django-crispy-forms==1.4.0
-django-debug-toolbar==1.2.1
-django-dtpanel-htmltidy==0.1.1
-django-filter==0.7
-django-floppyforms==1.2.0
-django-gunicorn==0.1.1
 # django-redis==3.7.1
-django-tables2==0.15.0
 # django-tastypie==0.12.0
-djangorestframework==2.4.3
+# django-waffle
+# Django==1.7
+# docutils
+# docutils==0.11
 # dropbox==2.2.0
+# Fabric
+# Feature testing
+# Flask==0.10.1
+# ftplib
+# ftputil==2.4.2
 # gnureadline==6.3.3
+# Google Stuff
 # googleapi==0.1.2
 # gunicorn==19.1.1
 # html5lib==0.999
 # httplib2==0.9
+# Image Stuff
+# Install everything that needs to be compiled
 # ipython==2.2.0
+# iso8601==0.1.4
 # itsdangerous==0.24
+# Jinja2==2.7
+# Jinja2==2.7.3
 # kombu==3.0.23
+# L10n/i18n
+# Logging
+# lptools==0.1
+# lxml
+# Make sure to: apt-get install python-dev for _mysqlif using MySQLdb
+# Mako==1.0.0
+# Markdown==2.5
+# Markup
+# MarkupSafe==0.23
 # mechanize==0.2.5
+# Migrations
 # mimeparse==0.1.3
-# pycurl==7.19.5
-python-dateutil==2.2
+# mysql-connector-python==0.3.2-devel
+# MySQL-python==1.2.5
+# oauth==1.0.1
+# Other Stuff Maybe Unnecessarily Redundant
+# Other Utils
+# PAM==0.4.2
+# Pillow==2.5.3
+# pyatom==1.3
+# pycrypto==2.4.1
+# pycurl
+# pyexiv2
+# pyinotify==0.9.4
+# pyOpenSSL==0.12
 # python-memcached==1.53
+# PythonMagic
 # pytidylib==0.2.3
 # pytz==2014.7
+# PyXML==0.8.4
+# PyYAML==3.10
+# raven
 # redis==2.10.3
 # requests==2.4.1
-six==1.8.0
+# requirements.txt in the root directory of a project.
+# Security
+# simplejson
 # sorl-thumbnail==11.12
-sqlparse==0.1.12
+# South
+# SQLAlchemy==0.9.7
+# Sys Utils / FTP
+# Templates
+# Text Stuff
+# There are useful panels for debug-toolbar, but have not quite been updated yet for 1.5
+# This file is here because many Platforms as a Service look for
+# Thumbs
 # unicodecsv==0.9.4
 # urllib3==1.9.1
+# virtualenv
 # wsgiref==0.1.2
 # xlrd==0.9.3
 # xlwt==0.7.5
+## Django Admin
+## RESTful stuff
+## upload with AJAX
+###
+###
+#-e git://github.com/clouserw/tower.git#egg=tower
+ajaxuploader
+BeautifulSoup
+beautifulsoup4
+bleach
+celery
+distribute
+django
+django-admin-bootstrapped
+django-admin_tools
+django-adminactions
+django-ajax-selects  # ==1.3.5
+django-ajax-upload-widget
+django-bootstrap-toolkit
+django-bootstrap3
+django-celery
+django-compressor
+django-crispy-forms
+django-debug-toolbar
+django-dtpanel-htmltidy
+django-filter
+django-floppyforms
+django-gunicorn
+django-redis
+django-tables2
+django-tastypie
+django_compressor
+djangorestframework
+dropbox
+googleapi
+gunicorn
+html5lib
+Markdown
+mechanize
+MySQL-python # ==1.2.4b4
+Pillow
+pycurl
+python-dateutil
+python-memcached
+requests
+six
+sorl-thumbnail
+SQLAlchemy
+sqlparse
+xlrd
+xlwt

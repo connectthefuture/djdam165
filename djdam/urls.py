@@ -42,7 +42,7 @@ from tastypie.api import Api
 from searcher.api.resources import SelectedFilesResource, ProductSnapshotLiveResource, ExcelToolDataResource, ViewExcelToolDuplicateVendorStyleResource, OffshoreStatusResource, OffshoreStatusSentOnlyResource, UserResource
 from searcher.api.resources import PushPhotoselectsResource, Zimages1PhotoselectsResource, PostReadyOriginalResource, ProductionRawZimagesResource
 from searcher.api.resources import ProductionRawCp1DataResource, ProductionRawCp1PreSelectResource, ProductionRawCp1SelectResource
-from searcher.api.resources import SupplierIngestResource, SupplierIngestImagesResource
+from searcher.api.resources import SupplierIngestResource, SupplierIngestImagesResource, ImageUpdateResource
 
 
 v1_api = Api(api_name='v1')
@@ -67,6 +67,7 @@ v1_api.register(ViewExcelToolDuplicateVendorStyleResource())
 v1_api.register(ProductSnapshotLiveResource())
 v1_api.register(SupplierIngestResource())
 v1_api.register(SupplierIngestImagesResource())
+v1_api.register(ImageUpdateResource())
 
 # #viewexceltoolduplicatevendorstyle_resource = ViewExcelToolDuplicateVendorStyleResource()
 # from searcher.api.resources import ProductSnapshotLiveResource
@@ -89,6 +90,7 @@ urlpatterns = patterns('',
     (r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9})?([_a-z0-9]{2,7})?/?$', include(SupplierIngestImagesResource().urls)),
     (r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9})/(?P<alt>\d)/?$', include(SupplierIngestImagesResource().urls)),
     #(r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9})(?P<alt>[_a-z0-9]{2,7})?/?', include(SupplierIngestImagesResource().urls)),
+    (r'^api/v1/image-update/(?P<colorstyle>\d{9})/?', include(ImageUpdateResource().urls)),
     (r'^api/', include(v1_api.urls)),
 )
 
@@ -186,6 +188,7 @@ router.register(r'excel-tool-data', views.ExcelToolDataViewSet)
 # router.register(r'supplier-ingest-images', views.SupplierIngestImagesViewSet)
 router.register(r'supplier-ingest', views.SupplierIngestViewSet)
 router.register(r'supplier-ingest-404', views.SupplierIngest404ViewSet)
+router.register(r'image-update', views.ImageUpdateSerializer)
 
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)

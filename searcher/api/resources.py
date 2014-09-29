@@ -38,7 +38,8 @@ from tastypie import fields
 ## Data Models
 from searcher.models import SelectedFiles, ProductSnapshotLive, OffshoreStatus, ProductionRawCp1Data, ExcelToolData, ViewExcelToolDuplicateVendorStyle
 ## File Models
-from searcher.models import Zimages1Photoselects, PostReadyOriginal, PushPhotoselects, ProductionRawZimages, SupplierIngest, SupplierIngestImages
+from searcher.models import Zimages1Photoselects, PostReadyOriginal, PushPhotoselects, ProductionRawZimages
+from searcher.models import SupplierIngest, SupplierIngestImages, ImageUpdate
 from tastypie.throttle import BaseThrottle, CacheThrottle
 
 ## User and Session Resources
@@ -86,6 +87,7 @@ class PushPhotoselectsResource(ModelResource):
         queryset = PushPhotoselects.objects.all()
         allowed_methods = ['get', 'post', 'put']
         detail_allowed_methods = ['get']
+
 
 class Zimages1PhotoselectsResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
@@ -226,6 +228,19 @@ class OffshoreStatusSentOnlyResource(ModelResource):
         colorstyle = kwargs.pop('colorstyle')
         kwargs['colorstyle'] = get_object_or_404(OffshoreStatus, colorstyle=colorstyle)
         return super(OffshoreStatusSentOnlyResource, self).dispatch(request_type, request, **kwargs)
+
+
+## Styles to clear cache
+class ImageUpdateResource(ModelResource):
+    # user = fields.ForeignKey(UserResource, 'user')
+    class Meta:
+        serializer = Serializer(formats=['json', 'jsonp', 'xml'])
+        resource_name = 'image-update'
+        # authorization= Authorization()
+        queryset =  ImageUpdate.objects.all()
+        allowed_methods         = ['get', 'post', 'put']
+        list_allowed_methods    = ['get', 'post']
+        detail_allowed_methods  = ['get']
 
 
 ### Raw Capture 1 data

@@ -1641,8 +1641,8 @@ class ExcelToolDataViewSet(viewsets.ModelViewSet):
 
 
 
-from searcher.models import SupplierIngest, SupplierIngest404
-from searcher.serializers import SupplierIngestSerializer, SupplierIngest404Serializer
+from searcher.models import SupplierIngest, SupplierIngest404, ImageUpdate
+from searcher.serializers import SupplierIngestSerializer, SupplierIngest404Serializer, ImageUpdateSerializer
 
 class SupplierIngestViewSet(viewsets.ModelViewSet):
     """
@@ -1658,3 +1658,9 @@ class SupplierIngest404ViewSet(viewsets.ModelViewSet):
     queryset = SupplierIngest404.objects.all()
     serializer_class = SupplierIngest404Serializer
 
+class ImageUpdateViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows SupplierIngest404 to be viewed or edited.
+    """
+    queryset = ImageUpdate.objects.all()
+    serializer_class = ImageUpdateSerializer
