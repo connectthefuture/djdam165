@@ -1,14 +1,7 @@
-{% load admin_static %}
-<!DOCTYPE html>
+{% load admin_static %}<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
-<title>
-{% block title %}
-    <div class="navbar-header">
-        <a class="navbar-brand" href="/">A Fine Home for Photo Administration Since the Mid to Late '50s</a>
-    </div>
-{% endblock %}
-</title>
+<title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
 {% block extrastyle %}{% endblock %}
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
@@ -28,18 +21,16 @@
     <!-- Header -->
     <div id="header">
         <div id="branding">
-        {% block branding %}
-        {% endblock %}
+        {% block branding %}{% endblock %}
         </div>
         {% if user.is_active and user.is_staff %}
         <div id="user-tools">
             {% trans 'Welcome,' %}
             <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username %}{% endfilter %}</strong>.
             {% block userlinks %}
-                {% url 'base.views.home' as homepage %}
-{#                {% url 'django-admindocs-docroot' as homepage %}#}
-                {% if homepage %}
-                    <a href="{{ homepage }}">{% trans 'Documentation' %}</a> /
+                {% url 'django-admindocs-docroot' as docsroot %}
+                {% if docsroot %}
+                    <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
                 {% endif %}
                 {% if user.has_usable_password %}
                 <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
@@ -75,7 +66,7 @@
         {% block object-tools %}{% endblock %}
         {{ content }}
         {% endblock %}
-        {% block sidebar %}<strong>Sidebar</strong>{% endblock %}
+        {% block sidebar %}{% endblock %}
         <br class="clear" />
     </div>
     <!-- END Content -->
