@@ -209,7 +209,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates/ajaxsearch'),
     os.path.join(BASE_DIR, 'templates/accounts'),
     os.path.join(BASE_DIR, 'templates/imgadjust'),
-    os.path.join(BASE_DIR, 'templates/rest_framework'),
+    # os.path.join(BASE_DIR, 'templates/rest_framework'),
 )
 
 
