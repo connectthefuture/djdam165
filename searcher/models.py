@@ -904,24 +904,6 @@ class Product(models.Model):
 
 
 class ImageUpdate(models.Model):
-    #snapshotdata = models.ForeignKey('ProductSnapshotLive')
-    colorstyle = models.CharField(max_length=9)
-    alt = models.CharField(max_length=3, default="1", blank=True)
-    create_dt   = models.DateTimeField(auto_now_add=True)
-    modify_dt   = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        db_table = 'image_update'
-        #unique_together = ('brand', 'vendor_style',)
-        ordering = ['-modify_dt', 'colorstyle', 'alt']
-
-    def __unicode__(self):
-        if self.alt == '1':
-            alt= 'Primary'
-        else:
-            alt = self.alt
-        return "Style {0} \nImage Type: {1}".format(self.colorstyle, self.alt)
-
     PRIMARY = '1'
     ALT1 = '2'
     ALT2 = '3'
@@ -941,6 +923,25 @@ class ImageUpdate(models.Model):
     image_type = models.CharField(max_length=2,
                                   choices=IMAGE_TYPE_CHOICES,
                                   default=PRIMARY)
+    
+    #snapshotdata = models.ForeignKey('ProductSnapshotLive')
+    colorstyle = models.CharField(max_length=9)
+    alt = models.CharField(max_length=3, default="1", blank=True)
+    create_dt   = models.DateTimeField(auto_now_add=True)
+    modify_dt   = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'image_update'
+        #unique_together = ('brand', 'vendor_style',)
+        ordering = ['-modify_dt', 'colorstyle', 'alt']
+
+    def __unicode__(self):
+        if self.alt == '1':
+            alt= 'Primary'
+        else:
+            alt = self.alt
+        return "Style {0} \nImage Type: {1}".format(self.colorstyle, self.alt)
+
 
     def count_styles_images(self):
         count = self.image_type in (self.ALT1, self.ALT2, self.ALT3, self.ALT4, self.ALT5 )
