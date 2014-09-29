@@ -29,14 +29,16 @@ def get_file_path(instance, filename):
 ##  Global Model Variables ##
 #############################
 #### Image Type Choice Vars as Tuples ########
+ALLIMGS = '0'
 PRIMARY = '1'
-ALT1 = '2'
-ALT2 = '3'
-ALT3 = '4'
-ALT4 = '5'
-ALT5 = '6'
+ALT1    = '2'
+ALT2    = '3'
+ALT3    = '4'
+ALT4    = '5'
+ALT5    = '6'
 
 IMAGE_TYPE_CHOICES = (
+    (ALLIMGS, 'AllImages'),
     (PRIMARY, 'MainImage'),
     (ALT1, 'Alt1-Back'),
     (ALT2, 'Alt2'),
@@ -926,16 +928,16 @@ class Product(models.Model):
 class ImageUpdate(models.Model):
     #snapshotdata = models.ForeignKey('ProductSnapshotLive')
     colorstyle = models.CharField(max_length=9)
-    alt = models.CharField(max_length=3, default="1", blank=True)
+    alt = models.CharField(max_length=3, default="1", blank=False)
     create_dt   = models.DateTimeField(auto_now_add=True)
     modify_dt   = models.DateTimeField(auto_now=True)
-    image_type  = models.CharField(max_length=2,
+    image_type  = models.CharField(max_length=3,
                                   choices=IMAGE_TYPE_CHOICES,
                                   default=PRIMARY)
 
     class Meta:
         db_table = 'image_update'
-        #unique_together = ('brand', 'vendor_style',)
+        unique_together = ('colorstyle', 'alt',)
         ordering = ['-modify_dt', 'colorstyle', 'alt']
 
     def __unicode__(self):
