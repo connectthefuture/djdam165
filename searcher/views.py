@@ -1664,3 +1664,51 @@ class ImageUpdateViewSet(viewsets.ModelViewSet):
     """
     queryset = ImageUpdate.objects.all()
     serializer_class = ImageUpdateSerializer
+
+## REST_FRAMEWORK Browsable views
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view(['GET', 'POST'])
+def image_update_list(request):
+    """
+    List all image_updates, or create a new image_update.
+    """
+    if request.method == 'GET':
+        image_updates = ImageUpdate.objects.all()
+        serializer = ImageUpdateSerializer(image_updates, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = ImageUpdateSerializer(data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def image_update_detail(request, pk):
+    """
+    Retrieve, update or delete an ImageUpdate instance.
+    """
+    try:
+        image_update = ImageUpdate.objects.get(pk=pk)
+    except ImageUpdate.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ImageUpdateSerializer(image_update)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = ImageUpdateSerializer(image_update, data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        image_update.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
