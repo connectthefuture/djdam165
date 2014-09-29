@@ -906,7 +906,7 @@ class Product(models.Model):
 class ImageUpdate(models.Model):
     #snapshotdata = models.ForeignKey('ProductSnapshotLive')
     colorstyle = models.CharField(max_length=9)
-    alt = models.CharField(max_length=3, default="All")
+    alt = models.CharField(max_length=3, default="1", blank=True)
     create_dt   = models.DateTimeField(auto_now_add=True)
     modify_dt   = models.DateTimeField(auto_now=True)
 
@@ -916,7 +916,11 @@ class ImageUpdate(models.Model):
         ordering = ['-modify_dt', 'colorstyle', 'alt']
 
     def __unicode__(self):
-        return self.id
+        if self.alt == '1':
+            alt= 'Primary'
+        else:
+            alt = self.alt
+        return "Style {0} \nImage Type: {1}".format(self.colorstyle,self.alt)
 
     PRIMARY = '1'
     ALT1 = '2'
