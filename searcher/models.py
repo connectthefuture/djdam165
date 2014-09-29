@@ -918,6 +918,30 @@ class ImageUpdate(models.Model):
     def __unicode__(self):
         return self.id
 
+    PRIMARY = '1'
+    ALT1 = '2'
+    ALT2 = '3'
+    ALT3 = '4'
+    ALT4 = '5'
+    ALT5 = '6'
+
+    IMAGE_TYPE_CHOICES = (
+        (PRIMARY, 'MainImage'),
+        (ALT1, 'Alt1-Back'),
+        (ALT2, 'Alt2'),
+        (ALT3, 'Alt3'),
+        (ALT4, 'Alt4'),
+        (ALT5, 'Alt5'),
+    )
+
+    image_type = models.CharField(max_length=2,
+                                  choices=IMAGE_TYPE_CHOICES,
+                                  default=PRIMARY)
+
+    def count_styles_images(self):
+        count = self.image_type in (self.ALT1, self.ALT2, self.ALT3, self.ALT4, self.ALT5 )
+        return len(count + 1)
+
 
 ##########
 from djdam.settings import MEDIA_ROOT
