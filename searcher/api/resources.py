@@ -236,6 +236,7 @@ class ImageUpdateResource(ModelResource):
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'image-update'
+        # detail_uri_name = 'colorstyle'
         # authorization= Authorization()
         queryset =  ImageUpdate.objects.all()
         allowed_methods         = ['get', 'post', 'put']

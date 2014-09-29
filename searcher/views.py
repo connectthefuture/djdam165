@@ -1660,7 +1660,7 @@ class SupplierIngest404ViewSet(viewsets.ModelViewSet):
 
 class ImageUpdateViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows SupplierIngest404 to be viewed or edited.
+    API endpoint that allows ImageUpdate to be viewed or edited.
     """
     queryset = ImageUpdate.objects.all()
     serializer_class = ImageUpdateSerializer
