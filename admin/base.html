@@ -1,7 +1,20 @@
-{% load admin_static %}<!DOCTYPE html>
+{% load admin_static %}
+<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
-<title>{% block title %}{% endblock %}</title>
+<title>
+{% block title %}
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">A Fine Home for Photos Since the Mid to Late '50s</a>
+    </div>
+{% endblock %}
+</title>
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
 {% block extrastyle %}{% endblock %}
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
@@ -22,12 +35,6 @@
     <div id="header">
         <div id="branding">
         {% block branding %}
-          <ul class="nav navbar-nav">
-          <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> Home </a></li>
-          <li><a href="admin/"><span class="glyphicon glyphicon-th-large"></span> Admin </a></li>
-          <li><a href="imgadjust/"><span class="glyphicon glyphicon-screenshot"></span> Adjust </a></li>
-          <li><a href="uploader/"><span class="glyphicon glyphicon-cloud-upload"></span> Upload </a></li>
-          </ul>
         {% endblock %}
         </div>
         {% if user.is_active and user.is_staff %}
