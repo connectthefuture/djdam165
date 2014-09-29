@@ -912,7 +912,7 @@ class ImageUpdate(models.Model):
     modify_dt   = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'updated_images'
+        db_table = 'image_update'
         #unique_together = ('brand', 'vendor_style',)
         ordering = ['-modify_dt', 'colorstyle', 'alt']
 
