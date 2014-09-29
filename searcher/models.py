@@ -904,7 +904,6 @@ class Product(models.Model):
 
 
 class ImageUpdate(models.Model):
-    id = models.BigIntegerField(primary_key=True)
     #snapshotdata = models.ForeignKey('ProductSnapshotLive')
     colorstyle = models.CharField(max_length=9)
     alt = models.CharField(max_length=3, default="All")
