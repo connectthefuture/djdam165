@@ -920,7 +920,7 @@ class ImageUpdate(models.Model):
             alt= 'Primary'
         else:
             alt = self.alt
-        return "Style {0} \nImage Type: {1}".format(self.colorstyle,self.alt)
+        return "Style {0} \nImage Type: {1}".format(self.colorstyle, self.alt)
 
     PRIMARY = '1'
     ALT1 = '2'

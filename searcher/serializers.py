@@ -10,7 +10,7 @@ from rest_framework import serializers
 class PostReadyOriginalSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PostReadyOriginal
-        fields = ('colorstyle', 'alt', 'file_path', 'photo_date')
+        fields = ('colorstyle', 'alt', 'file_path', 'photo_date', 'image_type')
 
 class ProductSnapshotLiveSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
