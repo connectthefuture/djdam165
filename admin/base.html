@@ -5,13 +5,7 @@
 <title>
 {% block title %}
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">A Fine Home for Photos Since the Mid to Late '50s</a>
+        <a class="navbar-brand" href="/">A Fine Home for Photo Administration Since the Mid to Late '50s</a>
     </div>
 {% endblock %}
 </title>
@@ -42,7 +36,7 @@
             {% trans 'Welcome,' %}
             <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username %}{% endfilter %}</strong>.
             {% block userlinks %}
-                {% url 'jbhome' as homepage %}
+                {% url 'base.views.home' as homepage %}
 {#                {% url 'django-admindocs-docroot' as homepage %}#}
                 {% if homepage %}
                     <a href="{{ homepage }}">{% trans 'Documentation' %}</a> /
@@ -81,7 +75,7 @@
         {% block object-tools %}{% endblock %}
         {{ content }}
         {% endblock %}
-        {% block sidebar %}{% endblock %}
+        {% block sidebar %}<strong>Sidebar</strong>{% endblock %}
         <br class="clear" />
     </div>
     <!-- END Content -->
