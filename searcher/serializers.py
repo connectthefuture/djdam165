@@ -4,7 +4,7 @@
 __author__ = 'johnb'
 
 from django.contrib.auth.models import User, Group
-from models import PostReadyOriginal, ProductSnapshotLive, ExcelToolData
+from searcher.models import PostReadyOriginal, ProductSnapshotLive, ExcelToolData
 from rest_framework import serializers
 
 class PostReadyOriginalSerializer(serializers.HyperlinkedModelSerializer):
