@@ -1,8 +1,14 @@
 {% extends "rest_framework/base.html" %}
-{% block title %}REST-Api{% endblock %}
+{% block title %}Another-RESTful-API{% endblock %}
 
 {#{% block bootstrap_theme %}#}
 {#    <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css" type="text/css">#}
 {#{% endblock %}#}
 {##}
 {#{% block bootstrap_navbar_variant %}{% endblock %}#}
+{% block branding %}
+    <a class='brand' rel="nofollow" href='http://prodimages.ny.bluefly.com'>
+    Oh no, take me Home...I dont want
+    </a>
+    <span class="version">Another RESTful API </span>
+{% endblock %}
