@@ -1670,8 +1670,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-@api_view(['GET', 'POST'])
-def image_update_list(request):
+@api_view(['GET', 'POST', 'PUT'])
+def image_update_list(request,pk=None):
     """
     List all image_updates, or create a new image_update.
     """
@@ -1685,6 +1685,18 @@ def image_update_list(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    elif request.method == 'PUT':
+        try:
+            image_update = ImageUpdate.objects.get(pk=pk)
+        except ImageUpdate.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = ImageUpdateSerializer(image_update, data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
