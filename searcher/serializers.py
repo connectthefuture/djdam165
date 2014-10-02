@@ -6,6 +6,8 @@ __author__ = 'johnb'
 from django.contrib.auth.models import User, Group
 from searcher.models import PostReadyOriginal, ProductSnapshotLive, ExcelToolData
 from rest_framework import serializers
+import autocomplete_light
+
 
 class PostReadyOriginalSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -27,7 +29,6 @@ class ExcelToolDataSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('colorstyle', 'brand', 'vendor_style', 'po_number','short_name', 'material', 'country_origin')
 
 
-import autocomplete_light
 from searcher.models import SupplierIngestImages
 #(serializers.ModelSerializer):
 class SupplierIngestImagesSerializer(serializers.HyperlinkedModelSerializer):
