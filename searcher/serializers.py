@@ -13,6 +13,9 @@ class PostReadyOriginalSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('colorstyle', 'alt', 'file_path', 'photo_date', 'image_type')
 
 class ProductSnapshotLiveSerializer(serializers.HyperlinkedModelSerializer):
+    po_number = serializers.ChoiceField(
+        widget=autocomplete_light.ChoiceWidget('PoNumberAutocomplete')
+    )
     class Meta:
         model = ProductSnapshotLive
         fields = ('colorstyle', 'brand', 'vendor_style', 'po_number', 'po_type', 'product_type', 'product_subtype')
@@ -25,14 +28,14 @@ class ExcelToolDataSerializer(serializers.HyperlinkedModelSerializer):
 
 
 import autocomplete_light
-from searcher.models import SupplierIngest
+from searcher.models import SupplierIngestImages
 #(serializers.ModelSerializer):
-class SupplierIngestSerializer(serializers.HyperlinkedModelSerializer):
+class SupplierIngestImagesSerializer(serializers.HyperlinkedModelSerializer):
     vendor_name = serializers.ChoiceField(
         widget=autocomplete_light.ChoiceWidget('VendorNameAutocomplete')
     )
     class Meta:
-        model = SupplierIngest
+        model = SupplierIngestImages
         fields = ('colorstyle', 'vendor_name','vendor_brand', 'vendor_style', 'alt', 'image_url', 'image_type', 'modified_dt')
 
 
@@ -48,8 +51,6 @@ class ImageUpdateSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ImageUpdate
         fields = ('colorstyle', 'alt', 'create_dt', 'modify_dt')
-
-
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
