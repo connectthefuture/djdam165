@@ -131,6 +131,7 @@ INSTALLED_APPS = (# '',
     # Local ajaxsearch app, referenced via appname
     'ajaxsearch',
     'ajax_select',
+    'autocomplete_light',
     #'autocomplete',
 )
 

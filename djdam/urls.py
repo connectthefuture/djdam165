@@ -12,10 +12,14 @@ import os, sys
 import admin_tools as admin_tools
 import adminactions as adminactions
 
+## Autocomplete right before admi autodiscover
+import autocomplete_light
+autocomplete_light.autodiscover()
 
 from django.contrib import admin
 admin.autodiscover()
 
+####
 
 def bad(request):
     """ Simulates a server error """
@@ -123,7 +127,8 @@ urlpatterns += patterns('',
                        #url(r'^ajax/', include('searcher.urls')),
                        #    url(r'^images/', include('images.urls')),
                        #    url(r'^photo/', include('photo.urls')),
-
+                       ## Include autocompleter
+                       url(r'^autocomplete/', include('autocomplete_light.urls')),
                        # # Debug tool bar html tidy panel
                        url(r'^', include('debug_toolbar_htmltidy.urls')),
 
