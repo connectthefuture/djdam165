@@ -22,7 +22,7 @@ autocomplete_light.register(ScriptRunnerAutocomplete)
 
 
 import autocomplete_light
-from models import ProductSnapshotLive, SupplierIngestImages
+from models import ProductSnapshotLive, SupplierIngest
 class PoNumberAutocomplete(autocomplete_light.AutocompleteModelBase):
     search_fields = ['^colorstyle', 'po_number']
 autocomplete_light.register(ProductSnapshotLive, PoNumberAutocomplete)
@@ -34,4 +34,5 @@ autocomplete_light.register(ProductSnapshotLive, ColorstyleAutocomplete)
 
 class VendorNameAutocomplete(autocomplete_light.AutocompleteModelBase):
     search_fields = ['^colorstyle', 'vendor_name']
-autocomplete_light.register(SupplierIngestImages, VendorNameAutocomplete)
+autocomplete_light.register(SupplierIngest, VendorNameAutocomplete)
+

@@ -29,14 +29,14 @@ class ExcelToolDataSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('colorstyle', 'brand', 'vendor_style', 'po_number','short_name', 'material', 'country_origin')
 
 
-from searcher.models import SupplierIngestImages
+from searcher.models import SupplierIngest
 #(serializers.ModelSerializer):
-class SupplierIngestImagesSerializer(serializers.HyperlinkedModelSerializer):
+class SupplierIngestSerializer(serializers.HyperlinkedModelSerializer):
     vendor_name = serializers.ChoiceField(
         widget=autocomplete_light.ChoiceWidget('VendorNameAutocomplete')
     )
     class Meta:
-        model = SupplierIngestImages
+        model = SupplierIngest
         fields = ('colorstyle', 'vendor_name','vendor_brand', 'vendor_style', 'alt', 'image_url', 'image_type', 'modified_dt')
 
 
