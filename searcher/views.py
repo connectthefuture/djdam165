@@ -1640,7 +1640,6 @@ class ExcelToolDataViewSet(viewsets.ModelViewSet):
 
 
 
-
 from searcher.models import SupplierIngest, SupplierIngest404, ImageUpdate
 from searcher.serializers import SupplierIngestSerializer, SupplierIngest404Serializer, ImageUpdateSerializer
 
