@@ -707,7 +707,9 @@ def merge_dicts_bycolorstyle(dict1, dict2):
 
 ###################################################################################################
 ###################################################################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def get_all_images_colorstyle(request):
     from searcher.models import Images
     from searcher.models import ProductionRawZimages
@@ -882,7 +884,9 @@ def get_all_images_colorstyle(request):
 
 ###################################################################################################
 ###################################################################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def get_all_images_outtakes(request):
     from searcher.models import Images
     from searcher.models import ProductionRawZimages
