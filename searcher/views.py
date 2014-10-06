@@ -1670,7 +1670,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 @api_view(['GET', 'POST', 'PUT'])
-def image_update_list(request,pk=None):
+def image_update_list(request,pk=None,alt=None,colorstyle=None):
     """
     List all image_updates, or create a new image_update.
     """
@@ -1700,14 +1700,18 @@ def image_update_list(request,pk=None):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def image_update_detail(request, pk):
+def image_update_detail(request, pk=None,alt=None,colorstyle=None):
     """
     Retrieve, update or delete an ImageUpdate instance.
     """
     try:
         image_update = ImageUpdate.objects.get(pk=pk)
     except ImageUpdate.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        try:
+            image_update = ImageUpdate.objects.get(colorstyle=colorstyle,alt=alt)
+        except ImageUpdate.DoesNotExist:
+
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = ImageUpdateSerializer(image_update)
