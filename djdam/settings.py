@@ -247,7 +247,7 @@ CACHES = {
         'OPTIONS': {
             'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
         }
-    }
+    },
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
@@ -261,7 +261,7 @@ CACHE_MIDDLEWARE_KEY_PREFIX = 'djcache'
 
 # Enable these options for memcached
 CACHE_BACKEND= "memcached://127.0.0.1:11211/"
-#CACHE_MIDDLEWARE_ANONYMOUS_ONLY=True
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY=True
 
 # Set this to true if you use a proxy that sets X-Forwarded-Host
 USE_X_FORWARDED_HOST = True
