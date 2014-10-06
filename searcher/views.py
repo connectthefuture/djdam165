@@ -82,7 +82,9 @@ def search_users_albums_bycolorstyle(request):
             results = Product.objects.filter(album__icontains=q_album)
             return render(request, 'search_results.html', {'results': results, 'query': q_user,})
 
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def search_colorstyle(request, q):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
@@ -100,7 +102,9 @@ def search_colorstyle(request, q):
         message = 'You submitted an empty form from views.main using {}.'.format(request.GET['q'])
         return HttpResponse(message)
 
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def search_brand(request):
 #    if 'brandsearch' in request.GET and request.GET['brandsearch']:
     if 'q' in request.GET and request.GET['q']:
@@ -118,7 +122,9 @@ def search_brand(request):
 # def search_photo_date(request, q):
 #     results = ProductionRawZimages.objects.filter(photo_date__icontains=q)
 #     return render(request, 'search_results.html', {'results': results, 'query': q})
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def search_photo_date(request, startdate):
     # if 'q' in request.GET and request.GET['q']:
     #     q = request.GET['q']
@@ -147,7 +153,9 @@ def search_photo_date(request, startdate):
     #     message = 'Please Do not Enter Anything in text box when searching using dates\n \tPlease remove {} and try again.'.format(request.GET['q'])
     #     return HttpResponse(message)
 
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def search_keyword(request):
     if 'keywordsearch' in request.GET and request.GET['keywordsearch']:
         if 'q' in request.GET and request.GET['q']:
@@ -158,7 +166,9 @@ def search_keyword(request):
 
 
 
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def main(request):
     """All Queries Get Routed to functions via this regex parser"""
     import re
@@ -214,7 +224,9 @@ def main(request):
 
 ###################################################################################################
 ###################################################################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def query_previous_week(modelname):
     from datetime import timedelta
     from django.utils import timezone
@@ -635,9 +647,7 @@ def imagenotes_form(request):
 
 from django.views.generic.dates import YearArchiveView, MonthArchiveView, WeekArchiveView, DayArchiveView
 from searcher.models import PostReadyOriginal, Zimages1Photoselects
-from django.views.decorators.cache import cache_page
 
-@cache_page(60 * 15)
 class PhotoYearArchiveView(YearArchiveView):
     queryset = PostReadyOriginal.objects.all()
     date_field = "photo_date"
@@ -645,9 +655,7 @@ class PhotoYearArchiveView(YearArchiveView):
     allow_future = True
 
 ###################################################
-from django.views.decorators.cache import cache_page
 
-@cache_page(60 * 15)
 class PhotoMonthArchiveView(MonthArchiveView):
     queryset = PostReadyOriginal.objects.all()
     date_field = "photo_date"
@@ -655,9 +663,7 @@ class PhotoMonthArchiveView(MonthArchiveView):
     allow_future = True
 
 ###################################################
-from django.views.decorators.cache import cache_page
 
-@cache_page(60 * 15)
 class PhotoWeekArchiveView(WeekArchiveView):
     queryset = PostReadyOriginal.objects.all()
     date_field = "photo_date"
@@ -677,9 +683,7 @@ class PhotoDayArchiveView(DayArchiveView):
 ###################################################################################################
 ############ RAW Onfig Outtakes
 from searcher.models import PostReadyOriginal##ProductionRawOnfigure
-from django.views.decorators.cache import cache_page
 
-@cache_page(60 * 15)
 class PhotoRawYearArchiveView(YearArchiveView):
     queryset = ProductionRawZimages.objects.all()
     date_field = "photo_date"
@@ -687,9 +691,7 @@ class PhotoRawYearArchiveView(YearArchiveView):
     allow_future = True
 
 ###################################################
-from django.views.decorators.cache import cache_page
 
-@cache_page(60 * 15)
 class PhotoRawMonthArchiveView(MonthArchiveView):
     queryset = ProductionRawZimages.objects.all()
     date_field = "photo_date"
@@ -697,9 +699,7 @@ class PhotoRawMonthArchiveView(MonthArchiveView):
     allow_future = True
 
 ###################################################
-from django.views.decorators.cache import cache_page
 
-@cache_page(60 * 15)
 class PhotoRawWeekArchiveView(WeekArchiveView):
     queryset = ProductionRawZimages.objects.all()
     date_field = "photo_date"
@@ -708,9 +708,7 @@ class PhotoRawWeekArchiveView(WeekArchiveView):
     allow_future = True
 
 ###################################################
-from django.views.decorators.cache import cache_page
 
-@cache_page(60 * 15)
 class PhotoRawDayArchiveView(DayArchiveView):
     queryset = ProductionRawZimages.objects.all()
     date_field = "photo_date"
