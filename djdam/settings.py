@@ -1,12 +1,5 @@
-"""
-Django settings for djdam project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
-"""
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -188,6 +181,7 @@ USE_TZ = True
 
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -197,6 +191,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'searcher.utils.Tastypie_Default_Format.TastyJSONMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+
 )
 
 
@@ -240,20 +236,40 @@ EMAIL_HOST_USER = 'john.bragato@gmail.com'
 EMAIL_HOST_PASSWORD = ''
 
 
+#==============================================================================
+#  General Cache Settings - Memcached, Redis
+#==============================================================================
 
-#####################################################################
-#################  SORL.THUMBNAIL & REDIS SERVER SETUP  #############
-#####################################################################
 CACHES = {
-    'default': {
+    'redis_cache': {
         'BACKEND': 'redis_cache.cache.RedisCache',
         'LOCATION': '127.0.0.1:6379:1',
         'OPTIONS': {
             'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
         }
     }
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
 }
 
+### Cache FRamework Settings
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 1000
+CACHE_MIDDLEWARE_KEY_PREFIX = 'djcache'
+
+# Enable these options for memcached
+CACHE_BACKEND= "memcached://127.0.0.1:11211/"
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY=True
+
+# Set this to true if you use a proxy that sets X-Forwarded-Host
+USE_X_FORWARDED_HOST = True
+
+
+#####################################################################
+#################  SORL.THUMBNAIL & REDIS SERVER SETUP  #############
+#####################################################################
 
 THUMBNAIL_FORMAT = 'PNG'
 THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
@@ -268,7 +284,7 @@ FILE_UPLOAD_TEMP_DIR = '/var/tmp/'
 FILE_UPLOAD_MAX_MEMORY_SIZE = 157286400
 
 #####################################################################
-#####       Storage/Cache Services
+#####       Remote Storage/Cache Services
 #####################################################################
 #AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 #AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
@@ -370,14 +386,6 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 # CELERY_TASK_SERIALIZER = 'json'
 # CELERY_RESULT_SERIALIZER = 'json'
 
-
-
-# Enable these options for memcached
-CACHE_BACKEND= "memcached://127.0.0.1:11211/"
-CACHE_MIDDLEWARE_ANONYMOUS_ONLY=True
-
-# Set this to true if you use a proxy that sets X-Forwarded-Host
-USE_X_FORWARDED_HOST = True
 
 #==============================================================================
 #  Project Email settings
