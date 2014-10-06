@@ -228,7 +228,9 @@ def query_previous_week(modelname):
 
 ###################################################################################################
 ###################################################################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def query_current_week(modelname):
     from datetime import timedelta
     from django.utils import timezone
@@ -242,7 +244,9 @@ def query_current_week(modelname):
 
 ###################################################################################################
 ###################################################################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def query_yesterday(modelname):
     from datetime import timedelta
     from django.utils import timezone
@@ -301,7 +305,9 @@ def yesterday_still_selects(request):
 
 ###################################################################################################
 ###################################################################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def yesterday_fashion_outtakes(request):
     results = query_yesterday(ProductionRawZimages)
     results = results.filter(file_path__icontains="CR2")
@@ -342,7 +348,9 @@ def weeks_fashion_outtakes(request):
 
 ###################################################################################################
 ###################################################################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def lastweeks_fashion_outtakes(request):
     results = query_previous_week(ProductionRawZimages)
     results = results.filter(file_path__contains="CR2")
@@ -363,7 +371,9 @@ def lastweeks_fashion_outtakes(request):
 
 ###################################################################################################
 ###################################################################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def weeks_still_selects(request):
     results = query_current_week(PushPhotoselects)
     results = results.filter(file_path__contains="aPhoto")
@@ -403,7 +413,9 @@ def weeks_fashion_selects(request):
 
 ###################################################################################################
 ###################################################################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def lastweeks_still_selects(request):
     results = query_previous_week(PostReadyOriginal)
     results = results.filter(file_path__contains="Still")
@@ -425,7 +437,9 @@ def lastweeks_still_selects(request):
 
 ###################################################################################################
 ###################################################################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 def lastweeks_fashion_selects(request):
     results = query_previous_week(PostReadyOriginal)
     results = results.filter(file_path__contains="Fashion")
@@ -621,7 +635,9 @@ def imagenotes_form(request):
 
 from django.views.generic.dates import YearArchiveView, MonthArchiveView, WeekArchiveView, DayArchiveView
 from searcher.models import PostReadyOriginal, Zimages1Photoselects
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 class PhotoYearArchiveView(YearArchiveView):
     queryset = PostReadyOriginal.objects.all()
     date_field = "photo_date"
@@ -629,7 +645,9 @@ class PhotoYearArchiveView(YearArchiveView):
     allow_future = True
 
 ###################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 class PhotoMonthArchiveView(MonthArchiveView):
     queryset = PostReadyOriginal.objects.all()
     date_field = "photo_date"
@@ -637,7 +655,9 @@ class PhotoMonthArchiveView(MonthArchiveView):
     allow_future = True
 
 ###################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 class PhotoWeekArchiveView(WeekArchiveView):
     queryset = PostReadyOriginal.objects.all()
     date_field = "photo_date"
@@ -657,7 +677,9 @@ class PhotoDayArchiveView(DayArchiveView):
 ###################################################################################################
 ############ RAW Onfig Outtakes
 from searcher.models import PostReadyOriginal##ProductionRawOnfigure
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 class PhotoRawYearArchiveView(YearArchiveView):
     queryset = ProductionRawZimages.objects.all()
     date_field = "photo_date"
@@ -665,7 +687,9 @@ class PhotoRawYearArchiveView(YearArchiveView):
     allow_future = True
 
 ###################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 class PhotoRawMonthArchiveView(MonthArchiveView):
     queryset = ProductionRawZimages.objects.all()
     date_field = "photo_date"
@@ -673,7 +697,9 @@ class PhotoRawMonthArchiveView(MonthArchiveView):
     allow_future = True
 
 ###################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 class PhotoRawWeekArchiveView(WeekArchiveView):
     queryset = ProductionRawZimages.objects.all()
     date_field = "photo_date"
@@ -682,7 +708,9 @@ class PhotoRawWeekArchiveView(WeekArchiveView):
     allow_future = True
 
 ###################################################
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 15)
 class PhotoRawDayArchiveView(DayArchiveView):
     queryset = ProductionRawZimages.objects.all()
     date_field = "photo_date"
