@@ -1734,8 +1734,11 @@ def image_update_detail(request, pk=None,alt=1,colorstyle=None):
     """
     Retrieve, update or delete an ImageUpdate instance.
     """
+    if not colorstyle:
+        colorstyle = request.GET['colorstyle']
     try:
-        image_update = ImageUpdate.objects.get(pk=pk)
+
+        image_update = ImageUpdate.objects.get(colorstyle=colorstyle, alt=1)
     except ImageUpdate.DoesNotExist:
         try:
             image_update = ImageUpdate.objects.get(colorstyle=colorstyle,alt=alt)
