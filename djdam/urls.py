@@ -80,8 +80,48 @@ v1_api.register(ImageUpdateResource())
 #
 # TASTYPIE API URLS
 #
+######################################################################################################
+#####   Django   #####################################################################################
+#####   REST Framework    ############################################################################
+######################################################################################################
 
-urlpatterns = patterns('',
+from django.conf.urls import patterns, url, include
+from rest_framework import routers
+from searcher import views
+
+router = routers.DefaultRouter()
+router.register(r'post-ready-original', views.PostReadyOriginalViewSet)
+router.register(r'pmdata', views.ProductSnapshotLiveViewSet)
+router.register(r'excel-tool-data', views.ExcelToolDataViewSet)
+
+
+# router.register(r'supplier-ingest-images', views.SupplierIngestImagesViewSet)
+router.register(r'supplier-ingest', views.SupplierIngestViewSet)
+router.register(r'supplier-ingest-404', views.SupplierIngest404ViewSet)
+router.register(r'image-update', views.ImageUpdateViewSet)
+
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+
+
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browseable API.
+from rest_framework.urlpatterns import format_suffix_patterns
+
+
+
+#### REST FRAMWORK URLS
+urlpatterns = patterns('snippets.views',
+    url(r'^snippets/$', 'snippet_list'),
+    url(r'^snippets/(?P<pk>[0-9]+)$', 'snippet_detail'),
+)
+
+urlpatterns = format_suffix_patterns(urlpatterns)
+
+## End REST
+
+### Tastypy URLS
+urlpatterns += patterns('',
     # ...more URLconf bits here...
     # Then add:
     #(r'^api/', include(v1_api.urls)),
@@ -175,34 +215,4 @@ urlpatterns += patterns('',
                         (r'^$', RedirectView.as_view(url='/searcher/list/')), # Just for ease of use.
                         ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-######################################################################################################
-#####   Django   #####################################################################################
-#####   REST Framework    ############################################################################
-######################################################################################################
-
-from django.conf.urls import patterns, url, include
-from rest_framework import routers
-from searcher import views
-
-router = routers.DefaultRouter()
-router.register(r'post-ready-original', views.PostReadyOriginalViewSet)
-router.register(r'pmdata', views.ProductSnapshotLiveViewSet)
-router.register(r'excel-tool-data', views.ExcelToolDataViewSet)
-
-
-# router.register(r'supplier-ingest-images', views.SupplierIngestImagesViewSet)
-router.register(r'supplier-ingest', views.SupplierIngestViewSet)
-router.register(r'supplier-ingest-404', views.SupplierIngest404ViewSet)
-router.register(r'image-update', views.ImageUpdateViewSet)
-
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
-
-
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browseable API.
-urlpatterns += patterns('',
-    url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-)
 
