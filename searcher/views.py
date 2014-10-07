@@ -1743,13 +1743,11 @@ def image_update_detail(request, pk=None,alt=1,colorstyle=None):
     except:
         pass
     try:
-
         image_update = ImageUpdate.objects.get(colorstyle=colorstyle, alt=1)
     except ImageUpdate.DoesNotExist:
         try:
             image_update = ImageUpdate.objects.get(colorstyle=colorstyle,alt=alt)
         except ImageUpdate.DoesNotExist:
-
             return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
@@ -1772,7 +1770,6 @@ def image_update_detail(request, pk=None,alt=1,colorstyle=None):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
     elif request.method == 'DELETE':
         image_update = ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt)
