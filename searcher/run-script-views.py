@@ -45,7 +45,7 @@ def script_runner_home_page(request):
     except:
         
         try:
-            if request.GET.items()['input_list']:
+            if request.GET.items()[:]:
                 styles= request.GET.items()['input_list']
                 print styles
         except IndexError:        
