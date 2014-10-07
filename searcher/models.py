@@ -939,7 +939,7 @@ class ImageUpdate(models.Model):
     image_type  = models.CharField(max_length=3,
                                   choices=IMAGE_TYPE_CHOICES,
                                   default=PRIMARY)
-    cache_cleared = models.BooleanField(False, null=True, blank=True)
+    cache_cleared = models.BooleanField(False, blank=True)
 
     class Meta:
         db_table = 'image_update'
