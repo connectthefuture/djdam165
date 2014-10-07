@@ -933,13 +933,13 @@ class Product(models.Model):
 class ImageUpdate(models.Model):
     #snapshotdata = models.ForeignKey('ProductSnapshotLive')
     colorstyle = models.CharField(max_length=9)
-    alt = models.CharField(max_length=3, default="1", blank=True)
+    alt = models.CharField(max_length=3, default="1")#, blank=True)
     create_dt   = models.DateTimeField(auto_now_add=True)
     modify_dt   = models.DateTimeField(auto_now=True)
     image_type  = models.CharField(max_length=3,
                                   choices=IMAGE_TYPE_CHOICES,
                                   default=PRIMARY)
-    cache_cleared = models.BooleanField(False, blank=True)
+    #cache_cleared = models.BooleanField(False, blank=True)
 
     class Meta:
         db_table = 'image_update'
