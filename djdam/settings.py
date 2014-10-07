@@ -453,12 +453,13 @@ ADMIN_TOOLS_THEMING_CSS = 'css/theming.css'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-## REST FRAMEWORK SETTINGS
+## Tastypy API SETTINGS
 TASTYPIE_DEFAULT_FORMATS = ['json']
 API_LIMIT_PER_PAGE = 20
 
+## REST FRAMEWORK SETTINGS
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'PAGINATE_BY': 20
 }
 
