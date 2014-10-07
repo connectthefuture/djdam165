@@ -1732,7 +1732,7 @@ def image_update_list(request,pk=None,alt=1,colorstyle=None):
 
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'POST'])
 def image_update_detail(request, pk=None,alt=1,colorstyle=None):
     """
     Retrieve, update or delete an ImageUpdate instance.
@@ -1765,6 +1765,14 @@ def image_update_detail(request, pk=None,alt=1,colorstyle=None):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'POST':
+        serializer = ImageUpdateSerializer(data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
     elif request.method == 'DELETE':
         image_update = ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt)
