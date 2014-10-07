@@ -862,6 +862,11 @@ class Images(models.Model):
     def __unicode__(self):
         return self.colorstyle
 
+# class ScriptRunner(models.Model):
+#     name    = models.CharField(max_length=40)
+#     file_path = models.FilePathField(max_length=240)
+#     params    = models.CharField(max_length=100)
+
 
 class SelectedFiles(models.Model):
     id = models.IntegerField(primary_key=True)
