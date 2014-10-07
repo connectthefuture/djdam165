@@ -940,7 +940,7 @@ class ImageUpdate(models.Model):
                                   choices=IMAGE_TYPE_CHOICES,
                                   default=PRIMARY)
     #cache_cleared = models.BooleanField(False, blank=True)
-    updated_by = models.ForeignKey('auth.User', null=True, related_name='image_update_user')
+    updated_by = models.ForeignKey('AuthUser', null=True, related_name='image_update_user')
     #deleted_by = models.ForeignKey('auth.User', null=True, related_name='profile_user_deleted')
     class Meta:
         db_table = 'image_update'
