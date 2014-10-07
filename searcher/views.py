@@ -1718,6 +1718,8 @@ def image_update_list(request,pk=None,alt=1,colorstyle=None):
 
 
     elif request.method == 'PUT':
+        if not colorstyle:
+            colorstyle = request.DATA['colorstyle']
         try:
             image_update = ImageUpdate.objects.get(colorstyle=colorstyle,alt=alt)
         except ImageUpdate.DoesNotExist:
@@ -1729,13 +1731,17 @@ def image_update_list(request,pk=None,alt=1,colorstyle=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+
 @api_view(['GET', 'PUT', 'DELETE'])
 def image_update_detail(request, pk=None,alt=1,colorstyle=None):
     """
     Retrieve, update or delete an ImageUpdate instance.
     """
-    if not colorstyle:
-        colorstyle = request.GET['colorstyle']
+    try:
+        if not colorstyle:
+            colorstyle = request.GET['colorstyle']
+    except:
+        pass
     try:
 
         image_update = ImageUpdate.objects.get(colorstyle=colorstyle, alt=1)
@@ -1751,6 +1757,9 @@ def image_update_detail(request, pk=None,alt=1,colorstyle=None):
         return Response(serializer.data)
 
     elif request.method == 'PUT':
+        if not colorstyle:
+            colorstyle = request.DATA['colorstyle']
+        image_update = ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt)
         serializer = ImageUpdateSerializer(image_update, data=request.DATA)
         if serializer.is_valid():
             serializer.save()
@@ -1758,5 +1767,6 @@ def image_update_detail(request, pk=None,alt=1,colorstyle=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
+        image_update = ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt)
         image_update.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
