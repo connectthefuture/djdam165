@@ -98,7 +98,7 @@ router.register(r'excel-tool-data', views.ExcelToolDataViewSet)
 # router.register(r'supplier-ingest-images', views.SupplierIngestImagesViewSet)
 router.register(r'supplier-ingest', views.SupplierIngestViewSet)
 router.register(r'supplier-ingest-404', views.SupplierIngest404ViewSet)
-router.register(r'image-update', views.ImageUpdateViewSet)
+router.register(r'image-update$', views.ImageUpdateViewSet)
 
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
@@ -111,11 +111,10 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 
 #### REST FRAMWORK URLS
-urlpatterns = patterns('snippets.views',
-    url(r'^snippets/$', 'snippet_list'),
-    url(r'^snippets/(?P<pk>[0-9]+)$', 'snippet_detail'),
+urlpatterns = patterns('searcher.views',
+    url(r'^image-update/$', 'image_update_list'),
+    url(r'^image-update/(?P<colorstyle>[0-9]{9}).*?$', 'image_update_detail'),
 )
-
 urlpatterns = format_suffix_patterns(urlpatterns)
 
 ## End REST
