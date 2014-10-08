@@ -3,8 +3,8 @@ from django.conf.urls import patterns, include, url
 
 from . import views
 
-urlpatterns = patterns('accounts',
-    url(r'^$', views.OnePageAppView.as_view(), name='onepageapp'),
+urlpatterns = patterns('',
+    url(r'^accounts$', views.OnePageAppView.as_view(), name='onepageapp'),
 )
 
 urlpatterns = patterns('',
