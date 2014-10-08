@@ -105,25 +105,6 @@ router.register(r'groups', api_views.GroupViewSet)
 router.register(r'accounts', api_views.UserView, 'list')
 
 # Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browseable API.
-from rest_framework.urlpatterns import format_suffix_patterns
-
-
-#### REST FRAMWORK URLS Views in Accounts for now
-urlpatterns = patterns('accounts.views',
-    url(r'^image-update-list/$', 'image_update_list'),
-    url(r'^image-update/(?P<colorstyle>[0-9]{9}).*?/$', 'image_update_detail'),
-    url(r'^image-update-detail/$', 'image_update_detail'),
-    url(r'^image-update/?$', 'image_update_list'),
-)
-urlpatterns = format_suffix_patterns(urlpatterns)
-
-
-# Angularjs 1 page app
-urlpatterns += patterns('',
-                        url(r'^api/auth/$', api_views.AuthView.as_view(), name='authenticate'),
-                        url(r'^$', api_views.OnePageAppView.as_view(), name='1pghome'),
-                        )
 
 ## End REST
 
