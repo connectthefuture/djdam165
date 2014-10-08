@@ -1,5 +1,4 @@
-from django.shortcuts import render
-
+# -*- coding: utf-8 -*-
 # Create your views here.
 
 ####################
@@ -11,8 +10,13 @@ from django.shortcuts import render
 ####################################################
 ####################
 ###
+from django.shortcuts import render
+from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
+from rest_framework import viewsets
+from rest_framework.permissions import AllowAny
 from accounts.serializers import UserSerializer, GroupSerializer
+from accounts.permissions import IsStaffOrTargetUser
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -21,6 +25,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
@@ -176,11 +181,6 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None):
 from django.views.generic.base import TemplateView
 
 ####### Angular API #######
-from django.contrib.auth.models import User
-from rest_framework import viewsets
-from rest_framework.permissions import AllowAny
-from accounts.permissions import IsStaffOrTargetUser
-
 
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
