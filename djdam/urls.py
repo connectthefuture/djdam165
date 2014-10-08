@@ -87,29 +87,7 @@ v1_api.register(ImageUpdateResource())
 
 from django.conf.urls import patterns, url, include
 from rest_framework import routers
-from accounts import views as api_views
-
-router = routers.DefaultRouter()
-router.register(r'post-ready-original', api_views.PostReadyOriginalViewSet)
-router.register(r'pmdata', api_views.ProductSnapshotLiveViewSet)
-router.register(r'excel-tool-data', api_views.ExcelToolDataViewSet)
-
-# router.register(r'supplier-ingest-images', views.SupplierIngestImagesViewSet)
-router.register(r'supplier-ingest', api_views.SupplierIngestViewSet)
-router.register(r'supplier-ingest-404', api_views.SupplierIngest404ViewSet)
-router.register(r'image-update', api_views.ImageUpdateViewSet)
-
-router.register(r'users', api_views.UserViewSet)
-router.register(r'groups', api_views.GroupViewSet)
-
-router.register(r'accounts', api_views.UserView, 'list')
-
-# Wire up our API using automatic URL routing.
-
-import accounts.views
-# Additionally, we include login URLs for the browseable API.
-from rest_framework.urlpatterns import format_suffix_patterns
-
+#from accounts import views as api_views
 
 #### REST FRAMWORK URLS Views in Accounts for now
 urlpatterns = patterns('',
@@ -123,7 +101,7 @@ urlpatterns = format_suffix_patterns(urlpatterns)
 ## End REST
 
 ### Tastypy URLS
-urlpatterns = patterns('',
+urlpatterns += patterns('',
     # ...more URLconf bits here...
     # Then add:
     #(r'^api/', include(v1_api.urls)),
