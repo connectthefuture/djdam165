@@ -100,7 +100,7 @@ from rest_framework.response import Response
 
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes((IsAuthenticated, ))
-def image_update_list(request, format=None, pk=None, alt=1, colorstyle=None):
+def image_update_list(request, pk=None, alt=1, colorstyle=None):
     """
     List all image_updates, or create a new image_update.
     """
