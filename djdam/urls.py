@@ -96,7 +96,7 @@ urlpatterns = patterns('',
     url(r'^image-update-list/$', 'image_update_list'),
     url(r'^image-update/(?P<colorstyle>[0-9]{9}).*?/$', 'image_update_detail'),
     url(r'^image-update-detail/$', 'image_update_detail'),
-    url(r'^image-update/?$', 'image_update_list'),
+    #url(r'^image-update/?$', 'image_update_list'),
 )
 urlpatterns = format_suffix_patterns(urlpatterns)
 
