@@ -73,10 +73,7 @@ urlpatterns = patterns('searcher.views',
                       ## (r'^manage/tags/$', 'manage_tags'),
                       ## (r'^manage/selects/$', 'manage_selects'),
                       ## (r'^manage/products/$', 'manage_products'),
-                      (r'^image-update/image-update-detail/$', 'image_update_detail'),
-                      (r'^image-update/image-update-list/$', 'image_update_list'),
                       url(r'^imagenotes_add/(?P<pkey>\d+).*?$', 'imagenotes_add', name='imagenotes_add'),
-
                       (r'^index/$', 'index'),
                       )
 
