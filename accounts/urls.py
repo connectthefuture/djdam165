@@ -28,5 +28,5 @@ urlpatterns += patterns('',
 # Angularjs 1 page app
 urlpatterns += patterns('',
                         url(r'^api/auth/$', views.AuthView.as_view(), name='authenticate'),
-                        url(r'^$', views.OmePageAppView.as_view(), name='onepagehome'),
+                        url(r'^$', views.OnePageAppView.as_view(), name='onepagehome'),
                         )
