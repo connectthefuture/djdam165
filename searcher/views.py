@@ -23,7 +23,7 @@
 
 # Photo Admin Methods #######
 # @login_required
-from accounts import authentication
+from django.views.decorators.cache import cache_page
 
 from djdam.settings import MEDIA_URL
 
@@ -377,6 +377,7 @@ def weeks_still_selects(request):
 ###################################################################################################
 ###################################################################################################
 
+@cache_page(60 * 15)
 def weeks_fashion_selects(request):
     results = query_current_week(PushPhotoselects)
     results = results.filter(file_path__contains="eFashion")
@@ -877,7 +878,6 @@ def get_all_images_colorstyle(request):
 
 ###################################################################################################
 ###################################################################################################
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def get_all_images_outtakes(request):
