@@ -88,6 +88,8 @@ v1_api.register(ImageUpdateResource())
 from django.conf.urls import patterns, url, include
 from rest_framework import routers
 #from accounts import views as api_views
+from rest_framework.urlpatterns import format_suffix_patterns
+
 
 #### REST FRAMWORK URLS Views in Accounts for now
 urlpatterns = patterns('',
