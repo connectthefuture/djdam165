@@ -90,24 +90,23 @@ from rest_framework import routers
 from searcher import views
 
 router = routers.DefaultRouter()
-router.register(r'post-ready-original', views.PostReadyOriginalViewSet)
-router.register(r'pmdata', views.ProductSnapshotLiveViewSet)
-router.register(r'excel-tool-data', views.ExcelToolDataViewSet)
-
+router.register(r'post-ready-original', api_views.PostReadyOriginalViewSet)
+router.register(r'pmdata', api_views.ProductSnapshotLiveViewSet)
+router.register(r'excel-tool-data', api_views.ExcelToolDataViewSet)
 
 # router.register(r'supplier-ingest-images', views.SupplierIngestImagesViewSet)
-router.register(r'supplier-ingest', views.SupplierIngestViewSet)
-router.register(r'supplier-ingest-404', views.SupplierIngest404ViewSet)
-router.register(r'image-update', views.ImageUpdateViewSet)
+router.register(r'supplier-ingest', api_views.SupplierIngestViewSet)
+router.register(r'supplier-ingest-404', api_views.SupplierIngest404ViewSet)
+router.register(r'image-update', api_views.ImageUpdateViewSet)
 
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'users', api_views.UserViewSet)
+router.register(r'groups', api_views.GroupViewSet)
 
+router.register(r'accounts', api_views.UserView, 'list')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browseable API.
 from rest_framework.urlpatterns import format_suffix_patterns
-
 
 
 #### REST FRAMWORK URLS
@@ -118,6 +117,14 @@ urlpatterns = patterns('searcher.views',
     url(r'^image-update/?$', 'image_update_list'),
 )
 urlpatterns = format_suffix_patterns(urlpatterns)
+
+
+# Angularjs 1 page app
+from accounts import views as api_views
+urlpatterns += patterns('',
+                        url(r'^api/auth/$', api_views.AuthView.as_view(), name='authenticate'),
+                        url(r'^$', api_views.OnePageAppView.as_view(), name='1pghome'),
+                        )
 
 ## End REST
 

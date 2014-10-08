@@ -5,12 +5,8 @@
 # Create your views here.
 #from kombu.transport import django
 #from string import join
-from searcher.models import PostReadyOriginal
 
-import os, re
-from PIL import Image as PImage
 # from settings import MEDIA_ROOT
-from django.db import models
 
 
 ## adminactions  ####
@@ -27,20 +23,9 @@ from django.db import models
 
 # Photo Admin Methods #######
 # @login_required
-from string import join
+from accounts import authentication
 
-from collections import defaultdict
-
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404, render_to_response, render
-from django.contrib.auth.decorators import login_required
-from django.core.context_processors import csrf
-from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from django.db.models import Q
-from django.contrib.auth.models import User
-from django.shortcuts import render
-
-from djdam.settings import MEDIA_ROOT, MEDIA_URL
+from djdam.settings import MEDIA_URL
 
 #import searcher.models
 from searcher.models import *
@@ -82,7 +67,6 @@ def search_users_albums_bycolorstyle(request):
             results = Product.objects.filter(album__icontains=q_album)
             return render(request, 'search_results.html', {'results': results, 'query': q_user,})
 
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def search_colorstyle(request, q):
@@ -102,7 +86,6 @@ def search_colorstyle(request, q):
         message = 'You submitted an empty form from views.main using {}.'.format(request.GET['q'])
         return HttpResponse(message)
 
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def search_brand(request):
@@ -122,7 +105,6 @@ def search_brand(request):
 # def search_photo_date(request, q):
 #     results = ProductionRawZimages.objects.filter(photo_date__icontains=q)
 #     return render(request, 'search_results.html', {'results': results, 'query': q})
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def search_photo_date(request, startdate):
@@ -135,7 +117,6 @@ def search_photo_date(request, startdate):
             enddate = request.GET['enddate']
             startend = (startdate, enddate,)
 
-    import datetime
     ##TODO:Convert request.startdate,enddate to py datetime obj
 
     #if not startend:
@@ -153,7 +134,6 @@ def search_photo_date(request, startdate):
     #     message = 'Please Do not Enter Anything in text box when searching using dates\n \tPlease remove {} and try again.'.format(request.GET['q'])
     #     return HttpResponse(message)
 
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def search_keyword(request):
@@ -164,9 +144,6 @@ def search_keyword(request):
             return render(request, 'search_results.html', {'results': results,
                                                             'query': q_keyword,})
 
-
-
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def main(request):
@@ -224,7 +201,6 @@ def main(request):
 
 ###################################################################################################
 ###################################################################################################
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def query_previous_week(modelname):
@@ -240,7 +216,6 @@ def query_previous_week(modelname):
 
 ###################################################################################################
 ###################################################################################################
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def query_current_week(modelname):
@@ -256,7 +231,6 @@ def query_current_week(modelname):
 
 ###################################################################################################
 ###################################################################################################
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def query_yesterday(modelname):
@@ -317,7 +291,6 @@ def yesterday_still_selects(request):
 
 ###################################################################################################
 ###################################################################################################
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def yesterday_fashion_outtakes(request):
@@ -360,7 +333,6 @@ def weeks_fashion_outtakes(request):
 
 ###################################################################################################
 ###################################################################################################
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def lastweeks_fashion_outtakes(request):
@@ -383,7 +355,6 @@ def lastweeks_fashion_outtakes(request):
 
 ###################################################################################################
 ###################################################################################################
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def weeks_still_selects(request):
@@ -425,7 +396,6 @@ def weeks_fashion_selects(request):
 
 ###################################################################################################
 ###################################################################################################
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def lastweeks_still_selects(request):
@@ -449,7 +419,6 @@ def lastweeks_still_selects(request):
 
 ###################################################################################################
 ###################################################################################################
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def lastweeks_fashion_selects(request):
@@ -490,7 +459,7 @@ def image(request, pk):
 ###################################################################################################
 ###################################################################################################
 
-from searcher.forms import MetadataForm, ImportCropUploadForm
+from searcher.forms import ImportCropUploadForm
 
 
 def email_image_and_notes(request, pk):
@@ -613,9 +582,9 @@ def manage_products(request, brand_id):
 ###################################################################################################
 ###################################################################################################
 
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.core.mail import mail_admins
-from forms import ImageNotesForm, UploadFileForm
+from forms import ImageNotesForm
 
 
 def imagenotes_form(request):
@@ -646,7 +615,7 @@ def imagenotes_form(request):
 ## Hires Primary images
 
 from django.views.generic.dates import YearArchiveView, MonthArchiveView, WeekArchiveView, DayArchiveView
-from searcher.models import PostReadyOriginal, Zimages1Photoselects
+from searcher.models import Zimages1Photoselects
 
 class PhotoYearArchiveView(YearArchiveView):
     queryset = PostReadyOriginal.objects.all()
@@ -682,7 +651,6 @@ class PhotoDayArchiveView(DayArchiveView):
 ###################################################################################################
 ###################################################################################################
 ############ RAW Onfig Outtakes
-from searcher.models import PostReadyOriginal##ProductionRawOnfigure
 
 class PhotoRawYearArchiveView(YearArchiveView):
     queryset = ProductionRawZimages.objects.all()
@@ -733,7 +701,6 @@ def merge_dicts_bycolorstyle(dict1, dict2):
 
 ###################################################################################################
 ###################################################################################################
-from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def get_all_images_colorstyle(request):
@@ -914,7 +881,6 @@ from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 15)
 def get_all_images_outtakes(request):
-    from searcher.models import Images
     from searcher.models import ProductionRawZimages
     from searcher.models import ProductSnapshotLive
     PmData = ProductSnapshotLive.objects.all()
@@ -1065,7 +1031,7 @@ def get_all_images_outtakes(request):
 ###################################################################################################
 
 from django.shortcuts import render
-from forms import MessageForm, MetadataForm
+from forms import MetadataForm
 
 def imagenotes_add(request, pkey=''):
     # This view is missing all form handling logic for simplicity of the example
@@ -1147,8 +1113,6 @@ def mark_selected(request):
     #    except sqlalchemy.exc.DatabaseError:
 
 
-    from datetime import timedelta as timedelta
-
     user_index = SelectedFiles.objects.filter(ipaddress__exact=ipaddress) ##.filter(create_dt__gt=create_dt - timedelta(days=7))
     return render(request, 'base/success.html',
                           {'form': MetadataForm(),
@@ -1200,7 +1164,6 @@ def mark_removed(request):
 ###################################################################################################
 
 def selected_index(request):
-    import datetime
     #user_id     = request.HTTP_COOKIE['_auth_user_id']
     ipaddress = request.META['REMOTE_ADDR']
     #session_id = request.COOKIES['sessionid']
@@ -1216,8 +1179,6 @@ def selected_index(request):
 ###################################################################################################
 ###################################################################################################
 
-from django.http import HttpResponse
-import zipfile
 import os
 from cStringIO import StringIO  # caveats for Python 3.0 apply
 
@@ -1273,7 +1234,7 @@ def upload_and_crop(request):
 
 
 def handle_uploaded_excel_file(workbk=None):
-    import csv,xlrd,sys
+    import xlrd
     #workbk = sys.argv[1]
     book = xlrd.open_workbook(workbk)##sys.argv[1])
     sh = book.sheet_by_index(0)
@@ -1326,7 +1287,6 @@ from xlwt import *
 from django.http import HttpResponse
 
 
-from forms import UploadFileForm
 def input_merge_list(request):
     form = UploadFileForm(request.POST, request.FILES)
     file_path   = request.FILES['file']
@@ -1371,7 +1331,8 @@ def download_merge_file(request):
 
 
 from utilities import ExcelResponse
-from models import ExcelToolData
+
+
 def output_excel_table(request):
     oldpo = 'm'
     objs = ExcelToolData.objects.all()
@@ -1496,8 +1457,6 @@ def export_excel_file(request, queryset):
 ###############################   UploadFileWithForm   ############################################
 ###################################################################################################
 
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
 from .forms import UploadFileForm
 from .models import File
 
@@ -1534,8 +1493,6 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from .models import Document
-from searcher.forms import DocumentForm
 
 def ajax_return_search(request):
     try:
@@ -1606,173 +1563,3 @@ def ajax_colorstyle_search(request,q=None,sq=None):
 #         context_instance=RequestContext(request)
 #     )
 
-####################
-####################################################
-####################################################
-#### Django --> REST Framework
-#######################################################
-# ###################
-####################################################
-####################
-###
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
-from searcher.serializers import UserSerializer, GroupSerializer
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-
-####################################################
-############
-####################################################
-####################################################
-############
-####################################################
-
-from searcher.models import PostReadyOriginal, ProductSnapshotLive, ExcelToolData
-from searcher.serializers import PostReadyOriginalSerializer, ProductSnapshotLiveSerializer, ExcelToolDataSerializer
-
-class PostReadyOriginalViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows PostReadyOriginal to be viewed or edited.
-    """
-    queryset = PostReadyOriginal.objects.all()
-    serializer_class = PostReadyOriginalSerializer
-
-class ProductSnapshotLiveViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows ProductSnapshotLive to be viewed or edited.
-    """
-    queryset = ProductSnapshotLive.objects.all()
-    serializer_class = ProductSnapshotLiveSerializer
-
-class ExcelToolDataViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows ExcelToolData to be viewed or edited.
-    """
-    queryset = ExcelToolData.objects.all()
-    serializer_class = ExcelToolDataSerializer
-
-
-
-from searcher.models import SupplierIngest, SupplierIngest404, ImageUpdate
-from searcher.serializers import SupplierIngestSerializer, SupplierIngest404Serializer, ImageUpdateSerializer
-
-class SupplierIngestViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows SupplierIngest to be viewed or edited.
-    """
-    queryset = SupplierIngest.objects.all()
-    serializer_class = SupplierIngestSerializer
-
-class SupplierIngest404ViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows SupplierIngest404 to be viewed or edited.
-    """
-    queryset = SupplierIngest404.objects.all()
-    serializer_class = SupplierIngest404Serializer
-
-class ImageUpdateViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows ImageUpdate to be viewed or edited.
-    """
-    queryset = ImageUpdate.objects.all()
-    serializer_class = ImageUpdateSerializer
-
-## REST_FRAMEWORK Browsable views
-from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-
-from rest_framework.response import Response
-
-@api_view(['GET', 'POST', 'PUT'])
-@permission_classes((IsAuthenticated, ))
-def image_update_list(request, format=None, pk=None, alt=1, colorstyle=None):
-    """
-    List all image_updates, or create a new image_update.
-    """
-    if request.method == 'GET':
-        image_updates = ImageUpdate.objects.all()
-        serializer = ImageUpdateSerializer(image_updates, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-        serializer = ImageUpdateSerializer(data=request.DATA)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-    elif request.method == 'PUT':
-        if not colorstyle:
-            colorstyle = request.DATA['colorstyle']
-        try:
-            image_update = ImageUpdate.objects.get(colorstyle=colorstyle,alt=alt)
-        except ImageUpdate.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = ImageUpdateSerializer(image_update, data=request.DATA)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-@api_view(['GET', 'PUT', 'POST'])
-@permission_classes((IsAuthenticated, ))
-def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None):
-    """
-    Retrieve, update or delete an ImageUpdate instance.
-    """
-    try:
-        if not colorstyle:
-            colorstyle = request.GET['colorstyle']
-    except:
-        pass
-    try:
-        image_update = ImageUpdate.objects.get(colorstyle=colorstyle, alt=1)
-    except ImageUpdate.DoesNotExist:
-        try:
-            image_update = ImageUpdate.objects.get(colorstyle=colorstyle,alt=alt)
-        except ImageUpdate.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
-        serializer = ImageUpdateSerializer(image_update)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        if not colorstyle:
-            colorstyle = request.DATA['colorstyle']
-        image_update = ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt)
-        serializer = ImageUpdateSerializer(image_update, data=request.DATA)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == 'POST':
-        serializer = ImageUpdateSerializer(data=request.DATA)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == 'DELETE':
-        image_update = ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt)
-        image_update.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -10,7 +10,15 @@ def home(request):
     return render(request, 'base/jbhome.html',)
 
 
+#################
+## REST framework
+#################
+from django.views.generic.base import TemplateView
+class OnePageAppView(TemplateView):
+    template_name = 'one_page_app.html'
 
+
+#################
 ###### Testing Layout views
 def bootstrapshell(request):
     """ Default view for the root """

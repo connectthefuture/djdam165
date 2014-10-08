@@ -65,12 +65,14 @@ class AuthGroup(models.Model):
     class Meta:
         db_table = 'auth_group'
 
+
 class AuthGroupPermissions(models.Model):
     id = models.IntegerField(primary_key=True)
     group = models.ForeignKey(AuthGroup)
     permission = models.ForeignKey('AuthPermission')
     class Meta:
         db_table = 'auth_group_permissions'
+
 
 class AuthPermission(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -79,6 +81,7 @@ class AuthPermission(models.Model):
     codename = models.CharField(max_length=100L)
     class Meta:
         db_table = 'auth_permission'
+
 
 class AuthUser(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -960,7 +963,8 @@ class ImageUpdate(models.Model):
         return len(count + 1)
 
 
-##########
+####################
+
 from djdam.settings import MEDIA_ROOT
 import os
 class LocalImageURL(models.Model):

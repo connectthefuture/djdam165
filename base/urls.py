@@ -45,6 +45,15 @@ urlpatterns += patterns('searcher.tables',url(r'^filtered/.*?$', FilteredSingleT
 )
                                                # name='filtered_single_table_view')
 
+##### REST Auth persistent login
+from django.conf.urls import patterns, include, url
+
+from . import views
+
+urlpatterns = patterns('',
+    url(r'^$', views.OnePageAppView.as_view(), name='home'),
+)
+
 #################################################################################
 ##  Favicon loading for Firefox and Chrome from non default /favicon.ico location
 from django.http import HttpResponseRedirect

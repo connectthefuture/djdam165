@@ -144,8 +144,7 @@ def script_runner_home_page(request):
         print 'PoolClose'
         pool.join()
         print 'PoolJoin'
-        
-        
+
         #return render_to_response('listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res}, context_instance=RequestContext(request))
         return render(request, 'listing/script_output_page.html', {'styles': styles, 'script': script_selected, 'results': res })
 
