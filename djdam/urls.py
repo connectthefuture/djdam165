@@ -106,6 +106,20 @@ router.register(r'accounts', api_views.UserView, 'list')
 
 # Wire up our API using automatic URL routing.
 
+import accounts
+# Additionally, we include login URLs for the browseable API.
+from rest_framework.urlpatterns import format_suffix_patterns
+
+
+#### REST FRAMWORK URLS Views in Accounts for now
+urlpatterns = patterns('accounts.views',
+    url(r'^image-update-list/$', 'image_update_list'),
+    url(r'^image-update/(?P<colorstyle>[0-9]{9}).*?/$', 'image_update_detail'),
+    url(r'^image-update-detail/$', 'image_update_detail'),
+    url(r'^image-update/?$', 'image_update_list'),
+)
+urlpatterns = format_suffix_patterns(urlpatterns)
+
 ## End REST
 
 ### Tastypy URLS
