@@ -1,4 +1,12 @@
-from django.conf.urls import patterns, url
+##### REST Auth persistent login
+from django.conf.urls import patterns, include, url
+
+from . import views
+
+urlpatterns = patterns('',
+    url(r'^$', views.OnePageAppView.as_view(), name='onepageapp'),
+)
+
 urlpatterns = patterns('',
     (r'^login$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}),
     (r'^logout$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
