@@ -87,7 +87,7 @@ v1_api.register(ImageUpdateResource())
 
 from django.conf.urls import patterns, url, include
 from rest_framework import routers
-from searcher import views
+from accounts import views as api_views
 
 router = routers.DefaultRouter()
 router.register(r'post-ready-original', api_views.PostReadyOriginalViewSet)
@@ -120,7 +120,6 @@ urlpatterns = format_suffix_patterns(urlpatterns)
 
 
 # Angularjs 1 page app
-from accounts import views as api_views
 urlpatterns += patterns('',
                         url(r'^api/auth/$', api_views.AuthView.as_view(), name='authenticate'),
                         url(r'^$', api_views.OnePageAppView.as_view(), name='1pghome'),
