@@ -1627,7 +1627,6 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-
 class GroupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
@@ -1645,14 +1644,12 @@ class GroupViewSet(viewsets.ModelViewSet):
 from searcher.models import PostReadyOriginal, ProductSnapshotLive, ExcelToolData
 from searcher.serializers import PostReadyOriginalSerializer, ProductSnapshotLiveSerializer, ExcelToolDataSerializer
 
-
 class PostReadyOriginalViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows PostReadyOriginal to be viewed or edited.
     """
     queryset = PostReadyOriginal.objects.all()
     serializer_class = PostReadyOriginalSerializer
-
 
 class ProductSnapshotLiveViewSet(viewsets.ModelViewSet):
     """
@@ -1696,11 +1693,14 @@ class ImageUpdateViewSet(viewsets.ModelViewSet):
 
 ## REST_FRAMEWORK Browsable views
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+
 from rest_framework.response import Response
 
 @api_view(['GET', 'POST', 'PUT'])
-def image_update_list(request,pk=None,alt=1,colorstyle=None):
+@permission_classes((IsAuthenticated, ))
+def image_update_list(request, format=None, pk=None, alt=1, colorstyle=None):
     """
     List all image_updates, or create a new image_update.
     """
@@ -1733,7 +1733,8 @@ def image_update_list(request,pk=None,alt=1,colorstyle=None):
 
 
 @api_view(['GET', 'PUT', 'POST'])
-def image_update_detail(request, pk=None,alt=1,colorstyle=None):
+@permission_classes((IsAuthenticated, ))
+def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None):
     """
     Retrieve, update or delete an ImageUpdate instance.
     """
