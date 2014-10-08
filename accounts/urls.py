@@ -28,5 +28,5 @@ urlpatterns += patterns('',
 
 # Angularjs 1 page app
 urlpatterns += patterns('accounts.views',
-                        url(r'^$', api_views.OnePageAppView.as_view(), name='onepagehome'),
+                        url(r'^$', OnePageAppView.as_view(), name='onepagehome'),
                         )
