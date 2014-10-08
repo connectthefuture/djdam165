@@ -22,11 +22,11 @@ urlpatterns += patterns('',
     (r'^logout$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     (r'^password_change$', 'django.contrib.auth.views.password_change', {'template_name': 'accounts/password_change_form.html'}),
     (r'^password_change_done$', 'django.contrib.auth.views.password_change_done', {'template_name': 'accounts/password_change_done.html'}),
-    url(r'^api/auth/$', api_views.AuthView.as_view(), name='authenticate'),
 )
 
 
 # Angularjs 1 page app
 urlpatterns += patterns('accounts.views',
+                        url(r'^api/auth/$', AuthView.as_view(), name='authenticate'),
                         url(r'^$', OnePageAppView.as_view(), name='onepagehome'),
                         )
