@@ -109,7 +109,7 @@ router.register(r'accounts', api_views.UserView, 'list')
 ## End REST
 
 ### Tastypy URLS
-urlpatterns += patterns('',
+urlpatterns = patterns('',
     # ...more URLconf bits here...
     # Then add:
     #(r'^api/', include(v1_api.urls)),
