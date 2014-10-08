@@ -3,7 +3,7 @@ from django.conf.urls import patterns, include, url
 
 from . import views
 
-urlpatterns += patterns('',
+urlpatterns = patterns('',
     (r'^login$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}),
     (r'^logout$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     (r'^password_change$', 'django.contrib.auth.views.password_change', {'template_name': 'accounts/password_change_form.html'}),
