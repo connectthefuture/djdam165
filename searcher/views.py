@@ -292,7 +292,6 @@ def yesterday_still_selects(request):
 ###################################################################################################
 ###################################################################################################
 
-@cache_page(60 * 15)
 def yesterday_fashion_outtakes(request):
     results = query_yesterday(ProductionRawZimages)
     results = results.filter(file_path__icontains="CR2")
@@ -334,7 +333,6 @@ def weeks_fashion_outtakes(request):
 ###################################################################################################
 ###################################################################################################
 
-@cache_page(60 * 15)
 def lastweeks_fashion_outtakes(request):
     results = query_previous_week(ProductionRawZimages)
     results = results.filter(file_path__contains="CR2")
@@ -356,7 +354,6 @@ def lastweeks_fashion_outtakes(request):
 ###################################################################################################
 ###################################################################################################
 
-@cache_page(60 * 15)
 def weeks_still_selects(request):
     results = query_current_week(PushPhotoselects)
     results = results.filter(file_path__contains="aPhoto")
@@ -377,7 +374,6 @@ def weeks_still_selects(request):
 ###################################################################################################
 ###################################################################################################
 
-@cache_page(60 * 15)
 def weeks_fashion_selects(request):
     results = query_current_week(PushPhotoselects)
     results = results.filter(file_path__contains="eFashion")
@@ -398,7 +394,6 @@ def weeks_fashion_selects(request):
 ###################################################################################################
 ###################################################################################################
 
-@cache_page(60 * 15)
 def lastweeks_still_selects(request):
     results = query_previous_week(PostReadyOriginal)
     results = results.filter(file_path__contains="Still")
@@ -421,7 +416,6 @@ def lastweeks_still_selects(request):
 ###################################################################################################
 ###################################################################################################
 
-@cache_page(60 * 15)
 def lastweeks_fashion_selects(request):
     results = query_previous_week(PostReadyOriginal)
     results = results.filter(file_path__contains="Fashion")
