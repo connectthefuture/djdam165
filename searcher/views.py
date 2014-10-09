@@ -68,7 +68,7 @@ def search_users_albums_bycolorstyle(request):
             return render(request, 'search_results.html', {'results': results, 'query': q_user,})
 
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def search_colorstyle(request, q):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
@@ -87,7 +87,7 @@ def search_colorstyle(request, q):
         return HttpResponse(message)
 
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def search_brand(request):
 #    if 'brandsearch' in request.GET and request.GET['brandsearch']:
     if 'q' in request.GET and request.GET['q']:
@@ -106,7 +106,7 @@ def search_brand(request):
 #     results = ProductionRawZimages.objects.filter(photo_date__icontains=q)
 #     return render(request, 'search_results.html', {'results': results, 'query': q})
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def search_photo_date(request, startdate):
     # if 'q' in request.GET and request.GET['q']:
     #     q = request.GET['q']
@@ -135,7 +135,7 @@ def search_photo_date(request, startdate):
     #     return HttpResponse(message)
 
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def search_keyword(request):
     if 'keywordsearch' in request.GET and request.GET['keywordsearch']:
         if 'q' in request.GET and request.GET['q']:
@@ -145,7 +145,7 @@ def search_keyword(request):
                                                             'query': q_keyword,})
 
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def main(request):
     """All Queries Get Routed to functions via this regex parser"""
     import re
@@ -202,7 +202,6 @@ def main(request):
 ###################################################################################################
 ###################################################################################################
 
-@cache_page(60 * 15)
 def query_previous_week(modelname):
     from datetime import timedelta
     from django.utils import timezone
@@ -217,7 +216,6 @@ def query_previous_week(modelname):
 ###################################################################################################
 ###################################################################################################
 
-@cache_page(60 * 15)
 def query_current_week(modelname):
     from datetime import timedelta
     from django.utils import timezone
@@ -232,7 +230,6 @@ def query_current_week(modelname):
 ###################################################################################################
 ###################################################################################################
 
-@cache_page(60 * 15)
 def query_yesterday(modelname):
     from datetime import timedelta
     from django.utils import timezone
@@ -292,6 +289,7 @@ def yesterday_still_selects(request):
 ###################################################################################################
 ###################################################################################################
 
+# @cache_page(60 * 15)
 def yesterday_fashion_outtakes(request):
     results = query_yesterday(ProductionRawZimages)
     results = results.filter(file_path__icontains="CR2")
@@ -333,6 +331,7 @@ def weeks_fashion_outtakes(request):
 ###################################################################################################
 ###################################################################################################
 
+# @cache_page(60 * 15)
 def lastweeks_fashion_outtakes(request):
     results = query_previous_week(ProductionRawZimages)
     results = results.filter(file_path__contains="CR2")
@@ -354,6 +353,7 @@ def lastweeks_fashion_outtakes(request):
 ###################################################################################################
 ###################################################################################################
 
+# @cache_page(60 * 15)
 def weeks_still_selects(request):
     results = query_current_week(PushPhotoselects)
     results = results.filter(file_path__contains="aPhoto")
@@ -374,6 +374,7 @@ def weeks_still_selects(request):
 ###################################################################################################
 ###################################################################################################
 
+# @cache_page(60 * 15)
 def weeks_fashion_selects(request):
     results = query_current_week(PushPhotoselects)
     results = results.filter(file_path__contains="eFashion")
@@ -394,6 +395,7 @@ def weeks_fashion_selects(request):
 ###################################################################################################
 ###################################################################################################
 
+# @cache_page(60 * 15)
 def lastweeks_still_selects(request):
     results = query_previous_week(PostReadyOriginal)
     results = results.filter(file_path__contains="Still")
@@ -416,6 +418,7 @@ def lastweeks_still_selects(request):
 ###################################################################################################
 ###################################################################################################
 
+# @cache_page(60 * 15)
 def lastweeks_fashion_selects(request):
     results = query_previous_week(PostReadyOriginal)
     results = results.filter(file_path__contains="Fashion")
@@ -697,7 +700,7 @@ def merge_dicts_bycolorstyle(dict1, dict2):
 ###################################################################################################
 ###################################################################################################
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def get_all_images_colorstyle(request):
     from searcher.models import Images
     from searcher.models import ProductionRawZimages
