@@ -17,7 +17,7 @@ import autocomplete_light
 autocomplete_light.autodiscover()
 
 from django.contrib import admin
-admin.autodiscover()
+#admin.autodiscover()
 
 ####
 
@@ -120,11 +120,9 @@ urlpatterns += patterns('',
     (r'^api/', include(v1_api.urls)),
 )
 from django.conf.urls import include, url
-from djdam.admin import admin_site
+from djdam.admin import *
 
-urlpatterns = [
-    url(r'^myadmin/', include(admin_site.urls)),
-]
+
 urlpatterns += patterns('',
                        ## Admin -> dj admin tools actions and other admin config routing,
                        #  must load prior to django Admin loading
@@ -132,7 +130,8 @@ urlpatterns += patterns('',
                        url(r'^admin_tools/', include('admin_tools.urls')),
                        url(r'^adminactions/', include('adminactions.urls')),
                        # Uncomment the next line to enable the admin:
-                       url(r'^admin/', include(admin.site.urls)),
+                       url(r'^myadmin/', include(admin.urls)),
+                       #url(r'^admin/', include(admin.site.urls)),
                        #url(r'^admin/$', admin.site.admin_view(admin.site.index)),
                        ## Uncomment the admin/doc line below to enable admin
                        # documentation:
