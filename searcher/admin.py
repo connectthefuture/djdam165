@@ -27,12 +27,6 @@ class ExcelToolDataAdmin(admin.ModelAdmin):
 admin.site.register(ExcelToolData, ExcelToolDataAdmin)
 
 
-class ExcelToolDataAdmin(admin.ModelAdmin):
-    # This will generate a ModelForm
-    form = autocomplete_light.modelform_factory(ExcelToolData)
-admin.site.register(ExcelToolData, ExcelToolDataAdmin)
-
-
 class ProductAdmin(admin.ModelAdmin):
     # This will generate a ModelForm
     form = autocomplete_light.modelform_factory(Product)
