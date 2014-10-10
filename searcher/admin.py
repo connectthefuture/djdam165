@@ -84,6 +84,7 @@ myadmin.site.register(PostReadyOriginal, PostReadyOriginalAdmin)
 
 
 class AuthGroupAdmin(models.Model):
+    form = autocomplete_light.modelform_factory(AuthGroup)
     pass
 myadmin.site.register(AuthGroup, AuthGroupAdmin)
 
@@ -91,4 +92,5 @@ myadmin.site.register(AuthGroup, AuthGroupAdmin)
 class AuthUserAdmin(models.Model):
     search_fields = ['username']
     list_display = ('username', 'is_staff', 'is_superuser', 'email')
+    form = autocomplete_light.modelform_factory(AuthUser)
 myadmin.site.register(AuthUser, AuthUserAdmin)
