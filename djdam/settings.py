@@ -56,16 +56,16 @@ INSTALLED_APPS = (# '',
     # # DjangoAdminBootstrapped
     'django_admin_bootstrapped',
     # Dj Admin Tools
-    #'admin_tools',  #
+    'admin_tools',  #
     #'admin_tools.theming',  #
     #'admin_tools.dashboard',  #
     #'admin_tools.menu',
-    #'adminactions',  #
+    'adminactions',  #
     # Django contrib apps/admin
+    # 'django.contrib.admin',
+    'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',
     'django.contrib.sites',
-    'django.contrib.admin',
-    #'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
