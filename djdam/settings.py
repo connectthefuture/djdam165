@@ -62,8 +62,8 @@ INSTALLED_APPS = (# '',
     #'admin_tools.menu',
     'adminactions',  #
     # Django contrib apps/admin
-    # 'django.contrib.admin',
-    'django.contrib.admin.apps.SimpleAdminConfig',
+    'django.contrib.admin',
+    #'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.contenttypes',

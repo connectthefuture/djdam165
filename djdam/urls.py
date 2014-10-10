@@ -17,7 +17,7 @@ import autocomplete_light
 autocomplete_light.autodiscover()
 
 from django.contrib import admin
-#admin.autodiscover()
+admin.autodiscover()
 
 ####
 
