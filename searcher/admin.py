@@ -23,9 +23,21 @@ myadmin.site.register(SupplierIngestImages, SupplierIngestImagesAdmin)
 
 class SupplierIngestAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
-    list_display = ('colorstyle', 'image_number', 'vendor_name', 'vendor_brand')
+    list_display = ('colorstyle', 'vendor_name', 'vendor_style','image_url', 'image_ready_dt', 'modified_dt', 'version')
     search_fields = ['colorstyle__vendor_name__vendor_brand']
+    list_filter = ('vendor_name', 'vendor_brand', 'modified_dt')
     form = autocomplete_light.modelform_factory(SupplierIngest)
+
+    def get_search_results(self, request, queryset, search_term):
+        queryset, use_distinct = super(SupplierIngestAdmin, self).get_search_results(request, queryset, search_term)
+        try:
+            search_term_as_int = int(search_term)
+        except ValueError:
+            pass
+        else:
+            queryset |= self.model.objects.filter(age=search_term_as_int)
+        return queryset, use_distinct
+
 myadmin.site.register(SupplierIngest, SupplierIngestAdmin)
 
 
