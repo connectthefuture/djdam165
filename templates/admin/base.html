@@ -1,7 +1,7 @@
 {% load admin_static %}<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
-<title>{% block title %}{% endblock %}</title>
+<title>{% block title %}DJDAM Admin{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
 {% block extrastyle %}{% endblock %}
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
@@ -21,7 +21,9 @@
     <!-- Header -->
     <div id="header">
         <div id="branding">
-        {% block branding %}{% endblock %}
+        {% block branding %}
+            <a href="/"></a><h1 id="site-name">{% trans 'Prodimages App/DB administration' %}</h1></a>
+        {% endblock %}
         </div>
         {% if user.is_active and user.is_staff %}
         <div id="user-tools">
