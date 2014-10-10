@@ -123,9 +123,9 @@ urlpatterns += patterns('',
 from django.conf.urls import include, url
 #from djdam.admin import *
 
-urlpatterns += patterns('',
-    (r'^admin/', include(admin.urls)),
-)
+# urlpatterns += patterns('',
+#     (r'^admin/', include(admin.urls)),
+# )
 
 urlpatterns += patterns('',
                        ## Admin -> dj admin tools actions and other admin config routing,
@@ -134,7 +134,7 @@ urlpatterns += patterns('',
                        url(r'^admin_tools/', include('admin_tools.urls')),
                        url(r'^adminactions/', include('adminactions.urls')),
                        # Uncomment the next line to enable the admin:
-                       url(r'^admin/', include(admin.site.urls)),
+                       url(r'^admin/', include(admin.urls)),
                        #url(r'^admin/', include(admin.site.urls)),
                        #url(r'^admin/$', admin.site.admin_view(admin.site.index)),
                        ## Uncomment the admin/doc line below to enable admin

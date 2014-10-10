@@ -21,7 +21,12 @@ from django.contrib.admin.filters import (ListFilter, SimpleListFilter,
 # Right after
 site = AdminSite()
 
+import django.contrib.admin
+django.contrib.admin.site = site
 
+# By the way now you can use the standard django admin autodiscover function
+# you can import it here
+from django.contrib.admin import autodiscover
 # Add
 # Monkey patch django admin_tools
 import admin_tools.utils
