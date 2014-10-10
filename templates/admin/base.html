@@ -1,11 +1,8 @@
 {% extends '_layouts/base.html' %}
 
 {#{% load admin_static %}<!DOCTYPE html>#}
-<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
-<head>
 {% block page_title %}DJDAM Admin{% endblock %}
 {% block extrajshead %}
-<script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
 <meta name="robots" content="NONE,NOARCHIVE" />
 {% endblock %}
 {% load i18n %}
