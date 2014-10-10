@@ -83,13 +83,13 @@ myadmin.site.register(PostReadyOriginal, PostReadyOriginalAdmin)
 ### Auth Groups and Users for Super only
 
 
-class AuthGroupAdmin(models.Model):
+class AuthGroupAdmin(myadmin.ModelAdmin):
     form = autocomplete_light.modelform_factory(AuthGroup)
     pass
 myadmin.site.register(AuthGroup, AuthGroupAdmin)
 
 
-class AuthUserAdmin(models.Model):
+class AuthUserAdmin(myadmin.ModelAdmin):
     search_fields = ['username']
     list_display = ('username', 'is_staff', 'is_superuser', 'email')
     form = autocomplete_light.modelform_factory(AuthUser)

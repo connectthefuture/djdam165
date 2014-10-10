@@ -200,7 +200,7 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
     os.path.join(BASE_DIR, 'templates/_layouts'),
-    os.path.join(BASE_DIR, 'admin'),
+    os.path.join(BASE_DIR, 'templates/admin'),
     os.path.join(BASE_DIR, 'templates/base'),
     os.path.join(BASE_DIR, 'templates/searcher'),
     os.path.join(BASE_DIR, 'templates/uploader'),
