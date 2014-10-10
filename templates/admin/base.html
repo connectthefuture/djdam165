@@ -1,13 +1,33 @@
-{% extends '_layouts/base.html' %}
-
-{#{% load admin_static %}<!DOCTYPE html>#}
-{% block page_title %}DJDAM Admin{% endblock %}
-{% block extrajshead %}
-<meta name="robots" content="NONE,NOARCHIVE" />
+{% load admin_static %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title>{% block title %}DJDAM Admin{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
+{% block extrastyle %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/redmond/jquery-ui-1.10.4.custom.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/datepicker.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/navbar-fixed-top.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/app.css">
 {% endblock %}
+
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
+{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
+<script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
+{% block extrahead %}
+  <script src="{{ STATIC_URL }}js/jquery-1.10.2.js"></script>
+  <script src="{{ STATIC_URL }}js/libs/jquery-ui-1.10.4.custom.min.js"></script>
+  <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
+  <script src="{{ STATIC_URL }}js/plugins.js"></script>
+{% endblock %}
+{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+</head>
 {% load i18n %}
 
-{% block body %}
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+
 <!-- Container -->
 <div id="container">
 
@@ -66,6 +86,10 @@
         <br class="clear" />
     </div>
     <!-- END Content -->
+
+    {% block footer %}<div id="footer"></div>{% endblock %}
 </div>
 <!-- END Container -->
-{% endblock %}
+
+</body>
+</html>
