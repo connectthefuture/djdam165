@@ -4,23 +4,12 @@
 <title>{% block title %}DJDAM Admin{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
 {% block extrastyle %}
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/redmond/jquery-ui-1.10.4.custom.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/datepicker.css">
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/navbar-fixed-top.css">
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/app.css">
 {% endblock %}
 
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
 {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
 <script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
 {% block extrahead %}
-  <script src="{{ STATIC_URL }}js/jquery-1.10.2.js"></script>
-  <script src="{{ STATIC_URL }}js/libs/jquery-ui-1.10.4.custom.min.js"></script>
-  <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
-  <script src="{{ STATIC_URL }}js/plugins.js"></script>
 {% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
 </head>
