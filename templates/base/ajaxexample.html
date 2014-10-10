@@ -2,35 +2,35 @@
 <html>
 <head>
 <title>jQuery Ajax Example with JSON Response</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function(){
   $(':submit').on('click', function() { // This event fires when a button is clicked
       var button = $(this).val();
-      $.ajax({ // ajax call starts
-          url: 'http://prodimages.ny.bluefly', // JQuery loads http://prodimages.ny.bluefly
+      $.ajax({ // ajax c* starts
+          url: 'http://prodimages.ny.bluefly/ap1/v1/supplier-ingest/', // JQuery loads http://prodimages.ny.bluefly
           data: 'button=' + $(this).val(), // Send value of the clicked button
           dataType: 'json', // Choosing a JSON datatype
           success: function(data) // Variable data contains the data we get from serverside
           {
-              $('#wines').html(''); // Clear #wines div
+              $('#image_download_valid').html(''); // Clear #image_download_valid div
               
-              if (button == 'all') { // If clicked buttons value is all, we post every wine
-                  for (var i in data.red) {
-                      $('#wines').append('Red wine: ' + data.red[i] + '<br/>');
+              if (button == '*') { // If clicked buttons value is *, we post every wine
+                  for (var i in data.P) {
+                      $('#image_download_valid').append('Valid Url: ' + data.P[i] + '<br/>');
                   }
-                  for (var i in data.white) {
-                      $('#wines').append('White wine: ' + data.white[i] + '<br/>');
-                  }
-              }
-              else if (button == 'red') { // If clicked buttons value is red, we post only red wines
-                  for (var i in data) {
-                      $('#wines').append('Red wine: ' + data[i] + '<br/>');
+                  for (var i in data.F) {
+                      $('#image_download_valid').append('Invalid Url: ' + data.F[i] + '<br/>');
                   }
               }
-              else if (button == 'white') { // If clicked buttons value is white, we post only white wines
+              else if (button == 'P') { // If clicked buttons value is P, we post only P image_download_valid
                   for (var i in data) {
-                      $('#wines').append('White wine: ' + data[i] + '<br/>');
+                      $('#image_download_valid').append('Valid Url: ' + data[i] + '<br/>');
+                  }
+              }
+              else if (button == 'F') { // If clicked buttons value is F, we post only F image_download_valid
+                  for (var i in data) {
+                      $('#image_download_valid').append('Invalid Url: ' + data[i] + '<br/>');
                   }
               }
           }
@@ -46,12 +46,12 @@ $(document).ready(function(){
 
 <body>
   <form method="post" action="">
-      <button value="all" type="submit">Get All Wines!</button>
-      <button value="red" type="submit">Get Red Wines!</button>
-      <button value="white" type="submit">Get White Wines!</button>
+      <button value="*" type="submit">Get All Urls!</button>
+      <button value="P" type="submit">Get Valid Urls!</button>
+      <button value="F" type="submit">Get Invalid Urls!</button>
   </form>
   
-  <div id="wines">
+  <div id="image_download_valid">
   <!-- Javascript will print data in here when we have finished the page -->
   </div>
 
