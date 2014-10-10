@@ -1,5 +1,6 @@
 # Register your models here.
-from django.contrib import admin
+import searcher.admin_custom as admin
+admin.autodiscover()
 import autocomplete_light
 from models import *
 

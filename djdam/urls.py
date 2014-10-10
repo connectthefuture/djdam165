@@ -16,9 +16,10 @@ import adminactions as adminactions
 import autocomplete_light
 autocomplete_light.autodiscover()
 
-from django.contrib import admin
+#from django.contrib import admin
+#admin.autodiscover()
+from searcher import admin_custom as admin
 admin.autodiscover()
-
 ####
 
 def bad(request):
@@ -122,6 +123,9 @@ urlpatterns += patterns('',
 from django.conf.urls import include, url
 #from djdam.admin import *
 
+urlpatterns += patterns('',
+    (r'^admin/', include(admin.urls)),
+)
 
 urlpatterns += patterns('',
                        ## Admin -> dj admin tools actions and other admin config routing,
