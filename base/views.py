@@ -32,6 +32,10 @@ def testhome(request):
     """ Default view for the root """
     return render(request, 'base/jbtesthome.html',)
 
+def ajaxexample(request):
+    """ Default view for the root """
+    return render(request, 'base/ajaxexample.html',)
+
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext

@@ -13,6 +13,7 @@ urlpatterns = patterns('base.views',
                        url(r'^bootstrap3shell/$', 'bootstrap3shell', name='bootstrap3shell'),
                        url(r'^testhome/?$', 'testhome', name='jbtesthome'),
                        url(r'^testjsonform/?.*?$', 'testjsonform', name='testjsonform'),
+                       url(r'^ajaxexample/?.*?$', 'ajaxexample', name='ajaxexample'),
 
 )
 
