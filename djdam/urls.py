@@ -119,7 +119,12 @@ urlpatterns += patterns('',
     (r'^api/v1/image-update/(?P<colorstyle>\d{9})/?', include(ImageUpdateResource().urls)),
     (r'^api/', include(v1_api.urls)),
 )
+from django.conf.urls import include, url
+from djdam.admin import admin_site
 
+urlpatterns = [
+    url(r'^myadmin/', include(admin_site.urls)),
+]
 urlpatterns += patterns('',
                        ## Admin -> dj admin tools actions and other admin config routing,
                        #  must load prior to django Admin loading
