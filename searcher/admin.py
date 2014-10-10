@@ -37,7 +37,6 @@ class SupplierIngestAdmin(myadmin.ModelAdmin):
     #     else:
     #         queryset |= self.model.objects.filter(age=search_term_as_int)
     #     return queryset, use_distinct
-
 myadmin.site.register(SupplierIngest, SupplierIngestAdmin)
 
 
@@ -79,3 +78,17 @@ class PostReadyOriginalAdmin(myadmin.ModelAdmin):
     search_fields = ['colorstyle']
     form = autocomplete_light.modelform_factory(PostReadyOriginal)
 myadmin.site.register(PostReadyOriginal, PostReadyOriginalAdmin)
+
+
+### Auth Groups and Users for Super only
+
+
+class AuthGroupAdmin(models.Model):
+    pass
+myadmin.site.register(AuthGroup, AuthGroupAdmin)
+
+
+class AuthUserAdmin(models.Model):
+    search_fields = ['username']
+    list_display = ('username', 'is_staff', 'is_superuser', 'email')
+myadmin.site.register(AuthUser, AuthUserAdmin)
