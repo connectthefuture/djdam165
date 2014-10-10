@@ -133,11 +133,11 @@ class ProductSnapshotLiveResource(ModelResource):
         #     'created': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
         #     'gender': ALL,
         # }
-
-    def dispatch(self, request_type, request, **kwargs):
-        colorstyle = kwargs.pop('colorstyle')
-        kwargs['colorstyle'] = get_object_or_404(ProductSnapshotLive, colorstyle=colorstyle)
-        return super(ProductSnapshotLiveResource, self).dispatch(request_type, request, **kwargs)
+    #
+    # def dispatch(self, request_type, request, **kwargs):
+    #     colorstyle = kwargs.pop('colorstyle')
+    #     kwargs['colorstyle'] = get_object_or_404(ProductSnapshotLive, colorstyle=colorstyle)
+    #     return super(ProductSnapshotLiveResource, self).dispatch(request_type, request, **kwargs)
 
     # def prepend_urls(self):
     #             return [
@@ -211,11 +211,11 @@ class OffshoreStatusResource(ModelResource):
         allowed_methods = ['get', 'post', 'put']
         detail_uri_name = 'colorstyle'
 
-    def dispatch(self, request_type, request, **kwargs):
-        colorstyle = kwargs.pop('colorstyle')
-        kwargs['colorstyle'] = get_object_or_404(OffshoreStatus, colorstyle=colorstyle)
-        return super(OffshoreStatusResource, self).dispatch(request_type, request, **kwargs)
-
+    # def dispatch(self, request_type, request, **kwargs):
+    #     colorstyle = kwargs.pop('colorstyle')
+    #     kwargs['colorstyle'] = get_object_or_404(OffshoreStatus, colorstyle=colorstyle)
+    #     return super(OffshoreStatusResource, self).dispatch(request_type, request, **kwargs)
+    #
 
 class OffshoreStatusSentOnlyResource(ModelResource):
     class Meta:
@@ -224,11 +224,11 @@ class OffshoreStatusSentOnlyResource(ModelResource):
         allowed_methods = ['get', 'post']
         detail_uri_name = 'colorstyle'
 
-    def dispatch(self, request_type, request, **kwargs):
-        colorstyle = kwargs.pop('colorstyle')
-        kwargs['colorstyle'] = get_object_or_404(OffshoreStatus, colorstyle=colorstyle)
-        return super(OffshoreStatusSentOnlyResource, self).dispatch(request_type, request, **kwargs)
-
+    # def dispatch(self, request_type, request, **kwargs):
+    #     colorstyle = kwargs.pop('colorstyle')
+    #     kwargs['colorstyle'] = get_object_or_404(OffshoreStatus, colorstyle=colorstyle)
+    #     return super(OffshoreStatusSentOnlyResource, self).dispatch(request_type, request, **kwargs)
+    #
 
 ## Styles to clear cache
 class ImageUpdateResource(ModelResource):
