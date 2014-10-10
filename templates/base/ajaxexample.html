@@ -1,7 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>jQuery Ajax Example with JSON Response</title>
+{% extends "_layouts/base.html" %}
+
+{% comment %}
+{% extends 'base/jbhome.html' %}
+{% endcomment %}
+
+{% block page_title %}jQuery Ajax Example with JSON Response
+{% endblock %}
+
+
+{% block content %}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -42,8 +49,6 @@ $(document).ready(function(){
 
 <!-- Write Javascript code here -->
 
-</head>
-
 <body>
   <form method="post" action="">
       <button value="*" type="submit">Get All Urls!</button>
@@ -54,6 +59,4 @@ $(document).ready(function(){
   <div id="image_download_valid">
   <!-- Javascript will print data in here when we have finished the page -->
   </div>
-
-</body>
-</html>
+{% endblock %}
