@@ -1,7 +1,7 @@
 # Register your models here.
 from django.contrib import admin
 import autocomplete_light
-from models import ImageUpdate, SupplierIngestImages, SupplierIngest
+from models import *
 
 class ImageUpdateAdmin(admin.ModelAdmin):
     # This will generate a ModelForm
@@ -15,7 +15,37 @@ class SupplierIngestImagesAdmin(admin.ModelAdmin):
 admin.site.register(SupplierIngestImages, SupplierIngestImagesAdmin)
 
 
-class SupplierIngestAdmin(admin.ModelAdmin):
+class ProductSnapshotLiveAdmin(admin.ModelAdmin):
     # This will generate a ModelForm
-    form = autocomplete_light.modelform_factory(SupplierIngest)
-admin.site.register(SupplierIngest, SupplierIngestAdmin)
+    form = autocomplete_light.modelform_factory(ProductSnapshotLive)
+admin.site.register(ProductSnapshotLive, ProductSnapshotLiveAdmin)
+
+
+class ExcelToolDataAdmin(admin.ModelAdmin):
+    # This will generate a ModelForm
+    form = autocomplete_light.modelform_factory(ExcelToolData)
+admin.site.register(ExcelToolData, ExcelToolDataAdmin)
+
+
+class ExcelToolDataAdmin(admin.ModelAdmin):
+    # This will generate a ModelForm
+    form = autocomplete_light.modelform_factory(ExcelToolData)
+admin.site.register(ExcelToolData, ExcelToolDataAdmin)
+
+
+class ProductAdmin(admin.ModelAdmin):
+    # This will generate a ModelForm
+    form = autocomplete_light.modelform_factory(Product)
+admin.site.register(Product, ProductAdmin)
+
+
+class SelectedFilesAdmin(admin.ModelAdmin):
+    # This will generate a ModelForm
+    form = autocomplete_light.modelform_factory(SelectedFiles)
+admin.site.register(SelectedFiles, SelectedFilesAdmin)
+
+
+class PostReadyOriginalAdmin(admin.ModelAdmin):
+    # This will generate a ModelForm
+    form = autocomplete_light.modelform_factory(PostReadyOriginal)
+admin.site.register(PostReadyOriginal, PostReadyOriginalAdmin)

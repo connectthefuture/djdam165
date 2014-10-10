@@ -31,7 +31,6 @@ class ColorstyleAutocomplete(autocomplete_light.AutocompleteModelBase):
     search_fields = ['^colorstyle', 'po_number']
 autocomplete_light.register(ProductSnapshotLive, ColorstyleAutocomplete)
 
-
 class VendorNameAutocomplete(autocomplete_light.AutocompleteModelBase):
     search_fields = ['^colorstyle', 'vendor_name']
 autocomplete_light.register(SupplierIngest, VendorNameAutocomplete)

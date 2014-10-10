@@ -51,7 +51,7 @@ $('#myFormSubmit').click(function(e){
 
 <script>
     $("button").click(function() {
-        $.get("api/v1/pmdata/" + $(":input:first-of-type"))
+        $.get("/api/v1/pmdata/" + $(":input:first-of-type"))
                 .done(function (data) {
                     alert("Data Loaded: " + data);
                 });

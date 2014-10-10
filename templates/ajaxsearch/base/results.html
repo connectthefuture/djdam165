@@ -1,3 +1,6 @@
+{% extends 'ajaxsearch/base/base.html' %}
+
+{% block results %}
 {% if results|length %}
  
 <table>
@@ -28,3 +31,4 @@ Last logged in {{ user.last_login|timesince }} ago
 Your search yielded no results
 </div>
 {% endif %}
+{% endblock %}

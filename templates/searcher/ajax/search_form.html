@@ -20,19 +20,19 @@
   <table class='table-responsive'>
     <tr>
       <td>{{ row.colorstyle }}</td>
-      <input type="text" name="nameColorstyle" id='idColorstyle' value="{{ row.colorstyle }}">
+      <input type="text" name="colorstyle" id='idColorstyle' value="{{ row.colorstyle }}">
     </tr>
     <tr>
       <td>{{ row.po_number }}</td>
-      <input type="text" name="namePoNumber" id='idPoNumber' value="{{ row.po_number }}">
+      <input type="text" name="po_number" id='idPoNumber' value="{{ row.po_number }}">
     </tr>
     <tr>
       <td>{{ row.brand }}</td>
-      <input type="text" name="nameBrand" id='idBrand' value="{{ row.brand  }}">
+      <input type="text" name="brand" id='idBrand' value="{{ row.brand  }}">
     </tr>
     <tr>
       <td>{{ row.vendor_style }}</td>
-      <input type="text" name="nameVendorStyle" id='idVendorStyle' value="{{ row.vendor_style  }}">
+      <input type="text" name="vendor_style" id='idVendorStyle' value="{{ row.vendor_style  }}">
     </tr>
   </table>
   <input type="submit" value="Submit">
@@ -42,7 +42,7 @@
 {% endblock %}
 
 
-{% block js %}
+{% block extrajs %}
 <script>
 // Attach a submit handler to the form
 // $.ajax({
@@ -77,10 +77,10 @@ $( "#searchForm" ).submit(function( event ) {
 <script>
 $("#input_list_form").submit(function() {
 
-    //var url = 'http://prodimages.ny.bluefly.com/api/v1/excel-tool-data/'; // the script where you handle the form input.
+    var url = 'http://prodimages.ny.bluefly.com/api/v1/pmdata/'; // the script where you handle the form input.
     // var url = 'http://prodimages.ny.bluefly.com/searcher/ajax/colorstyle/';
     //var url = '{% url 'searcher:views-ajax_colorstyle_search' %}';
-    var url = 'searcher/ajax/colorstyle';
+    //var url = 'searcher/ajax/colorstyle';
     $.ajax({
            type: "get",
            url: url,
