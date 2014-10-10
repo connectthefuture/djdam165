@@ -1,46 +1,46 @@
 # Register your models here.
-import searcher.admin_custom as admin
-admin.autodiscover()
+import searcher.admin_custom as myadmin
+myadmin.autodiscover()
 import autocomplete_light
 from models import *
 
-class ImageUpdateAdmin(admin.ModelAdmin):
+class ImageUpdateAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     form = autocomplete_light.modelform_factory(ImageUpdate)
-admin.site.register(ImageUpdate, ImageUpdateAdmin)
+myadmin.site.register(ImageUpdate, ImageUpdateAdmin)
 
 
-class SupplierIngestImagesAdmin(admin.ModelAdmin):
+class SupplierIngestImagesAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     form = autocomplete_light.modelform_factory(SupplierIngestImages)
-admin.site.register(SupplierIngestImages, SupplierIngestImagesAdmin)
+myadmin.site.register(SupplierIngestImages, SupplierIngestImagesAdmin)
 
 
-class ProductSnapshotLiveAdmin(admin.ModelAdmin):
+class ProductSnapshotLiveAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     form = autocomplete_light.modelform_factory(ProductSnapshotLive)
-admin.site.register(ProductSnapshotLive, ProductSnapshotLiveAdmin)
+myadmin.site.register(ProductSnapshotLive, ProductSnapshotLiveAdmin)
 
 
-class ExcelToolDataAdmin(admin.ModelAdmin):
+class ExcelToolDataAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     form = autocomplete_light.modelform_factory(ExcelToolData)
-admin.site.register(ExcelToolData, ExcelToolDataAdmin)
+myadmin.site.register(ExcelToolData, ExcelToolDataAdmin)
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     form = autocomplete_light.modelform_factory(Product)
-admin.site.register(Product, ProductAdmin)
+myadmin.site.register(Product, ProductAdmin)
 
 
-class SelectedFilesAdmin(admin.ModelAdmin):
+class SelectedFilesAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     form = autocomplete_light.modelform_factory(SelectedFiles)
-admin.site.register(SelectedFiles, SelectedFilesAdmin)
+myadmin.site.register(SelectedFiles, SelectedFilesAdmin)
 
 
-class PostReadyOriginalAdmin(admin.ModelAdmin):
+class PostReadyOriginalAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     form = autocomplete_light.modelform_factory(PostReadyOriginal)
-admin.site.register(PostReadyOriginal, PostReadyOriginalAdmin)
+myadmin.site.register(PostReadyOriginal, PostReadyOriginalAdmin)
