@@ -18,6 +18,7 @@ autocomplete_light.autodiscover()
 
 #from django.contrib import admin
 #admin.autodiscover()
+## OVERRIDE ADMIN
 from searcher import admin_custom as admin
 admin.autodiscover()
 ####
