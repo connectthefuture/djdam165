@@ -127,6 +127,8 @@ from django.conf.urls import include, url
 # urlpatterns += patterns('',
 #     (r'^admin/', include(admin.urls)),
 # )
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns += patterns('',
                        ## Admin -> dj admin tools actions and other admin config routing,
@@ -141,6 +143,13 @@ urlpatterns += patterns('',
                        ## Uncomment the admin/doc line below to enable admin
                        # documentation:
                        url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+                       ## Reset passwords
+                       url(r'^admin/password_reset/$', auth_views.password_reset, name='admin_password_reset'),
+                       url(r'^admin/password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
+                       url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', auth_views.password_reset_confirm,
+                           name='password_reset_confirm'),
+                       url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
+
                        ## End admin configs
                        #url(r'^', include('debug_toolbar_user_panel.urls')),
 
