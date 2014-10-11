@@ -406,14 +406,13 @@ class SupplierIngest(models.Model):
     # ... your code
     def vendor_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img height="96" width="80" type="inline" src="{0}"/>').format(self.image_url)
+        return mark_safe('<img height="96" width="80" src="{0}"/>').format(self.image_url)
     vendor_image.allow_tags = True
 
 
     def bfly_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe(
-            '<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
     bfly_image.allow_tags = True
 
 
@@ -468,8 +467,7 @@ class SupplierIngestImages(models.Model):
 
     def bfly_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe(
-            '<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
     bfly_image.allow_tags = True
 
 
