@@ -716,7 +716,7 @@ class ProductionRawZimages(models.Model):
 
 class Vendor(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.ForeignKey(SupplierIngest, to_field='vendor_name')
+    vendor_name = models.ManyToManyField(SupplierIngest)
     address = models.CharField(max_length=50)
     city = models.CharField(max_length=60)
     state_province = models.CharField(max_length=30)
@@ -734,7 +734,7 @@ class Vendor(models.Model):
 
 class Brand(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.ForeignKey(ProductSnapshotLive, to_field='brand', related_name='snp_brand')
+    brand = models.ManyToManyField(ProductSnapshotLive, related_name='snp_brand')
     departments = models.CharField(max_length=50, blank=True, null=True)
     brandtype = models.CharField(max_length=50, blank=True, null=True)
     #vendors = models.ManyToManyField(Vendor)
