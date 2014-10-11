@@ -31,7 +31,7 @@ myadmin.site.register(SupplierIngestImages, SupplierIngestImagesAdmin)
 
 class SupplierIngestAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
-    list_display = ('bfly_image', 'vendor_image', 'colorstyle', 'vendor_name', 'vendor_style', 'image_url', 'image_ready_dt', 'modified_dt', 'version', 'get_http_status_code')
+    list_display = ('bfly_image', 'vendor_image', 'colorstyle', 'vendor_name', 'vendor_style', 'image_url', 'image_ready_dt', 'modified_dt', 'version')
     search_fields = ['colorstyle__vendor_name__vendor_brand']
     list_filter = ('vendor_name', 'modified_dt')
     form = autocomplete_light.modelform_factory(SupplierIngest)
