@@ -16,11 +16,11 @@ import adminactions as adminactions
 import autocomplete_light
 autocomplete_light.autodiscover()
 
-#from django.contrib import admin
+from django.contrib import admin
 #admin.autodiscover()
 ## OVERRIDE ADMIN
-from searcher import admin_custom as admin
-admin.autodiscover()
+#from searcher import admin_custom as admin
+#admin.autodiscover()
 ####
 
 def bad(request):

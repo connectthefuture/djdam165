@@ -65,12 +65,14 @@ class SelectedFilesAdmin(myadmin.ModelAdmin):
     form = autocomplete_light.modelform_factory(SelectedFiles)
 myadmin.site.register(SelectedFiles, SelectedFilesAdmin)
 
+
 class OffshoreStatusAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('colorstyle', 'category', 'product_type', 'return_dt')
     search_fields = ['colorstyle', 'send_dt', 'return_dt']
     form = autocomplete_light.modelform_factory(OffshoreStatus)
 myadmin.site.register(OffshoreStatus, OffshoreStatusAdmin)
+
 
 class PostReadyOriginalAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
@@ -81,8 +83,6 @@ myadmin.site.register(PostReadyOriginal, PostReadyOriginalAdmin)
 
 
 ### Auth Groups and Users for Super only
-
-
 class AuthGroupAdmin(myadmin.ModelAdmin):
     form = autocomplete_light.modelform_factory(AuthGroup)
     pass

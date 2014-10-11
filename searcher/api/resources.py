@@ -304,10 +304,10 @@ class ExcelToolDataResource(ModelResource):
     #         ]
 
 
-    def dispatch(self, request_type, request, **kwargs):
-        colorstyle = kwargs.pop('colorstyle')
-        kwargs['colorstyle'] = get_object_or_404(ExcelToolData, colorstyle=colorstyle)
-        return super(ExcelToolDataResource, self).dispatch(request_type, request, **kwargs)
+    # def dispatch(self, request_type, request, **kwargs):
+    #     colorstyle = kwargs.pop('colorstyle')
+    #     kwargs['colorstyle'] = get_object_or_404(ExcelToolData, colorstyle=colorstyle)
+    #     return super(ExcelToolDataResource, self).dispatch(request_type, request, **kwargs)
 
     # def get_object_list(self, request):
     #     vendor_style = request.POST['vendor_style']
