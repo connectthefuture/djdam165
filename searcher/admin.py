@@ -14,7 +14,7 @@ myadmin.site.register(ImageUpdate, ImageUpdateAdmin)
 
 
 class VendorAdmin(myadmin.ModelAdmin):
-    list_display = ('vendor_name', 'website_url', 'ftp_prefix')
+    list_display = ('vendor_name', 'website', 'ftp_prefix')
     search_fields = ['vendor_name']
     form = autocomplete_light.modelform_factory(Vendor)
 myadmin.site.register(Vendor, VendorAdmin)
