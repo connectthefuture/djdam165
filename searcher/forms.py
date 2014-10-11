@@ -167,6 +167,17 @@ class ImagesForm(forms.ModelForm):
             'image_outtake',
             )
 
+class ImageUpdateForm(forms.ModelForm):
+    id = forms.IntegerField(widget=forms.HiddenInput(), initial=1)
+    colorstyle = forms.CharField(max_length=9, help_text="Please enter the Colorstyle")
+    alt = forms.IntegerField()
+
+    class Meta:
+        model = ImageUpdate
+        fields = ('id',
+            'colorstyle',
+            'alt',
+            )
 
 class MetadataBasicForm(forms.ModelForm):
     class Meta:
