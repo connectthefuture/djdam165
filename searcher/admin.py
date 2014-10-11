@@ -24,7 +24,7 @@ class SupplierIngestImagesAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('admin_image', 'colorstyle', 'alt', 'modified_dt', 'get_http_status_code')
     search_fields = ['colorstyle__vendor_name']
-    list_filter = ('get_http_status_code', 'modified_dt')
+    list_filter = ('vendor_name', 'modified_dt')
     form = autocomplete_light.modelform_factory(SupplierIngestImages)
 myadmin.site.register(SupplierIngestImages, SupplierIngestImagesAdmin)
 
@@ -33,7 +33,7 @@ class SupplierIngestAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('admin_image', 'colorstyle', 'vendor_name', 'vendor_style','image_url', 'image_ready_dt', 'modified_dt', 'version', 'get_http_status_code')
     search_fields = ['colorstyle__vendor_name__vendor_brand']
-    list_filter = ('vendor_name', 'vendor_brand', 'modified_dt', 'get_http_status_code')
+    list_filter = ('vendor_name', 'modified_dt',)
     form = autocomplete_light.modelform_factory(SupplierIngest)
 
     # def get_search_results(self, request, queryset, search_term):
@@ -53,6 +53,7 @@ class ProductSnapshotLiveAdmin(myadmin.ModelAdmin):
     list_display = ('admin_image', 'colorstyle', 'brand', 'product_type', 'po_number', 'vendor_style', 'image_ready_dt')
     search_fields = ['colorstyle__vendor_style__brand']
     form = autocomplete_light.modelform_factory(ProductSnapshotLive)
+    list_filter = ('product_type', 'image_ready_dt',)
 myadmin.site.register(ProductSnapshotLive, ProductSnapshotLiveAdmin)
 
 
