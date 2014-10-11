@@ -288,12 +288,12 @@ class ProductSnapshotLive(models.Model):
         db_table = 'product_snapshot_live'
         ordering = ['-colorstyle']
 
-
     # ... your code
     def admin_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=50&height=60&ver=null"/>').format(self.colorstyle)
+        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=100&height=120&ver=null"/>').format(self.colorstyle)
     admin_image.allow_tags = True
+
 
     def __unicode__(self):
         return self.colorstyle
@@ -371,7 +371,7 @@ class SupplierIngest(models.Model):
     vendor_name = models.CharField(max_length=70)
     vendor_brand = models.CharField(max_length=70)
     bfly_product_path = models.CharField(max_length=90)
-    image_url = models.CharField(max_length=150, blank=True)
+    image_url = models.CharField(max_length=190, blank=True)
     alt = models.CharField(max_length=1, blank=True)
     image_download_valid = models.CharField(max_length=5, blank=True)
     ingest_style_id = models.CharField(max_length=10, blank=True)
@@ -390,13 +390,12 @@ class SupplierIngest(models.Model):
     @property
     def get_http_status_code(self):
         import requests
-        r = requests.get(self)
+        r = requests.get(self.image_url)
         self.code = r.status_code
         return self.code
 
     # def get_absolute_url(self):
     #    return reversed('postready-detail', kwargs={'pk': self.pk})
-
     unique_together = ('colorstyle', 'alt')
     ordering = ['-colorstyle']
 
@@ -405,7 +404,7 @@ class SupplierIngest(models.Model):
 
     def admin_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img src="%s"/>') % self.image_url
+        return mark_safe('<img height="120" width="100" src="{0}" alt="{1}"/>').format(self.image_url, self.get_http_status_code())
     admin_image.allow_tags = True
 
 
