@@ -13,6 +13,13 @@ class ImageUpdateAdmin(myadmin.ModelAdmin):
 myadmin.site.register(ImageUpdate, ImageUpdateAdmin)
 
 
+class VendorAdmin(myadmin.ModelAdmin):
+    list_display = ('vendor_name', 'website_url', 'ftp_prefix')
+    search_fields = ['vendor_name']
+    form = autocomplete_light.modelform_factory(Vendor)
+myadmin.site.register(Vendor, VendorAdmin)
+
+
 class SupplierIngestImagesAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('admin_image', 'colorstyle', 'alt', 'modify_dt')

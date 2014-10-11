@@ -405,7 +405,7 @@ class SupplierIngest(models.Model):
 
     def admin_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img size="100x120" src="%s"/>') % self.image_url
+        return mark_safe('<img src="%s"/>') % self.image_url
     admin_image.allow_tags = True
 
 
@@ -454,7 +454,7 @@ class SupplierIngestImages(models.Model):
 
     def admin_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img size="100x120" src="%s"/>') % self.image_url
+        return mark_safe('<img type="inline" src="%s"/>') % self.image_url
     admin_image.allow_tags = True
 
 
