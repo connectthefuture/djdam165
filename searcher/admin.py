@@ -33,7 +33,7 @@ class SupplierIngestAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('admin_image', 'colorstyle', 'vendor_name', 'vendor_style','image_url', 'image_ready_dt', 'modified_dt', 'version', 'get_http_status_code')
     search_fields = ['colorstyle__vendor_name__vendor_brand']
-    list_filter = ('vendor_name', 'modified_dt',)
+    list_filter = ('vendor_name', 'modified_dt', 'get_http_status_code')
     form = autocomplete_light.modelform_factory(SupplierIngest)
 
     # def get_search_results(self, request, queryset, search_term):
