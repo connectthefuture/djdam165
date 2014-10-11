@@ -729,7 +729,7 @@ class Vendor(models.Model):
         db_table = 'vendor'
 
     def __unicode__(self):
-        return self.name
+        return self.vendor_name
 
 
 class Brand(models.Model):
