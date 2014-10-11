@@ -54,7 +54,7 @@ INTERNAL_IPs = ('127.0.0.1',)
 INSTALLED_APPS = (# '',
     # 'admin_bootstrap',
     # # DjangoAdminBootstrapped
-    'django_admin_bootstrapped.bootstrap3',
+    #'django_admin_bootstrapped.bootstrap3',
     'django_admin_bootstrapped',
     # Dj Admin Tools
     'admin_tools',  #
