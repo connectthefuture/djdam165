@@ -98,6 +98,7 @@ class AuthUser(models.Model):
     class Meta:
         db_table = 'auth_user'
 
+
 class AuthUserGroups(models.Model):
     id = models.IntegerField(primary_key=True)
     user = models.ForeignKey(AuthUser)
@@ -288,6 +289,11 @@ class ProductSnapshotLive(models.Model):
         ordering = ['-colorstyle']
 
 
+    # ... your code
+    def admin_image(self):
+        from django.utils.safestring import mark_safe
+        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=50&height=60&ver=null"/>').format(self.colorstyle)
+    admin_image.allow_tags = True
 
     def __unicode__(self):
         return self.colorstyle
@@ -351,7 +357,6 @@ class Album(models.Model):
     images.allow_tags = True
 
 
-
 ######################################################################
 #################### File Location Models ############################
 ######################################################################
@@ -398,6 +403,11 @@ class SupplierIngest(models.Model):
     def __unicode__(self):
         return self.file_path
 
+    def admin_image(self):
+        from django.utils.safestring import mark_safe
+        return mark_safe('<img size="100x120" src="%s"/>') % self.image_url
+    admin_image.allow_tags = True
+
 
 class SupplierIngest404(models.Model):
     colorstyle = models.CharField(primary_key=True, max_length=9)
@@ -432,6 +442,8 @@ class SupplierIngestImages(models.Model):
     bfly_zoom_site = models.CharField(max_length=150)
     bfly_list_site = models.CharField(max_length=150)
     bfly_pdp_site = models.CharField(max_length=150)
+
+
     class Meta:
         managed = False
         db_table = 'supplier_ingest_images'
@@ -439,6 +451,12 @@ class SupplierIngestImages(models.Model):
 
     def __unicode__(self):
         return self.file_name
+
+    def admin_image(self):
+        from django.utils.safestring import mark_safe
+        return mark_safe('<img size="100x120" src="%s"/>') % self.image_url
+    admin_image.allow_tags = True
+
 
 class PostReadyConsignment(models.Model):
     sql_id = models.BigIntegerField(primary_key=True)
@@ -698,15 +716,15 @@ class ProductionRawZimages(models.Model):
 
 class Vendor(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=30, unique=True)
+    name = models.ForeignKey(SupplierIngest, to_field='vendor_name')
     address = models.CharField(max_length=50)
     city = models.CharField(max_length=60)
     state_province = models.CharField(max_length=30)
     country = models.CharField(max_length=50)
     #merchant = models.ForeignKey(Merchant)
-    website = models.URLField()
+    website = models.URLField(max_length=150, blank=True, null=True)
     #imgisstd = models.Boolean(Merchant)
-    ftpurl_prefix = models.URLField()
+    ftpurl_prefix = models.URLField(max_length=150, blank=True, null=True)
     class Meta:
         db_table = 'vendor'
 
@@ -716,9 +734,9 @@ class Vendor(models.Model):
 
 class Brand(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.ManyToManyField(ProductSnapshotLive, related_name='snp_brand') ##, to_field='brand')
-    departments = models.CharField(max_length=50)
-    brandtype = models.CharField(max_length=50)
+    name = models.ForeignKey(ProductSnapshotLive, to_field='brand', related_name='snp_brand')
+    departments = models.CharField(max_length=50, blank=True, null=True)
+    brandtype = models.CharField(max_length=50, blank=True, null=True)
     #vendors = models.ManyToManyField(Vendor)
     class Meta:
         db_table = 'brand'
@@ -943,7 +961,7 @@ class ImageUpdate(models.Model):
                                   choices=IMAGE_TYPE_CHOICES,
                                   default=PRIMARY)
     #cache_cleared = models.BooleanField(False, blank=True)
-    updated_by = models.ForeignKey('AuthUser', null=True, related_name='image_update_user')
+    updated_by = models.ForeignKey(AuthUser, null=True, related_name='image_update_user')
     #deleted_by = models.ForeignKey('auth.User', null=True, related_name='profile_user_deleted')
     class Meta:
         db_table = 'image_update'
