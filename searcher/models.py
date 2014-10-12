@@ -562,6 +562,16 @@ class Zimages1Photoselects(models.Model):
     def __unicode__(self):
         return self.file_path
 
+
+    def primary_select_image(self):
+        from django.utils.safestring import mark_safe
+
+        return mark_safe(
+            '<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(
+            self.file_path)
+        # return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+    primary_select_image.allow_tags = True
+
     from djdam.settings import MEDIA_ROOT
 
     def _get_absolute_url(self):
