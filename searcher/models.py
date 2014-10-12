@@ -291,7 +291,8 @@ class ProductSnapshotLive(models.Model):
     # ... your code
     def admin_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+        # return mark_safe('<div class="effectback"><img class="effectfront" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/></div>').format(self.colorstyle)
+        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=300&height=360&ver=null" onmouseover="this.width=\'300\'; this.height=\'360\'" onmouseout="this.width=\'100\'; this.height=\'120\'"/>').format(self.colorstyle)
     admin_image.allow_tags = True
 
 
