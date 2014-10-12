@@ -557,7 +557,7 @@ class Zimages1Photoselects(models.Model):
 
     class Meta:
         db_table = 'zimages1_photoselects'
-        #ordering = ['-photo_date', '-colorstyle', 'alt']
+        ordering = ['-photo_date', '-colorstyle', 'alt']
 
     def __unicode__(self):
         return self.file_path
