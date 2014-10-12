@@ -98,14 +98,6 @@ class PushPhotoselectsAdmin(myadmin.ModelAdmin):
 myadmin.site.register(PushPhotoselects, PushPhotoselectsAdmin)
 
 
-class PushPhotoselectsAdmin(myadmin.ModelAdmin):
-    # This will generate a ModelForm
-    list_display = ('primary_select_image', 'colorstyle', 'alt', 'photo_date', 'file_path')
-    search_fields = ['colorstyle']
-    form = autocomplete_light.modelform_factory(PushPhotoselects)
-myadmin.site.register(PushPhotoselects, PushPhotoselectsAdmin)
-
-
 class ProductionRawOnfigureAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('primary_select_image', 'colorstyle', 'alt', 'shot_number', 'photo_date', 'file_path')
