@@ -32,7 +32,7 @@ myadmin.site.register(SupplierIngestImages, SupplierIngestImagesAdmin)
 class SupplierIngestAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('bfly_image', 'vendor_image', 'colorstyle', 'vendor_name', 'vendor_style', 'image_url', 'image_ready_dt', 'modified_dt', 'version', 'get_http_status_code')
-    search_fields = ['colorstyle__vendor_name__vendor_brand']
+    search_fields = ['colorstyle__vendor_name']
     list_filter = ('vendor_name', 'modified_dt')
     form = autocomplete_light.modelform_factory(SupplierIngest)
     # def get_search_results(self, request, queryset, search_term):
@@ -84,16 +84,39 @@ myadmin.site.register(OffshoreStatus, OffshoreStatusAdmin)
 
 class PostReadyOriginalAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
-    list_display = ('colorstyle', 'alt', 'photo_date', 'file_path')
+    list_display = ('primary_select_image', 'colorstyle', 'alt', 'photo_date', 'file_path')
     search_fields = ['colorstyle']
     form = autocomplete_light.modelform_factory(PostReadyOriginal)
 myadmin.site.register(PostReadyOriginal, PostReadyOriginalAdmin)
 
 
+class PushPhotoselectsAdmin(myadmin.ModelAdmin):
+    # This will generate a ModelForm
+    list_display = ('primary_select_image', 'colorstyle', 'alt', 'photo_date', 'file_path')
+    search_fields = ['colorstyle']
+    form = autocomplete_light.modelform_factory(PushPhotoselects)
+myadmin.site.register(PushPhotoselects, PushPhotoselectsAdmin)
+
+
+class PushPhotoselectsAdmin(myadmin.ModelAdmin):
+    # This will generate a ModelForm
+    list_display = ('primary_select_image', 'colorstyle', 'alt', 'photo_date', 'file_path')
+    search_fields = ['colorstyle']
+    form = autocomplete_light.modelform_factory(PushPhotoselects)
+myadmin.site.register(PushPhotoselects, PushPhotoselectsAdmin)
+
+
+class ProductionRawOnfigureAdmin(myadmin.ModelAdmin):
+    # This will generate a ModelForm
+    list_display = ('primary_select_image', 'colorstyle', 'alt', 'shot_number', 'photo_date', 'file_path')
+    search_fields = ['colorstyle']
+    form = autocomplete_light.modelform_factory(ProductionRawOnfigure)
+myadmin.site.register(ProductionRawOnfigure, ProductionRawOnfigureAdmin)
+
+
 ### Auth Groups and Users for Super only
 class AuthGroupAdmin(myadmin.ModelAdmin):
     form = autocomplete_light.modelform_factory(AuthGroup)
-    pass
 myadmin.site.register(AuthGroup, AuthGroupAdmin)
 
 

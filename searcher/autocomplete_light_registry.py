@@ -8,7 +8,7 @@ autocomplete_light.register(ProductSnapshotLive,
     search_fields=['^colorstyle', 'brand', 'vendor_style'],
     # This will actually html attribute data-placeholder which will set
     # javascript attribute widget.autocomplete.placeholder.
-    autocomplete_js_attributes={'placeholder': 'Other model name ?',},
+    autocomplete_js_attributes={'placeholder': 'Whats my name ?',},
 )
 
 class ScriptRunnerAutocomplete(autocomplete_light.AutocompleteListTemplate):
@@ -24,11 +24,11 @@ autocomplete_light.register(ScriptRunnerAutocomplete)
 import autocomplete_light
 from models import ProductSnapshotLive, SupplierIngest
 class PoNumberAutocomplete(autocomplete_light.AutocompleteModelBase):
-    search_fields = ['^colorstyle', 'po_number']
+    search_fields = ['^colorstyle']
 autocomplete_light.register(ProductSnapshotLive, PoNumberAutocomplete)
 
 class ColorstyleAutocomplete(autocomplete_light.AutocompleteModelBase):
-    search_fields = ['^colorstyle', 'po_number']
+    search_fields = ['^colorstyle']
 autocomplete_light.register(ProductSnapshotLive, ColorstyleAutocomplete)
 
 class VendorNameAutocomplete(autocomplete_light.AutocompleteModelBase):

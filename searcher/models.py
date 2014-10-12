@@ -292,8 +292,8 @@ class ProductSnapshotLive(models.Model):
     def admin_image(self):
         from django.utils.safestring import mark_safe
         # return mark_safe('<div class="effectback"><img class="effectfront" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/></div>').format(self.colorstyle)
-        return mark_safe('<img style="width:50%;" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
-        #return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=300&height=360&ver=null" onload="this.width=\'100\'; this.height=\'120\'" onmouseover="this.width=\'300\'; this.height=\'360\'" onmouseout="this.width=\'100\'; this.height=\'120\'"/>').format(self.colorstyle)
+        # return mark_safe('<img style="width:50%;" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=300&height=360&ver=null" onload="this.width=\'100\'; this.height=\'120\'" onmouseover="this.width=\'300\'; this.height=\'360\'" onmouseout="this.width=\'100\'; this.height=\'120\'"/>').format(self.colorstyle)
     admin_image.allow_tags = True
 
 
@@ -407,13 +407,14 @@ class SupplierIngest(models.Model):
 
     def vendor_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img height="96" width="80" src="{0}"/>').format(self.image_url)
+        return mark_safe('<img src="{0} onload="this.width=\'100\'; this.height=\'120\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'" />').format(self.image_url)
     vendor_image.allow_tags = True
 
 
     def bfly_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=200&height=240&ver=null" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(self.colorstyle)
+        #return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
     bfly_image.allow_tags = True
 
 
@@ -505,6 +506,15 @@ class PostReadyOriginal(models.Model):
         db_table = 'post_ready_original'
         ordering = ['-photo_date', '-colorstyle', 'alt']
 
+    def primary_select_image(self):
+        from django.utils.safestring import mark_safe
+
+        return mark_safe(
+            '<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(
+            self.file_path)
+        # return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+
+    primary_select_image.allow_tags = True
     #def get_absolute_url(self):
     #    return reversed('postready-detail', kwargs={'pk': self.pk})
 
@@ -522,6 +532,13 @@ class PushPhotoselects(models.Model):
     photo_date = models.DateField()
     file_path = models.CharField(max_length=120, unique=True)
     alt = models.CharField(max_length=2)
+
+
+    def primary_select_image(self):
+        from django.utils.safestring import mark_safe
+        return mark_safe('<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(self.file_path)
+        # return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+    primary_select_image.allow_tags = True
 
     class Meta:
         db_table = 'push_photoselects'
@@ -617,6 +634,15 @@ class ProductionRawOnfigure(models.Model):
     class Meta:
         db_table = 'production_raw_onfigure'
         ordering = ['-photo_date', '-colorstyle', 'alt', 'shot_number']
+
+    def primary_select_image(self):
+        from django.utils.safestring import mark_safe
+
+        return mark_safe(
+            '<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(
+            self.file_path)
+        # return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+    primary_select_image.allow_tags = True
 
     def __unicode__(self):
         return self.file_path
