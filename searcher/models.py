@@ -388,6 +388,7 @@ class SupplierIngest(models.Model):
     class Meta:
         #managed = False
         db_table = 'supplier_ingest'
+        ordering = ['-modified_dt', '-colorstyle', 'alt', ]
 
     @property
     def get_http_status_code(self):
@@ -407,7 +408,7 @@ class SupplierIngest(models.Model):
 
     def vendor_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img src="{0}" onload="this.width=\'100\'; this.height=\'120\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'" />').format(self.image_url)
+        return mark_safe('<img style="width:200px;"src="{0}" onload="this.width=\'100\'; this.height=\'120\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'" />').format(self.image_url)
     vendor_image.allow_tags = True
 
 
