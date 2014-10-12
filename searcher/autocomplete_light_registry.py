@@ -11,14 +11,14 @@ autocomplete_light.register(ProductSnapshotLive,
     autocomplete_js_attributes={'placeholder': 'Whats my name ?',},
 )
 
-class ScriptRunnerAutocomplete(autocomplete_light.AutocompleteListTemplate):
-    choices = ['download_server_imgs_byPOorStyleList',
-               'newAll_Sites_CacheClear',
-               'bfly_listpage_scrape_clear',
-               'bflyurl_scrape_return_styles_only',
-               'meckPM_localLoginSave']
-    autocomplete_template = 'autocompletelight/scriptchoose_hardcoded_autocomplete_box.html'
-autocomplete_light.register(ScriptRunnerAutocomplete)
+# class ScriptRunnerAutocomplete(autocomplete_light.AutocompleteListTemplate):
+#     choices = ['download_server_imgs_byPOorStyleList',
+#                'newAll_Sites_CacheClear',
+#                'bfly_listpage_scrape_clear',
+#                'bflyurl_scrape_return_styles_only',
+#                'meckPM_localLoginSave']
+#     autocomplete_template = 'autocompletelight/scriptchoose_hardcoded_autocomplete_box.html'
+# autocomplete_light.register(ScriptRunnerAutocomplete)
 
 
 import autocomplete_light
