@@ -221,6 +221,7 @@ class OffshoreStatus(models.Model):
     class Meta:
         db_table = 'offshore_status'
         ordering = ['-modify_dt']
+        verbose_name_plural = 'Outsourced_Clipping_Styles'
 
 
     #slug = models.SlugField()
@@ -287,6 +288,7 @@ class ProductSnapshotLive(models.Model):
     class Meta:
         db_table = 'product_snapshot_live'
         ordering = ['-colorstyle']
+        verbose_name_plural = 'Production_Style_Data'
 
     # ... your code
     def admin_image(self):
@@ -389,6 +391,7 @@ class SupplierIngest(models.Model):
         #managed = False
         db_table = 'supplier_ingest'
         ordering = ['-modified_dt', '-colorstyle', 'alt', ]
+        verbose_name_plural = 'Supplier_Styles'
 
     @property
     def get_http_status_code(self):
@@ -458,6 +461,7 @@ class SupplierIngestImages(models.Model):
         managed = False
         db_table = 'supplier_ingest_images'
         ordering = ['-colorstyle', 'alt']
+        verbose_name_plural = 'Supplier_Styles'
 
     def __unicode__(self):
         return self.file_name
@@ -472,8 +476,6 @@ class SupplierIngestImages(models.Model):
         from django.utils.safestring import mark_safe
         return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
     bfly_image.allow_tags = True
-
-
 
 
 class PostReadyConsignment(models.Model):
@@ -506,6 +508,7 @@ class PostReadyOriginal(models.Model):
     class Meta:
         db_table = 'post_ready_original'
         ordering = ['-photo_date', '-colorstyle', 'alt']
+        verbose_name_plural = 'Photography_Archived_Selects'
 
     def primary_select_image(self):
         from django.utils.safestring import mark_safe
@@ -544,6 +547,7 @@ class PushPhotoselects(models.Model):
     class Meta:
         db_table = 'push_photoselects'
         ordering = ['-photo_date', '-colorstyle', 'alt']
+        verbose_name_plural = 'Photography_Selects'
 
     def __unicode__(self):
         return self.file_path
