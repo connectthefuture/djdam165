@@ -5,19 +5,13 @@ import autocomplete_light
 from models import *
 
 
-class ImageUpdateAdmin(myadmin.ModelAdmin):
+class ProductSnapshotLiveAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
-    list_display = ('colorstyle', 'alt', 'modify_dt')
-    search_fields = ['colorstyle__alt']
-    form = autocomplete_light.modelform_factory(ImageUpdate)
-myadmin.site.register(ImageUpdate, ImageUpdateAdmin)
-
-
-class VendorAdmin(myadmin.ModelAdmin):
-    list_display = ('vendor_name', 'website', 'ftpurl_prefix')
-    search_fields = ['vendor_name']
-    form = autocomplete_light.modelform_factory(Vendor)
-myadmin.site.register(Vendor, VendorAdmin)
+    list_display = ('admin_image', 'colorstyle', 'brand', 'product_type', 'po_number', 'vendor_style', 'image_ready_dt')
+    search_fields = ['colorstyle__vendor_style__brand']
+    form = autocomplete_light.modelform_factory(ProductSnapshotLive)
+    list_filter = ('product_type', 'image_ready_dt',)
+myadmin.site.register(ProductSnapshotLive, ProductSnapshotLiveAdmin)
 
 
 class SupplierIngestImagesAdmin(myadmin.ModelAdmin):
@@ -47,31 +41,12 @@ class SupplierIngestAdmin(myadmin.ModelAdmin):
 myadmin.site.register(SupplierIngest, SupplierIngestAdmin)
 
 
-class ProductSnapshotLiveAdmin(myadmin.ModelAdmin):
+class ImageUpdateAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
-    list_display = ('admin_image', 'colorstyle', 'brand', 'product_type', 'po_number', 'vendor_style', 'image_ready_dt')
-    search_fields = ['colorstyle__vendor_style__brand']
-    form = autocomplete_light.modelform_factory(ProductSnapshotLive)
-    list_filter = ('product_type', 'image_ready_dt',)
-myadmin.site.register(ProductSnapshotLive, ProductSnapshotLiveAdmin)
-
-
-class ExcelToolDataAdmin(myadmin.ModelAdmin):
-    # This will generate a ModelForm
-    form = autocomplete_light.modelform_factory(ExcelToolData)
-myadmin.site.register(ExcelToolData, ExcelToolDataAdmin)
-
-
-class ProductAdmin(myadmin.ModelAdmin):
-    # This will generate a ModelForm
-    form = autocomplete_light.modelform_factory(Product)
-myadmin.site.register(Product, ProductAdmin)
-
-
-class SelectedFilesAdmin(myadmin.ModelAdmin):
-    # This will generate a ModelForm
-    form = autocomplete_light.modelform_factory(SelectedFiles)
-myadmin.site.register(SelectedFiles, SelectedFilesAdmin)
+    list_display = ('colorstyle', 'alt', 'modify_dt')
+    search_fields = ['colorstyle__alt']
+    form = autocomplete_light.modelform_factory(ImageUpdate)
+myadmin.site.register(ImageUpdate, ImageUpdateAdmin)
 
 
 class OffshoreStatusAdmin(myadmin.ModelAdmin):
@@ -80,6 +55,10 @@ class OffshoreStatusAdmin(myadmin.ModelAdmin):
     search_fields = ['colorstyle', 'send_dt', 'return_dt']
     form = autocomplete_light.modelform_factory(OffshoreStatus)
 myadmin.site.register(OffshoreStatus, OffshoreStatusAdmin)
+
+
+########## Primary Admins End
+### Image Admins
 
 
 class PostReadyOriginalAdmin(myadmin.ModelAdmin):
@@ -114,8 +93,41 @@ class ProductionRawOnfigureAdmin(myadmin.ModelAdmin):
 myadmin.site.register(ProductionRawOnfigure, ProductionRawOnfigureAdmin)
 
 
+########## Image Admins End
+### Data Admins
+
+class ExcelToolDataAdmin(myadmin.ModelAdmin):
+    # This will generate a ModelForm
+    form = autocomplete_light.modelform_factory(ExcelToolData)
+myadmin.site.register(ExcelToolData, ExcelToolDataAdmin)
+
+
+class ProductAdmin(myadmin.ModelAdmin):
+    # This will generate a ModelForm
+    form = autocomplete_light.modelform_factory(Product)
+myadmin.site.register(Product, ProductAdmin)
+
+
+class VendorAdmin(myadmin.ModelAdmin):
+    list_display = ('vendor_name', 'website', 'ftpurl_prefix')
+    search_fields = ['vendor_name']
+    form = autocomplete_light.modelform_factory(Vendor)
+myadmin.site.register(Vendor, VendorAdmin)
+
+
+######## End Data Admins
+### Depreciated/Etc
+class SelectedFilesAdmin(myadmin.ModelAdmin):
+    # This will generate a ModelForm
+    form = autocomplete_light.modelform_factory(SelectedFiles)
+myadmin.site.register(SelectedFiles, SelectedFilesAdmin)
+
+
+##########
 ### Auth Groups and Users for Super only
 class AuthGroupAdmin(myadmin.ModelAdmin):
+    search_fields = ['name']
+    list_display = ('name','name__permission__name')
     form = autocomplete_light.modelform_factory(AuthGroup)
 myadmin.site.register(AuthGroup, AuthGroupAdmin)
 
