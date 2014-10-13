@@ -106,6 +106,7 @@ class AuthUserGroups(models.Model):
     class Meta:
         db_table = 'auth_user_groups'
 
+
 class AuthUserUserPermissions(models.Model):
     id = models.IntegerField(primary_key=True)
     user = models.ForeignKey(AuthUser)
@@ -461,7 +462,7 @@ class SupplierIngestImages(models.Model):
         managed = False
         db_table = 'supplier_ingest_images'
         ordering = ['-colorstyle', 'alt']
-        verbose_name_plural = 'Supplier_Styles'
+        verbose_name_plural = 'Supplier_Images'
 
     def __unicode__(self):
         return self.file_name
@@ -563,6 +564,7 @@ class Zimages1Photoselects(models.Model):
     class Meta:
         db_table = 'zimages1_photoselects'
         ordering = ['-photo_date', '-colorstyle', 'alt']
+        verbose_name_plural = 'Photography_ThumbSelects'
 
     def __unicode__(self):
         return self.file_path
@@ -633,6 +635,7 @@ class ProductionRawCp1Data(models.Model):
     class Meta:
         db_table = 'production_raw_cp1_data'
         ordering = ['-colorstyle', 'alt', 'cp1_colortag']
+        verbose_name_plural = 'Onfigure_CP1_Data'
 
     def __unicode__(self):
         return self.cp1_settings_filepath
@@ -649,6 +652,7 @@ class ProductionRawOnfigure(models.Model):
     class Meta:
         db_table = 'production_raw_onfigure'
         ordering = ['-photo_date', '-colorstyle', 'alt', 'shot_number']
+        verbose_name_plural = 'Onfigure_Outakes'
 
     def primary_select_image(self):
         from django.utils.safestring import mark_safe
@@ -674,6 +678,7 @@ class ProductionRawZimages(models.Model):
     class Meta:
         db_table = 'production_raw_zimages'
         ordering = ['-photo_date', '-colorstyle', 'alt', 'shot_number']
+        verbose_name_plural = 'Onfigure_ThumbOutakes'
 
     def __unicode__(self):
         return self.file_path
@@ -881,6 +886,7 @@ class Images(models.Model):
         db_table = 'images'
         #unique_together = ('brand', 'vendor_style',)
         #ordering = ['-colorstyle']
+        verbose_name_plural = 'Image_BaseModel'
 
 
     def _get_absolute_url(self):
@@ -973,6 +979,7 @@ class SelectedFiles(models.Model):
     class Meta:
         db_table = 'selected_files'
         ordering = ['-create_dt', '-file_path']
+        verbose_name_plural = 'Selected_DAM_Files'
 
     def __unicode__(self):
         return self.file_path
@@ -1024,6 +1031,7 @@ class ImageUpdate(models.Model):
         db_table = 'image_update'
         unique_together = ('colorstyle', 'alt',)
         ordering = ['-modify_dt', 'colorstyle', 'alt']
+        verbose_name_plural = 'Image_Cache_Updates'
 
     def __unicode__(self):
         if self.alt == '1':
@@ -1143,6 +1151,7 @@ class OnfigureSetdata(models.Model):
         db_table = 'onfigure_setdata'
         #ordering = ['-shoot_dt']
         #unique_together = ['shoot_dt', 'location']
+        verbose_name_plural = 'Onfigure_Set_Data'
 
 
 class Photo_Shoot(models.Model):
@@ -1186,6 +1195,7 @@ class ExcelToolData(models.Model):
     class Meta:
         db_table = 'excel_tool_data'
         ordering = ['-colorstyle']
+        verbose_name_plural = 'Required_Copy_Data'
 
     def __unicode__(self):
         return self.colorstyle
@@ -1281,6 +1291,7 @@ class Metadata(models.Model):
         #unique_together = ('image', 'metadata_type',)
         db_table = 'metadata'
         #ordering = ('position',)
+        verbose_name_plural = 'Metadata'
 
     def __unicode__(self):
         return self.metadata_type
