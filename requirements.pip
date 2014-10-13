@@ -115,6 +115,7 @@
 BeautifulSoup
 Markdown
 MySQL-python # ==1.2.4b4
+## <<<<<<< Updated upstream
 Pillow
 SQLAlchemy
 ajaxuploader
@@ -138,6 +139,9 @@ django-dtpanel-htmltidy
 django-filter
 django-floppyforms
 django-gunicorn
+# =======
+# cx-Oracle  #==5.1.2
+# >>>>>>> Stashed changes
 django-redis
 django-tables2
 django-tastypie
