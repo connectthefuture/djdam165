@@ -5,69 +5,32 @@ import autocomplete_light
 from models import *
 
 from django.contrib.admin.filters import SimpleListFilter
-#
-# class NullFilterSpec(SimpleListFilter):
-#     title = u''
-#
-#     parameter_name = u''
-#
-#     def lookups(self, request, model_admin):
-#         return (
-#             ('1', _('Has value'), ),
-#             ('0', _('None'), ),
-#         )
-#
-#     def queryset(self, request, queryset):
-#         kwargs = {
-#         '%s'%self.parameter_name : None,
-#         }
-#         if self.value() == '0':
-#             return queryset.filter(**kwargs)
-#         if self.value() == '1':
-#             return queryset.exclude(**kwargs)
-#         return queryset
-#
 
-from django.contrib.admin.filters import FieldListFilter
-from django.db import models
-from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+class NullFilterSpec(SimpleListFilter):
+    title = u''
 
-# FilterSpec.register places the new FilterSpec at the back
-# of the list. This can be a problem, because the first
-# matching FilterSpec is the one used.
-def _register_front(cls, test, factory):
-    cls.filter_specs.insert(0, (test, factory))
-FilterSpec =FieldListFilter
-FilterSpec.register_front = classmethod(_register_front)
+    parameter_name = u''
 
-class NullFilterSpec(FilterSpec):
-    fields = (models.CharField, models.DateField, models.DateTimeField)
+    def lookups(self, request, model_admin):
+        return (
+            ('1', _('Has value'), ),
+            ('0', _('None'), ),
+        )
 
-    #@classmethod
-    def test(cls, field):
-        return field.null and isinstance(field, cls.fields) and not field._choices
-    test = classmethod(test)
+    def queryset(self, request, queryset):
+        kwargs = {
+        '%s'%self.parameter_name : None,
+        }
+        if self.value() == '0':
+            return queryset.filter(**kwargs)
+        if self.value() == '1':
+            return queryset.exclude(**kwargs)
+        return queryset
 
-    def __init__(self, f, request, params, model, model_admin):
-        super(NullFilterSpec, self).__init__(f, request, params, model, model_admin)
-        self.lookup_kwarg = '%s__isnull' % f.name
-        self.lookup_val = request.GET.get(self.lookup_kwarg, None)
 
-    def choices(self, cl):
-        # bool(v) must be False for IS NOT NULL and True for IS NULL, but can only be a string
-        for k, v in ((_('All'), None), (_('Has value'), ''), (_('Omitted'), '1')):
-            yield {
-                'selected' : self.lookup_val == v,
-                'query_string' : cl.get_query_string({self.lookup_kwarg : v}),
-                'display' : k
-            }
-
-FilterSpec.register_front(NullFilterSpec.test, NullFilterSpec)
-#
-# class StartNullFilterSpec(NullFilterSpec):
-#     title = u'Started'
-#     parameter_name = u'started'
+class StartNullFilterSpec(NullFilterSpec):
+    title = u'Started'
+    parameter_name = u'started'
 
 
 class ProductSnapshotLiveAdmin(myadmin.ModelAdmin):
@@ -83,7 +46,7 @@ class SupplierIngestImagesAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('bfly_image', 'colorstyle', 'alt', 'modified_dt', 'vendor_image')
     search_fields = ['colorstyle__vendor_name']
-    list_filter = (('modified_dt', FilterSpec), 'vendor_name')
+    list_filter = (('modified_dt',NullFilterSpec), 'vendor_name')
     form = autocomplete_light.modelform_factory(SupplierIngestImages)
 myadmin.site.register(SupplierIngestImages, SupplierIngestImagesAdmin)
 
