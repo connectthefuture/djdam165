@@ -72,9 +72,7 @@ class AuthGroupPermissions(models.Model):
     permission = models.ForeignKey('AuthPermission')
     class Meta:
         db_table = 'auth_group_permissions'
-
-    def __unicode__(self):
-        return self.id
+        verbose_name_plural = 'AuthGroupPermissions'
 
 class AuthPermission(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -292,6 +290,7 @@ class ProductSnapshotLive(models.Model):
         db_table = 'product_snapshot_live'
         ordering = ['-colorstyle']
         verbose_name_plural = 'Production_Style_Data'
+        verbose_name = 'Production_Style_Data'
 
     # ... your code
     def admin_image(self):
