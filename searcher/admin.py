@@ -138,3 +138,10 @@ class AuthUserAdmin(myadmin.ModelAdmin):
     list_display = ('username', 'is_staff', 'is_superuser', 'email')
     form = autocomplete_light.modelform_factory(AuthUser)
 myadmin.site.register(AuthUser, AuthUserAdmin)
+
+class AuthGroupPermissionsAdmin(myadmin.ModelAdmin):
+    pass
+    #search_fields = ['username']
+    #list_display = ('username', 'is_staff', 'is_superuser', 'email')
+    #form = autocomplete_light.modelform_factory(AuthGroupPermissions)
+myadmin.site.register(AuthGroupPermissions, AuthGroupPermissionsAdmin)
