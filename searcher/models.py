@@ -3,6 +3,7 @@
 
 # new
 from django.db import models
+import re
 from tastypie.utils.timezone import now
 from django.contrib.auth.models import User
 from django.utils.text import slugify
@@ -474,7 +475,10 @@ class SupplierIngestImages(models.Model):
 
     def bfly_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+        if len(self.file_name) == 9:
+            return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver={1}"/>').format(self.colorstyle.self.version)
+        else:
+            return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/altImage.ms?img={0}.pct&outputx=80&outputy=96&level=1&ver={1}').format(self.file_name, self.version)
     bfly_image.allow_tags = True
 
 
