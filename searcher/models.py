@@ -377,7 +377,7 @@ class SupplierIngest(models.Model):
     vendor_name = models.CharField(max_length=70)
     vendor_brand = models.CharField(max_length=70)
     bfly_product_path = models.CharField(max_length=90)
-    image_url = models.CharField(max_length=190, blank=True)
+    image_url = models.URLField(max_length=190, blank=True)
     alt = models.CharField(max_length=1, blank=True)
     image_download_valid = models.CharField(max_length=5, blank=True)
     ingest_style_id = models.CharField(max_length=10, blank=True)
