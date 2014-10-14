@@ -450,7 +450,7 @@ class SupplierIngestImages(models.Model):
     alt = models.CharField(max_length=5)
     image_download_valid = models.CharField(max_length=5)
     ingest_style_id = models.CharField(max_length=25)
-    modified_dt = models.DateField()
+    modified_dt = models.DateField(blank=True,null=True)
     bfly_local_src = models.CharField(max_length=100, blank=True, null=True)
     bfly_zoom_src = models.CharField(max_length=150)
     bfly_zoom_site = models.CharField(max_length=150)
