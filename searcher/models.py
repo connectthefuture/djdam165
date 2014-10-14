@@ -407,7 +407,7 @@ class SupplierIngest(models.Model):
     ordering = ['-colorstyle']
 
     def __unicode__(self):
-        return self.file_path
+        return self.colorstyle
 
 
     def vendor_image(self):
@@ -418,8 +418,8 @@ class SupplierIngest(models.Model):
 
     def bfly_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=200&height=240&ver=null" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(self.colorstyle)
-        #return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+        #return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=200&height=240&ver=null" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(self.colorstyle)
+        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=100&height=120&ver={1}"/>').format(self.colorstyle,self.version)
     bfly_image.allow_tags = True
 
 
