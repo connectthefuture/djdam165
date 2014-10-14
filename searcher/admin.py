@@ -141,7 +141,7 @@ myadmin.site.register(AuthUser, AuthUserAdmin)
 
 class AuthGroupPermissionsAdmin(myadmin.ModelAdmin):
     pass
-    #search_fields = ['username']
-    #list_display = ('username', 'is_staff', 'is_superuser', 'email')
+    search_fields = ['group']
+    list_display = ('id', 'group', 'permission')
     #form = autocomplete_light.modelform_factory(AuthGroupPermissions)
 myadmin.site.register(AuthGroupPermissions, AuthGroupPermissionsAdmin)

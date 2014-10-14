@@ -73,6 +73,8 @@ class AuthGroupPermissions(models.Model):
     class Meta:
         db_table = 'auth_group_permissions'
 
+    def __unicode__(self):
+        return self.id
 
 class AuthPermission(models.Model):
     id = models.IntegerField(primary_key=True)
