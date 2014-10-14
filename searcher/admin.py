@@ -44,7 +44,7 @@ myadmin.site.register(ProductSnapshotLive, ProductSnapshotLiveAdmin)
 
 class SupplierIngestImagesAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
-    list_display = ('bfly_image', 'colorstyle', 'alt', 'modified_dt', 'vendor_image')
+    list_display = ('bfly_image', 'vendor_image', 'colorstyle', 'alt', 'modified_dt')
     search_fields = ['colorstyle__vendor_name']
     list_filter = ('modified_dt', 'vendor_name')
     form = autocomplete_light.modelform_factory(SupplierIngestImages)
