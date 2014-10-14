@@ -9,8 +9,8 @@ class ProductSnapshotLiveAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('admin_image', 'colorstyle', 'brand', 'product_type', 'po_number', 'vendor_style', 'image_ready_dt')
     search_fields = ['colorstyle__vendor_style__brand']
+    list_filter = ('image_ready_dt', 'product_type',)
     form = autocomplete_light.modelform_factory(ProductSnapshotLive)
-    list_filter = ('product_type', 'image_ready_dt',)
 myadmin.site.register(ProductSnapshotLive, ProductSnapshotLiveAdmin)
 
 
@@ -28,8 +28,7 @@ class SupplierIngestAdmin(myadmin.ModelAdmin):
     list_display = ('bfly_image', 'vendor_image', 'colorstyle', 'vendor_name', 'vendor_style', 'image_url', 'image_ready_dt', 'modified_dt', 'version', 'get_http_status_code')
     search_fields = ['colorstyle','vendor_name']
     list_filter = ('image_ready_dt', 'modified_dt', 'vendor_name')
-
-form = autocomplete_light.modelform_factory(SupplierIngest)
+    form = autocomplete_light.modelform_factory(SupplierIngest)
     # def get_search_results(self, request, queryset, search_term):
     #     queryset, use_distinct = super(SupplierIngestAdmin, self).get_search_results(request, queryset, search_term)
     #     try:
