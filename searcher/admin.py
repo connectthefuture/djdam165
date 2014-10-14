@@ -139,6 +139,7 @@ class AuthUserAdmin(myadmin.ModelAdmin):
     form = autocomplete_light.modelform_factory(AuthUser)
 myadmin.site.register(AuthUser, AuthUserAdmin)
 
+
 class AuthGroupPermissionsAdmin(myadmin.ModelAdmin):
     pass
     search_fields = ['group']
