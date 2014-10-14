@@ -128,7 +128,7 @@ myadmin.site.register(SelectedFiles, SelectedFilesAdmin)
 ### Auth Groups and Users for Super only
 class AuthGroupAdmin(myadmin.ModelAdmin):
     search_fields = ['name']
-    list_display = ('name','name__permission__name')
+    list_display = ('name',)
     form = autocomplete_light.modelform_factory(AuthGroup)
 myadmin.site.register(AuthGroup, AuthGroupAdmin)
 
