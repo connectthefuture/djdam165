@@ -28,7 +28,7 @@ from django.contrib.admin.filters import SimpleListFilter
 #         return queryset
 #
 
-#from django.contrib.admin.filters import BooleanFieldListFilter
+from django.contrib.admin.filters import FieldListFilter
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
@@ -38,7 +38,7 @@ from django.utils.translation import ugettext as _
 # matching FilterSpec is the one used.
 def _register_front(cls, test, factory):
     cls.filter_specs.insert(0, (test, factory))
-FilterSpec =BooleanFieldListFilter
+FilterSpec =FieldListFilter
 FilterSpec.register_front = classmethod(_register_front)
 
 class NullFilterSpec(FilterSpec):
