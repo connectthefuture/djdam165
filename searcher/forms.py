@@ -111,7 +111,6 @@ class ImportCropUploadForm(forms.Form):
 #    file_path = forms.ImageField(required=True)
     file_path = forms.FileField(required=True)
 
-
     def create(self, file_path):
         selected_file = SelectedFiles()
         selected_file.save_selected_file_path(file_path.name, file_path, save=True)
