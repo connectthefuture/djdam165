@@ -4,6 +4,34 @@ myadmin.autodiscover()
 import autocomplete_light
 from models import *
 
+from django.contrib.admin.filters import SimpleListFilter
+
+class NullFilterSpec(SimpleListFilter):
+    title = u''
+
+    parameter_name = u''
+
+    def lookups(self, request, model_admin):
+        return (
+            ('1', _('Has value'), ),
+            ('0', _('None'), ),
+        )
+
+    def queryset(self, request, queryset):
+        kwargs = {
+        '%s'%self.parameter_name : None,
+        }
+        if self.value() == '0':
+            return queryset.filter(**kwargs)
+        if self.value() == '1':
+            return queryset.exclude(**kwargs)
+        return queryset
+
+
+class StartNullFilterSpec(NullFilterSpec):
+    title = u'Started'
+    parameter_name = u'started'
+
 
 class ProductSnapshotLiveAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
@@ -18,7 +46,7 @@ class SupplierIngestImagesAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('bfly_image', 'colorstyle', 'alt', 'modified_dt', 'vendor_image')
     search_fields = ['colorstyle__vendor_name']
-    list_filter = ('modified_dt', 'vendor_name')
+    list_filter = (('modified_dt', StartNullFilterSpec), 'vendor_name')
     form = autocomplete_light.modelform_factory(SupplierIngestImages)
 myadmin.site.register(SupplierIngestImages, SupplierIngestImagesAdmin)
 
