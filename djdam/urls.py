@@ -137,6 +137,7 @@ urlpatterns += patterns('',
                        url(r'^admin_tools/', include('admin_tools.urls')),
                        url(r'^adminactions/', include('adminactions.urls')),
                        # Uncomment the next line to enable the admin:
+                       (r'^grappelli/', include('grappelli.urls')),  # grappelli Admin URLS
                        url(r'^admin/', include(admin.site.urls)),
                        #url(r'^admin/', include(admin.site.urls)),
                        #url(r'^admin/$', admin.site.admin_view(admin.site.index)),
