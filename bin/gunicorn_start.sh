@@ -22,7 +22,7 @@ export DJANGO_SETTINGS_MODULE=djdam.settings # which settings file should Django
 export DJANGO_WSGI_MODULE=djdam.wsgi # WSGI module name
 
 echo "Starting $NAME"
-
+env;
 # Activate the virtual environment
 cd $DJANGODIR
 source ../../bin/activate
