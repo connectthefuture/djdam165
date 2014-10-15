@@ -14,10 +14,11 @@ export PYTHONDIR=/home/johnb/virtualenvs/DJDAM/bin/ # Django project directory
 export SOCKFILE=$DJANGODIR/var/run/gunicorn.sock # we will communicte using this unix socket
 export LOGFILE=$DJANGODIR/var/log/gunicorn/searcher.log
 export LOGDIR=$(dirname $LOGFILE)
-export USER=root # the user to run as
+export PWD=$DJANGODIR
+export USER=www-data # the user to run as
 export GROUP=www-data # the group to run as
 export NUM_WORKERS=5 # how many worker processes should Gunicorn spawn
-export DJANGO_SETTINGS_MODULE=settings.local # which settings file should Django use
+export DJANGO_SETTINGS_MODULE=djdam.settings # which settings file should Django use
 export DJANGO_WSGI_MODULE=djdam.wsgi # WSGI module name
 
 echo "Starting $NAME"
@@ -32,7 +33,7 @@ test -d $RUNDIR || mkdir -p $RUNDIR
 
 ## Add Needed files to PATH
 export PYTHONPATH=$DJANGODIR:$DJANGODIR/settings:$DJANGODIR/apps:$DJANGODIR/../../src:$DJANGODIR/../../bin:$PYTHONPATH
-
+export PATH=$DJANGODIR:$DJANGODIR/settings:$DJANGODIR/apps:$DJANGODIR/../../src:$DJANGODIR/../../bin:$PATH
 ## Start Guni
 $PYTHONDIR/gunicorn djdam.wsgi:application --bind=127.0.0.1:9000 --name $NAME --workers $NUM_WORKERS --user=$USER --group=$GROUP --log-level=debug &
 
