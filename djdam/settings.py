@@ -55,6 +55,7 @@ INSTALLED_APPS = (# '',
     # 'admin_bootstrap',
     # # DjangoAdminBootstrapped
     #'django_admin_bootstrapped.bootstrap3',
+    'grappelli',
     'django_admin_bootstrapped',
     # Dj Admin Tools
     'admin_tools',  #
@@ -63,7 +64,6 @@ INSTALLED_APPS = (# '',
     #'admin_tools.menu',
     'adminactions',  #
     # Django contrib apps/admin
-    'grappelli',
     'django.contrib.admin',
     #'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',
