@@ -50,14 +50,14 @@ $('#myFormSubmit').click(function(e){
     });
 </script>
 {##}
-{#<script>#}
-{#    $("button").click(function() {#}
-{#        $.get("/api/v1/pmdata/" + $(":input:first-of-type"))#}
-{#                .done(function (data) {#}
-{#                    alert("Data Loaded: " + data);#}
-{#                });#}
-{#    });#}
-{#</script>#}
+<script>
+    $("button").click(function() {
+        $.get("/api/v1/pmdata/" + $(":input:first-of-type"))
+                .done(function (data) {
+                    alert("Data Loaded: " + data);
+                });
+    });
+</script>
 {##}
 {#<script>#}
 {#  function showValues() {#}
