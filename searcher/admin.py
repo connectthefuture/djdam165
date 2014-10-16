@@ -46,7 +46,7 @@ class NullFilterSpec(SimpleListFilter):
             yield {'selected': str(k) == str(self.lookup_val),
                     'query_string': cl.get_query_string({self.lookup_kwarg: k}),
                     'display': v}
-SimpleListFilter.register(lambda f: f.null, NullFilterSpec)
+#NullFilterSpec.register(lambda f: f.null, NullFilterSpec)
 #SimpleListFilter.filter_specs.insert(0, (lambda f: f.null, NullFilterSpec))
 
 
