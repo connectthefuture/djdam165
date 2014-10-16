@@ -56,7 +56,7 @@ class SupplierIngestAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('bfly_image', 'vendor_image', 'colorstyle', 'vendor_name', 'vendor_style', 'image_url', 'image_ready_dt', 'modified_dt', 'version', 'get_http_status_code')
     search_fields = ['colorstyle','vendor_name']
-    list_filter = (('image_ready_dt', NullFilterSpec), 'modified_dt', 'vendor_name')
+    list_filter = ('image_ready_dt', 'modified_dt', 'vendor_name')
     list_per_page = 25
     #form = autocomplete_light.modelform_factory(SupplierIngest)
     # def get_search_results(self, request, queryset, search_term):
