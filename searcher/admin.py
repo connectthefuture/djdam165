@@ -4,33 +4,50 @@ myadmin.autodiscover()
 import autocomplete_light
 from models import *
 
-from django.contrib.admin.filters import SimpleListFilter
-
+# from django.contrib.admin.filters import SimpleListFilter
+#
+# class NullFilterSpec(SimpleListFilter):
+#     title = u''
+#
+#     parameter_name = u''
+#
+#     def lookups(self, request, model_admin):
+#         return (
+#             ('1', _('Has value'), ),
+#             ('0', _('None'), ),
+#         )
+#
+#     def queryset(self, request, queryset):
+#         kwargs = {
+#         '%s'%self.parameter_name : None,
+#         }
+#         if self.value() == '0':
+#             return queryset.filter(**kwargs)
+#         if self.value() == '1':
+#             return queryset.exclude(**kwargs)
+#         return queryset
+#
+#
+# class StartNullFilterSpec(NullFilterSpec):
+#     title = u'Started'
+#     parameter_name = u'started'
+SimpleListFilter = myadmin.SimpleListFilter
 class NullFilterSpec(SimpleListFilter):
-    title = u''
+    def __init__(self, f, request, params, model, model_admin):
+        super(NullFilterSpec, self).__init__(f, request, params, model, model_admin)
+        self.lookup_kwarg = '%s__isnull' % f.name
+        self.lookup_val = request.GET.get(self.lookup_kwarg, None)
 
-    parameter_name = u''
-
-    def lookups(self, request, model_admin):
-        return (
-            ('1', _('Has value'), ),
-            ('0', _('None'), ),
-        )
-
-    def queryset(self, request, queryset):
-        kwargs = {
-        '%s'%self.parameter_name : None,
-        }
-        if self.value() == '0':
-            return queryset.filter(**kwargs)
-        if self.value() == '1':
-            return queryset.exclude(**kwargs)
-        return queryset
-
-
-class StartNullFilterSpec(NullFilterSpec):
-    title = u'Started'
-    parameter_name = u'started'
+    def choices(self, cl):
+        yield {'selected': self.lookup_val is None,
+               'query_string': cl.get_query_string({}, [self.lookup_kwarg]),
+               'display': _('All')}
+        for k, v in ((True,_('Null')),('',_('With value'))):
+            yield {'selected': str(k) == str(self.lookup_val),
+                    'query_string': cl.get_query_string({self.lookup_kwarg: k}),
+                    'display': v}
+#FilterSpec.register(lambda f: f.null, NullFilterSpec)
+SimpleListFilter.filter_specs.insert(0, (lambda f: f.null, NullFilterSpec))
 
 
 class ProductSnapshotLiveAdmin(myadmin.ModelAdmin):
@@ -56,7 +73,7 @@ class SupplierIngestAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('bfly_image', 'vendor_image', 'colorstyle', 'vendor_name', 'vendor_style', 'image_url', 'image_ready_dt', 'modified_dt', 'version', 'get_http_status_code')
     search_fields = ['colorstyle','vendor_name']
-    list_filter = (('image_ready_dt', BooleanFieldListFilter), 'modified_dt', 'vendor_name')
+    list_filter = (('image_ready_dt', NullFilterSpec), 'modified_dt', 'vendor_name')
     list_per_page = 25
     #form = autocomplete_light.modelform_factory(SupplierIngest)
     # def get_search_results(self, request, queryset, search_term):
