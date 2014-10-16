@@ -201,6 +201,7 @@ class EventsStyleStatusplus(models.Model):
     def __unicode__(self):
         return self.colorstyle
 
+
 class OffshoreStatus(models.Model):
     id = models.IntegerField(primary_key=True)
     colorstyle = models.CharField(max_length=9L, blank=True)

@@ -29,7 +29,8 @@
             </form>
             <div id="results"></div>
 
-{% comment %}<script>
+
+<script>
 $('#myFormSubmit').click(function(e){
       var inputdata = $('#inputajax');
       e.preventDefault();
@@ -40,37 +41,37 @@ $('#myFormSubmit').click(function(e){
          function(data, status, xhr){
            // do something here with response;
          });
-
 });
-</script>{% endcomment %}
-<script>
-    $("button").click(function() {
-        alert($(":input").val());
-    });
 </script>
-
-<script>
-    $("button").click(function() {
-        $.get("/api/v1/pmdata/" + $(":input:first-of-type"))
-                .done(function (data) {
-                    alert("Data Loaded: " + data);
-                });
-    });
-</script>
-
-<script>
-  function showValues() {
-    var fields;
-      fields = $(":input").serializeArray();
-    $( "#results" ).empty();
-    jQuery.each( fields, function( i, field ) {
-                                  $( "#results" ).append( field.value + " " );
-    });
-  }
-
-  $( ":checkbox, :radio" ).click( showValues );
-  $( "select" ).change( showValues );
-  showValues();
-</script>
+{##}
+{#<script>#}
+{#    $("button").click(function() {#}
+{#        alert($(":input").val());#}
+{#    });#}
+{#</script>#}
+{##}
+{#<script>#}
+{#    $("button").click(function() {#}
+{#        $.get("/api/v1/pmdata/" + $(":input:first-of-type"))#}
+{#                .done(function (data) {#}
+{#                    alert("Data Loaded: " + data);#}
+{#                });#}
+{#    });#}
+{#</script>#}
+{##}
+{#<script>#}
+{#  function showValues() {#}
+{#    var fields;#}
+{#      fields = $(":input").serializeArray();#}
+{#    $( "#results" ).empty();#}
+{#    jQuery.each( fields, function( i, field ) {#}
+{#                                  $( "#results" ).append( field.value + " " );#}
+{#    });#}
+{#  }#}
+{##}
+{#  $( ":checkbox, :radio" ).click( showValues );#}
+{#  $( "select" ).change( showValues );#}
+{#  showValues();#}
+{#</script>#}
 
 {% endblock %}
