@@ -17,7 +17,9 @@ from django.views.generic.base import TemplateView
 class OnePageAppView(TemplateView):
     template_name = 'one_page_app.html'
 
-
+def onepageappview(request):
+    """ Default view for the root """
+    return render(request, 'base/jbhome.html',)
 #################
 ###### Testing Layout views
 def bootstrapshell(request):
@@ -50,7 +52,7 @@ def testjsonform(request):
         #request.GET['input_list']
         colorstyle = request.GET['input_list']
     except:
-        colorstyle = '321424701' #request.GET['data__0']
+        colorstyle = request.GET['data__0']
         pass
     #try:
     try:

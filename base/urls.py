@@ -14,6 +14,7 @@ urlpatterns = patterns('base.views',
                        url(r'^testhome/?$', 'testhome', name='jbtesthome'),
                        url(r'^testjsonform/?.*?$', 'testjsonform', name='testjsonform'),
                        url(r'^ajaxexample/?.*?$', 'ajaxexample', name='ajaxexample'),
+                       url(r'^onepageappview/?.*?$', 'onepageappview', name='onepageappview'),
 
 )
 
