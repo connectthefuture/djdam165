@@ -23,15 +23,44 @@ autocomplete_light.register(ProductSnapshotLive,
 
 import autocomplete_light
 from models import ProductSnapshotLive, SupplierIngest
-class PoNumberAutocomplete(autocomplete_light.AutocompleteModelBase):
-    search_fields = ['^colorstyle']
-autocomplete_light.register(ProductSnapshotLive, PoNumberAutocomplete)
+
 
 class ColorstyleAutocomplete(autocomplete_light.AutocompleteModelBase):
     search_fields = ['^colorstyle']
-autocomplete_light.register(ProductSnapshotLive, ColorstyleAutocomplete)
+
+autocomplete_light.register(ProductSnapshotLive, ColorstyleAutocomplete,
+        autocomplete_js_attributes = {
+                                         'minimum_characters': 0,
+        'placeholder': 'Colorstyle ?',
+        },
+        widget_js_attributes = {
+        'max_values': 9,
+        }
+        )
+
+class PoNumberAutocomplete(autocomplete_light.AutocompleteModelBase):
+    search_fields = ['^colorstyle']
+
+autocomplete_light.register(ProductSnapshotLive, PoNumberAutocomplete, autocomplete_js_attributes={
+        'minimum_characters': 0,
+        'placeholder': 'Po number ?',
+    },
+    widget_js_attributes = {
+        'max_values': 6,
+    }
+    )
+
 
 class VendorNameAutocomplete(autocomplete_light.AutocompleteModelBase):
     search_fields = ['^colorstyle', 'vendor_name']
-autocomplete_light.register(SupplierIngest, VendorNameAutocomplete)
+
+autocomplete_light.register(SupplierIngest, VendorNameAutocomplete,
+    autocomplete_js_attributes={
+        'minimum_characters': 0,
+        'placeholder': 'Vendor name ?',
+    },
+        widget_js_attributes={
+        'max_values': 61,
+    }
+    )
 
