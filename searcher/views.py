@@ -19,7 +19,8 @@
 ##=========================================================================
 
 ##=========================================================================
-
+import autocomplete_light
+autocomplete_light.autodiscover()
 
 # Photo Admin Methods #######
 # @login_required
