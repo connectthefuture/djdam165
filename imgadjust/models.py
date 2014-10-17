@@ -86,6 +86,27 @@ class ImageSource(models.Model):
     class Meta:
         db_table = 'imgadjust_image_source'
 
+    def primary_select_image(self):
+        from django.utils.safestring import mark_safe
+        return mark_safe('<img src="{0}"/>').format(self.source_url)
+        # return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+    primary_select_image.allow_tags = True
+
+
+    def vendor_image(self):
+        from django.utils.safestring import mark_safe
+        return mark_safe('<img height="96" width="80" src="{0}"/>').format(self.supplier_ingest.image_url)
+    vendor_image.allow_tags = True
+
+
+    def bfly_image(self):
+        from django.utils.safestring import mark_safe
+        if len(self.colorstyle) == 9:
+            return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+        else:
+            return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom85.ms?img={0}.pct&outputx=80&outputy=96&level=1&ver=nukk').format(self.file_name, self.version)
+    bfly_image.allow_tags = True
+
     def __unicode__(self):
         return self.source_url    
 
