@@ -64,10 +64,10 @@ autocomplete_light.register(SupplierIngest, VendorNameAutocomplete,
     }
     )
 
-import autocomplete_light
+# import autocomplete_light
 
-from models import TemplatedChoice
+# from models import TemplatedChoice
 
-autocomplete_light.register(TemplatedChoice,
-	autocomplete_light.AutocompleteModelTemplate,
-	choice_template='template_autocomplete/templated_choice.html')
+# autocomplete_light.register(TemplatedChoice,
+# 	autocomplete_light.AutocompleteModelTemplate,
+# 	choice_template='searcher/autocompletelight/templated_choice.html')

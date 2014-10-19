@@ -10,7 +10,6 @@ from django.utils.text import slugify
 ################################################################
 #   UPLOAD Image Class Handler Model
 ################################################################
-
 ### file storage
 
 from django.db import models
@@ -49,7 +48,9 @@ IMAGE_TYPE_CHOICES = (
 )
 
 ################################################################
-
+# from autocomplete_light import AutocompleteModel, AutocompleteTemplate
+# class AutocompleteModelTemplate(AutocompleteModel, AutocompleteTemplate):
+#     pass
 
 class AdminToolsMenuBookmark(models.Model):
     id = models.IntegerField(primary_key=True)
