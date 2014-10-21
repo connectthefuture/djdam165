@@ -45,7 +45,7 @@ myadmin.site.register(ProductSnapshotLive, ProductSnapshotLiveAdmin)
 class SupplierIngestImagesAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('bfly_image', 'vendor_image', 'colorstyle', 'alt', 'modified_dt')
-    search_fields = ['colorstyle__vendor_name']
+    search_fields = ['colorstyle']
     list_filter = ('modified_dt', 'vendor_name')
     form = autocomplete_light.modelform_factory(SupplierIngestImages)
 myadmin.site.register(SupplierIngestImages, SupplierIngestImagesAdmin)
@@ -55,7 +55,7 @@ from django.contrib.admin import BooleanFieldListFilter
 class SupplierIngestAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('bfly_image', 'vendor_image', 'colorstyle', 'vendor_name', 'vendor_style', 'image_url', 'image_ready_dt', 'modified_dt', 'version', 'get_http_status_code')
-    search_fields = ['colorstyle','vendor_name']
+    search_fields = ['colorstyle']
     list_filter = ('image_ready_dt', 'modified_dt', 'vendor_name')
     list_per_page = 25
     #form = autocomplete_light.modelform_factory(SupplierIngest)
@@ -74,7 +74,7 @@ myadmin.site.register(SupplierIngest, SupplierIngestAdmin)
 class ImageUpdateAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('colorstyle', 'alt', 'modify_dt')
-    search_fields = ['colorstyle__alt']
+    search_fields = ['colorstyle']
     form = autocomplete_light.modelform_factory(ImageUpdate)
 myadmin.site.register(ImageUpdate, ImageUpdateAdmin)
 
