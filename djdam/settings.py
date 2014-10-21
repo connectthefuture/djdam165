@@ -84,8 +84,8 @@ INSTALLED_APPS = (# '',
     ## Debug toolbar
     # 'debug_toolbar.apps.DebugToolbarConfig',  ## Uncomment for >= Django 1.7
     'debug_toolbar',  ## Uncomment for <= Django 1.6
-    'debug_toolbar_htmltidy',
-    #'debug_toolbar_user_panel',#
+    # 'debug_toolbar_htmltidy',
+    # 'debug_toolbar_user_panel',#
 
 
     # bootstrap and other toolkits for widgets tables forms etc.
@@ -216,8 +216,8 @@ TEMPLATE_DIRS = (
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.filesystem.Loader',
     'django.template.loaders.eggs.Loader',
 )
 
@@ -283,7 +283,7 @@ THUMBNAIL_DEBUG = True
 THUMBNAIL_QUALITY = 60
 THUMBNAIL_PROGRESSIVE = False
 
-FILE_UPLOAD_TEMP_DIR = '/var/tmp/'
+FILE_UPLOAD_TEMP_DIR = MEDIA_ROOT + '/tmp/'
 #FILE_UPLOAD_TEMP_DIR = '/tmp'
 FILE_UPLOAD_MAX_MEMORY_SIZE = 157286400
 
@@ -432,7 +432,7 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.headers.HeadersPanel',
     'debug_toolbar.panels.sql.SQLPanel',
     'debug_toolbar.panels.templates.TemplatesPanel',
-    'debug_toolbar_htmltidy.panels.HTMLTidyDebugPanel',
+    # 'debug_toolbar_htmltidy.panels.HTMLTidyDebugPanel',
     'debug_toolbar.panels.staticfiles.StaticFilesPanel',
     'debug_toolbar.panels.signals.SignalsPanel',
     'debug_toolbar.panels.redirects.RedirectsPanel',
