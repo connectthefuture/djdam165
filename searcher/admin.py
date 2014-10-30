@@ -55,7 +55,7 @@ class SupplierIngestImagesAdmin(myadmin.ModelAdmin):
     def queryset(self, request):
         """Limit SupplierIngestImages to those that belong to the request's user."""
         qs = super(SupplierIngestImagesAdmin, self).queryset(request)
-        if request.user.is_staff:
+        if request.user.is_authenticated():
             # It is mine, all mine. Just return everything.
             return qs
         # Now we just add an extra filter on the queryset and
