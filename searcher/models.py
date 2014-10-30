@@ -458,7 +458,7 @@ class SupplierIngestImages(models.Model):
     bfly_zoom_site = models.CharField(max_length=150)
     bfly_list_site = models.CharField(max_length=150)
     bfly_pdp_site = models.CharField(max_length=150)
-
+    user    = models.ForeignKey(User)
 
     class Meta:
         managed = False

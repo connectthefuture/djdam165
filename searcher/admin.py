@@ -45,8 +45,23 @@ myadmin.site.register(ProductSnapshotLive, ProductSnapshotLiveAdmin)
 class SupplierIngestImagesAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('bfly_image', 'vendor_image', 'colorstyle', 'alt', 'modified_dt')
-    search_fields = ['colorstyle__vendor_name']
-    list_filter = ('modified_dt', 'vendor_name')
+    search_fields = ['colorstyle', 'vendor_name']
+    list_filter = ('alt', 'modified_dt', 'vendor_name')
+    readonly_fields = ('colorstyle',
+                       'alt',
+                       'vendor_name',
+                       'modified_dt')
+    
+    def queryset(self, request):
+        """Limit SupplierIngestImages to those that belong to the request's user."""
+        qs = super(SupplierIngestImagesAdmin, self).queryset(request)
+        if request.user.is_staff:
+            # It is mine, all mine. Just return everything.
+            return qs
+        # Now we just add an extra filter on the queryset and
+        # we're done. Assumption: SupplierIngestImages.owner is a foreignkey
+        # to a User.
+        return qs.filter(owner=request.user)
     form = autocomplete_light.modelform_factory(SupplierIngestImages)
 myadmin.site.register(SupplierIngestImages, SupplierIngestImagesAdmin)
 
@@ -58,6 +73,7 @@ class SupplierIngestAdmin(myadmin.ModelAdmin):
     search_fields = ['colorstyle','vendor_name']
     list_filter = ('image_ready_dt', 'modified_dt', 'vendor_name')
     list_per_page = 25
+
     #form = autocomplete_light.modelform_factory(SupplierIngest)
     # def get_search_results(self, request, queryset, search_term):
     #     queryset, use_distinct = super(SupplierIngestAdmin, self).get_search_results(request, queryset, search_term)
