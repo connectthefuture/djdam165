@@ -1,6 +1,9 @@
 {% extends 'base/jbhome.html' %}
 {% block content %}
 
+{% load crispy_forms_tags %}
+{% crispy example_form example_form.helper %}
+
 <form method="post" action="">
     {{ formset.management_form }}
     <table>
