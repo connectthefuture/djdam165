@@ -593,23 +593,23 @@ def manage_products(request, brand_id):
 #     return render_to_response("manage/manage_supplier_ingest.html", {
 #         "formset": formset,
 #     })
+#from forms import SupplierIngestImagesForm, SupplierIngestForm
+def manage_supplier_ingest(request, colorstyle=None):
+    formset=''   
+    # if request.method == "POST":
+    #     formset = SupplierIngestForm(request.POST)
+    #     if formset.is_valid():
+    #         pass
+    #         #data = form.cleaned_data['colorstyle'],
+    #     else:
+    #         print 'bad'
+    #         pass
+    # else:
+    #     formset = SupplierIngestForm()
 
-# from forms import SupplierIngestImagesForm, SupplierIngestForm
-# def manage_supplier_ingest(request, colorstyle=None):
-#     if request.method == "POST":
-#         formset = SupplierIngestForm(request.POST)
-#         if formset.is_valid():
-#             pass
-#             #data = form.cleaned_data['colorstyle'],
-#         else:
-#             print 'bad'
-#             pass
-#     else:
-#         formset = SupplierIngestForm()
-
-#     return render_to_response("manage/manage_supplier_ingest.html", {
-#         "formset": formset,
-#     })
+    return render_to_response("manage/manage_supplier_ingest.html", {
+        "formset": formset,
+    })
 
 ###################################################################################################
 ###################################################################################################
