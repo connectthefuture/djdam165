@@ -579,17 +579,33 @@ def manage_products(request, brand_id):
 
 ###################################################
 
+# def manage_supplier_ingest(request, colorstyle=None):
+#     images = SupplierIngestImages.objects.get(colorstyle=colorstyle)
+#     SupplierIngestInlineFormSet = inlineformset_factory(SupplierIngestImages, SupplierIngest)
+#     if request.method == "POST" or request.method == "GET":
+#         formset = SupplierIngestInlineFormSet(request.POST, request.FILES, instance=brand)
+#         if formset.is_valid():
+#             formset.save()
+#             # Do something. Should generally end with a redirect. For example:
+#             return HttpResponseRedirect(images.get_absolute_url())
+#     else:
+#         formset = SupplierIngestInlineFormSet(instance=images)
+#     return render_to_response("manage/manage_supplier_ingest.html", {
+#         "formset": formset,
+#     })
+from forms import SupplierIngestImagesForm, SupplierIngestForm
 def manage_supplier_ingest(request, colorstyle=None):
-    images = SupplierIngestImages.objects.get(colorstyle=colorstyle)
-    SupplierIngestInlineFormSet = inlineformset_factory(SupplierIngestImages, SupplierIngest)
-    if request.method == "POST" or request.method == "GET":
-        formset = SupplierIngestInlineFormSet(request.POST, request.FILES, instance=brand)
+    if request.method == "POST":
+        formset = SupplierIngestForm(request.POST)
         if formset.is_valid():
-            formset.save()
-            # Do something. Should generally end with a redirect. For example:
-            return HttpResponseRedirect(images.get_absolute_url())
+            pass
+            #data = form.cleaned_data['colorstyle'],
+        else:
+            print 'bad'
+            pass
     else:
-        formset = SupplierIngestInlineFormSet(instance=images)
+        formset = SupplierIngestForm()
+
     return render_to_response("manage/manage_supplier_ingest.html", {
         "formset": formset,
     })

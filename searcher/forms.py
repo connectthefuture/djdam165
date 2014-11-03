@@ -576,3 +576,100 @@ from searcher.widgets import SplitJSONWidget
 class testJSONForm(forms.Form):
     attrs = {'class': 'navbar-form', 'size': '40'}
     data = forms.CharField(widget=SplitJSONWidget(attrs=attrs, debug=True))
+
+
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout
+from crispy_forms.layout import Submit
+from crispy_forms.bootstrap import TabHolder, Tab
+from searcher.models import SupplierIngest, SupplierIngestImages
+
+
+class SupplierIngestModelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SupplierIngestModelForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-supplierIngestForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'submit_survey'
+        self.helper.layout = Layout(
+            TabHolder(
+            Tab(
+                'Detail',
+                'colorstyle',
+                'po_number',
+                'vendor_name',
+                'vendor_brand',
+                'vendor_style',
+                'modified_dt'
+            ),
+            Tab(
+                'Image Info',
+                'image_url',
+                'get_http_status_code',
+                'vendor_image',
+                'bfly_image',
+                'version'
+            ),
+            Tab(
+                'Status',
+                'bfly_product_path',
+                'production_complete_dt',
+                'image_ready_dt',
+                'copy_ready_dt',
+                'start_dt'
+            )
+            )
+        )
+        self.helper.add_input(Submit('submit', 'Submit'))
+
+    class Meta:
+        model = SupplierIngest
+
+
+class SupplierIngestImagesModelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SupplierIngestImagesModelForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-supplierIngestImagesForm'
+        self.helper.form_class = 'form-horizontal'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'manage_supplier_ingest'
+        self.helper.layout = Layout(
+            TabHolder(
+            Tab(
+                'Details',
+                'colorstyle',
+                'alt',
+                'bfly_product_path',
+                'po_number',
+                'modified_dt'
+            ),
+            Tab(
+                'Vendor Images',
+                'vendor_name',
+                'vendor_brand',
+                'vendor_style',
+                'vendor_image',
+                'bfly_image'
+            ),
+            Tab(
+                'Bluefly Images',
+                'file_name',
+                'version',
+                'bfly_local_src',
+                'bfly_zoom_src',
+                'bfly_zoom_site',
+                'bfly_list_site',
+                'bfly_pdp_site'
+            )
+        )
+        self.helper.add_input(Submit('submit', 'Submit'))
+
+    class Meta:
+        model = SupplierIngestImages
+
+
+
