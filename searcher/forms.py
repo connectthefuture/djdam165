@@ -665,7 +665,8 @@ class SupplierIngestImagesModelForm(forms.ModelForm):
                 'bfly_list_site',
                 'bfly_pdp_site'
             )
-        )
+            )
+        )
         self.helper.add_input(Submit('submit', 'Submit'))
 
     class Meta:
