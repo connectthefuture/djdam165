@@ -1,3 +1,5 @@
+{% extends 'base/jbhome.html' %}
+{% block content %}
 
 <form method="post" action="">
     {{ formset.management_form }}
@@ -7,3 +9,5 @@
         {% endfor %}
     </table>
 </form>
+
+{% endblock %}

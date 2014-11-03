@@ -455,7 +455,9 @@ DEBUG_TOOLBAR_PANELS = (
 ## ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'dashboard.CustomAppIndexDashboard'
 ADMIN_TOOLS_THEMING_CSS = 'css/theming.css'
 
+## Crispy Forms Vars
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+#CRISPY_CLASS_CONVERTERS = {'textinput': "textinput inputtext"}
 
 ## Tastypy API SETTINGS
 TASTYPIE_DEFAULT_FORMATS = ['json']
