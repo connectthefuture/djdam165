@@ -581,15 +581,15 @@ def manage_products(request, brand_id):
 
 def manage_supplier_ingest(request, colorstyle=None):
     images = SupplierIngestImages.objects.get(pk=11)
-    SupplierIngestInlineFormSet = inlineformset_factory(SupplierIngestImages, SupplierIngest)
+    SupplierIngestImagesInlineFormSet = inlineformset_factory(SupplierIngestImages)
     if request.method == "POST" or request.method == "GET":
-        formset = SupplierIngestInlineFormSet(request.POST, request.FILES, instance=brand)
+        formset = SupplierIngestImagesInlineFormSet(request.POST, request.FILES, instance=brand)
         if formset.is_valid():
             formset.save()
             # Do something. Should generally end with a redirect. For example:
             return HttpResponseRedirect(images.get_absolute_url())
     else:
-        formset = SupplierIngestInlineFormSet(instance=images)
+        formset = SupplierIngestImagesInlineFormSet(instance=images)
     return render_to_response("manage/manage_supplier_ingest.html", {
         "formset": formset,
     })
