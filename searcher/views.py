@@ -580,7 +580,7 @@ def manage_products(request, brand_id):
 ###################################################
 
 def manage_supplier_ingest(request, colorstyle=None):
-    images = SupplierIngestImages.objects.get(colorstyle=colorstyle)
+    images = SupplierIngestImages.objects.get(pk=11)
     SupplierIngestInlineFormSet = inlineformset_factory(SupplierIngestImages, SupplierIngest)
     if request.method == "POST" or request.method == "GET":
         formset = SupplierIngestInlineFormSet(request.POST, request.FILES, instance=brand)
