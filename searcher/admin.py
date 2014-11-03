@@ -73,7 +73,7 @@ class SupplierIngestAdmin(myadmin.ModelAdmin):
     list_display = ('bfly_image', 'vendor_image', 'colorstyle', 'vendor_name', 'vendor_style', 'image_url', 'image_ready_dt', 'modified_dt', 'version', 'get_http_status_code')
     search_fields = ['colorstyle']
     list_filter = ('image_ready_dt', 'modified_dt', 'vendor_name')
-    list_per_page = 25
+    list_per_page = 150
 
     #form = autocomplete_light.modelform_factory(SupplierIngest)
     # def get_search_results(self, request, queryset, search_term):
