@@ -593,9 +593,9 @@ class SupplierIngestModelForm(forms.ModelForm):
         self.helper.form_id     = 'id-supplierIngestForm'
         self.helper.form_method = 'post'
         self.helper.form_action = 'manage_supplier_ingest'
-        self.helper.form_class  = 'form-horizontal'
+        self.helper.form_class  = 'form-vertical'
         self.helper.label_class = 'control-label'
-        self.helper.field_class = 'col-lg-2'
+        self.helper.field_class = 'col-md-4'
         self.helper.layout = Layout(
             TabHolder(
                 Tab(
@@ -678,7 +678,6 @@ class SupplierIngestImagesModelForm(forms.ModelForm):
         model = SupplierIngestImages
 
 
-
 class ProductSnapshotLiveModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProductSnapshotLiveModelForm, self).__init__(*args, **kwargs)
@@ -728,7 +727,6 @@ class ProductSnapshotLiveModelForm(forms.ModelForm):
 
     class Meta:
         model = ProductSnapshotLive
-
 
 
 class SupplierImagesModelForm(forms.ModelForm):

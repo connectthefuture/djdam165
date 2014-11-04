@@ -21,11 +21,12 @@ urlpatterns = patterns('base.views',
 urlpatterns += patterns('searcher.views',
                        url(r'^selected_index/?.*?$','selected_index',  name='selected_index'),
 )
-#
-#urlpatterns += patterns('',
-#                        (r'^media/(?P<path>.*)$', 'django.views.static.serve',
-#                         {'document_root': MEDIA_ROOT}),
-#)
+
+
+from djdam.settings import MEDIA_ROOT
+urlpatterns += patterns('',
+    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT}),
+    )
 
 urlpatterns += patterns('searcher.tables',url(r'^suppliers/?$','suppliers'))
 

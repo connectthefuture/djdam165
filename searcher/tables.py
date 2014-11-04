@@ -1,8 +1,8 @@
 __author__ = 'johnb'
 
 import django_tables2 as tables
-from django_tables2 import RequestConfig, SingleTableView, A
-from searcher.models import SupplierIngest
+from django_tables2 import RequestConfig, SingleTableView
+
 import itertools
 
 ####  Tables -- aka tables.py
@@ -24,6 +24,7 @@ class SupplierIngestTable(tables.Table):
         return '<%d>' % code
 
     class Meta:
+        from models import SupplierIngest
         model = SupplierIngest
         # add class="paleblue" to <table> tag
         # attrs = {"class": "paleblue"}
@@ -47,7 +48,7 @@ class SupplierIngestTable(tables.Table):
 
 ##### Table VIEWS ####
 from django.shortcuts import render
-from django_tables2   import RequestConfig, SingleTableView, A
+from django_tables2 import RequestConfig, SingleTableView
 
 
 def get_http_status_code(request):
@@ -93,9 +94,12 @@ class SupplierIngestFilter(django_filters.FilterSet):
 
     def __init__(self, *args, **kwargs):
         super(SupplierIngestFilter, self).__init__(*args, **kwargs)
-        self.filters['vendor_name'].extra.update({'empty_label': 'All Vendors'})
-        self.filters['vendor_brand'].extra.update({'empty_label': 'All Brands'})
-        self.filters['alt'].extra.update({'empty_label': 'All Image Kinds'})
+        self.filters['vendor_name'].extra.update(
+            {'empty_label': 'All Vendors'})
+        self.filters['vendor_brand'].extra.update(
+            {'empty_label': 'All Brands'})
+        self.filters['alt'].extra.update(
+            {'empty_label': 'All Image Kinds'})
 
 # class MySupplierFilter(django_filters.FilterSet):
 #   field1 = django_filters.CharFilter()
@@ -116,7 +120,6 @@ class FilteredSingleTableView(SingleTableView):
     f = SupplierIngestFilter(self.request.GET, queryset = SupplierIngest.objects.all() , request=self.request )
     return f
 
-
   def get_context_data(self, **kwargs):
     context = super(FilteredSingleTableView, self).get_context_data(**kwargs)
     f = SupplierIngestFilter(self.request.GET, queryset = SupplierIngest.objects.all(), request=self.request )
@@ -128,6 +131,21 @@ from django.shortcuts import render_to_response
 def supplier_filter(request):
     f = SupplierIngestFilter(request.GET, queryset=SupplierIngest.objects.all())
     return render_to_response('searcher/tables/supplier-ingest-detail.html', {'filter': f})
+
+
+# class FilteredSingleTableView(SingleTableView):
+#   def get_table_data(self):
+#     data= SupplierIngest.objects.all
+#     if self.request.GET.get('field1'):
+#       data = data.filter(field1=self.request.GET.get('field1') )
+#     if self.request.GET.get('field1'):
+#       data = data.filter(field1=self.request.GET.get('field1') )
+#     return data
+#
+#     def get_context_data(self, **kwargs):
+#       context = super(FilteredSingleTableView, self).get_context_data(**kwargs)
+#       context['form'] = forms.MyFilterForm(self.request.user, self.request.GET)
+#       return context
 
 
 class SupplierIngestList(SingleTableView):

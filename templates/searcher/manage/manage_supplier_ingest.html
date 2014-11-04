@@ -4,26 +4,32 @@
 {% load crispy_forms_tags %}
 {% crispy formset %}
 
-<script>
-//'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site',
+
+<div id="#results"></div>
+
+
+<script type="text/javascript">
 $(document).ready(function () {
      function submitSearchStyle() {
-        $("#id-supplierIngestForm").submit(function () {
+        //$("#id-supplierIngestForm").submit(function () {
+          $(':submit').on('click', function() {
             var colorstyle = $('#id_colorstyle').val();
             var vendor = $('#id_vendor').val(); //colorstyle.split("_")[-1];
             var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/";
             //+ colorstyle + "/";
             var res = {};
+            var data = $(':input textarea').val();
             $.ajax({
                 type: "POST",
                 url: url,
-                //"http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/",
+                //url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/",
                 contentType: "application/json",
-                dataType: "json",
-                data: { colorstyle: colorstyle},
-                // $(colorstyle + "/" + alt).serialize(), // serializes the form's elements.
-                success: function (data) {
-                    alert("Wow Lookie Here " + data); // show response from the python script.
+                data: {colorstyle: colorstyle },
+                data: 'button=' + $(this).val(), // Send value of the clicked button
+                dataType: 'json', // Choosing a JSON datatype
+                success: function(data) // Variable data contains the data we get from serverside
+                {
+                  $('#results').html(''); // Clear #image_download_valid div // show response from the python script.
                 }
             });
 
