@@ -100,16 +100,16 @@
             <li><a href="/imgadjust/"><span class="glyphicon glyphicon-screenshot"></span> Adjust </a></li>
             <li><a href="/image-update/"><span class="glyphicon glyphicon-picture"></span> Update </a></li>
             <li><a href="/uploader/"><span class="glyphicon glyphicon-cloud-upload"></span> Upload </a></li>
-            <li><a href="/searcher/filtered/"><span class="glyphicon glyphicon-glass"></span> Tables </a></li>
-            <li><a href="/searcher/suppliers/filter/"><span class="glyphicon glyphicon-briefcase"></span> Suppliers </a></li>
+            <li><a href="/filtered/"><span class="glyphicon glyphicon-glass"></span> Tables </a></li>
+            <li><a href="/suppliers/filter/"><span class="glyphicon glyphicon-briefcase"></span> Suppliers </a></li>
             <li><a href="/searcher/manage/supplier-ingest/"><span class="glyphicon glyphicon-eye-open"></span> SupplierImages </a></li>
             <li><a href="/ajaxexample/"><span class="glyphicon glyphicon-time"></span> AjaxEx </a></li>
 
             {% elif user.is_staff %}
             <li><a href="/imgadjust/"><span class="glyphicon glyphicon-screenshot"></span> Adjust </a></li>
-            <li><a href="/image-update/"><span class="glyphicon glyphicon-picture"></span> Update </a></li>
+            <li class="active"><a href="/image-update/"><span class="glyphicon glyphicon-picture"></span> Update </a></li>
             <li><a href="/uploader/"><span class="glyphicon glyphicon-cloud-upload"></span> Upload </a></li>
-            <li><a href="/searcher/filtered/"><span class="glyphicon glyphicon-glass"></span> Tables </a></li>
+            <li><a href="/filtered/"><span class="glyphicon glyphicon-glass"></span> Tables </a></li>
             {% elif user.is_authenticated %}
             <li><a href="/uploader/"><span class="glyphicon glyphicon-cloud-upload"></span> Upload </a></li>
             {% endif %}
