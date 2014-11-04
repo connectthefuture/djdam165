@@ -583,7 +583,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
 from crispy_forms.layout import Submit
 from crispy_forms.bootstrap import TabHolder, Tab
-from searcher.models import SupplierIngest, SupplierIngestImages
+from searcher.models import SupplierIngest, SupplierIngestImages, ProductSnapshotLive
 
 
 class SupplierIngestModelForm(forms.ModelForm):
@@ -593,7 +593,7 @@ class SupplierIngestModelForm(forms.ModelForm):
         self.helper.form_id     = 'id-supplierIngestForm'
         self.helper.form_class  = 'form-horizontal'
         self.helper.form_method = 'post'
-        self.helper.form_action = 'supplier_ingest'
+        self.helper.form_action = 'manage_supplier_ingest'
         self.helper.layout = Layout(
             TabHolder(
                 Tab(
@@ -636,7 +636,7 @@ class SupplierIngestImagesModelForm(forms.ModelForm):
         self.helper.form_id     = 'id-supplierIngestImagesForm'
         self.helper.form_class  = 'form-horizontal'
         self.helper.form_method = 'post'
-        self.helper.form_action = 'manage_supplier_ingest'
+        self.helper.form_action = 'manage_supplier_ingest_images'
         self.helper.layout = Layout(
             TabHolder(
                 Tab(
@@ -673,4 +673,52 @@ class SupplierIngestImagesModelForm(forms.ModelForm):
         model = SupplierIngestImages
 
 
+
+class ProductSnapshotLiveModelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ProductSnapshotLiveModelForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id     = 'id-productSnapshotLiveModelForm'
+        self.helper.form_class  = 'form-horizontal'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'manage_product_snapshot_live'
+        self.helper.layout = Layout(
+            TabHolder(
+                Tab(
+                'Style Info',
+                'colorstyle',
+                'brand',
+                'color',
+                'admin_image'
+                ),
+                Tab(
+                'Vendor Info',
+                'po_number',
+                'po_type',
+                'vendor_style',
+                'track_number',
+                'track_dt'
+                ),
+                Tab(
+                'Samples',
+                'sample_id',
+                'sample_status',
+                'sample_location',
+                'status_dt',
+                'track_number',
+                'track_dt'
+                ),
+                Tab(
+                'Status',
+                'production_complete_dt',
+                'image_ready_dt',
+                'copy_ready_dt',
+                'start_dt'
+                )
+            )
+        )
+        self.helper.add_input(Submit('submit', 'Submit'))
+
+    class Meta:
+        model = ProductSnapshotLive
 

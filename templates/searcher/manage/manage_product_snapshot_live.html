@@ -1,0 +1,17 @@
+{% extends 'base/jbhome.html' %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+{% crispy formset %}
+
+
+<form method="post" action="">
+    {{ formset.management_form }}
+    <table>
+        {% for form in formset %}
+            {{ form }}
+        {% endfor %}
+    </table>
+</form>
+
+{% endblock %}
