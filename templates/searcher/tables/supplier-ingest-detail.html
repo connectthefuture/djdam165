@@ -6,6 +6,6 @@
         <input type="submit" />
     </form>
     {% for obj in filter %}
-        {{ obj.colorstyle }} - ${{ obj.image_url }}<br />
+        {{ obj.vendor_name }} - ${{ obj.colorstyle }}<br />
     {% endfor %}
 {% endblock %}

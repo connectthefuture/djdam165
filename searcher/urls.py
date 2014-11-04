@@ -121,19 +121,19 @@ urlpatterns += patterns('searcher.views',
 # }
 
 ######### Generates a Generic List View of the Product Model
-# from django.conf.urls import defaults
-# from django.views.generic import list, detail
-# from searcher.models import Product
+from django.views.generic import list, detail
+from searcher.models import Product
 
-# product_info = {
-#     'queryset': Product.objects.all(),
-#     'template_name': 'product_list_page.html',
-#     }
+product_info = {
+    'queryset': Product.objects.all(),
+    'template_name': 'listing/product_list_page.html',
+    }
 
 
-# urlpatterns += patterns('',
-#     (r'^products/$', list_detail.object_list, product_info),
-#     )
+urlpatterns += patterns('',
+    (r'^i/$', views.object_list, product_info),
+    )
+
 
 
 # ## Edit/Show Metadata on single images

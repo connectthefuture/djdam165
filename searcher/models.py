@@ -398,26 +398,30 @@ class SupplierIngest(models.Model):
         ordering = ['-modified_dt', '-colorstyle', 'alt', ]
         verbose_name_plural = 'Supplier_Styles'
 
+    # def get_absolute_url(self):
+    # return reversed('postready-detail', kwargs={'pk': self.pk})
+    unique_together = ('colorstyle', 'alt')
+    ordering = ['-colorstyle']
+
+
+    def __unicode__(self):
+        return self.colorstyle
+
     @property
     def get_http_status_code(self):
         import requests
         r = requests.get(self.image_url)
         self.code = r.status_code
         return self.code
+    get_http_status_code.allow_tags = True
 
-    # def get_absolute_url(self):
-    #    return reversed('postready-detail', kwargs={'pk': self.pk})
-    unique_together = ('colorstyle', 'alt')
-    ordering = ['-colorstyle']
-
-    def __unicode__(self):
-        return self.colorstyle
-
+    @property
     def vendor_image(self):
         from django.utils.safestring import mark_safe
         return mark_safe('<img style="width:100px;"src="{0}" onload="this.width=\'100\'; this.height=\'120\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'" />').format(self.image_url)
     vendor_image.allow_tags = True
 
+    @property
     def bfly_image(self):
         from django.utils.safestring import mark_safe
         #return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=200&height=240&ver=null" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(self.colorstyle)
@@ -503,19 +507,16 @@ class PostReadyOriginal(models.Model):
     sql_id = models.BigIntegerField(primary_key=True)
     colorstyle = models.CharField(max_length=9)
     photo_date = models.DateField()
-    file_path = models.FilePathField(max_length=150, unique=True)
+    file_path = models.FilePathField(max_length=180, unique=True)
     alt = models.CharField(max_length=2)
-    #image = models.ImageField(upload_to="images/",
-    #                          blank=True,
-    #                          null=True,
-    #                          height_field="height",
-    #                          width_field="width")
+    #image = models.ImageField(upload_to="images/", blank=True, null=True, height_field="height", width_field="width")
 
     class Meta:
         db_table = 'post_ready_original'
         ordering = ['-photo_date', '-colorstyle', 'alt']
         verbose_name_plural = 'Photography_Archived_Selects'
 
+    @property
     def primary_select_image(self):
         from django.utils.safestring import mark_safe
 
@@ -523,8 +524,8 @@ class PostReadyOriginal(models.Model):
             '<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(
             self.file_path)
         # return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
-
     primary_select_image.allow_tags = True
+
     #def get_absolute_url(self):
     #    return reversed('postready-detail', kwargs={'pk': self.pk})
 

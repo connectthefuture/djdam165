@@ -93,12 +93,9 @@ class SupplierIngestFilter(django_filters.FilterSet):
 
     def __init__(self, *args, **kwargs):
         super(SupplierIngestFilter, self).__init__(*args, **kwargs)
-        self.filters['vendor_name'].extra.update(
-            {'empty_label': 'All Vendors'})
-        self.filters['vendor_brand'].extra.update(
-            {'empty_label': 'All Brands'})
-        self.filters['alt'].extra.update(
-            {'empty_label': 'All Image Kinds'})
+        self.filters['vendor_name'].extra.update({'empty_label': 'All Vendors'})
+        self.filters['vendor_brand'].extra.update({'empty_label': 'All Brands'})
+        self.filters['alt'].extra.update({'empty_label': 'All Image Kinds'})
 
 # class MySupplierFilter(django_filters.FilterSet):
 #   field1 = django_filters.CharFilter()
@@ -119,9 +116,10 @@ class FilteredSingleTableView(SingleTableView):
     f = SupplierIngestFilter(self.request.GET, queryset = SupplierIngest.objects.all() , request=self.request )
     return f
 
+
   def get_context_data(self, **kwargs):
     context = super(FilteredSingleTableView, self).get_context_data(**kwargs)
-    f = SupplierIngestFilter(self.request.GET, queryset = SupplierIngest.objects.all() , request=self.request )
+    f = SupplierIngestFilter(self.request.GET, queryset = SupplierIngest.objects.all(), request=self.request )
     context['form'] = f.form
     return context
 
@@ -130,21 +128,6 @@ from django.shortcuts import render_to_response
 def supplier_filter(request):
     f = SupplierIngestFilter(request.GET, queryset=SupplierIngest.objects.all())
     return render_to_response('searcher/tables/supplier-ingest-detail.html', {'filter': f})
-
-
-# class FilteredSingleTableView(SingleTableView):
-#   def get_table_data(self):
-#     data= SupplierIngest.objects.all
-#     if self.request.GET.get('field1'):
-#       data = data.filter(field1=self.request.GET.get('field1') )
-#     if self.request.GET.get('field1'):
-#       data = data.filter(field1=self.request.GET.get('field1') )
-#     return data
-#
-#     def get_context_data(self, **kwargs):
-#       context = super(FilteredSingleTableView, self).get_context_data(**kwargs)
-#       context['form'] = forms.MyFilterForm(self.request.user, self.request.GET)
-#       return context
 
 
 class SupplierIngestList(SingleTableView):
