@@ -593,10 +593,10 @@ def manage_products(request, brand_id):
 #     return render_to_response("manage/manage_supplier_ingest.html", {
 #         "formset": formset,
 #     })
-from searcher.forms import SupplierIngestImagesModelForm, SupplierIngestModelForm
+from searcher.forms import SupplierIngestImagesModelForm, SupplierIngestModelForm, SupplierImagesModelForm
 def manage_supplier_ingest(request, colorstyle=None):
     if request.method == "POST":
-        formset = SupplierIngestModelForm(request.POST)
+        formset = SupplierImagesModelForm(request.POST)
         if formset.is_valid():
             pass
             #data = form.cleaned_data['colorstyle'],
@@ -604,7 +604,7 @@ def manage_supplier_ingest(request, colorstyle=None):
             print 'bad'
             pass
     else:
-        formset = SupplierIngestModelForm()
+        formset = SupplierImagesModelForm()
 
     return render_to_response("manage/manage_supplier_ingest.html", {
         "formset": formset,

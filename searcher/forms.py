@@ -625,7 +625,8 @@ class SupplierIngestModelForm(forms.ModelForm):
                 )
             )
         )
-        self.helper.add_input(FormActions(Submit('submit', 'Submit')))
+        #self.helper.add_input(FormActions(Submit('submit', 'Submit')))
+        self.helper.add_input(Submit('submit', 'Submit'))
 
     class Meta:
         model = SupplierIngest
@@ -728,3 +729,23 @@ class ProductSnapshotLiveModelForm(forms.ModelForm):
     class Meta:
         model = ProductSnapshotLive
 
+
+
+class SupplierImagesModelForm(forms.ModelForm):
+    class Meta:
+        model = SupplierIngestImages
+
+    def __init__(self, *args, **kwargs):
+        super(SupplierImagesModelForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_tag = False
+        self.helper.disable_csrf = True
+        self.helper.layout = Layout(
+            'colorstyle',
+            'alt',
+            'vendor_image',
+            HTML("""{% if form.vendor_image.value %}<img class="img-responsive" src="{{ form.vendor_image.value }}">{% endif %}""", ),
+            'bfly_image',
+            HTML("""{% if form.bfly_image.value %}<img class="img-responsive" src="{{ form.bfly_image.value }}">{% endif %}""", ),
+        )
+        self.helper.add_input(Submit('submit', 'Submit'))
