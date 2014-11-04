@@ -591,9 +591,12 @@ class SupplierIngestModelForm(forms.ModelForm):
         super(SupplierIngestModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id     = 'id-supplierIngestForm'
-        self.helper.form_class  = 'form-horizontal'
         self.helper.form_method = 'post'
         self.helper.form_action = 'manage_supplier_ingest'
+        self.helper.form_class  = 'form-horizontal'
+        self.helper.label_class = 'control-label'
+        self.helper.field_class = 'col-lg-4'
+
         self.helper.layout = Layout(
             TabHolder(
                 Tab(
@@ -634,9 +637,11 @@ class SupplierIngestImagesModelForm(forms.ModelForm):
         super(SupplierIngestImagesModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id     = 'id-supplierIngestImagesForm'
-        self.helper.form_class  = 'form-horizontal'
         self.helper.form_method = 'post'
         self.helper.form_action = 'manage_supplier_ingest_images'
+        self.helper.form_class  = 'form-horizontal'
+        self.helper.label_class = 'control-label'
+        self.helper.field_class = 'col-lg-4'
         self.helper.layout = Layout(
             TabHolder(
                 Tab(
@@ -679,9 +684,11 @@ class ProductSnapshotLiveModelForm(forms.ModelForm):
         super(ProductSnapshotLiveModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id     = 'id-productSnapshotLiveModelForm'
-        self.helper.form_class  = 'form-horizontal'
         self.helper.form_method = 'post'
         self.helper.form_action = 'manage_product_snapshot_live'
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'control-label'
+        self.helper.field_class = 'col-lg-4'
         self.helper.layout = Layout(
             TabHolder(
                 Tab(
