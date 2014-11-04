@@ -403,7 +403,6 @@ class SupplierIngest(models.Model):
     unique_together = ('colorstyle', 'alt')
     ordering = ['-colorstyle']
 
-
     def __unicode__(self):
         return self.colorstyle
 
