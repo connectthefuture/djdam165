@@ -593,10 +593,10 @@ def manage_products(request, brand_id):
 #     return render_to_response("manage/manage_supplier_ingest.html", {
 #         "formset": formset,
 #     })
-from forms import SupplierIngestImagesForm, SupplierIngestForm
+from searcher.forms import SupplierIngestImagesModelForm, SupplierIngestModelForm
 def manage_supplier_ingest(request, colorstyle=None):
     if request.method == "POST":
-        formset = SupplierIngestForm(request.POST)
+        formset = SupplierIngestModelForm(request.POST)
         if formset.is_valid():
             pass
             #data = form.cleaned_data['colorstyle'],
@@ -604,7 +604,7 @@ def manage_supplier_ingest(request, colorstyle=None):
             print 'bad'
             pass
     else:
-        formset = SupplierIngestForm()
+        formset = SupplierIngestModelForm()
 
     return render_to_response("manage/manage_supplier_ingest.html", {
         "formset": formset,
@@ -1530,7 +1530,7 @@ def ajax_return_search(request):
     except:
         q = request.GET['input_list']
     results = ProductSnapshotLive.objects.get(colorstyle__icontains=q)
-    return render_to_response('ajax/search_form.html', {'results': results, 'q':q}, context_instance=RequestContext(request))
+    return render_to_response('ajax/search_form.html', {'results': results, 'q': q}, context_instance=RequestContext(request))
 
 
 def ajax_colorstyle_search(request,q=None,sq=None):
