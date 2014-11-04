@@ -2,11 +2,12 @@ __author__ = 'johnb'
 
 import django_tables2 as tables
 from django_tables2 import RequestConfig, SingleTableView
-
+from models import SupplierIngest
 import itertools
 
 ####  Tables -- aka tables.py
 class SupplierIngestTable(tables.Table):
+    from models import SupplierIngest
     vendor_name  =  tables.Column()
     vendor_brand =  tables.Column()
     image_url	 =	tables.URLColumn()  #'supplier_detail',args=[A('image_url')])
@@ -24,7 +25,7 @@ class SupplierIngestTable(tables.Table):
         return '<%d>' % code
 
     class Meta:
-        from models import SupplierIngest
+
         model = SupplierIngest
         # add class="paleblue" to <table> tag
         # attrs = {"class": "paleblue"}
