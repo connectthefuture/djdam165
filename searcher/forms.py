@@ -623,10 +623,9 @@ class SupplierIngestModelForm(forms.ModelForm):
                 'copy_ready_dt',
                 'start_dt'
                 )
-            )
+            ),
+            Submit('submit', 'Submit'),
         )
-        #self.helper.add_input(FormActions(Submit('submit', 'Submit')))
-        self.helper.add_input(Submit('submit', 'Submit'))
 
     class Meta:
         model = SupplierIngest
@@ -670,9 +669,10 @@ class SupplierIngestImagesModelForm(forms.ModelForm):
                 'bfly_list_site',
                 'bfly_pdp_site'
                 )
-            )
+            ),
+            Submit('submit', 'Submit'),
         )
-        self.helper.add_input(Submit('submit', 'Submit'))
+
 
     class Meta:
         model = SupplierIngestImages

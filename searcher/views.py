@@ -610,6 +610,33 @@ def manage_supplier_ingest(request, colorstyle=None):
         "formset": formset,
     })
 
+def manage_supplier_images(request, colorstyle=None, alt=None):
+    try:
+        if not colorstyle:
+            colorstyle = request.POST['colorstyle']
+    except KeyError:
+        pass
+    try:
+        if not alt:
+            alt = request.POST['alt']
+    except KeyError:
+        alt = '1'
+        pass
+
+    if request.method == "POST":
+        formset = SupplierImagesModelForm({'colorstyle': colorstyle, 'alt': alt})
+        if formset.is_valid():
+            pass
+            #data = form.cleaned_data['colorstyle'],
+        else:
+            print 'bad'
+            pass
+    else:
+        formset = SupplierImagesModelForm()
+
+    return render_to_response("manage/manage_supplier_ingest.html", {
+        "formset": formset,
+    })
 
 #manage_product_snapshot_live
 ###################################################################################################
