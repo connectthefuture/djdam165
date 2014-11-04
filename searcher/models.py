@@ -413,7 +413,7 @@ class SupplierIngest(models.Model):
         r = requests.get(self.image_url)
         self.code = r.status_code
         return self.code
-    get_http_status_code.allow_tags = True
+    #get_http_status_code.allow_tags = True
 
     @property
     def vendor_image(self):
