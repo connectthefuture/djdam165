@@ -4,6 +4,32 @@
 {% load crispy_forms_tags %}
 {% crispy formset %}
 
+<script>
+//'image_url', 'bfly_local_src', 'bfly_zoom_src',  'bfly_list_site',
+$(document).ready(function () {
+     function submitSearchStyle() {
+        $("#id-supplierIngestForm").submit(function () {
+            var colorstyle = $('#id_colorstyle').val();
+            var vendor = $('#id_vendor').val(); //colorstyle.split("_")[-1];
+            var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/";
+            //+ colorstyle + "/";
+            var res = {};
+            $.ajax({
+                type: "POST",
+                url: url,
+                //"http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/",
+                contentType: "application/json",
+                dataType: "json",
+                data: { colorstyle: colorstyle},
+                // $(colorstyle + "/" + alt).serialize(), // serializes the form's elements.
+                success: function (data) {
+                    alert("Wow Lookie Here " + data); // show response from the python script.
+                }
+            });
 
-
+            return false; // avoid to execute the actual submit of the form.
+        });
+    }
+});
+</script>
 {% endblock %}
