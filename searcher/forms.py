@@ -747,5 +747,5 @@ class SupplierImagesModelForm(forms.ModelForm):
             HTML("""{% if form.vendor_image.value %}<img class="img-responsive" src="{{ form.vendor_image.value }}">{% endif %}""", ),
             'bfly_image',
             HTML("""{% if form.bfly_image.value %}<img class="img-responsive" src="{{ form.bfly_image.value }}">{% endif %}""", ),
+            Submit('submit', 'Submit'),
         )
-        self.helper.add_input(Submit('submit', 'Submit'))
