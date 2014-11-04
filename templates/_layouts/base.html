@@ -86,7 +86,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/searcher/manage/supplier-ingest/">A </a><a class="navbar-brand" href="/">Fine Home for Photos Since the Mid to Late '50s</a>
+        <a class="navbar-brand" href="/searcher/manage/supplier-ingest/">A </a>
+        <a class="navbar-brand" href="/">Fine Home for Photos Since the Mid to Late '50s</a>
       </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -94,11 +95,24 @@
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
           {# <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> Home </a></li> #}
-          <li class="active"><a href="/admin/"><span class="glyphicon glyphicon-th-large"></span> Admin </a></li>
-          <li><a href="/imgadjust/"><span class="glyphicon glyphicon-screenshot"></span> Adjust </a></li>
-          <li><a href="/image-update/"><span class="glyphicon glyphicon-picture"></span> Update </a></li>
-          <li><a href="/uploader/"><span class="glyphicon glyphicon-cloud-upload"></span> Upload </a></li>
+            {% if user.is_admin %}
+            <li class="active"><a href="/admin/"><span class="glyphicon glyphicon-globe"></span> Admin </a></li>
+            <li><a href="/imgadjust/"><span class="glyphicon glyphicon-screenshot"></span> Adjust </a></li>
+            <li><a href="/image-update/"><span class="glyphicon glyphicon-picture"></span> Update </a></li>
+            <li><a href="/uploader/"><span class="glyphicon glyphicon-cloud-upload"></span> Upload </a></li>
+            <li><a href="/searcher/filtered/"><span class="glyphicon glyphicon-glass"></span> Tables </a></li>
+            <li><a href="/searcher/suppliers/filter/"><span class="glyphicon glyphicon-briefcase"></span> Suppliers </a></li>
+            <li><a href="/searcher/manage/supplier-ingest/"><span class="glyphicon glyphicon-eye-open"></span> SupplierImages </a></li>
+            <li><a href="/ajaxexample/"><span class="glyphicon glyphicon-time"></span> AjaxEx </a></li>
 
+            {% elif user.is_staff %}
+            <li><a href="/imgadjust/"><span class="glyphicon glyphicon-screenshot"></span> Adjust </a></li>
+            <li><a href="/image-update/"><span class="glyphicon glyphicon-picture"></span> Update </a></li>
+            <li><a href="/uploader/"><span class="glyphicon glyphicon-cloud-upload"></span> Upload </a></li>
+            <li><a href="/searcher/filtered/"><span class="glyphicon glyphicon-glass"></span> Tables </a></li>
+            {% elif user.is_authenticated %}
+            <li><a href="/uploader/"><span class="glyphicon glyphicon-cloud-upload"></span> Upload </a></li>
+            {% endif %}
 {% comment %}
             {% if user.is_authenticated %}
             <li><p><span class="glyphicon glyphicon-dashboard"></span>Welcome, {{ user.username }}  <a href="/accounts/logout">[logout]</a></p></li>
