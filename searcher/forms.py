@@ -596,17 +596,16 @@ class SupplierIngestModelForm(forms.ModelForm):
         self.helper.form_class  = 'form-horizontal'
         self.helper.label_class = 'control-label'
         self.helper.field_class = 'col-lg-4'
-
         self.helper.layout = Layout(
             TabHolder(
                 Tab(
                 'Detail',
-                'colorstyle',
+                Field('colorstyle', css_class='btn btn-success'),
                 'po_number',
-                'vendor_name',
-                'vendor_brand',
-                'vendor_style',
-                'modified_dt'
+                Div('vendor_name',
+                    Field('vendor_brand', css_class='btn btn-success'),
+                    'vendor_style',
+                    'modified_dt')
                 ),
                 Tab(
                 'Image Info',
@@ -626,7 +625,7 @@ class SupplierIngestModelForm(forms.ModelForm):
                 )
             )
         )
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.add_input(FormActions(Submit('submit', 'Submit')))
 
     class Meta:
         model = SupplierIngest
