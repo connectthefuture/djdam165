@@ -634,10 +634,12 @@ def manage_supplier_images(request, colorstyle=None, alt=None):
     else:
         formset = SupplierImagesModelForm()
 
-    return render_to_response("manage/manage_supplier_ingest.html", {
+    # return render_to_response("manage/manage_supplier_ingest.html", {
+    #     "formset": formset,
+    # })
+    return render(request, "manage/manage_supplier_ingest.html", {
         "formset": formset,
     })
-
 
 
 #manage_product_snapshot_live
