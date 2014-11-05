@@ -27,7 +27,7 @@
                 dataType: 'json', // Choosing a JSON datatype
                 success: function(data) // Variable data contains the data we get from serverside
                 {
-                  $('#id-supplierIngestForm').html(JSON.parse(data)); // Clear #image_download_valid div // show response from the python script.
+                  $('#id-supplierIngestForm').json(data)); // Clear #image_download_valid div // show response from the python script.
                 }
             });
 
