@@ -295,7 +295,7 @@ class ProductSnapshotLive(models.Model):
         verbose_name_plural = 'Production_Style_Data'
         verbose_name = 'Production_Style_Data'
 
-    # ... your code
+
     def admin_image(self):
         from django.utils.safestring import mark_safe
         # return mark_safe('<div class="effectback"><img class="effectfront" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/></div>').format(self.colorstyle)
@@ -303,6 +303,20 @@ class ProductSnapshotLive(models.Model):
         return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=300&height=360&ver=null" onload="this.width=\'100\'; this.height=\'120\'" onmouseover="this.width=\'300\'; this.height=\'360\'" onmouseout="this.width=\'100\'; this.height=\'120\'"/>').format(self.colorstyle)
     admin_image.allow_tags = True
 
+
+    def track_sample(self):
+        from django.utils.safestring import mark_safe
+        if str(self.track_number).isdigit() and str(self.track_number):
+            fedex_url = 'http://fedex.com/Tracking?action=track&language=english&cntry_code=us&tracknumbers={0}'.format(self.track_number)
+            track_url  = fedex_url
+        else:
+            ups_url = 'http://wwwapps.ups.com/WebTracking/track?loc=en_US&track.x=Track&trackNums={0}'.format(self.track_number)
+            track_url = ups_url
+
+        # return mark_safe('<div class="effectback"><img class="effectfront" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/></div>').format(self.colorstyle)
+        # return mark_safe('<img style="width:50%;" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
+        return mark_safe('<a href="{0}"/>').format(track_url)
+    track_sample.allow_tags = True
 
     def __unicode__(self):
         return self.colorstyle
@@ -362,7 +376,6 @@ class Album(models.Model):
         lst = [x.image.name for x in self.image_set.all()]
         lst = ["<a href='/media/uploads/{0}'>{1}</a>".format(x, x.split('/')[-1]) for x in lst]
         return ', '.join(lst)
-
     images.allow_tags = True
 
 
@@ -505,11 +518,7 @@ class PostReadyOriginal(models.Model):
     photo_date = models.DateField()
     file_path = models.FilePathField(max_length=150, unique=True)
     alt = models.CharField(max_length=2)
-    #image = models.ImageField(upload_to="images/",
-    #                          blank=True,
-    #                          null=True,
-    #                          height_field="height",
-    #                          width_field="width")
+    #image = models.ImageField(upload_to="images/",blank=True,null=True,height_field="height",width_field="width")
 
     class Meta:
         db_table = 'post_ready_original'
@@ -518,13 +527,12 @@ class PostReadyOriginal(models.Model):
 
     def primary_select_image(self):
         from django.utils.safestring import mark_safe
-
         return mark_safe(
             '<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(
             self.file_path)
         # return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
-
     primary_select_image.allow_tags = True
+
     #def get_absolute_url(self):
     #    return reversed('postready-detail', kwargs={'pk': self.pk})
 
@@ -542,7 +550,6 @@ class PushPhotoselects(models.Model):
     photo_date = models.DateField()
     file_path = models.CharField(max_length=120, unique=True)
     alt = models.CharField(max_length=2)
-
 
     def primary_select_image(self):
         from django.utils.safestring import mark_safe
@@ -574,24 +581,21 @@ class Zimages1Photoselects(models.Model):
     def __unicode__(self):
         return self.file_path
 
-
     def primary_select_image(self):
         from django.utils.safestring import mark_safe
-
         return mark_safe(
             '<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(
             self.file_path)
         # return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
     primary_select_image.allow_tags = True
 
-    from djdam.settings import MEDIA_ROOT
-
     def _get_absolute_url(self):
-        return "/{0}/zImages/{1}/{2}_{3}.jpg".format(MEDIA_ROOT,
+        from djdam.settings import MEDIA_ROOT
+        return "{0}zImages/{1}/{2}_{3}.jpg".format(
+            MEDIA_ROOT,
             self.colorstyle[:4],
             self.colorstyle,
             self.alt,)
-
     url = property(_get_absolute_url)
 #       #(Whilst this code is correct and simple, it may not be the most portable way to write this kind of method. The reverse() function is usually the best approach.)
 #

@@ -2,8 +2,37 @@ __author__ = 'johnb'
 
 import django_tables2 as tables
 from django_tables2 import RequestConfig, SingleTableView
-from models import SupplierIngest
+from models import SupplierIngest, ProductSnapshotLive, PushPhotoselects
 import itertools
+
+####  Product Snapshot Tables
+class ProductSnapshotLiveTable(tables.Table):
+    from models import ProductSnapshotLive
+    colorstyle       =  tables.Column(sortable=True)
+    brand            =  tables.Column(orderable=True)
+    vendor_style     =  tables.Column(sortable=True)
+    color            =  tables.Column(orderable=True)
+    image_url	     =	tables.URLColumn()  #'supplier_detail',args=[A('image_url')])
+    sample_status 	 = 	tables.Column(orderable=True)
+    sample_location  = 	tables.Column(sortable=True)
+    track_number     =  tables.Column(sortable=True)
+    po_type          =  tables.Column(orderable=True)
+
+    def __init__(self, *args, **kwargs):
+        super(ProductSnapshotLiveTable, self).__init__(*args, **kwargs)
+        self.counter = itertools.count()
+
+    def render_urlcode(self):
+        import requests
+        r = requests.get(self.image_url)
+        code = r.status_code
+        return '<%d>' % code
+
+    class Meta:
+        model = ProductSnapshotLive
+        # add class="paleblue" to <table> tag
+        # attrs = {"class": "paleblue"}
+        attrs = {"class": "table-responsive"}
 
 ####  Tables -- aka tables.py
 class SupplierIngestTable(tables.Table):
@@ -51,7 +80,6 @@ class SupplierIngestTable(tables.Table):
 from django.shortcuts import render
 from django_tables2 import RequestConfig, SingleTableView
 
-
 def get_http_status_code(request):
     import requests
 
@@ -61,6 +89,12 @@ def get_http_status_code(request):
 
 
 def suppliers(request):
+    table = SupplierIngestTable(SupplierIngest.objects.all())
+    RequestConfig(request).configure(table)
+    return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
+
+
+def suppliers_compare(request):
     table = SupplierIngestTable(SupplierIngest.objects.all())
     RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
@@ -78,7 +112,6 @@ def supplier_detail(request,vendor_brand=None,vendor_name=None):
 
     RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
-
 
 
 ######## Filtered ####
@@ -111,15 +144,15 @@ class SupplierIngestFilter(django_filters.FilterSet):
 
 
 ######## Filtered Views #######
-
 from django_tables2 import SingleTableView
 from searcher.models import SupplierIngest
 
 
 class FilteredSingleTableView(SingleTableView):
   def get_table_data(self):
-    f = SupplierIngestFilter(self.request.GET, queryset = SupplierIngest.objects.all() , request=self.request )
+    f = SupplierIngestFilter(self.request.GET, queryset = SupplierIngest.objects.all(), request=self.request )
     return f
+
 
   def get_context_data(self, **kwargs):
     context = super(FilteredSingleTableView, self).get_context_data(**kwargs)

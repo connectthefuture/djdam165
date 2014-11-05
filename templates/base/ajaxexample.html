@@ -20,24 +20,24 @@ $(document).ready(function(){
           dataType: 'json', // Choosing a JSON datatype
           success: function(data) // Variable data contains the data we get from serverside
           {
-              $('#image_download_valid').html(''); // Clear #image_download_valid div
+              $('#resultsData').html(''); // Clear #resultsData div
               
               if (button == '*') { // If clicked buttons value is *, we post every wine
                   for (var i in data.P) {
-                      $('#image_download_valid').append('Valid Url: ' + data.P[i] + '<br/>');
+                      $('#resultsData').append('Valid Url: ' + data.P[i] + '<br/>');
                   }
                   for (var i in data.F) {
-                      $('#image_download_valid').append('Invalid Url: ' + data.F[i] + '<br/>');
+                      $('#resultsData').append('Invalid Url: ' + data.F[i] + '<br/>');
                   }
               }
-              else if (button == 'P') { // If clicked buttons value is P, we post only P image_download_valid
+              else if (button == 'P') { // If clicked buttons value is P, we post only P resultsData
                   for (var i in data) {
-                      $('#image_download_valid').append('Valid Url: ' + data[i] + '<br/>');
+                      $('#resultsData').append('Valid Url: ' + data[i] + '<br/>');
                   }
               }
-              else if (button == 'F') { // If clicked buttons value is F, we post only F image_download_valid
+              else if (button == 'F') { // If clicked buttons value is F, we post only F resultsData
                   for (var i in data) {
-                      $('#image_download_valid').append('Invalid Url: ' + data[i] + '<br/>');
+                      $('#resultsData').append('Invalid Url: ' + data[i] + '<br/>');
                   }
               }
           }
@@ -50,13 +50,14 @@ $(document).ready(function(){
 <!-- Write Javascript code here -->
 
 <body>
-  <form method="post" action="">
+  <form id="formAjax" class="form-horizontal">
       <button value="*" type="submit">Get All Urls!</button>
       <button value="P" type="submit">Get Valid Urls!</button>
       <button value="F" type="submit">Get Invalid Urls!</button>
+      <textarea name="inputColorstyle" id="id-inputColorstyle"></textarea>
   </form>
   
-  <div id="image_download_valid">
+  <div id="resultsData">
   <!-- Javascript will print data in here when we have finished the page -->
   </div>
 {% endblock %}

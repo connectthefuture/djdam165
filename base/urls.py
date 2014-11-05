@@ -28,7 +28,10 @@ urlpatterns += patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT}),
     )
 
-urlpatterns += patterns('searcher.tables',url(r'^suppliers/?$','suppliers'))
+urlpatterns += patterns('searcher.tables',
+                        url(r'^suppliers/?$','suppliers'),
+                        url(r'^suppliers/compare/?.*?$', 'supplier_compare'),
+)
 
 urlpatterns += patterns('searcher.tables',
     url(r'^suppliers/(?P<vendor_name>\w+)/?$', 'supplier_detail'),
