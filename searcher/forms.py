@@ -590,8 +590,8 @@ class SupplierIngestModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(SupplierIngestModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_id     = 'id-supplierIngestForm'
-        self.helper.form_method = 'get'
+        self.helper.form_id     = 'id_supplierIngestForm'
+        self.helper.form_method = 'post'
         self.helper.form_action = 'manage_supplier_ingest'
         self.helper.form_class  = 'form-vertical'
         self.helper.label_class = 'control-label'
