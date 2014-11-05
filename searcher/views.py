@@ -607,7 +607,7 @@ def manage_supplier_ingest(request, colorstyle=None):
         formset = SupplierIngestModelForm(request.GET)
     else:
         formset = SupplierIngestModelForm()
-    
+
     return render_to_response("manage/manage_supplier_ingest.html", {
         "formset": formset,
     })
