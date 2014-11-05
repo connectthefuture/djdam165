@@ -30,7 +30,7 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('searcher.tables',
                         url(r'^suppliers/?$','suppliers'),
-                        url(r'^suppliers/compare/?.*?$', 'supplier_compare'),
+                        url(r'^suppliers/compare/?.*?$', 'suppliers_compare'),
 )
 
 urlpatterns += patterns('searcher.tables',

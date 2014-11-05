@@ -166,8 +166,7 @@ def supplier_filter(request):
     f = SupplierIngestFilter(request.GET, queryset=SupplierIngest.objects.all())
     return render_to_response('searcher/tables/supplier-ingest-detail.html', {'filter': f})
 
-def supplier_compare(request, colorstyle=None, alt=None):
-    pass
+
 # class FilteredSingleTableView(SingleTableView):
 #   def get_table_data(self):
 #     data= SupplierIngest.objects.all
