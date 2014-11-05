@@ -582,7 +582,7 @@ class testJSONForm(forms.Form):
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
 from crispy_forms.layout import Submit
-from crispy_forms.bootstrap import TabHolder, Tab
+from crispy_forms.bootstrap import TabHolder, Tab, Field, Div
 from searcher.models import SupplierIngest, SupplierIngestImages, ProductSnapshotLive
 
 
