@@ -27,7 +27,7 @@
                 dataType: 'json', // Choosing a JSON datatype
                 success: function(data) // Variable data contains the data we get from serverside
                 {
-                  $('#results').append('RES'); // Clear #image_download_valid div // show response from the python script.
+                  $('#results').append(data); // Clear #image_download_valid div // show response from the python script.
                 }
             });
 
