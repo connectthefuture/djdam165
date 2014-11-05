@@ -18,7 +18,7 @@
             var res = {};
             var data = JSON.stringify({colorstyle: colorstyle, alt: alt});
             $.ajax({
-                type: "POST",
+                type: "post",
                 url: url + colorstyle +'/',
                 //url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/",
                 contentType: "application/json",
