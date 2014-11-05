@@ -1,4 +1,4 @@
-{% extends "_layouts/base.html" %}
+{% extends "base/jbhome.html" %}
 
 {% comment %}
 {% extends 'base/jbhome.html' %}
@@ -13,31 +13,31 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $(':submit').on('click', function() { // This event fires when a button is clicked
-      var button = $(this).val();
-      $.ajax({ // ajax c* starts
+      var button = $(this).val().serialize();
+      $.ajax({ // ajax cnx starts
           url: 'http://prodimages.ny.bluefly/ap1/v1/supplier-ingest/', // JQuery loads http://prodimages.ny.bluefly
-          data: 'button=' + $(this).val(), // Send value of the clicked button
+          data: 'colorstyle=' + $('#formAjax:input textarea').val() + '', // Send value of the clicked button
           dataType: 'json', // Choosing a JSON datatype
           success: function(data) // Variable data contains the data we get from serverside
           {
-              $('#resultsData').html(''); // Clear #resultsData div
+              $('#results').html(''); // Clear #results div
               
-              if (button == '*') { // If clicked buttons value is *, we post every wine
-                  for (var i in data.P) {
-                      $('#resultsData').append('Valid Url: ' + data.P[i] + '<br/>');
+              if (button == 'All') { // If clicked buttons value is All, we post every style
+                  for (var i in data.Valid) {
+                      $('#results').append('Valid Url: ' + data.Valid[i] + '<br/>');
                   }
-                  for (var i in data.F) {
-                      $('#resultsData').append('Invalid Url: ' + data.F[i] + '<br/>');
-                  }
-              }
-              else if (button == 'P') { // If clicked buttons value is P, we post only P resultsData
-                  for (var i in data) {
-                      $('#resultsData').append('Valid Url: ' + data[i] + '<br/>');
+                  for (var i in data.Invalid) {
+                      $('#results').append('Invalid Url: ' + data.Invalid[i] + '<br/>');
                   }
               }
-              else if (button == 'F') { // If clicked buttons value is F, we post only F resultsData
+              else if (button == 'Valid') { // If clicked buttons value is Valid, we post only Valid results
                   for (var i in data) {
-                      $('#resultsData').append('Invalid Url: ' + data[i] + '<br/>');
+                      $('#results').append('Valid Url: ' + data[i] + '<br/>');
+                  }
+              }
+              else if (button == 'Invalid') { // If clicked buttons value is Invalid, we post only Invalid results
+                  for (var i in data) {
+                      $('#results').append('<li>Invalid Url: ' + data[i] + '<br/></li>');
                   }
               }
           }
@@ -47,18 +47,17 @@ $(document).ready(function(){
 });
 </script>
 
-<!-- Write Javascript code here -->
+<!-- Write HTML Content code here -->
 
 <body>
   <form id="formAjax">
-      <button value="*" type="submit">Get All Urls!</button>
-      <button value="P" type="submit">Get Valid Urls!</button>
-      <button value="F" type="submit">Get Invalid Urls!</button>
-      <textarea name="colorstyle" id="id-inputColorstyle"></textarea>
+      <button value="All" type="submit">Get All Urls!</button>
+      <button value="Valid" type="submit">Get Valid Urls!</button>
+      <button value="Invalid" type="submit">Get Invalid Urls!</button>
       <textarea name="colorstyle" id="id-inputColorstyle"></textarea>
   </form>
   
-  <div id="resultsData">
+  <div id="results">
   <!-- Javascript will print data in here when we have finished the page -->
   </div>
 {% endblock %}
