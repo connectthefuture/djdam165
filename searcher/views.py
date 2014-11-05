@@ -638,6 +638,9 @@ def manage_supplier_images(request, colorstyle=None, alt=None):
         "formset": formset,
     })
 
+
+def suppliers_compare(request, colorstyle=None, alt=None):
+    pass
 #manage_product_snapshot_live
 ###################################################################################################
 ###################################################################################################
