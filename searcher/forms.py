@@ -736,8 +736,10 @@ class SupplierImagesModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(SupplierImagesModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
-        self.helper.form_tag = False
-        self.helper.disable_csrf = True
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'manage_supplier_images'
+        #self.helper.form_tag = False
+        #self.helper.disable_csrf = True
         self.helper.layout = Layout(
             'colorstyle',
             'alt',
