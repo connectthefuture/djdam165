@@ -16,18 +16,18 @@
             var alt = $('#id_alt').val(); //colorstyle.split("_")[-1];
             var url = "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/";
             var res = {};
-            var data = $(':input').val();
+            var data = JSON.stringify({colorstyle: colorstyle, alt: alt});
             $.ajax({
                 type: "GET",
                 url: url + colorstyle +'/',
                 //url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/",
                 contentType: "application/json",
-                data:  JSON.stringify({colorstyle: colorstyle, alt: alt}),
+                data:  data,
                 //data: 'button=' + $(this).val(), // Send value of the clicked button
                 dataType: 'json', // Choosing a JSON datatype
                 success: function(data) // Variable data contains the data we get from serverside
                 {
-                  $('#results').append(data)); // Clear #image_download_valid div // show response from the python script.
+                  $('#results').html(JSON.parse(data)); // Clear #image_download_valid div // show response from the python script.
                 }
             });
 
