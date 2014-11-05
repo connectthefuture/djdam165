@@ -33,7 +33,7 @@ $(document).ready(function(){
           dataType: 'json', // Choosing a JSON datatype
           success: function(data) // Variable data contains the data we get from serverside
           {
-              $('#results').html(''); // Clear #results div
+              //$('#results').html(''); // Clear #results div
               
               if (button == 'All') { // If clicked buttons value is All, we post every style
                   for (var i in data.Valid) {
