@@ -19,7 +19,7 @@
             var data = $(':input').val();
             $.ajax({
                 type: "GET",
-                url: url + '/' + colorstyle +'/',
+                url: url + colorstyle +'/',
                 //url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/",
                 contentType: "application/json",
                 data:  JSON.stringify({colorstyle: colorstyle, alt: alt}),
