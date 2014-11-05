@@ -70,8 +70,8 @@ urlpatterns = patterns('searcher.views',
 
                       url(r'^manage/supplier-ingest/$', 'manage_supplier_ingest', name='manage_supplier_base'),
                       url(r'^manage/supplier-ingest/(?P<colorstyle>\d{5,9})/?$', 'manage_supplier_ingest', name='manage_supplier_colorstyle'),
-                      url(r'^manage/supplier-images/?$', 'manage_supplier_ingest', name='manage_supplier_images_base'),
-                      url(r'^manage/supplier-images/(?P<colorstyle>\d{5,9})/?$', 'manage_supplier_ingest', name='manage_supplier_images_colorstyle'),
+                      url(r'^manage/supplier-images/?$', 'manage_supplier_images', name='manage_supplier_images_base'),
+                      url(r'^manage/supplier-images/(?P<colorstyle>\d{5,9})/?$', 'manage_supplier_images', name='manage_supplier_images_colorstyle'),
 
                       ## (r'^manage/images/(\d{5,9})/(\d)?/(d\{1,4})?/$', 'manage_images'),
                       # (r'^manage/metadata/(\d{5,9})/$', 'manage_metadata'),
