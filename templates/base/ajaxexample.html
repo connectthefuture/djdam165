@@ -28,7 +28,7 @@ $(document).ready(function(){
       var button = $(this).val().serialize();
       var dataraw = 'colorstyle=' + $('#formAjax:input textarea').val() + '';
       $.ajax({ // ajax cnx starts
-          url: 'http://prodimages.ny.bluefly/ap1/v1/supplier-ingest/', // JQuery loads http://prodimages.ny.bluefly
+          url: 'http://prodimages.ny.bluefly/ap1/v1/pmdata/', // JQuery loads http://prodimages.ny.bluefly
           data: JSON.stringify(dataraw, [ "colorstyle" ], 4), // Send value of the clicked button
           dataType: 'json', // Choosing a JSON datatype
           success: function(data) // Variable data contains the data we get from serverside
@@ -36,16 +36,16 @@ $(document).ready(function(){
               //$('#results').html(''); // Clear #results div
               
               if (button == 'All') { // If clicked buttons value is All, we post every style
-                  for (var i in data.Valid) {
-                      $('#results').append('Valid Url: ' + data.Valid[i] + '<br/>');
+                  for (var i in data.objects) {
+                      $('#results').append('Valid Url: ' + data.objects[i] + '<br/>');
                   }
-                  for (var i in data.Invalid) {
-                      $('#results').append('Invalid Url: ' + data.Invalid[i] + '<br/>');
+                  for (var i in data.objects) {
+                      $('#results').append('Invalid Url: ' + data.objects[i] + '<br/>');
                   }
               }
               else if (button == 'Valid') { // If clicked buttons value is Valid, we post only Valid results
-                  for (var i in data) {
-                      $('#results').append('Valid Url: ' + data[i] + '<br/>');
+                  for (var i in data.objects) {
+                      $('#results').append('Valid Url: ' + data.objects[i] + '<br/>');
                   }
               }
               else if (button == 'Invalid') { // If clicked buttons value is Invalid, we post only Invalid results
