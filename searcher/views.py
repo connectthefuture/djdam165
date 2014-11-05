@@ -613,17 +613,17 @@ def manage_supplier_ingest(request, colorstyle=None):
 def manage_supplier_images(request, colorstyle=None, alt=None):
     try:
         if not colorstyle:
-            colorstyle = request.POST['colorstyle']
+            colorstyle = request.GET['colorstyle']
     except KeyError:
         pass
     try:
-        if not alt:
-            alt = request.POST['alt']
+        if not colorstyle:
+            colorstyle = request.POST['colorstyle']
     except KeyError:
         alt = '1'
         pass
 
-    if request.method == "POST":
+    if request.method == "POST" or request.method == "GET":
         formset = SupplierImagesModelForm({'colorstyle': colorstyle, 'alt': alt})
         if formset.is_valid():
             pass

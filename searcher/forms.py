@@ -636,8 +636,8 @@ class SupplierIngestImagesModelForm(forms.ModelForm):
         super(SupplierIngestImagesModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id     = 'id-supplierIngestImagesForm'
-        self.helper.form_method = 'post'
-        self.helper.form_action = 'manage_supplier_ingest_images'
+        #self.helper.form_method = 'post'
+        #self.helper.form_action = 'manage_supplier_ingest_images'
         self.helper.form_class  = 'form-horizontal'
         self.helper.label_class = 'control-label'
         self.helper.field_class = 'col-lg-2'
