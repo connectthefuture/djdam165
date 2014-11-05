@@ -582,7 +582,7 @@ class testJSONForm(forms.Form):
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
 from crispy_forms.layout import Submit
-from crispy_forms.bootstrap import TabHolder, Tab ##, Field, Div
+from crispy_forms.bootstrap import TabHolder, Tab
 from searcher.models import SupplierIngest, SupplierIngestImages, ProductSnapshotLive
 
 
@@ -590,7 +590,7 @@ class SupplierIngestModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(SupplierIngestModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_id     = 'id_supplierIngestForm'
+        self.helper.form_id     = 'id-supplierIngestForm'
         self.helper.form_method = 'post'
         self.helper.form_action = 'manage_supplier_ingest'
         self.helper.form_class  = 'form-vertical'
@@ -636,8 +636,8 @@ class SupplierIngestImagesModelForm(forms.ModelForm):
         super(SupplierIngestImagesModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id     = 'id-supplierIngestImagesForm'
-        #self.helper.form_method = 'post'
-        #self.helper.form_action = 'manage_supplier_ingest_images'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'manage_supplier_ingest_images'
         self.helper.form_class  = 'form-horizontal'
         self.helper.label_class = 'control-label'
         self.helper.field_class = 'col-lg-2'
@@ -683,8 +683,8 @@ class ProductSnapshotLiveModelForm(forms.ModelForm):
         super(ProductSnapshotLiveModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id     = 'id-productSnapshotLiveModelForm'
-        #self.helper.form_method = 'post'
-        #self.helper.form_action = 'manage_product_snapshot_live'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'manage_product_snapshot_live'
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'control-label'
         self.helper.field_class = 'col-lg-2'
