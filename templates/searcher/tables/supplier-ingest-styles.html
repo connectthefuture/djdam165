@@ -1,4 +1,4 @@
-{% extends '_layouts/base.html' %}
+{% extends "base/jbhome.html" %}
 {% load render_table from django_tables2 %}
 {% block content %}
     <link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
@@ -9,6 +9,7 @@
     {% render_table table %}
     {% else %}
         <div id="id_results" name="results"></div>
+        <div id="results" name="results">RR</div>
     </body>
 
     {% endif %}
