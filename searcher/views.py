@@ -622,7 +622,7 @@ def manage_supplier_images(request, colorstyle=None, alt=None):
     except KeyError:
         alt = '1'
         pass
-
+    formset = SupplierImagesModelForm()
     if request.method == "POST" or request.method == "GET":
         formset = SupplierImagesModelForm({'colorstyle': colorstyle, 'alt': alt})
         if formset.is_valid():
