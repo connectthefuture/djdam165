@@ -7,6 +7,18 @@
 {% block page_title %}jQuery Ajax Example with JSON Response
 {% endblock %}
 
+<script>
+var myArray=[];
+$('#submitButton').click(function(){
+   $('#formAjax textarea').each(function(){
+      var inputTextData = $(this);
+      var k=$('input:first',inputTextData).val();
+      var v=$('input:first',inputTextData).next().val();
+        myArray.push({key:k, value: v});
+
+   });
+});
+</script>
 
 {% block content %}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
@@ -14,9 +26,10 @@
 $(document).ready(function(){
   $(':submit').on('click', function() { // This event fires when a button is clicked
       var button = $(this).val().serialize();
+      var dataraw = 'colorstyle=' + $('#formAjax:input textarea').val() + '';
       $.ajax({ // ajax cnx starts
           url: 'http://prodimages.ny.bluefly/ap1/v1/supplier-ingest/', // JQuery loads http://prodimages.ny.bluefly
-          data: 'colorstyle=' + $('#formAjax:input textarea').val() + '', // Send value of the clicked button
+          data: JSON.stringify(dataraw, [ "colorstyle" ], 4), // Send value of the clicked button
           dataType: 'json', // Choosing a JSON datatype
           success: function(data) // Variable data contains the data we get from serverside
           {
