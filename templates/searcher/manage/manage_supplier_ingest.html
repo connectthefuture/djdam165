@@ -9,8 +9,9 @@
 
 
 <script type="text/javascript">
-$(document).ready(function () {
-        //$("#id-supplierIngestForm").submit(function () {
+    $( "form" ).submit(function( event ) {event.preventDefault()});
+    $(document).ready(function () {
+    //$("#id-supplierIngestForm").submit(function () {
           $(':submit').on('click', function() {
             var colorstyle = $('#id_colorstyle').val();
             var alt = $('#id_alt').val(); //colorstyle.split("_")[-1];
@@ -22,7 +23,7 @@ $(document).ready(function () {
                 url: url,
                 //url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/",
                 contentType: "application/json",
-                data: {colorstyle: colorstyle, alt: alt},
+                data:  JSON.stringify({colorstyle: colorstyle, alt: alt}),
                 //data: 'button=' + $(this).val(), // Send value of the clicked button
                 dataType: 'json', // Choosing a JSON datatype
                 success: function(data) // Variable data contains the data we get from serverside
@@ -33,7 +34,6 @@ $(document).ready(function () {
 
             return false; // avoid to execute the actual submit of the form.
         });
-        $( "form" ).submit(function( event ) {event.preventDefault()});
 });
 
 </script>
