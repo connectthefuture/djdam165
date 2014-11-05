@@ -592,7 +592,7 @@ class SupplierIngestModelForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_id     = 'id-supplierIngestForm'
         self.helper.form_method = 'get'
-        #self.helper.form_action = 'manage_supplier_ingest'
+        self.helper.form_action = 'manage_supplier_ingest'
         self.helper.form_class  = 'form-vertical'
         self.helper.label_class = 'control-label'
         self.helper.field_class = 'col-md-4'
