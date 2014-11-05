@@ -9,7 +9,6 @@
 
 
 <script type="text/javascript">
-    $( "form" ).submit(function( event ) {event.preventDefault()});
     $(document).ready(function () {
     //$("#id-supplierIngestForm").submit(function () {
           $(':submit').on('click', function() {
@@ -28,7 +27,7 @@
                 dataType: 'json', // Choosing a JSON datatype
                 success: function(data) // Variable data contains the data we get from serverside
                 {
-                  $('#results').html(data); // Clear #image_download_valid div // show response from the python script.
+                  $('#results').html(JSON.parse(data)); // Clear #image_download_valid div // show response from the python script.
                 }
             });
 
