@@ -592,7 +592,7 @@ class SupplierIngestModelForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_id     = 'id-supplierIngestForm'
         #self.helper.form_tag = False
-        self.helper.form_method = 'get'
+        self.helper.form_method = 'post'
         #self.helper.disable_csrf = False
         self.helper.form_action = 'manage_supplier_ingest'
         self.helper.form_class = 'blueForms'

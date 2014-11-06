@@ -598,8 +598,8 @@ def manage_products(request, brand_id):
 #     })
 from searcher.forms import SupplierIngestImagesModelForm, SupplierIngestModelForm, SupplierImagesModelForm, ProductSnapshotLiveModelForm
 def manage_supplier_ingest(request, colorstyle=None):
-    if request.method == "GET":
-        form = SupplierIngestModelForm(request.GET)
+    if request.method == "POST":
+        form = SupplierIngestModelForm(request.POST)
         if form.is_valid():
             pass
             #data = form.cleaned_data['colorstyle'],
