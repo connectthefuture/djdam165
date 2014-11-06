@@ -610,9 +610,9 @@ class SupplierIngestModelForm(forms.ModelForm):
                 Tab(
                 'Image Info',
                 'image_url',
-                'get_http_status_code',
-                'vendor_image',
-                'bfly_image',
+                # 'get_http_status_code',
+                # 'vendor_image',
+                # 'bfly_image',
                 'version'
                 ),
                 Tab(
