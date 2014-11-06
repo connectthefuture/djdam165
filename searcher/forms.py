@@ -744,8 +744,8 @@ class SupplierImagesModelForm(forms.ModelForm):
             'colorstyle',
             'alt',
             'vendor_image',
-            HTML("""{% if formset.vendor_image.value %}<img class="img-responsive" src="{{ formset.vendor_image.value }}">{% endif %}""", ),
+            HTML("""{% if form.vendor_image.value %}<img class="img-responsive" src="{{ form.vendor_image.value }}">{% endif %}""", ),
             'bfly_image',
-            HTML("""{% if formset.bfly_image.value %}<img class="img-responsive" src="{{ formset.bfly_image.value }}">{% endif %}""", ),
+            HTML("""{% if form.bfly_image.value %}<img class="img-responsive" src="{{ form.bfly_image.value }}">{% endif %}""", ),
             Submit('submit', 'Submit'),
         )

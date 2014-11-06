@@ -596,18 +596,18 @@ def manage_products(request, brand_id):
 from searcher.forms import SupplierIngestImagesModelForm, SupplierIngestModelForm, SupplierImagesModelForm
 def manage_supplier_ingest(request, colorstyle=None):
     if request.method == "POST":
-        formset = SupplierIngestModelForm(request.POST)
-        if formset.is_valid():
+        form = SupplierIngestModelForm(request.POST)
+        if form.is_valid():
             pass
             #data = form.cleaned_data['colorstyle'],
         else:
             print 'bad'
             pass
     else:
-        formset = SupplierIngestModelForm()
+        form = SupplierIngestModelForm()
 
     return render_to_response("manage/manage_supplier_ingest.html", {
-        "formset": formset,
+        "form": form,
     })
 
 def manage_supplier_images(request, colorstyle=None, alt=None):
@@ -624,18 +624,18 @@ def manage_supplier_images(request, colorstyle=None, alt=None):
         pass
 
     if request.method == "POST" or request.method == "GET":
-        formset = SupplierImagesModelForm({'colorstyle': colorstyle, 'alt': alt})
-        if formset.is_valid():
+        form = SupplierImagesModelForm({'colorstyle': colorstyle, 'alt': alt})
+        if form.is_valid():
             pass
             #data = form.cleaned_data['colorstyle'],
         else:
             print 'bad'
             pass
     else:
-        formset = SupplierImagesModelForm()
+        form = SupplierImagesModelForm()
 
     return render_to_response("manage/manage_supplier_ingest.html", {
-        "formset": formset,
+        "form": form,
     })
 
 

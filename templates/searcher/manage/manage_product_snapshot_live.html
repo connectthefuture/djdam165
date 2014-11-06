@@ -2,13 +2,13 @@
 {% block content %}
 
 {% load crispy_forms_tags %}
-{% crispy formset %}
+{% crispy form %}
 
 
 <form method="post" action="">
-    {{ formset.management_form }}
+    {{ form.management_form }}
     <table>
-        {% for form in formset %}
+        {% for form in form %}
             {{ form }}
         {% endfor %}
     </table>
