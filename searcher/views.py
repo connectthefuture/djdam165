@@ -617,7 +617,10 @@ def manage_supplier_ingest(request, colorstyle=None):
 def manage_supplier_images(request, colorstyle=None, alt=None):
     try:
         if not colorstyle:
-            colorstyle = request.POST['colorstyle']
+            try:
+                colorstyle = request.POST['colorstyle']
+            except:
+                colorstyle = request.GET['colorstyle']
     except KeyError:
         pass
     try:
