@@ -48,7 +48,7 @@ class UserResource(ModelResource):
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         queryset = User.objects.all()
         resource_name = 'user'
-        allowed_methods = ['get']
+        allowed_methods = ['get', 'post']
         #fields = ['username', 'first_name', 'last_name', 'last_login']
         #instead of Excluding like below blklist above fields acts as whitelist
         excludes = ['email', 'password', 'is_active', 'is_staff', 'is_superuser']
@@ -100,6 +100,7 @@ class Zimages1PhotoselectsResource(ModelResource):
         list_allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get']
 
+
 class PostReadyOriginalResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
     class Meta:
@@ -117,7 +118,7 @@ class PostReadyOriginalResource(ModelResource):
 class ProductSnapshotLiveResource(ModelResource):
     class Meta:
         queryset = ProductSnapshotLive.objects.all()
-        allowed_methods = ['get']
+        allowed_methods = ['get', 'post']
         list_allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get', 'post', 'put', 'delete']
         resource_name = 'pmdata'
@@ -154,7 +155,8 @@ class SupplierIngestResource(ModelResource):
         # authorization= Authorization()
         queryset = SupplierIngest.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
-        detail_allowed_methods = ['get']
+        list_allowed_methods = ['get', 'post']
+        detail_allowed_methods = ['get', 'post']
         excludes = ['active', 'create_dt', 'start_dt']
         filtering = {
             'colorstyle': ALL,
