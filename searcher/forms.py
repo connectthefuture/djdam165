@@ -593,6 +593,7 @@ class SupplierIngestModelForm(forms.ModelForm):
         self.helper.form_id     = 'id-supplierIngestForm'
         #self.helper.form_tag = False
         self.helper.form_method = 'post'
+        self.helper.disable_csrf = False
         #self.helper.form_action = '/searcher/manage/supplier-ingest/manage_supplier_ingest'
         self.helper.form_class = 'blueForms'
         #self.helper.form_class  = 'form-vertical'
