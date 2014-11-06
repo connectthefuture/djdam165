@@ -9,7 +9,58 @@
 {% crispy form %}
 </div>
 
+{% if form.id %}
+<div id="resultsModal">
+<form id="{{ form.id }}" role="form" class="small" name="{{ form.name }}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">{{ form.colorstyle }}</h4>
+      </div>
+      <div class="modal-body">
+       {% crispy form %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="button" class="btn btn-primary" value="Send" id="send">
+      </div>
+    </div>
+  </div>
+</form>
+{% endif %}
+</div>
+<script>
+$(document).ready(function () {
+    $('button#send').click(function(e){
+        e.preventDefault();
+        data = {
+           "colorstyle": $('#id_colorstyle').val(),
+           "alt": $('#id_alt').val(),
+           "po_number": $('#id_po_number').val(),
+           "vendor_name": $('#id_vendor_name').val(),
+           "vendor_brand": $('#id_vendor_brand').val(),
+           "vendor_style": $('#id_vendor_style').val(),
+           "modified_dt": $('#id_modified_dt').val(),
+           "image_url": $('#id_image_url').val(),
+           "version": $('#id_version').val(),
+           "bfly_product_path": $('#id_bfly_product_path').val()
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/",
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json",
+            success: function(data) {console.log(data)},
+            error: function (rs, e) {console.debug(rs)}
+        });
+    });
+});
 
+
+
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
     //$("#id-supplierIngestForm").submit(function () {
@@ -38,4 +89,6 @@
 });
 
 </script>
+
+
 {% endblock %}
