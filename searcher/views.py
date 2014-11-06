@@ -600,16 +600,12 @@ from searcher.forms import SupplierIngestImagesModelForm, SupplierIngestModelFor
 def manage_supplier_ingest(request, colorstyle=None):
     if request.method == "POST":
         form = SupplierIngestModelForm(request.POST)
-        # if form.is_valid():
-        #     pass
-    elif request.method == "GET":
-        form = SupplierIngestModelForm(request.GET)
-        # if form.is_valid():
-        #     pass
-        #     #data = form.cleaned_data['colorstyle'],
-        # else:
-        #     print 'bad'
-        #     pass
+        if form.is_valid():
+            pass
+            #data = form.cleaned_data['colorstyle'],
+        else:
+            print 'bad'
+            pass
     else:
         form = SupplierIngestModelForm()
 
@@ -618,13 +614,16 @@ def manage_supplier_ingest(request, colorstyle=None):
     })
 
 
-def manage_supplier_images(request, colorstyle=None, alt='1'):
+def manage_supplier_images(request, colorstyle=None, alt=None):
     try:
         if not colorstyle:
             try:
                 colorstyle = request.POST['colorstyle']
             except:
-                colorstyle = request.GET['colorstyle']
+                try:
+                    colorstyle = request.GET['colorstyle']
+                except:
+                    pass
     except KeyError:
         pass
     try:
@@ -636,12 +635,12 @@ def manage_supplier_images(request, colorstyle=None, alt='1'):
 
     if request.method == "POST" or request.method == "GET":
         form = SupplierImagesModelForm({'colorstyle': colorstyle, 'alt': alt})
-        # if form.is_valid():
-        #     pass
-        #     #data = form.cleaned_data['colorstyle'],
-        # else:
-        #     print 'bad'
-        #     pass
+        if form.is_valid():
+            pass
+            #data = form.cleaned_data['colorstyle'],
+        else:
+            print 'bad'
+            pass
     else:
         form = SupplierImagesModelForm()
 
@@ -680,6 +679,8 @@ def manage_product_snapshot_live(request, colorstyle=None):
     return render_to_response("manage/manage_product_snapshot_live.html", {
         "form": form,
     })
+
+
 
 
 ###################################################################################################
