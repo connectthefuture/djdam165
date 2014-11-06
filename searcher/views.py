@@ -602,6 +602,10 @@ def manage_supplier_ingest(request, colorstyle=None):
         form = SupplierIngestModelForm(request.POST)
         if form.is_valid():
             pass
+    elif request.method == "GET":
+        form = SupplierIngestModelForm(request.GET)
+        if form.is_valid():
+            pass
             #data = form.cleaned_data['colorstyle'],
         else:
             print 'bad'
@@ -652,7 +656,8 @@ def manage_product_snapshot_live(request, colorstyle=None):
             colorstyle = request.POST['colorstyle']
     except KeyError:
         pass
-
+    if request.method == "GET":
+        colorstyle = request.GET['colorstyle']
     if request.method == "POST" or request.method == "GET":
         form = ProductSnapshotLiveModelForm({'colorstyle': colorstyle})
         if form.is_valid():
