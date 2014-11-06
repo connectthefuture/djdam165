@@ -595,7 +595,7 @@ class SupplierIngestModelForm(forms.ModelForm):
         #self.helper.form_method = 'post'
         self.helper.form_action = 'manage_supplier_ingest'
         self.helper.form_class  = 'form-vertical'
-        self.helper.label_class = 'control-label'
+        #self.helper.label_class = 'control-label'
         self.helper.field_class = 'col-md-4'
         self.helper.layout = Layout(
             TabHolder(

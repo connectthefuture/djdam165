@@ -618,7 +618,7 @@ def manage_supplier_ingest(request, colorstyle=None):
     })
 
 
-def manage_supplier_images(request, colorstyle=None, alt=None):
+def manage_supplier_images(request, colorstyle=None, alt='1'):
     try:
         if not colorstyle:
             try:
