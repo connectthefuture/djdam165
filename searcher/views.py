@@ -603,8 +603,6 @@ def manage_supplier_ingest(request, colorstyle=None):
         else:
             print 'bad'
             pass
-    elif request.method == "GET":
-        formset = SupplierIngestModelForm(request.GET)
     else:
         formset = SupplierIngestModelForm()
 
@@ -615,16 +613,16 @@ def manage_supplier_ingest(request, colorstyle=None):
 def manage_supplier_images(request, colorstyle=None, alt=None):
     try:
         if not colorstyle:
-            colorstyle = request.GET['colorstyle']
+            colorstyle = request.POST['colorstyle']
     except KeyError:
         pass
     try:
-        if not colorstyle:
-            colorstyle = request.POST['colorstyle']
+        if not alt:
+            alt = request.POST['alt']
     except KeyError:
         alt = '1'
         pass
-    formset = SupplierImagesModelForm()
+
     if request.method == "POST" or request.method == "GET":
         formset = SupplierImagesModelForm({'colorstyle': colorstyle, 'alt': alt})
         if formset.is_valid():
@@ -636,12 +634,10 @@ def manage_supplier_images(request, colorstyle=None, alt=None):
     else:
         formset = SupplierImagesModelForm()
 
-    # return render_to_response("manage/manage_supplier_ingest.html", {
-    #     "formset": formset,
-    # })
-    return render(request, "manage/manage_supplier_ingest.html", {
+    return render_to_response("manage/manage_supplier_ingest.html", {
         "formset": formset,
     })
+
 
 
 #manage_product_snapshot_live

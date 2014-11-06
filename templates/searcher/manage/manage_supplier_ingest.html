@@ -2,10 +2,12 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
+
+
+
+<div id="results">
 {% crispy formset %}
-
-
-<div id="results"></div>
+</div>
 
 
 <script type="text/javascript">
@@ -27,7 +29,7 @@
                 dataType: 'json', // Choosing a JSON datatype
                 success: function(data) // Variable data contains the data we get from serverside
                 {
-                  $('#results').html(JSON.parse(data['json'])); // Clear #image_download_valid div // show response from the python script.
+                  //$('#results').html(JSON.parse(data['json'])); // Clear #image_download_valid div // show response from the python script.
                 }
             });
 
