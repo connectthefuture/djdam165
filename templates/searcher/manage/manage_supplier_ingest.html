@@ -58,7 +58,7 @@ $(document).ready(function () {
            "bfly_product_path": $('#id_bfly_product_path').val()
         };
         $.ajax({
-            type: "POST",
+            type: "get",
             url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/",
             data: JSON.stringify(data),
             dataType: "json",
@@ -80,7 +80,7 @@ $(document).ready(function () {
             var res = {};
             var data = JSON.stringify({colorstyle: colorstyle, alt: alt});
             $.ajax({
-                type: "post",
+                type: "get",
                 url: url + colorstyle +'/',
                 //url: "http://prodimages.ny.bluefly.com/api/v1/supplier-ingest/",
                 contentType: "application/json",
