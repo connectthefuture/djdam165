@@ -592,7 +592,7 @@ class SupplierIngestModelForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_id     = 'id-supplierIngestForm'
         #self.helper.form_tag = False
-        self.helper.form_method = 'get'
+        self.helper.form_method = 'post'
         self.helper.form_action = 'manage_supplier_ingest'
         self.helper.form_class  = 'form-vertical'
         #self.helper.label_class = 'control-label'
@@ -613,7 +613,7 @@ class SupplierIngestModelForm(forms.ModelForm):
                 'image_url',
                 HTML(
                 """{% if form.image_url.value %}<img class="img-responsive" size="100x120" src="{{ form.image_url.value }}">{% endif %}""", ),
-                # 'get_http_status_code',
+                # 'post_http_status_code',
                 # 'vendor_image',
                 # 'bfly_image',
                 'version'
@@ -639,7 +639,7 @@ class SupplierIngestImagesModelForm(forms.ModelForm):
         super(SupplierIngestImagesModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id     = 'id-supplierIngestImagesForm'
-        self.helper.form_method = 'get'
+        self.helper.form_method = 'post'
         self.helper.form_action = 'manage_supplier_ingest_images'
         self.helper.form_class  = 'form-vertical'
         self.helper.label_class = 'control-label'
@@ -686,7 +686,7 @@ class ProductSnapshotLiveModelForm(forms.ModelForm):
         super(ProductSnapshotLiveModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id     = 'id-productSnapshotLiveModelForm'
-        self.helper.form_method = 'get'
+        self.helper.form_method = 'post'
         self.helper.form_action = 'manage_product_snapshot_live'
         self.helper.form_class  = 'form-vertical'
         self.helper.label_class = 'control-label'
