@@ -604,7 +604,7 @@ class SupplierIngestModelForm(forms.ModelForm):
                 Field('colorstyle', css_class='btn btn-success'),
                 'po_number',
                 'vendor_name',
-                    Field('vendor_brand', css_class=''),
+                Field('vendor_brand', css_class=''),
                 'vendor_style',
                 'modified_dt',
                 ),
@@ -688,7 +688,7 @@ class ProductSnapshotLiveModelForm(forms.ModelForm):
         self.helper.form_id     = 'id-productSnapshotLiveModelForm'
         self.helper.form_method = 'post'
         self.helper.form_action = 'manage_product_snapshot_live'
-        self.helper.form_class = 'form-horizontal'
+        self.helper.form_class  = 'form-horizontal'
         self.helper.label_class = 'control-label'
         self.helper.field_class = 'col-lg-2'
         self.helper.layout = Layout(
@@ -724,9 +724,9 @@ class ProductSnapshotLiveModelForm(forms.ModelForm):
                 'copy_ready_dt',
                 'start_dt'
                 )
-            )
+            ),
+            Submit('submit', 'Submit'),
         )
-        self.helper.add_input(Submit('submit', 'Submit'))
 
     class Meta:
         model = ProductSnapshotLive
