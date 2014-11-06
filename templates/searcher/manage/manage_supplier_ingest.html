@@ -72,7 +72,7 @@ $(document).ready(function () {
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-    //$("#id-supplierIngestForm").submit(function () {
+    $("#id-supplierIngestForm").submit(function () {
           $(':submit').on('click', function() {
             var colorstyle = $('#id_colorstyle').val();
             var alt = $('#id_alt').val(); //colorstyle.split("_")[-1];
@@ -94,6 +94,8 @@ $(document).ready(function () {
 
             return false; // avoid to execute the actual submit of the form.
         });
+
+    });
 });
 
 </script>
