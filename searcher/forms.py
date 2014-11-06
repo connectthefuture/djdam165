@@ -602,14 +602,16 @@ class SupplierIngestModelForm(forms.ModelForm):
                 'Detail',
                 Field('colorstyle', css_class='btn btn-success'),
                 'po_number',
-                Div('vendor_name',
+                'vendor_name',
                     Field('vendor_brand', css_class=''),
-                    'vendor_style',
-                    'modified_dt')
+                'vendor_style',
+                'modified_dt',
                 ),
                 Tab(
                 'Image Info',
                 'image_url',
+                HTML(
+                """{% if form.image_url.value %}<img class="img-responsive" size="100x120" src="{{ form.image_url.value }}">{% endif %}""", ),
                 # 'get_http_status_code',
                 # 'vendor_image',
                 # 'bfly_image',
