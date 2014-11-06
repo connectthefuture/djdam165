@@ -31,6 +31,7 @@ urlpatterns += patterns('',
 urlpatterns += patterns('searcher.tables',
                         url(r'^suppliers/?$','suppliers'),
                         url(r'^suppliers/compare/?.*?$', 'suppliers_compare'),
+                        url(r'^productdata/?.*?$', 'pmdata_view'),
 )
 
 urlpatterns += patterns('searcher.tables',

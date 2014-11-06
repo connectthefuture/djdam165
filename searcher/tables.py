@@ -82,10 +82,15 @@ from django_tables2 import RequestConfig, SingleTableView
 
 def get_http_status_code(request):
     import requests
-
     r = requests.get(request)
     code = r.status_code
     return code
+
+
+def pmdata_view(request):
+    table = ProductSnapshotLiveTable(ProductSnapshotLive.objects.all())
+    RequestConfig(request).configure(table)
+    return render(request, 'tables/base_list_table.html', {'table': table})
 
 
 def suppliers(request):
@@ -95,7 +100,7 @@ def suppliers(request):
 
 
 def suppliers_compare(request):
-    table = SupplierIngestTable(SupplierIngest.objects.all())
+    table = SupplierIngestTable(SupplierIngest.objects.all().filter(colorstyle__icontains=request.get['colorstyle']))
     RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
 
