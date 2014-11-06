@@ -600,10 +600,10 @@ class SupplierIngestModelForm(forms.ModelForm):
             TabHolder(
                 Tab(
                 'Detail',
-                Field('colorstyle', css_class='active'),
+                Field('colorstyle', css_class='btn btn-success active'),
                 'po_number',
                 Div('vendor_name',
-                    Field('vendor_brand', css_class='btn btn-success'),
+                    Field('vendor_brand',
                     'vendor_style',
                     'modified_dt')
                 ),
@@ -640,7 +640,7 @@ class SupplierIngestImagesModelForm(forms.ModelForm):
         self.helper.form_action = 'manage_supplier_ingest_images'
         self.helper.form_class  = 'form-horizontal'
         self.helper.label_class = 'control-label'
-        self.helper.field_class = 'col-lg-2'
+        self.helper.field_class = 'col-md-4'
         self.helper.layout = Layout(
             TabHolder(
                 Tab(
