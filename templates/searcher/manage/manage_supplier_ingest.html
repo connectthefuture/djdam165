@@ -1,4 +1,4 @@
-{% extends "_layouts/base.html" %}
+{% extends "base/jbhome.html" %}
 
 {% block content %}
 {% load crispy_forms_tags %}
@@ -12,8 +12,6 @@
 
 <div id="resultsModal">
 {% if form %}
-<div class="container">
-<div class="row">
 <div class="col-sm-3 col-md-3">
     <!-- Button trigger modal -->
 <button class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">SearchParams</button>
@@ -39,8 +37,6 @@
     </div>
   </div>
 </form>
-</div>
-</div>
 </div>
 </div>
 {% endif %}
