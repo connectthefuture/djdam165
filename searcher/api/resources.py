@@ -158,8 +158,8 @@ class SupplierIngestResource(ModelResource):
         excludes = ['active', 'create_dt', 'start_dt']
         filtering = {
             'colorstyle': ALL,
-            'alt': ALL,
-            'vendor_style': ALL,
+            'vendor_name': ALL,
+            'vendor_brand': ALL,
             'modify_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
             'po_number': ALL,
         }
@@ -178,7 +178,7 @@ class SupplierIngestImagesResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
-        resource_name = 'supplier-ingest-images'
+        resource_name = 'supplier-images'
         detail_uri_name = 'file_name'
         # authorization= Authorization()
         queryset = SupplierIngestImages.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
@@ -191,8 +191,9 @@ class SupplierIngestImagesResource(ModelResource):
             'colorstyle': ALL,
             'alt': ALL,
             'vendor_style': ALL,
-            'modified_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
             'vendor_name': ALL,
+            'vendor_brand': ALL,
+            'modified_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
         }
 
     # ###  !!!  DO NOT NEED DISPATCH OVERRIDE WHEN USING THE URL CONF TO ROUTE REQUESTS !!!! ### #
