@@ -117,9 +117,9 @@ class PostReadyOriginalResource(ModelResource):
 class ProductSnapshotLiveResource(ModelResource):
     class Meta:
         queryset = ProductSnapshotLive.objects.all()
-        allowed_methods = ['get']
+        allowed_methods = ['get', 'post']
         list_allowed_methods = ['get', 'post']
-        detail_allowed_methods = ['get', 'post', 'put', 'delete']
+        detail_allowed_methods = ['get', 'post']  #, 'put', 'delete']
         resource_name = 'pmdata'
         detail_uri_name = 'colorstyle'
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
@@ -155,6 +155,7 @@ class SupplierIngestResource(ModelResource):
         queryset = SupplierIngest.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get', 'post']
+        list_allowed_methods = ['get', 'post']
         excludes = ['active', 'create_dt', 'start_dt']
         filtering = {
             'colorstyle': ALL,
