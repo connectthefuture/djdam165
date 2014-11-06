@@ -600,10 +600,10 @@ class SupplierIngestModelForm(forms.ModelForm):
             TabHolder(
                 Tab(
                 'Detail',
-                Field('colorstyle', css_class='btn btn-success active'),
+                Field('colorstyle', css_class='btn btn-success'),
                 'po_number',
                 Div('vendor_name',
-                    Field('vendor_brand',
+                    Field('vendor_brand', css_class=''),
                     'vendor_style',
                     'modified_dt')
                 ),
