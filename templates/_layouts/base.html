@@ -108,8 +108,8 @@
             <li><a href="/searcher/manage/supplier-ingest/"><span class="glyphicon glyphicon-barcode"></span> SupplierIngest </a></li>
             <li><a href="/searcher/manage/supplier-images/"><span class="glyphicon glyphicon-eye-open"></span> SupplierImages </a></li>
             <li><a href="/ajaxexample/"><span class="glyphicon glyphicon-time"></span> AjaxEx </a></li>
-            {% endif %}
-            {% if user.is_authenticated %}
+            
+            {% elif user.is_authenticated %}
             <li><a href="/imgadjust/"><span class="glyphicon glyphicon-screenshot"></span> Adjust </a></li>
             <li class="active"><a href="/image-update/"><span class="glyphicon glyphicon-picture"></span> Update </a></li>
             <li><a href="/uploader/"><span class="glyphicon glyphicon-cloud-upload"></span> Upload </a></li>
