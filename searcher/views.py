@@ -600,16 +600,16 @@ from searcher.forms import SupplierIngestImagesModelForm, SupplierIngestModelFor
 def manage_supplier_ingest(request, colorstyle=None):
     if request.method == "POST":
         form = SupplierIngestModelForm(request.POST)
-        if form.is_valid():
-            pass
+        # if form.is_valid():
+        #     pass
     elif request.method == "GET":
         form = SupplierIngestModelForm(request.GET)
-        if form.is_valid():
-            pass
-            #data = form.cleaned_data['colorstyle'],
-        else:
-            print 'bad'
-            pass
+        # if form.is_valid():
+        #     pass
+        #     #data = form.cleaned_data['colorstyle'],
+        # else:
+        #     print 'bad'
+        #     pass
     else:
         form = SupplierIngestModelForm()
 
@@ -636,12 +636,12 @@ def manage_supplier_images(request, colorstyle=None, alt=None):
 
     if request.method == "POST" or request.method == "GET":
         form = SupplierImagesModelForm({'colorstyle': colorstyle, 'alt': alt})
-        if form.is_valid():
-            pass
-            #data = form.cleaned_data['colorstyle'],
-        else:
-            print 'bad'
-            pass
+        # if form.is_valid():
+        #     pass
+        #     #data = form.cleaned_data['colorstyle'],
+        # else:
+        #     print 'bad'
+        #     pass
     else:
         form = SupplierImagesModelForm()
 
