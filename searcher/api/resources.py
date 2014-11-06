@@ -154,7 +154,7 @@ class SupplierIngestResource(ModelResource):
         # authorization= Authorization()
         queryset = SupplierIngest.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
-        detail_allowed_methods = ['get']
+        detail_allowed_methods = ['get', 'post']
         excludes = ['active', 'create_dt', 'start_dt']
         filtering = {
             'colorstyle': ALL,
