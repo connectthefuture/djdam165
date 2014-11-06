@@ -9,8 +9,12 @@
 {% crispy form %}
 </div>
 
-{% if form %}
+
 <div id="resultsModal">
+{% if form %}
+<button class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">SearchParams</button>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <form id="{{ form.id }}" role="form" class="small" name="{{ form.name }}">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -28,6 +32,7 @@
     </div>
   </div>
 </form>
+</div>
 {% endif %}
 </div>
 <script>
@@ -58,8 +63,6 @@ $(document).ready(function () {
     });
 });
 
-
-
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -78,9 +81,8 @@ $(document).ready(function () {
                 data:  data,
                 //data: 'button=' + $(this).val(), // Send value of the clicked button
                 dataType: 'json', // Choosing a JSON datatype
-                success: function(data) // Variable data contains the data we get from serverside
-                {
-                  //$('#results').html(JSON.parse(data['json'])); // Clear #image_download_valid div // show response from the python script.
+                success: function(data) {   // Variable data contains the data we get from serverside
+                  $('#resultsModal').html(JSON.parse(data)); // Clear #image_download_valid div // show response from the python script.
                 }
             });
 
