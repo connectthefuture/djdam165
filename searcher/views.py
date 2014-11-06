@@ -28,6 +28,9 @@ from django.views.decorators.cache import cache_page
 
 from djdam.settings import MEDIA_URL
 
+from django.shortcuts import redirect
+from django.core.mail import mail_admins
+
 #import searcher.models
 from searcher.models import *
 
@@ -593,7 +596,7 @@ def manage_products(request, brand_id):
 #     return render_to_response("manage/manage_supplier_ingest.html", {
 #         "formset": formset,
 #     })
-from searcher.forms import SupplierIngestImagesModelForm, SupplierIngestModelForm, SupplierImagesModelForm
+from searcher.forms import SupplierIngestImagesModelForm, SupplierIngestModelForm, SupplierImagesModelForm, ProductSnapshotLiveModelForm
 def manage_supplier_ingest(request, colorstyle=None):
     if request.method == "POST":
         form = SupplierIngestModelForm(request.POST)
@@ -609,6 +612,7 @@ def manage_supplier_ingest(request, colorstyle=None):
     return render_to_response("manage/manage_supplier_ingest.html", {
         "form": form,
     })
+
 
 def manage_supplier_images(request, colorstyle=None, alt=None):
     try:
@@ -639,7 +643,37 @@ def manage_supplier_images(request, colorstyle=None, alt=None):
     })
 
 
-#manage_product_snapshot_live
+def manage_product_snapshot_live(request, colorstyle=None):
+    try:
+        if not colorstyle:
+            colorstyle = request.POST['colorstyle']
+    except KeyError:
+        pass
+
+    if request.method == "POST" or request.method == "GET":
+        form = ProductSnapshotLiveModelForm({'colorstyle': colorstyle})
+        if form.is_valid():
+            message = "From: {0} <{1}>\r\nSubject:{2}\t{3}\r\nMessage:\r\n{4}\r\n".format(
+                form.cleaned_data['name'],
+                form.cleaned_data['email'],
+                form.cleaned_data['colorstyle'],
+                form.cleaned_data['subject'],
+                form.cleaned_data['message']
+            )
+            mail_admins('ProductSnapshotLiveModelForm', message, fail_silently=True)
+            pass
+            # data = form.cleaned_data['colorstyle'],
+        else:
+            print 'bad'
+            pass
+    else:
+        form = ProductSnapshotLiveModelForm()
+
+    return render_to_response("manage/manage_product_snapshot_live.html", {
+        "form": form,
+    })
+
+
 ###################################################################################################
 ###################################################################################################
 
