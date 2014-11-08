@@ -88,9 +88,6 @@
         </button>
         <a class="navbar-brand" href="/admin/">A</a>
         <a class="navbar-brand" href="/">Fine Home for Photos Since the Mid to Late '50s</a>
-        {% if user.is_admin %}
-        <a href="/owncloud/" class="navbar-brand"><span class="glyphicon glyphicon-cloud-download"></span> OwnCloud </a>
-        {% endif %}
       </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -127,7 +124,9 @@
             <li><p><span class="glyphicon glyphicon-dashboard"></span>Welcome, Mr/Ms Guest <a href="/accounts/login">[login]</a></p></li>
             {% endif %}
 {% endcomment %}
-
+            {% if user.is_admin %}
+            <a href="/owncloud/" class="navbar-brand"><span class="glyphicon glyphicon-cloud-download"></span> OwnCloud </a>
+            {% endif %}
             {% if user.is_authenticated %}
             
             <span class="glyphicon glyphicon-user"></span>Welcome, {{ user.username }}
