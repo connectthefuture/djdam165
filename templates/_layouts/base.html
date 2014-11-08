@@ -88,6 +88,9 @@
         </button>
         <a class="navbar-brand" href="/admin/">A</a>
         <a class="navbar-brand" href="/">Fine Home for Photos Since the Mid to Late '50s</a>
+        {% if user.is_admin %}
+        <a href="/owncloud/" class="navbar-brand"><span class="glyphicon glyphicon-cloud-download"></span> OwnCloud </a>
+        {% endif %}
       </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -109,9 +112,7 @@
             <li><a href="/searcher/manage/supplier-images/"><span class="glyphicon glyphicon-eye-open"></span> SupplierImages </a></li>
             <li><a href="/searcher/manage/productdata/"><span class="glyphicon glyphicon-barcode"></span> productdata </a></li>
             <li><a href="/ajaxexample/"><span class="glyphicon glyphicon-time"></span> AjaxEx </a></li>
-            {% if user.is_admin %}
-            <a href="/owncloud/" class="navbar-brand"><span class="glyphicon glyphicon-cloud-download"></span> OwnCloud </a>
-            {% endif %}
+
             {% elif user.is_authenticated %}
             <li><a href="/imgadjust/"><span class="glyphicon glyphicon-screenshot"></span> Adjust </a></li>
             <li class="active"><a href="/image-update/"><span class="glyphicon glyphicon-picture"></span> Update </a></li>
