@@ -124,7 +124,7 @@
             <li><p><span class="glyphicon glyphicon-dashboard"></span>Welcome, Mr/Ms Guest <a href="/accounts/login">[login]</a></p></li>
             {% endif %}
 {% endcomment %}
-            {% if user.is_admin %}
+            {% if user.is_staff %}
             <a href="/owncloud/" class="navbar-brand"><span class="glyphicon glyphicon-cloud-download"></span> OwnCloud </a>
             {% endif %}
             {% if user.is_authenticated %}
