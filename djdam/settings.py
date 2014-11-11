@@ -109,6 +109,7 @@ INSTALLED_APPS = (# '',
 
     ## REST
     'rest_framework',
+    'rest_framework.authtoken',
     'tastypie',
 
     # Application base, containing global templates and Home Page View
@@ -465,9 +466,20 @@ API_LIMIT_PER_PAGE = 20
 
 ## REST FRAMEWORK SETTINGS
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
     'PAGINATE_BY': 20
 }
+try:
+    from django.contrib.auth.models import User
+    from rest_framework.authtoken.models import Token
+
+    for user in User.objects.all():
+        Token.objects.get_or_create(user=user)
+except:
+    pass
 
 
 ### AUTOCOMPLETE django-ajax-selects
