@@ -1425,12 +1425,12 @@ class LookletReturned(models.Model):
     id = models.BigIntegerField(primary_key=True)
     #capture_date = models.ForeignKey('LookletShotList', to_field='photo_date')
     colorstyle = models.ForeignKey('LookletShotList')
-    file_path = models.ManyToManyField(PostReadyOriginal, related_name='looklet_file_paths_returned+') ##, through='LookletShotListPostReadyOriginal', through_fields=('file_paths','colorstyle'))
+    file_paths = models.ManyToManyField(PostReadyOriginal, related_name='looklet_file_paths_returned+') ##, through='LookletShotListPostReadyOriginal', through_fields=('file_paths','colorstyle'))
     metadata = models.ManyToManyField(LookletMetadataSidecar)
 
     class Meta:
         managed = True
-        ordering = ['-colorstyle', '-file_path']
+        ordering = ['-colorstyle']
         verbose_name_plural = 'Looklet_Returned_Files'
 
     def __unicode__(self):
