@@ -82,7 +82,7 @@ class AuthGroupPermissions(models.Model):
         verbose_name_plural = 'AuthGroupPermissions'
 
     def __unicode__(self):
-        return 'Group: ' + self.group + '\n\t' + 'Permission: ' + self.permission.codename
+        return 'Group: ' + self.group ##+ '\n\t' + 'Permission: ' + self.permission.codename
 
 
 class AuthPermission(models.Model):
@@ -95,7 +95,7 @@ class AuthPermission(models.Model):
         db_table = 'auth_permission'
 
     def __unicode__(self):
-        return 'CodeName: ' + self.codename + '\n\t' + 'AuthName: ' + self.name
+        return 'CodeName: ' + self.codename + '\n\t' + 'AuthDesc: ' + self.name
 
 
 class AuthUser(models.Model):
@@ -127,7 +127,7 @@ class AuthUserGroups(models.Model):
         db_table = 'auth_user_groups'
 
     def __unicode__(self):
-        return 'Username: ' + self.user.username + '\n\t' + 'Group: ' + self.group.name
+        return 'AuthUserID: ' + self.id ##.username + '\n\t' + 'Group: ' + self.group.name
 
 
 class AuthUserUserPermissions(models.Model):
@@ -139,7 +139,7 @@ class AuthUserUserPermissions(models.Model):
         db_table = 'auth_user_user_permissions'
 
     def __unicode__(self):
-        return 'Username: ' + self.user.username + '\n\t' + 'Permission: ' + self.permission.codename
+        return 'AuthUserPermissionID: ' + self.id  ##+ '\n\t' + 'Permission: ' + self.permission.codename
 
 
 class DjangoAdminLog(models.Model):
@@ -155,7 +155,7 @@ class DjangoAdminLog(models.Model):
         db_table = 'django_admin_log'
 
     def __unicode__(self):
-        return 'ObjectID: ' + self.object_id + '\n\t' + 'ContentType: ' + self.content_type.name
+        return 'ObjectID: ' + self.object_id ##+ '\n\t' + 'ContentType: ' + self.content_type.name
 
 
 class DjangoContentType(models.Model):
