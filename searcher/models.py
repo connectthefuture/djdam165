@@ -1408,24 +1408,24 @@ class LookletMetadataSidecar(models.Model):
         return self.metadata_value
 
 
-class LookletShotListPostReadyOriginal(models.Model):
-    id = models.BigIntegerField(primary_key=True)
-    colorstyle = models.ForeignKey('LookletShotList',  related_name='looklet_colorstyles_sent')
-    file_paths = models.ManyToManyField('PostReadyOriginal', related_name='looklet_file_paths_returned+')
-
-    class Meta:
-        managed = True
-        ordering = ['-colorstyle', '-file_paths']
-        verbose_name_plural = 'Looklet_PostReady_M2M'
-
-    def __unicode__(self):
-        return self.file_paths
+# class LookletShotListPostReadyOriginal(models.Model):
+#     id = models.BigIntegerField(primary_key=True)
+#     colorstyle = models.ForeignKey('LookletShotList',  related_name='looklet_colorstyles_sent')
+#     file_paths = models.ManyToManyField('PostReadyOriginal', related_name='looklet_file_paths_returned+')
+#
+#     class Meta:
+#         managed = True
+#         ordering = ['-colorstyle', '-file_paths']
+#         verbose_name_plural = 'Looklet_PostReady_M2M'
+#
+#     def __unicode__(self):
+#         return self.file_paths
 
 class LookletReturned(models.Model):
     id = models.BigIntegerField(primary_key=True)
     #capture_date = models.ForeignKey('LookletShotList', to_field='photo_date')
     colorstyle = models.ForeignKey('LookletShotList')
-    returned = models.ManyToManyField(PostReadyOriginal, through='LookletShotListPostReadyOriginal', through_fields=('file_paths','colorstyle'))
+    file_path = models.ForeignKey(PostReadyOriginal) ##, through='LookletShotListPostReadyOriginal', through_fields=('file_paths','colorstyle'))
     metadata = models.ManyToManyField(LookletMetadataSidecar)
 
     class Meta:
