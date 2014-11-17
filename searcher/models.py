@@ -1408,15 +1408,25 @@ class LookletMetadataSidecar(models.Model):
         return self.metadata_value
 
 
+class LookletShotListPostReadyOriginal(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    colorstyle = models.ForeignKey('LookletShotList')
+    file_paths = models.ManyToManyField('PostReadyOriginal', related_name='file_path')
+
+    def __unicode__(self):
+        managed = True
+        return self.file_paths
+
+
 class LookletShotList(models.Model):
     id = models.BigIntegerField(primary_key=True)
     colorstyle = models.CharField(max_length=9)
     photo_date = models.DateField(blank=True, null=True)
     reshoot = models.CharField(max_length=1, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
-    timestamp = models.DateTimeField(blank=True, auto_now_add=True)
+    timestamp = models.DateTimeField(blank=True, null=True)
     username = models.CharField(max_length=75, blank=True, null=True)
-    file_path = models.ForeignKey('PostReadyOriginal', to_field='file_path', blank=True, null=True)
+
 
     class Meta:
         managed = True
