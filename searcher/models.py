@@ -95,7 +95,7 @@ class AuthPermission(models.Model):
         db_table = 'auth_permission'
 
     def __unicode__(self):
-        return 'AuthName: ' + self.name + 'Content: ' + self.content_type
+        return 'AuthName: ' + self.name + 'CodeName: ' + self.codename
 
 
 class AuthUser(models.Model):
