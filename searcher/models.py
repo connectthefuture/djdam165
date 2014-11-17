@@ -95,7 +95,7 @@ class AuthPermission(models.Model):
         db_table = 'auth_permission'
 
     def __unicode__(self):
-        return 'Permission: ' + self.permission
+        return 'AuthName: ' + self.name + 'Content: ' + self.content_type
 
 
 class AuthUser(models.Model):
@@ -1399,7 +1399,6 @@ class LookletMetadataSidecar(models.Model):
 
     class Meta:
         managed = True
-        ##managed = False
         db_table = 'looklet_metadata_sidecar'
         ordering = ['-create_dt', '-modify_dt']
         verbose_name_plural = 'Looklet_Metadata'
@@ -1430,7 +1429,7 @@ class LookletReturned(models.Model):
 
     class Meta:
         managed = True
-        ordering = ['-colorstyle']
+        #ordering = ['-colorstyle']
         verbose_name_plural = 'Looklet_Returned_Files'
 
     def __unicode__(self):
