@@ -417,6 +417,13 @@ class LookletShotList(models.Model):
         db_table = 'looklet_shot_list'
         ordering = ['-timestamp', '-colorstyle' ]
         verbose_name_plural = 'Looklet_Shotlist'
+
+    slug = models.SlugField()
+    def save(self, *args, **kwargs):
+        # For automatic slug generation.
+        if not self.slug:
+            self.slug = slugify(self.id)[:50]
+        return super(Looklet_Shotlist, self).save(*args, **kwargs)
     
     def __unicode__(self):
         return self.colorstyle

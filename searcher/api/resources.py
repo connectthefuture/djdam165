@@ -39,7 +39,7 @@ from tastypie import fields
 from searcher.models import SelectedFiles, ProductSnapshotLive, OffshoreStatus, ProductionRawCp1Data, ExcelToolData, ViewExcelToolDuplicateVendorStyle
 ## File Models
 from searcher.models import Zimages1Photoselects, PostReadyOriginal, PushPhotoselects, ProductionRawZimages
-from searcher.models import SupplierIngest, SupplierIngestImages, ImageUpdate
+from searcher.models import SupplierIngest, SupplierIngestImages, ImageUpdate, LookletShotlist
 from tastypie.throttle import BaseThrottle, CacheThrottle
 
 ## User and Session Resources
@@ -65,6 +65,18 @@ class SelectedFilesResource(ModelResource):
         detail_allowed_methods = ['get']
 
 #
+
+class LookletShotlistResource(ModelResource):
+    class Meta:
+        queryset = LookletShotlist.objects.all()
+        allowed_methods = ['get', 'post', 'put']
+        list_allowed_methods = ['get', 'post']
+        detail_allowed_methods = ['get', 'post']  #, 'put', 'delete']
+        resource_name = 'looklet-shot-list'
+        detail_uri_name = 'timestamp'
+        serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
+
+
 ## File Path Resources
 class ProductionRawZimagesResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')

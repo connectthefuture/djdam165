@@ -48,7 +48,7 @@ from tastypie.api import Api
 from searcher.api.resources import SelectedFilesResource, ProductSnapshotLiveResource, ExcelToolDataResource, ViewExcelToolDuplicateVendorStyleResource, OffshoreStatusResource, OffshoreStatusSentOnlyResource, UserResource
 from searcher.api.resources import PushPhotoselectsResource, Zimages1PhotoselectsResource, PostReadyOriginalResource, ProductionRawZimagesResource
 from searcher.api.resources import ProductionRawCp1DataResource, ProductionRawCp1PreSelectResource, ProductionRawCp1SelectResource
-from searcher.api.resources import SupplierIngestResource, SupplierIngestImagesResource, ImageUpdateResource
+from searcher.api.resources import SupplierIngestResource, SupplierIngestImagesResource, ImageUpdateResource, LookletShotlistResource
 
 
 v1_api = Api(api_name='v1')
@@ -74,6 +74,7 @@ v1_api.register(ProductSnapshotLiveResource())
 v1_api.register(SupplierIngestResource())
 v1_api.register(SupplierIngestImagesResource())
 v1_api.register(ImageUpdateResource())
+v1_api.register(LookletShotlistResource())
 
 # #viewexceltoolduplicatevendorstyle_resource = ViewExcelToolDuplicateVendorStyleResource()
 # from searcher.api.resources import ProductSnapshotLiveResource
@@ -118,7 +119,8 @@ urlpatterns += patterns('',
     (r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9})?([_a-z0-9]{2,7})?/?$', include(SupplierIngestImagesResource().urls)),
     (r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9})/(?P<alt>\d)/?$', include(SupplierIngestImagesResource().urls)),
     #(r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9})(?P<alt>[_a-z0-9]{2,7})?/?', include(SupplierIngestImagesResource().urls)),
-    (r'^api/v1/image-update/(?P<colorstyle>\d{9})/?', include(ImageUpdateResource().urls)),
+    (r'^api/v1/image-update/(?P<colorstyle>\d{9})/?$', include(ImageUpdateResource().urls)),
+    (r'^api/v1/looklet-shot-list/?$', include(LookletShotlistResource().urls)),
     (r'^api/', include(v1_api.urls)),
 )
 from django.conf.urls import include, url
