@@ -39,7 +39,7 @@ from tastypie import fields
 from searcher.models import SelectedFiles, ProductSnapshotLive, OffshoreStatus, ProductionRawCp1Data, ExcelToolData, ViewExcelToolDuplicateVendorStyle
 ## File Models
 from searcher.models import Zimages1Photoselects, PostReadyOriginal, PushPhotoselects, ProductionRawZimages
-from searcher.models import SupplierIngest, SupplierIngestImages, ImageUpdate, LookletShotlist
+from searcher.models import SupplierIngest, SupplierIngestImages, ImageUpdate, LookletShotList
 from tastypie.throttle import BaseThrottle, CacheThrottle
 
 ## User and Session Resources
@@ -66,9 +66,9 @@ class SelectedFilesResource(ModelResource):
 
 #
 
-class LookletShotlistResource(ModelResource):
+class LookletShotListResource(ModelResource):
     class Meta:
-        queryset = LookletShotlist.objects.all()
+        queryset = LookletShotList.objects.all()
         allowed_methods = ['get', 'post', 'put']
         list_allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get', 'post']  #, 'put', 'delete']
