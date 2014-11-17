@@ -116,6 +116,7 @@ urlpatterns += patterns('',
     # Then add:
     #(r'^api/', include(v1_api.urls)),
     (r'^api/v1/pmdata/(?P<colorstyle>\d{9})/?', include(ProductSnapshotLiveResource().urls)),
+    (r'^api/v1/users/?.*?$', include(UserResource().urls)),
     (r'^api/v1/excel-tool-data/(?P<colorstyle>\d{9})/?', include(ExcelToolDataResource().urls)),
     (r'^api/v1/duplicate-vendor-style/(?P<colorstyle>\d{9})/?', include(ViewExcelToolDuplicateVendorStyleResource().urls)),
     (r'^api/v1/offshore-style/(?P<colorstyle>\d{9})/?', include(OffshoreStatusResource().urls)),

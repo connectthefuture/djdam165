@@ -35,6 +35,7 @@ from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie.authorization import Authorization, DjangoAuthorization
 from tastypie.serializers import Serializer
 from tastypie import fields
+from tastypie.cache import SimpleCache
 ## Data Models
 from searcher.models import SelectedFiles, ProductSnapshotLive, OffshoreStatus, ProductionRawCp1Data, ExcelToolData, ViewExcelToolDuplicateVendorStyle
 ## File Models
@@ -63,7 +64,7 @@ class UserResource(ModelResource):
         authentication = BasicAuthentication()
         authorization  = DjangoAuthorization()
         validation     = Validation()
-
+        cache = SimpleCache(timeout=10)
 
 class SelectedFilesResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
@@ -74,7 +75,7 @@ class SelectedFilesResource(ModelResource):
         queryset = SelectedFiles.objects.all()
         allowed_methods = ['get', 'post', 'put']
         detail_allowed_methods = ['get']
-
+        cache = SimpleCache(timeout=10)
 #
 
 class LookletShotListResource(ModelResource):
@@ -86,7 +87,7 @@ class LookletShotListResource(ModelResource):
         resource_name = 'looklet-shot-list'
         detail_uri_name = 'timestamp'
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
-
+        cache = SimpleCache(timeout=10)
 
 ## File Path Resources
 class ProductionRawZimagesResource(ModelResource):
@@ -99,7 +100,7 @@ class ProductionRawZimagesResource(ModelResource):
         allowed_methods        = ['get', 'post']
         list_allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get']
-
+        cache = SimpleCache(timeout=10)
 
 class PushPhotoselectsResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
@@ -110,7 +111,7 @@ class PushPhotoselectsResource(ModelResource):
         queryset = PushPhotoselects.objects.all()
         allowed_methods = ['get', 'post', 'put']
         detail_allowed_methods = ['get']
-
+        cache = SimpleCache(timeout=10)
 
 class Zimages1PhotoselectsResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
@@ -122,6 +123,7 @@ class Zimages1PhotoselectsResource(ModelResource):
         allowed_methods        = ['get', 'post']
         list_allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get']
+        cache = SimpleCache(timeout=10)
 
 class PostReadyOriginalResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
@@ -133,7 +135,7 @@ class PostReadyOriginalResource(ModelResource):
         allowed_methods        = ['get', 'post']
         list_allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get']
-
+        cache = SimpleCache(timeout=10)
 #
 ### Data Resources
 
@@ -146,7 +148,8 @@ class ProductSnapshotLiveResource(ModelResource):
         resource_name = 'pmdata'
         detail_uri_name = 'colorstyle'
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
-
+        ## Caching on
+        cache = SimpleCache(timeout=10)
         # to have generated url go to searcher/api not root url/api
         #resource_name = 'searcher/pmdata'
         #authorization = DjangoAuthorization()
@@ -187,7 +190,7 @@ class SupplierIngestResource(ModelResource):
             'modify_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
             'po_number': ALL,
         }
-
+        cache = SimpleCache(timeout=10)
 
     # def dispatch(self, request_type, request, **kwargs):
     #     colorstyle = kwargs.pop('colorstyle')
@@ -219,7 +222,7 @@ class SupplierIngestImagesResource(ModelResource):
             'vendor_brand': ALL,
             'modified_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
         }
-
+        cache = SimpleCache(timeout=10)
     # ###  !!!  DO NOT NEED DISPATCH OVERRIDE WHEN USING THE URL CONF TO ROUTE REQUESTS !!!! ### #
     # def dispatch(self, request_type, request, **kwargs):
     #     colorstyle = kwargs.pop('colorstyle')
@@ -235,7 +238,7 @@ class OffshoreStatusResource(ModelResource):
         queryset = OffshoreStatus.objects.all()
         allowed_methods = ['get', 'post', 'put']
         detail_uri_name = 'colorstyle'
-
+        cache = SimpleCache(timeout=10)
     # def dispatch(self, request_type, request, **kwargs):
     #     colorstyle = kwargs.pop('colorstyle')
     #     kwargs['colorstyle'] = get_object_or_404(OffshoreStatus, colorstyle=colorstyle)
@@ -248,7 +251,7 @@ class OffshoreStatusSentOnlyResource(ModelResource):
         queryset = OffshoreStatus.objects.all().exclude(send_dt=None).filter(return_dt=None)
         allowed_methods = ['get', 'post']
         detail_uri_name = 'colorstyle'
-
+        cache = SimpleCache(timeout=10)
     # def dispatch(self, request_type, request, **kwargs):
     #     colorstyle = kwargs.pop('colorstyle')
     #     kwargs['colorstyle'] = get_object_or_404(OffshoreStatus, colorstyle=colorstyle)
@@ -267,7 +270,7 @@ class ImageUpdateResource(ModelResource):
         allowed_methods         = ['get', 'post', 'put']
         list_allowed_methods    = ['get', 'post']
         detail_allowed_methods  = ['get']
-
+        cache = SimpleCache(timeout=10)
 
 ### Raw Capture 1 data
 class ProductionRawCp1DataResource(ModelResource):
@@ -280,6 +283,7 @@ class ProductionRawCp1DataResource(ModelResource):
         allowed_methods        = ['get', 'post']
         list_allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get']
+        cache = SimpleCache(timeout=10)
 
 class ProductionRawCp1PreSelectResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
@@ -290,6 +294,7 @@ class ProductionRawCp1PreSelectResource(ModelResource):
         queryset = ProductionRawCp1Data.objects.all().filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get']
+        cache = SimpleCache(timeout=10)
 
 class ProductionRawCp1SelectResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
@@ -300,7 +305,7 @@ class ProductionRawCp1SelectResource(ModelResource):
         queryset = ProductionRawCp1Data.objects.all().filter(cp1_colortag__icontains='GREEN')
         allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get']
-
+        cache = SimpleCache(timeout=10)
 
 class ExcelToolDataResource(ModelResource):
     #exceltooldata = ''#fields.ForeignKey(ExcelToolDataResource, 'view_excel_tool_duplicate_vendor_style')
@@ -320,7 +325,7 @@ class ExcelToolDataResource(ModelResource):
             'modify_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
             'po_number': ALL,
         }
-
+        cache = SimpleCache(timeout=10)
     # def prepend_urls(self):
     #         return [
     #             url(r"^(?P<'excel-tool-data'>%s)/(?P<colorstyle>[\w\d_.-]+)/$" % self._meta.exceltooldata,
@@ -368,7 +373,7 @@ class ViewExcelToolDuplicateVendorStyleResource(ModelResource):
             #'modify_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
             'color_group_id': ALL_WITH_RELATIONS,
         }
-
+        cache = SimpleCache(timeout=10)
 
     # def dispatch(self, request_type, request, **kwargs):
     #     colorstyle = kwargs.pop('colorstyle')
