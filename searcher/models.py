@@ -382,6 +382,44 @@ class Album(models.Model):
 ######################################################################
 #################### File Location Models ############################
 ######################################################################
+class LookletMetadataSidecar(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    metadata_type = models.CharField(max_length=10)
+    metadata_tag = models.CharField(max_length=255)
+    metadata_value = models.CharField(max_length=255)
+    create_dt = models.DateField()
+    modify_dt = models.DateTimeField()
+    source = models.CharField(max_length=12)
+    keywords = models.CharField(max_length=220)
+    user_id = models.IntegerField()
+
+    class Meta:
+        ##managed = False
+        db_table = 'looklet_metadata_sidecar'
+        ordering = ['-create_dt', '-modify_dt']
+        verbose_name_plural = 'Looklet_Metadata'
+
+    def __unicode__(self):
+        return self.metadata_value
+
+
+class LookletShotList(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    colorstyle = models.CharField(max_length=9)
+    photo_date = models.DateField(blank=True, null=True)
+    reshoot = models.CharField(max_length=1, blank=True)
+    notes = models.TextField(blank=True)
+    timestamp = models.DateTimeField()
+    username = models.CharField(max_length=55)
+
+    class Meta:
+        #managed = False
+        db_table = 'looklet_shot_list'
+        ordering = ['-timestamp', '-colorstyle' ]
+        verbose_name_plural = 'Looklet_Shotlist'
+    
+    def __unicode__(self):
+        return self.colorstyle
 
 ######## File6
 
