@@ -1410,8 +1410,8 @@ class LookletMetadataSidecar(models.Model):
 
 class LookletShotListPostReadyOriginal(models.Model):
     id = models.BigIntegerField(primary_key=True)
-    colorstyle = models.ForeignKey('LookletShotList')
-    file_paths = models.ManyToManyField('PostReadyOriginal', related_name='file_paths_returned')
+    colorstyle = models.ForeignKey('LookletShotList',  related_name='looklet_colorstyles_sent')
+    file_paths = models.ManyToManyField('PostReadyOriginal', related_name='looklet_file_paths_returned+')
 
     def __unicode__(self):
         managed = True
@@ -1426,7 +1426,7 @@ class LookletShotList(models.Model):
     notes = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(blank=True, null=True)
     username = models.CharField(max_length=75, blank=True, null=True)
-
+    returned = models.ManyToManyField(PostReadyOriginal, through='LookletShotListPostReadyOriginal', through_field='file_paths')
 
     class Meta:
         managed = True
