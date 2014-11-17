@@ -42,17 +42,28 @@ from searcher.models import Zimages1Photoselects, PostReadyOriginal, PushPhotose
 from searcher.models import SupplierIngest, SupplierIngestImages, ImageUpdate, LookletShotList
 from tastypie.throttle import BaseThrottle, CacheThrottle
 
+
+############ Authentication and Authorization
+from django.contrib.auth.models import User
+from tastypie.authentication import BasicAuthentication
+from tastypie.authorization import DjangoAuthorization
+from tastypie.validation import Validation
+from tastypie.resources import ModelResource
 ## User and Session Resources
 class UserResource(ModelResource):
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         queryset = User.objects.all()
-        resource_name = 'user'
-        allowed_methods = ['get']
+        resource_name = 'auth/user' #'user'
+        #allowed_methods = ['get']
         #fields = ['username', 'first_name', 'last_name', 'last_login']
         #instead of Excluding like below blklist above fields acts as whitelist
-        excludes = ['email', 'password', 'is_active', 'is_staff', 'is_superuser']
-        throttle = BaseThrottle(throttle_at=100)
+        excludes = ['email', 'password', 'is_superuser'] ##, 'is_active', 'is_staff', 'is_superuser']
+        #throttle = BaseThrottle(throttle_at=100)
+        authentication = BasicAuthentication()
+        authorization  = DjangoAuthorization()
+        validation     = Validation()
+
 
 class SelectedFilesResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
@@ -71,7 +82,7 @@ class LookletShotListResource(ModelResource):
         queryset = LookletShotList.objects.all()
         allowed_methods = ['get', 'post', 'put']
         list_allowed_methods = ['get', 'post']
-        detail_allowed_methods = ['get', 'post']  #, 'put', 'delete']
+        detail_allowed_methods = ['get', 'post', 'put']   #, 'put', 'delete']
         resource_name = 'looklet-shot-list'
         detail_uri_name = 'timestamp'
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])

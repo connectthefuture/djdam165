@@ -54,10 +54,14 @@ class ImageUpdateSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('colorstyle', 'alt', 'create_dt', 'modify_dt')
 
 
+from searcher.models import LookletShotList
+class LookletShotListSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = LookletShotList
+        fields = ('colorstyle', 'photo_date', 'reshoot', 'notes', 'timestamp', 'username')
+
+
 from django.contrib.auth.models import User
-from rest_framework import serializers
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

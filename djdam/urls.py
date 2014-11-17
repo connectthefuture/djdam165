@@ -96,10 +96,15 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 #### REST FRAMWORK URLS Views in Accounts for now
 urlpatterns = patterns('accounts.views',
+    ## Image Cache Clear Update Api
     url(r'^image-update-list/$', 'image_update_list'),
     url(r'^image-update/(?P<colorstyle>[0-9]{9}).*?/$', 'image_update_detail'),
     url(r'^image-update-detail/$', 'image_update_detail'),
     url(r'^image-update/?$', 'image_update_list'),
+    ## Looklet Shot List Update Api
+    url(r'^looklet-shot-list-update/?$', 'looklet_shot_list_update_list'),
+    url(r'^looklet-shot-list-update/(?P<photo_date>\d{4}-\d+-\d{2})?/?(?P<colorstyle>\d{9})?/?$', 'looklet_shot_list_update_detail'),
+    url(r'^looklet-shot-list-update-detail/$', 'looklet_shot_list_update_detail'),
 )
 urlpatterns = format_suffix_patterns(urlpatterns)
 
@@ -120,9 +125,10 @@ urlpatterns += patterns('',
     (r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9})/(?P<alt>\d)/?$', include(SupplierIngestImagesResource().urls)),
     #(r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9})(?P<alt>[_a-z0-9]{2,7})?/?', include(SupplierIngestImagesResource().urls)),
     (r'^api/v1/image-update/(?P<colorstyle>\d{9})/?$', include(ImageUpdateResource().urls)),
-    (r'^api/v1/looklet-shot-list/?$', include(LookletShotListResource().urls)),
+    (r'^api/v1/looklet-shot-list/?(?P<photo_date>\d{4}-\d+-\d{2})?/?(?P<colorstyle>\d{9})?/?$', include(LookletShotListResource().urls)),
     (r'^api/', include(v1_api.urls)),
 )
+
 from django.conf.urls import include, url
 #from djdam.admin import *
 

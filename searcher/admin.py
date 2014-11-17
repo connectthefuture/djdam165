@@ -96,6 +96,17 @@ class ImageUpdateAdmin(myadmin.ModelAdmin):
 myadmin.site.register(ImageUpdate, ImageUpdateAdmin)
 
 
+class LookletShotListAdmin(myadmin.ModelAdmin):
+    # This will generate a ModelForm
+    list_display = ( 'bfly_list_image', 'colorstyle', 'photo_date', 'reshoot', 'username', 'primary_select_zthumb', 'back_select_zthumb')
+    search_fields = ['colorstyle', 'photo_date']
+    list_filter = ('photo_date', 'reshoot', 'username')
+    list_per_page = 100
+    form = autocomplete_light.modelform_factory(LookletShotList)
+myadmin.site.register(LookletShotList, LookletShotListAdmin)
+
+
+
 class OffshoreStatusAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ('colorstyle', 'category', 'product_type', 'return_dt')

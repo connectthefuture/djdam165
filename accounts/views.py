@@ -66,8 +66,11 @@ class ExcelToolDataViewSet(viewsets.ModelViewSet):
     serializer_class = ExcelToolDataSerializer
 
 
-from searcher.models import SupplierIngest, SupplierIngest404, ImageUpdate
-from accounts.serializers import SupplierIngestSerializer, SupplierIngest404Serializer, ImageUpdateSerializer
+#####
+#####
+
+from searcher.models import SupplierIngest, SupplierIngest404, ImageUpdate, LookletShotList
+from accounts.serializers import SupplierIngestSerializer, SupplierIngest404Serializer, ImageUpdateSerializer, LookletShotListSerializer
 
 class SupplierIngestViewSet(viewsets.ModelViewSet):
     """
@@ -89,6 +92,14 @@ class ImageUpdateViewSet(viewsets.ModelViewSet):
     """
     queryset = ImageUpdate.objects.all()
     serializer_class = ImageUpdateSerializer
+
+
+class LookletShotListViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows LookletShotList to be viewed or edited.
+    """
+    queryset = LookletShotList.objects.all()
+    serializer_class = LookletShotListSerializer
 
 
 ## REST_FRAMEWORK Browsable views
@@ -213,3 +224,119 @@ class AuthView(TemplateView):
 
 class OnePageAppView(TemplateView):
     template_name = 'one_page_app.html'
+
+
+####################
+####################
+####################
+@api_view(['GET', 'POST', 'PUT'])
+@permission_classes((IsAuthenticated, ))
+def looklet_shot_list_update_list(request,
+                                  content_format=None,
+                                  pk=None,
+                                  colorstyle=None,
+                                  photo_date=None,
+                                  reshoot=False,
+                                  timestamp=None,
+                                  username=None):
+    """
+    List all looklet_shot_list_updates, or create a new looklet_shot_list_update.
+    """
+
+    if request.method == 'GET':
+        looklet_shot_list_updates = LookletShotList.objects.all()
+        serializer = LookletShotListSerializer(looklet_shot_list_updates, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = LookletShotListSerializer(data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    elif request.method == 'PUT':
+        if not colorstyle:
+            colorstyle = request.DATA['colorstyle']
+            photo_date = request.DATA['photo_date']
+        try:
+            looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle,
+                                                                   photo_date=photo_date)
+        except LookletShotList.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = LookletShotListSerializer(looklet_shot_list_update,
+                                               data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'POST'])
+@permission_classes((IsAuthenticated,))
+def looklet_shot_list_update_detail(request,
+                                    content_format=None,
+                                    pk=None,
+                                    colorstyle=None,
+                                    photo_date=None,
+                                    reshoot=False,
+                                    timestamp=None,
+                                    username=None):
+    """
+    Retrieve, update or delete an LookletShotList instance.
+    """
+    if not colorstyle:
+        colorstyle = request.DATA['colorstyle']
+        photo_date = request.DATA['photo_date']
+        pass
+
+    looklet_shot_list_update = ''
+    try:
+        looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle,
+                                                               photo_date=photo_date)
+    except LookletShotList.DoesNotExist:
+        pass
+        # try:
+        #     looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle)
+        # except LookletShotList.DoesNotExist:
+        #     return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        if not looklet_shot_list_update:
+            looklet_shot_list_updates = LookletShotList.objects.all()
+        else:
+            looklet_shot_list_updates = looklet_shot_list_update
+        serializer = LookletShotListSerializer(looklet_shot_list_updates, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = LookletShotListSerializer(data=request.DATA)
+        try:
+            looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle,
+                                                                   photo_date=photo_date)
+            pass
+        except LookletShotList.DoesNotExist:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'PUT':
+        if not colorstyle:
+            colorstyle = request.DATA['colorstyle']
+        looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle,
+                                                               photo_date=photo_date)
+        serializer = LookletShotListSerializer(looklet_shot_list_update,
+                                               data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle,
+                                                               photo_date=photo_date)
+        looklet_shot_list_update.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+

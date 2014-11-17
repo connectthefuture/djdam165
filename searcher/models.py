@@ -381,52 +381,6 @@ class Album(models.Model):
 
 ######################################################################
 #################### File Location Models ############################
-######################################################################
-class LookletMetadataSidecar(models.Model):
-    id = models.IntegerField(primary_key=True)  # AutoField?
-    metadata_type = models.CharField(max_length=10)
-    metadata_tag = models.CharField(max_length=255)
-    metadata_value = models.CharField(max_length=255)
-    create_dt = models.DateField()
-    modify_dt = models.DateTimeField()
-    source = models.CharField(max_length=12)
-    keywords = models.CharField(max_length=220)
-    user_id = models.IntegerField()
-
-    class Meta:
-        ##managed = False
-        db_table = 'looklet_metadata_sidecar'
-        ordering = ['-create_dt', '-modify_dt']
-        verbose_name_plural = 'Looklet_Metadata'
-
-    def __unicode__(self):
-        return self.metadata_value
-
-
-class LookletShotList(models.Model):
-    id = models.BigIntegerField(primary_key=True)
-    colorstyle = models.CharField(max_length=9)
-    photo_date = models.DateField(blank=True, null=True)
-    reshoot = models.CharField(max_length=1, blank=True)
-    notes = models.TextField(blank=True)
-    timestamp = models.DateTimeField()
-    username = models.CharField(max_length=55)
-
-    class Meta:
-        #managed = False
-        db_table = 'looklet_shot_list'
-        ordering = ['-timestamp', '-colorstyle' ]
-        verbose_name_plural = 'Looklet_Shotlist'
-
-    slug = models.SlugField(blank=True,null=True)
-    def save(self, *args, **kwargs):
-        # For automatic slug generation.
-        if not self.slug:
-            self.slug = slugify(self.id)[:50]
-        return super(Looklet_Shotlist, self).save(*args, **kwargs)
-    
-    def __unicode__(self):
-        return self.colorstyle
 
 ######## File6
 
@@ -1382,6 +1336,100 @@ class Asset(models.Model):
     def save(self):
         return self.file_path
 
+
+
+##############################################################################
+##############################################################################
+################ Looklet file and reporting handling Models###################
+##############################################################################
+
+class LookletMetadataSidecar(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    metadata_type = models.CharField(max_length=10)
+    metadata_tag = models.CharField(max_length=255)
+    metadata_value = models.CharField(max_length=255)
+    create_dt = models.DateField()
+    modify_dt = models.DateTimeField()
+    source = models.CharField(max_length=12)
+    keywords = models.CharField(max_length=220)
+    user_id = models.IntegerField()
+
+    class Meta:
+        ##managed = False
+        db_table = 'looklet_metadata_sidecar'
+        ordering = ['-create_dt', '-modify_dt']
+        verbose_name_plural = 'Looklet_Metadata'
+
+    def __unicode__(self):
+        return self.metadata_value
+
+
+class LookletShotList(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    colorstyle = models.CharField(max_length=9)
+    photo_date = models.DateField(blank=True, null=True)
+    reshoot = models.CharField(max_length=1, blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+    timestamp = models.DateTimeField(blank=True, auto_now_add=True)
+    username = models.CharField(max_length=75, blank=True, null=True)
+    file_path = models.ForeignKey('PostReadyOriginal', to_field='file_path', blank=True, null=True)
+
+    class Meta:
+        #managed = False
+        db_table = 'looklet_shot_list'
+        ordering = ['-timestamp', '-colorstyle' ]
+        verbose_name_plural = 'Looklet_ShotLists'
+        unique_together = ['colorstyle', 'photo_date']
+
+    slug = models.SlugField(blank=True,null=True)
+    def save(self, *args, **kwargs):
+        # For automatic slug generation.
+        if not self.slug:
+            self.slug = slugify(self.id)[:50]
+        return super(LookletShotList, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return '{0}_{1}'.format(self.colorstyle,self.photo_date)
+
+    def primary_select_small(self):
+        from django.utils.safestring import mark_safe
+        return mark_safe(
+            '<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(self.file_path)
+    primary_select_small.allow_tags = True
+
+
+    def primary_select_zthumb(self):
+        from djdam.settings import MEDIA_ROOT
+        img_url = "{0}zImages/{1}/{2}_1.jpg".format(MEDIA_ROOT, self.colorstyle[:4], self.colorstyle)
+        from django.utils.safestring import mark_safe
+        return mark_safe('<img class="img-rounded" style="width: 240px;" src="{0}"  alt="{1}"/>').format(img_url, self.timestamp)
+    primary_select_thumb = property(primary_select_zthumb)
+
+
+    def back_select_zthumb(self):
+        from djdam.settings import MEDIA_ROOT
+        img_url = "{0}zImages/{1}/{2}_2.jpg".format(MEDIA_ROOT, self.colorstyle[:4], self.colorstyle)
+        from django.utils.safestring import mark_safe
+        return mark_safe('<img class="img-rounded" style="width: 240px;" src="{0}" alt="{1}"/>').format(img_url, self.timestamp)
+    back_select_thumb = property(back_select_zthumb)
+
+
+    def primary_pdp_image(self):
+        from django.utils.safestring import mark_safe
+        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=340&height=408&ver=null"/>').format(self.colorstyle)
+    primary_pdp_image.allow_tags = True
+
+
+    def bfly_list_image(self):
+        from django.utils.safestring import mark_safe
+        ##if len(self.file_name) == 9:
+        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=250&height=301&ver=null"/>').format(self.colorstyle)
+    bfly_list_image.allow_tags = True
+
+
+##############################################################################
+##############################################################################
+##############################################################################
 
 # class OnfigureSetdataImages(models.Model):
 #     id = models.IntegerField(primary_key=True)
