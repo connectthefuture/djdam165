@@ -65,6 +65,7 @@ class AuthGroup(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=80L, unique=True)
     class Meta:
+        managed = True
         db_table = 'auth_group'
 
     def __unicode__(self):
@@ -76,6 +77,7 @@ class AuthGroupPermissions(models.Model):
     group = models.ForeignKey(AuthGroup)
     permission = models.ForeignKey('AuthPermission')
     class Meta:
+        managed = True
         db_table = 'auth_group_permissions'
         verbose_name_plural = 'AuthGroupPermissions'
 
@@ -89,6 +91,7 @@ class AuthPermission(models.Model):
     content_type = models.ForeignKey('DjangoContentType')
     codename = models.CharField(max_length=100L)
     class Meta:
+        managed = True
         db_table = 'auth_permission'
 
     def __unicode__(self):
@@ -108,6 +111,7 @@ class AuthUser(models.Model):
     is_active = models.IntegerField()
     date_joined = models.DateTimeField()
     class Meta:
+        managed = True
         db_table = 'auth_user'
 
     def __unicode__(self):
@@ -119,6 +123,7 @@ class AuthUserGroups(models.Model):
     user = models.ForeignKey(AuthUser)
     group = models.ForeignKey(AuthGroup)
     class Meta:
+        managed = True
         db_table = 'auth_user_groups'
 
     def __unicode__(self):
@@ -130,6 +135,7 @@ class AuthUserUserPermissions(models.Model):
     user = models.ForeignKey(AuthUser)
     permission = models.ForeignKey(AuthPermission)
     class Meta:
+        managed = True
         db_table = 'auth_user_user_permissions'
 
     def __unicode__(self):
@@ -260,7 +266,7 @@ class OffshoreStatus(models.Model):
         db_table = 'offshore_status'
         ordering = ['-modify_dt']
         verbose_name_plural = 'Outsourced_Clipping_Styles'
-
+        managed = True
 
     #slug = models.SlugField()
     def save(self, *args, **kwargs):
@@ -1049,6 +1055,7 @@ class Product(models.Model):
                               height_field="height",
                               width_field="width")
     class Meta:
+        managed = True
         db_table = 'product'
         #unique_together = ('brand', 'vendor_style',)
         #ordering = ['-colorstyle']
@@ -1070,6 +1077,7 @@ class ImageUpdate(models.Model):
     updated_by = models.ForeignKey(AuthUser, blank=True, to_field='username', related_name='image_update_user')
     #deleted_by = models.ForeignKey('auth.User', null=True, related_name='profile_user_deleted')
     class Meta:
+        managed = True
         db_table = 'image_update'
         unique_together = ('colorstyle', 'alt',)
         ordering = ['-modify_dt', 'colorstyle', 'alt']
@@ -1330,6 +1338,7 @@ class Metadata(models.Model):
     #position = models.PositiveSmallIntegerField("Position")
 
     class Meta:
+        managed = True
         #unique_together = ('image', 'metadata_type',)
         db_table = 'metadata'
         #ordering = ('position',)
@@ -1389,6 +1398,7 @@ class LookletMetadataSidecar(models.Model):
     user_id = models.IntegerField()
 
     class Meta:
+        managed = True
         ##managed = False
         db_table = 'looklet_metadata_sidecar'
         ordering = ['-create_dt', '-modify_dt']
@@ -1409,7 +1419,7 @@ class LookletShotList(models.Model):
     file_path = models.ForeignKey('PostReadyOriginal', to_field='file_path', blank=True, null=True)
 
     class Meta:
-        #managed = False
+        managed = True
         db_table = 'looklet_shot_list'
         ordering = ['-timestamp', '-colorstyle' ]
         verbose_name_plural = 'Looklet_ShotLists'
