@@ -1411,7 +1411,7 @@ class LookletMetadataSidecar(models.Model):
 class LookletShotListPostReadyOriginal(models.Model):
     id = models.BigIntegerField(primary_key=True)
     colorstyle = models.ForeignKey('LookletShotList')
-    file_paths = models.ManyToManyField('PostReadyOriginal', related_name='file_path')
+    file_paths = models.ManyToManyField('PostReadyOriginal', related_name='file_paths_returned')
 
     def __unicode__(self):
         managed = True
