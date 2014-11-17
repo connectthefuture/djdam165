@@ -67,6 +67,9 @@ class AuthGroup(models.Model):
     class Meta:
         db_table = 'auth_group'
 
+    def __unicode__(self):
+        return 'Group: ' + self.name
+
 
 class AuthGroupPermissions(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -76,6 +79,10 @@ class AuthGroupPermissions(models.Model):
         db_table = 'auth_group_permissions'
         verbose_name_plural = 'AuthGroupPermissions'
 
+    def __unicode__(self):
+        return 'Group: ' + self.group + 'Permission: ' + self.permission
+
+
 class AuthPermission(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50L)
@@ -83,6 +90,9 @@ class AuthPermission(models.Model):
     codename = models.CharField(max_length=100L)
     class Meta:
         db_table = 'auth_permission'
+
+    def __unicode__(self):
+        return 'Permission: ' + self.permission
 
 
 class AuthUser(models.Model):
@@ -100,6 +110,9 @@ class AuthUser(models.Model):
     class Meta:
         db_table = 'auth_user'
 
+    def __unicode__(self):
+        return 'Username: ' + self.username
+
 
 class AuthUserGroups(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -108,6 +121,9 @@ class AuthUserGroups(models.Model):
     class Meta:
         db_table = 'auth_user_groups'
 
+    def __unicode__(self):
+        return 'Username: ' + self.user + '\n\t' + 'Group: ' + self.group
+
 
 class AuthUserUserPermissions(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -115,6 +131,9 @@ class AuthUserUserPermissions(models.Model):
     permission = models.ForeignKey(AuthPermission)
     class Meta:
         db_table = 'auth_user_user_permissions'
+
+    def __unicode__(self):
+        return 'Username: ' + self.username + '\n\t' + 'Permission: ' + self.permission
 
 
 class DjangoAdminLog(models.Model):
@@ -129,6 +148,10 @@ class DjangoAdminLog(models.Model):
     class Meta:
         db_table = 'django_admin_log'
 
+    def __unicode__(self):
+        return 'ObjectID: ' + self.object_id + '\n\t' + 'ContentType: ' + self.content_type
+
+
 class DjangoContentType(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100L)
@@ -137,6 +160,10 @@ class DjangoContentType(models.Model):
     class Meta:
         db_table = 'django_content_type'
 
+    def __unicode__(self):
+        return 'ModelName: ' + self.model + '\n\t' + 'ContentType: ' + self.name
+
+
 class DjangoSession(models.Model):
     session_key = models.CharField(max_length=40L, primary_key=True)
     session_data = models.TextField()
@@ -144,12 +171,19 @@ class DjangoSession(models.Model):
     class Meta:
         db_table = 'django_session'
 
+    def __unicode__(self):
+        return 'SessionKey: ' + self.session_key + '\n\t' + 'SessionData: ' + self.session_data
+
+
 class DjangoSite(models.Model):
     id = models.IntegerField(primary_key=True)
     domain = models.CharField(max_length=100L)
     name = models.CharField(max_length=50L)
     class Meta:
         db_table = 'django_site'
+
+    def __unicode__(self):
+        return 'Site: ' + self.name + '\n\t' + 'Domain: ' + self.domain
 
 
 class EventsSnapshot(models.Model):
