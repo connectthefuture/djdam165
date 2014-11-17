@@ -418,7 +418,7 @@ class LookletShotList(models.Model):
         ordering = ['-timestamp', '-colorstyle' ]
         verbose_name_plural = 'Looklet_Shotlist'
 
-    slug = models.SlugField()
+    slug = models.SlugField(blank=True,null=True)
     def save(self, *args, **kwargs):
         # For automatic slug generation.
         if not self.slug:
