@@ -1413,20 +1413,38 @@ class LookletShotListPostReadyOriginal(models.Model):
     colorstyle = models.ForeignKey('LookletShotList',  related_name='looklet_colorstyles_sent')
     file_paths = models.ManyToManyField('PostReadyOriginal', related_name='looklet_file_paths_returned+')
 
-    def __unicode__(self):
+    class Meta:
         managed = True
+        ordering = ['-colorstyle', '-file_paths']
+        verbose_name_plural = 'Looklet_PostReady_M2M'
+
+    def __unicode__(self):
         return self.file_paths
 
+class LookletReturned(models.Model):
+    id = models.BigIntegerField(primary_key=True)
+    #capture_date = models.ForeignKey('LookletShotList', to_field='photo_date')
+    colorstyle = models.ForeignKey('LookletShotList', to_field='colorstyle')
+    returned = models.ManyToManyField(PostReadyOriginal, through='LookletShotListPostReadyOriginal', through_fields=('file_paths','colorstyle'))
+    metadata = models.ManyToManyField(LookletMetadataSidecar)
+
+    class Meta:
+        managed = True
+        ordering = ['-capture_date', '-returned']
+        verbose_name_plural = 'Looklet_Returned'
+
+    def __unicode__(self):
+        return self.returned
 
 class LookletShotList(models.Model):
     id = models.BigIntegerField(primary_key=True)
-    colorstyle = models.CharField(max_length=9)
+    colorstyle = models.CharField(max_length=9, unique_for_date=True)
     photo_date = models.DateField(blank=True, null=True)
     reshoot = models.CharField(max_length=1, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(blank=True, null=True)
     username = models.CharField(max_length=75, blank=True, null=True)
-    returned = models.ManyToManyField(PostReadyOriginal, through='LookletShotListPostReadyOriginal', through_field='file_paths')
+
 
     class Meta:
         managed = True
