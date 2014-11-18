@@ -82,7 +82,7 @@ class AuthGroupPermissions(models.Model):
         verbose_name_plural = 'AuthGroupPermissions'
 
     def __unicode__(self):
-        return 'Group: ' + self.group ##+ '\n\t' + 'Permission: ' + self.permission.codename
+        return 'Group: ' + self.id  ##+ '\n\t' + 'Permission: ' + self.permission.codename
 
 
 class AuthPermission(models.Model):
