@@ -74,7 +74,7 @@ class SelectedFilesResource(ModelResource):
         # authorization= Authorization()
         queryset = SelectedFiles.objects.all()
         allowed_methods = ['get', 'post', 'put']
-        detail_allowed_methods = ['get']
+        detail_allowed_methods = ['get',]
         cache = SimpleCache(timeout=10)
 #
 
@@ -85,9 +85,17 @@ class LookletShotListResource(ModelResource):
         list_allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get', 'post', 'put']   #, 'put', 'delete']
         resource_name = 'looklet-shot-list'
-        detail_uri_name = 'timestamp'
+        detail_uri_name = 'colorstyle'
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
         cache = SimpleCache(timeout=10)
+        filtering = {
+            ##'slug': ALL,
+            'username': ALL,
+            'timestamp': [range', 'gt', 'gte', 'lt', 'lte'],
+            'colorstyle': ALL,
+            'reshoot': ALL,
+        }
+
 
 ## File Path Resources
 class ProductionRawZimagesResource(ModelResource):
