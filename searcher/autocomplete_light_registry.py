@@ -5,10 +5,10 @@ from searcher.models import ProductSnapshotLive
 # This will generate a ProductSnapshotLiveAutocomplete class
 autocomplete_light.register(ProductSnapshotLive,
     # Just like in ModelAdmin.search_fields
-    search_fields=['^colorstyle', 'brand', 'vendor_style'],
+    search_fields=['^colorstyle', 'brand'],
     # This will actually html attribute data-placeholder which will set
     # javascript attribute widget.autocomplete.placeholder.
-    autocomplete_js_attributes={'placeholder': 'Whats my name ?',},
+    autocomplete_js_attributes={'placeholder': 'Whats the style or brand?',},
 )
 
 # class ScriptRunnerAutocomplete(autocomplete_light.AutocompleteListTemplate):
@@ -41,8 +41,9 @@ autocomplete_light.register(ProductSnapshotLive, ColorstyleAutocomplete,
 class PoNumberAutocomplete(autocomplete_light.AutocompleteModelBase):
     search_fields = ['^colorstyle']
 
-autocomplete_light.register(ProductSnapshotLive, PoNumberAutocomplete, autocomplete_js_attributes={
-        'minimum_characters': 0,
+autocomplete_light.register(ProductSnapshotLive, PoNumberAutocomplete,
+    autocomplete_js_attributes={
+        'minimum_characters': 2,
         'placeholder': 'Po number ?',
     },
     widget_js_attributes = {
@@ -52,11 +53,11 @@ autocomplete_light.register(ProductSnapshotLive, PoNumberAutocomplete, autocompl
 
 
 class VendorNameAutocomplete(autocomplete_light.AutocompleteModelBase):
-    search_fields = ['^colorstyle', 'vendor_name']
+    search_fields = ['^vendor_name']
 
 autocomplete_light.register(SupplierIngest, VendorNameAutocomplete,
     autocomplete_js_attributes={
-        'minimum_characters': 0,
+        'minimum_characters': 3,
         'placeholder': 'Vendor name ?',
     },
         widget_js_attributes={
@@ -64,6 +65,19 @@ autocomplete_light.register(SupplierIngest, VendorNameAutocomplete,
     }
     )
 
+
+class BrandAutocomplete(autocomplete_light.AutocompleteModelBase):
+    search_fields = ['^brand']
+
+autocomplete_light.register(ProductSnapshotLive, BrandAutocomplete,
+    autocomplete_js_attributes={
+        'minimum_characters': 3,
+        'placeholder': 'Brand ?',
+    },
+        widget_js_attributes={
+        'max_values': 61,
+    }
+    )
 # import autocomplete_light
 
 # from models import TemplatedChoice

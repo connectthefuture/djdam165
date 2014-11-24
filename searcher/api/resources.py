@@ -50,6 +50,7 @@ from tastypie.authentication import BasicAuthentication
 from tastypie.authorization import DjangoAuthorization
 from tastypie.validation import Validation
 from tastypie.resources import ModelResource
+from tastypie.authentication import ApiKeyAuthentication
 ## User and Session Resources
 class UserResource(ModelResource):
     class Meta:
@@ -88,10 +89,11 @@ class LookletShotListResource(ModelResource):
         detail_uri_name = 'colorstyle'
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
         cache = SimpleCache(timeout=10)
+        authorization  = ApiKeyAuthentication()
         filtering = {
             ##'slug': ALL,
             'username': ALL,
-            'timestamp': ['range', 'gt', 'gte', 'lt', 'lte'],
+            'photodata': ['range', 'gt', 'gte', 'lt', 'lte'],
             'colorstyle': ALL,
             'reshoot': ALL,
         }
@@ -186,6 +188,7 @@ class SupplierIngestResource(ModelResource):
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'supplier-ingest'
         # authorization= Authorization()
+        authorization  = ApiKeyAuthentication()
         queryset = SupplierIngest.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get', 'post']
@@ -216,6 +219,7 @@ class SupplierIngestImagesResource(ModelResource):
         resource_name = 'supplier-images'
         detail_uri_name = 'file_name'
         # authorization= Authorization()
+        authorization  = ApiKeyAuthentication()
         queryset = SupplierIngestImages.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
         list_allowed_methods = ['get', 'post']
@@ -274,6 +278,9 @@ class ImageUpdateResource(ModelResource):
         resource_name = 'image-update'
         # detail_uri_name = 'colorstyle'
         # authorization= Authorization()
+        # authorization  = ApiKeyAuthentication()
+        authorization= Authorization()
+
         queryset =  ImageUpdate.objects.all()
         allowed_methods         = ['get', 'post', 'put']
         list_allowed_methods    = ['get', 'post']

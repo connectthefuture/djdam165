@@ -51,7 +51,7 @@ class SupplierIngestImagesAdmin(myadmin.ModelAdmin):
                        'alt',
                        'vendor_name',
                        'modified_dt')
-    
+
     def queryset(self, request):
         """Limit SupplierIngestImages to those that belong to the request's user."""
         qs = super(SupplierIngestImagesAdmin, self).queryset(request)
@@ -98,9 +98,9 @@ myadmin.site.register(ImageUpdate, ImageUpdateAdmin)
 
 class LookletShotListAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
-    list_display = ( 'bfly_list_image', 'colorstyle', 'photo_date', 'reshoot', 'username', 'primary_select_zthumb', 'back_select_zthumb')
-    search_fields = ['colorstyle', 'photo_date']
-    list_filter = ('photo_date', 'reshoot', 'username')
+    list_display = ( 'bfly_list_image', 'colorstyle', 'photodate', 'reshoot', 'username', 'primary_select_zthumb', 'back_select_zthumb')
+    search_fields = ['colorstyle', 'photodate']
+    list_filter = ('photodate', 'reshoot', 'username')
     list_per_page = 100
     form = autocomplete_light.modelform_factory(LookletShotList)
 myadmin.site.register(LookletShotList, LookletShotListAdmin)
