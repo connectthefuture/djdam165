@@ -79,6 +79,19 @@ class SelectedFilesResource(ModelResource):
         cache = SimpleCache(timeout=10)
 #
 
+#
+class ColorstyleValidation(Validation):
+"""
+Make sure colorstyle is not empty
+"""
+    def is_valid(self, bundle, request=None):
+        if not bundle.data:
+            return {'__all__': 'No data provided.'}
+        errors = {}
+        if bundle.data.get('colorstyle', '') == '':
+            errors['colorstyle'] = 'Colorstyle cannot be empty'
+        return errors
+
 class LookletShotListResource(ModelResource):
     class Meta:
         queryset = LookletShotList.objects.all()
@@ -90,6 +103,8 @@ class LookletShotListResource(ModelResource):
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
         cache = SimpleCache(timeout=10)
         authentication  = ApiKeyAuthentication()
+        authorization   = DjangoAuthorization()
+        validation      = ColorstyleValidation()
         filtering = {
             ##'slug': ALL,
             'username': ALL,
@@ -279,7 +294,7 @@ class ImageUpdateResource(ModelResource):
         resource_name = 'image-update'
         # detail_uri_name = 'colorstyle'
         authorization= Authorization()
-        #authentication= ApiKeyAuthentication()
+        authentication= ApiKeyAuthentication()
 
         queryset =  ImageUpdate.objects.all()
         allowed_methods         = ['get', 'post', 'put']
