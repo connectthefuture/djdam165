@@ -81,9 +81,6 @@ class SelectedFilesResource(ModelResource):
 
 #
 class ColorstyleValidation(Validation):
-"""
-Make sure colorstyle is not empty
-"""
     def is_valid(self, bundle, request=None):
         if not bundle.data:
             return {'__all__': 'No data provided.'}
