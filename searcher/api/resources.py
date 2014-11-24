@@ -89,7 +89,7 @@ class LookletShotListResource(ModelResource):
         detail_uri_name = 'colorstyle'
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
         cache = SimpleCache(timeout=10)
-        authorization  = ApiKeyAuthentication()
+        authentication  = ApiKeyAuthentication()
         filtering = {
             ##'slug': ALL,
             'username': ALL,
@@ -187,8 +187,8 @@ class SupplierIngestResource(ModelResource):
     class Meta:
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'supplier-ingest'
-        # authorization= Authorization()
-        authorization  = ApiKeyAuthentication()
+        authorization= Authorization()
+        #authentication  = ApiKeyAuthentication()
         queryset = SupplierIngest.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
         detail_allowed_methods = ['get', 'post']
@@ -218,8 +218,8 @@ class SupplierIngestImagesResource(ModelResource):
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'supplier-images'
         detail_uri_name = 'file_name'
-        # authorization= Authorization()
-        authorization  = ApiKeyAuthentication()
+        authorization= Authorization()
+        ##authentication  = ApiKeyAuthentication()
         queryset = SupplierIngestImages.objects.all()  # .filter(cp1_colortag__icontains='YELLOW')
         allowed_methods = ['get', 'post']
         list_allowed_methods = ['get', 'post']
@@ -251,6 +251,7 @@ class OffshoreStatusResource(ModelResource):
         allowed_methods = ['get', 'post', 'put']
         detail_uri_name = 'colorstyle'
         cache = SimpleCache(timeout=10)
+        authentication = ApiKeyAuthentication()
     # def dispatch(self, request_type, request, **kwargs):
     #     colorstyle = kwargs.pop('colorstyle')
     #     kwargs['colorstyle'] = get_object_or_404(OffshoreStatus, colorstyle=colorstyle)
@@ -277,9 +278,8 @@ class ImageUpdateResource(ModelResource):
         serializer = Serializer(formats=['json', 'jsonp', 'xml'])
         resource_name = 'image-update'
         # detail_uri_name = 'colorstyle'
-        # authorization= Authorization()
-        # authorization  = ApiKeyAuthentication()
         authorization= Authorization()
+        #authentication= ApiKeyAuthentication()
 
         queryset =  ImageUpdate.objects.all()
         allowed_methods         = ['get', 'post', 'put']
