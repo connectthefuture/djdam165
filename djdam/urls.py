@@ -126,7 +126,8 @@ urlpatterns += patterns('',
     (r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9})/(?P<alt>\d)/?$', include(SupplierIngestImagesResource().urls)),
     #(r'^api/v1/supplier-ingest-images/(?P<colorstyle>\d{9})(?P<alt>[_a-z0-9]{2,7})?/?', include(SupplierIngestImagesResource().urls)),
     (r'^api/v1/image-update/(?P<colorstyle>\d{9})/?$', include(ImageUpdateResource().urls)),
-    (r'^api/v1/looklet-shot-list/?(?P<photo_date>\d{4}-\d+-\d{2})?/?(?P<colorstyle>\d{9})?/?$', include(LookletShotListResource().urls)),
+    #(r'^api/v1/looklet-shot-list/?(?P<photo_date>\d{4}-\d+-\d{2})?/?(?P<colorstyle>\d{9})?/?$', include(LookletShotListResource().urls)),
+    (r'^api/v1/looklet-shot-list/?$', include(LookletShotListResource().urls)),
     (r'^api/', include(v1_api.urls)),
 )
 
@@ -224,5 +225,3 @@ urlpatterns += patterns('',
                         # (r'^imgadjust/', include('imgadjust.urls')),
                         (r'^$', RedirectView.as_view(url='/searcher/list/')), # Just for ease of use.
                         ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
