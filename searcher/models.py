@@ -1438,7 +1438,7 @@ class LookletReturned(models.Model):
 class LookletShotList(models.Model):
     id = models.BigIntegerField(primary_key=True)
     colorstyle = models.CharField(max_length=9, unique_for_date=True)
-    photo_date = models.DateField(blank=True, null=True)
+    photodate = models.DateField(max_length=10, blank=True, null=True)
     reshoot = models.CharField(max_length=1, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     timestamp = models.DateTimeField(blank=True, null=True)
@@ -1450,7 +1450,7 @@ class LookletShotList(models.Model):
         db_table = 'looklet_shot_list'
         ordering = ['-timestamp', '-colorstyle' ]
         verbose_name_plural = 'Looklet_ShotLists'
-        unique_together = ['colorstyle', 'photo_date']
+        unique_together = ['colorstyle', 'photodate']
 
     slug = models.SlugField(blank=True,null=True)
     def save(self, *args, **kwargs):
@@ -1460,12 +1460,14 @@ class LookletShotList(models.Model):
         return super(LookletShotList, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return '{0}_{1}'.format(self.colorstyle,self.photo_date)
+        return '{0}_{1}'.format(self.colorstyle,self.photodate)
+
 
     def primary_select_small(self):
         from django.utils.safestring import mark_safe
-        return mark_safe(
-            '<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(self.file_path)
+        return mark_safe('<img class="img-rounded" style="width: 240px;" src="{0}"  alt="{1}"/>').format(img_url, self.timestamp)
+        #return mark_safe(
+        #    '<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(self.file_path)
     primary_select_small.allow_tags = True
 
 
@@ -1654,4 +1656,3 @@ class LookletShotList(models.Model):
 # admin.site.register(Product, ProductAdmin)
 
 # ############# End Admin Configs ###########
-
