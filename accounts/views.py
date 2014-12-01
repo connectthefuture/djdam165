@@ -232,7 +232,7 @@ class OnePageAppView(TemplateView):
 from rest_framework.authentication import TokenAuthentication, BasicAuthentication, SessionAuthentication
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes((IsAuthenticated, ))
-@authentication_classes((TokenAuthentication, BasicAuthentication))
+@authentication_classes((TokenAuthentication, BasicAuthentication, SessionAuthentication))
 def looklet_shot_list_update_list(request,
                                   content_format=None,
                                   pk=None,
@@ -274,7 +274,7 @@ def looklet_shot_list_update_list(request,
 
 @api_view(['GET', 'PUT', 'POST'])
 @permission_classes((IsAuthenticated,))
-@authentication_classes((TokenAuthentication, BasicAuthentication))
+@authentication_classes((TokenAuthentication, BasicAuthentication, SessionAuthentication))
 def looklet_shot_list_update_detail(request,
                                     content_format=None,
                                     pk=None,
