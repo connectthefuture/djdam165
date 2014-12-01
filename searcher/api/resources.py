@@ -47,7 +47,7 @@ from tastypie.throttle import BaseThrottle, CacheThrottle
 ############ Authentication and Authorization
 from django.contrib.auth.models import User
 from tastypie.authentication import BasicAuthentication
-from tastypie.authorization import DjangoAuthorization
+from tastypie.authorization import DjangoAuthorization, Authorization
 from tastypie.validation import Validation
 from tastypie.resources import ModelResource
 from tastypie.authentication import ApiKeyAuthentication
@@ -116,7 +116,7 @@ class LookletShotListResource(ModelResource):
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
         cache = SimpleCache(timeout=10)
         authentication  = ApiKeyAuthentication()
-        #authorization   = DjangoAuthorization()
+        authorization   = Authorization()
         #validation      = ColorstyleValidation()
         filtering = {
             ##'slug': ALL,
