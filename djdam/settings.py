@@ -465,6 +465,10 @@ TASTYPIE_DEFAULT_FORMATS = ['json']
 API_LIMIT_PER_PAGE = 20
 
 ## REST FRAMEWORK SETTINGS
+# 'DEFAULT_AUTHENTICATION_CLASSES': (
+#     'rest_framework.authentication.BasicAuthentication',
+#     'rest_framework.authentication.SessionAuthentication',
+# )
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',

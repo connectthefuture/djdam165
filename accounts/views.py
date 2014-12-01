@@ -255,14 +255,11 @@ def looklet_shot_list_update_list(request,
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
     elif request.method == 'PUT':
         if not colorstyle:
             colorstyle = request.DATA['colorstyle']
-            photodate = request.DATA['photodate']
         try:
-            looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle,
-                                                                   photodate=photodate)
+            looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle)
         except LookletShotList.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = LookletShotListSerializer(looklet_shot_list_update,
@@ -288,13 +285,12 @@ def looklet_shot_list_update_detail(request,
     """
     if not colorstyle:
         colorstyle = request.DATA['colorstyle']
-        photodate = request.DATA['photodate']
+        #photodate = request.DATA['photodate']
         pass
 
     looklet_shot_list_update = ''
     try:
-        looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle,
-                                                               photodate=photodate)
+        looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle)
     except LookletShotList.DoesNotExist:
         pass
         # try:
@@ -313,8 +309,7 @@ def looklet_shot_list_update_detail(request,
     elif request.method == 'POST':
         serializer = LookletShotListSerializer(data=request.DATA)
         try:
-            looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle,
-                                                                   photodate=photodate)
+            looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle)
             pass
         except LookletShotList.DoesNotExist:
             if serializer.is_valid():
@@ -325,8 +320,8 @@ def looklet_shot_list_update_detail(request,
     elif request.method == 'PUT':
         if not colorstyle:
             colorstyle = request.DATA['colorstyle']
-        looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle,
-                                                               photodate=photodate)
+        looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle
+                                                               )
         serializer = LookletShotListSerializer(looklet_shot_list_update,
                                                data=request.DATA)
         if serializer.is_valid():
@@ -335,8 +330,7 @@ def looklet_shot_list_update_detail(request,
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle,
-                                                               photodate=photodate)
+        looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle)
         looklet_shot_list_update.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
