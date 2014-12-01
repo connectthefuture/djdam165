@@ -108,9 +108,14 @@ class UserResource(ModelResource):
         excludes = ['email', 'password', 'is_superuser'] ##, 'is_active', 'is_staff', 'is_superuser']
         #throttle = BaseThrottle(throttle_at=100)
         #authentication = BasicAuthentication()
-        #authorization  = DjangoAuthorization()
+        authorization  = Authorization()
         #validation     = Validation()
         cache = SimpleCache(timeout=10)
+        filtering = {
+            # #'slug': ALL,
+            'username': ALL,
+            }
+
 
 class SelectedFilesResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
