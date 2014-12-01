@@ -115,8 +115,8 @@ class LookletShotListResource(ModelResource):
         detail_uri_name = 'colorstyle'
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
         cache = SimpleCache(timeout=10)
-        authentication  = BasicAuthentication() #ApiKeyAuthentication()
-        #authorization   = DjangoAuthorization()
+        authentication  = ApiKeyAuthentication()
+        authorization   = DjangoAuthorization()
         #validation      = ColorstyleValidation()
         filtering = {
             ##'slug': ALL,
