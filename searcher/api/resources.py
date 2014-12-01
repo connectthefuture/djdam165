@@ -109,7 +109,7 @@ class LookletShotListResource(ModelResource):
     class Meta:
         queryset = LookletShotList.objects.all()
         allowed_methods = ['get', 'post', 'put']
-        list_allowed_methods = ['get', 'post']
+        list_allowed_methods = ['get', 'post','put']
         detail_allowed_methods = ['get', 'post', 'put']   #, 'put', 'delete']
         resource_name = 'looklet-shot-list'
         detail_uri_name = 'colorstyle'
