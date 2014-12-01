@@ -103,7 +103,7 @@ urlpatterns = patterns('accounts.views',
     url(r'^image-update/?$', 'image_update_list'),
     ## Looklet Shot List Update Api
     url(r'^looklet-shot-list-update/?$', 'looklet_shot_list_update_list'),
-    url(r'^looklet-shot-list-update/(?P<photo_date>\d{4}-\d+-\d{2})?/?(?P<colorstyle>\d{9})?/?$', 'looklet_shot_list_update_detail'),
+    url(r'^looklet-shot-list-update/(?P<photodate>\d{4}-\d+-\d{2})?/?(?P<colorstyle>\d{9})?/?$', 'looklet_shot_list_update_detail'),
     url(r'^looklet-shot-list-update-detail/$', 'looklet_shot_list_update_detail'),
 )
 urlpatterns = format_suffix_patterns(urlpatterns)
