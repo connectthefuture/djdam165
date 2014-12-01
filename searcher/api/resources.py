@@ -145,7 +145,7 @@ class LookletShotListResource(ModelResource):
     class Meta:
         queryset = LookletShotList.objects.all()
         allowed_methods = ['get', 'post', 'put']
-        list_allowed_methods = ['get', 'post','put']
+        list_allowed_methods = ['get', 'post', 'put']
         detail_allowed_methods = ['get', 'post', 'put']   #, 'put', 'delete']
         resource_name = 'looklet-shot-list'
         detail_uri_name = 'slug'
@@ -157,9 +157,9 @@ class LookletShotListResource(ModelResource):
         #authorization   = SillyAuthorization()
         #validation      = ColorstyleValidation()
         filtering = {
-            ##'slug': ALL,
-            'user': ALL_WITH_RELATIONS,
-            #'photodata': ['range', 'gt', 'gte', 'lt', 'lte'],
+            'slug': ALL,
+            #'user': ALL_WITH_RELATIONS,
+            'photodata': ['range', 'gt', 'gte', 'lt', 'lte'],
             'colorstyle': ALL,
             'reshoot': ALL,
         }
