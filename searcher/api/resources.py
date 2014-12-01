@@ -108,7 +108,7 @@ class UserResource(ModelResource):
         excludes = ['email', 'password', 'is_superuser'] ##, 'is_active', 'is_staff', 'is_superuser']
         #throttle = BaseThrottle(throttle_at=100)
         #authentication = BasicAuthentication()
-        authorization  = Authorization()
+        #authorization  = Authorization()
         #validation     = Validation()
         cache = SimpleCache(timeout=10)
         filtering = {
@@ -140,6 +140,8 @@ class ColorstyleValidation(Validation):
         return errors
 
 class LookletShotListResource(ModelResource):
+    user = fields.ForeignKey(UserResource, 'user')
+
     class Meta:
         queryset = LookletShotList.objects.all()
         allowed_methods = ['get', 'post', 'put']
@@ -149,12 +151,13 @@ class LookletShotListResource(ModelResource):
         detail_uri_name = 'colorstyle'
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
         cache = SimpleCache(timeout=10)
-        authentication  = SillyAuthentication()
-        authorization   = SillyAuthorization()
+        authorization = Authorization()
+        #authentication  = ApiKeyAuthentication()
+        #authorization   = SillyAuthorization()
         #validation      = ColorstyleValidation()
         filtering = {
             ##'slug': ALL,
-            'username': ALL,
+            'user': ALL_WITH_RELATIONS,
             #'photodata': ['range', 'gt', 'gte', 'lt', 'lte'],
             'colorstyle': ALL,
             'reshoot': ALL,
