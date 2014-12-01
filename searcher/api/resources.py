@@ -140,7 +140,7 @@ class ColorstyleValidation(Validation):
         return errors
 
 class LookletShotListResource(ModelResource):
-    user = fields.ForeignKey(UserResource, 'user')
+    #user = fields.ForeignKey(UserResource, 'user')
 
     class Meta:
         queryset = LookletShotList.objects.all()
@@ -152,6 +152,7 @@ class LookletShotListResource(ModelResource):
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
         cache = SimpleCache(timeout=10)
         authorization = Authorization()
+
         #authentication  = ApiKeyAuthentication()
         #authorization   = SillyAuthorization()
         #validation      = ColorstyleValidation()
