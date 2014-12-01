@@ -104,7 +104,7 @@ class LookletShotListViewSet(viewsets.ModelViewSet):
 
 ## REST_FRAMEWORK Browsable views
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -229,8 +229,10 @@ class OnePageAppView(TemplateView):
 ####################
 ####################
 ####################
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication, SessionAuthentication
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes((IsAuthenticated, ))
+@authentication_classes((TokenAuthentication, BasicAuthentication))
 def looklet_shot_list_update_list(request,
                                   content_format=None,
                                   pk=None,
@@ -272,6 +274,7 @@ def looklet_shot_list_update_list(request,
 
 @api_view(['GET', 'PUT', 'POST'])
 @permission_classes((IsAuthenticated,))
+@authentication_classes((TokenAuthentication, BasicAuthentication))
 def looklet_shot_list_update_detail(request,
                                     content_format=None,
                                     pk=None,
