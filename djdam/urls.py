@@ -11,7 +11,7 @@ import os, sys
 
 import admin_tools as admin_tools
 import adminactions as adminactions
-
+from django.conf.urls import include
 ## Autocomplete right before admi autodiscover
 import autocomplete_light
 autocomplete_light.autodiscover()
@@ -107,6 +107,16 @@ urlpatterns = patterns('accounts.views',
     url(r'^looklet-shot-list-update-detail/$', 'looklet_shot_list_update_detail'),
 )
 urlpatterns = format_suffix_patterns(urlpatterns)
+
+urlpatterns += [
+    url(r'^api-auth/', include('rest_framework.urls',
+                               namespace='rest_framework')),
+]
+
+from rest_framework.authtoken import views
+urlpatterns += [
+    url(r'^api-token-auth/', views.obtain_auth_token)
+]
 
 ## End REST
 
