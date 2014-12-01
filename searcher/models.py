@@ -1452,11 +1452,11 @@ class LookletShotList(models.Model):
         verbose_name_plural = 'Looklet_ShotLists'
         unique_together = ['colorstyle', 'photodate']
 
-    slug = models.SlugField(blank=True,null=True)
+    #slug = models.SlugField(blank=True,null=True)
     def save(self, *args, **kwargs):
         # For automatic slug generation.
-        if not self.slug:
-            self.slug = slugify(self.id)[:50]
+        #if not self.slug:
+        #    self.slug = slugify(self.colorstyle)[:50]
         return super(LookletShotList, self).save(*args, **kwargs)
 
     def __unicode__(self):
