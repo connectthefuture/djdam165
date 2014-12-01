@@ -237,6 +237,17 @@ class UploadExcelFileForm(forms.Form):
 # {% endblock %}
 #
 #
+import __builtin__, json
+def json_file_parse(filename):
+    data = []
+    with __builtin__.open(filename, 'r') as jsonfile:
+        for line in jsonfile:
+            try:
+                data.append(json.loads(line))
+            except ValueError:
+                pass
+    return data
+
 #
 # {% if items %}
 # <tr>
