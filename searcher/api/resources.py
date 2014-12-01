@@ -109,7 +109,7 @@ class UserResource(ModelResource):
         #throttle = BaseThrottle(throttle_at=100)
         #authentication = BasicAuthentication()
         #authorization  = DjangoAuthorization()
-        validation     = Validation()
+        #validation     = Validation()
         cache = SimpleCache(timeout=10)
 
 class SelectedFilesResource(ModelResource):
