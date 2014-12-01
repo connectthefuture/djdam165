@@ -121,7 +121,7 @@ class LookletShotListResource(ModelResource):
         filtering = {
             ##'slug': ALL,
             'username': ALL,
-            'photodata': ['range', 'gt', 'gte', 'lt', 'lte'],
+            #'photodata': ['range', 'gt', 'gte', 'lt', 'lte'],
             'colorstyle': ALL,
             'reshoot': ALL,
         }
