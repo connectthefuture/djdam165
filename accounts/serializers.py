@@ -58,7 +58,7 @@ from searcher.models import LookletShotList
 class LookletShotListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = LookletShotList
-        fields = ('colorstyle', 'photo_date', 'reshoot', 'notes', 'timestamp', 'username')
+        fields = ('colorstyle', 'photodate', 'reshoot', 'notes', 'timestamp', 'username')
 
 
 from django.contrib.auth.models import User
