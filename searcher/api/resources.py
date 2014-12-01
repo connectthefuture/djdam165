@@ -67,6 +67,35 @@ class TastypieApiKeyAuth(AuthBase):
         r.headers['Authorization'] = 'ApiKey %s:%s' % (self.username, self.api_key)
         return r
 
+from tastypie.authentication import Authentication
+from tastypie.authorization import Authorization
+
+
+class SillyAuthentication(Authentication):
+    def is_authenticated(self, request, **kwargs):
+        if 'looklet' in request.user.username:
+          return True
+
+        return False
+
+    # Optional but recommended
+    def get_identifier(self, request):
+        return request.user.username
+
+class SillyAuthorization(Authorization):
+    def is_authorized(self, request, object=None):
+        if request.user.date_joined.year == 2014:
+            return True
+        else:
+            return False
+
+    # Optional but useful for advanced limiting, such as per user.
+    # def apply_limits(self, request, object_list):
+    #     if request and hasattr(request, 'user'):
+    #         return object_list.filter(author__username=request.user.username)
+    #
+    #     return object_list.none()
+
 ## User and Session Resources
 class UserResource(ModelResource):
     class Meta:
@@ -78,8 +107,8 @@ class UserResource(ModelResource):
         #instead of Excluding like below blklist above fields acts as whitelist
         excludes = ['email', 'password', 'is_superuser'] ##, 'is_active', 'is_staff', 'is_superuser']
         #throttle = BaseThrottle(throttle_at=100)
-        authentication = BasicAuthentication()
-        authorization  = DjangoAuthorization()
+        #authentication = BasicAuthentication()
+        #authorization  = DjangoAuthorization()
         validation     = Validation()
         cache = SimpleCache(timeout=10)
 
