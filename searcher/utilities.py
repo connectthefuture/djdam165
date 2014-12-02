@@ -237,18 +237,51 @@ class UploadExcelFileForm(forms.Form):
 # {% endblock %}
 #
 #
-import __builtin__, json
+import __builtin__, json,yaml,re
 def json_file_parse(filename):
     data = []
     with __builtin__.open(filename, 'r') as jsonfile:
         for line in jsonfile:
             try:
-                data.append(json.loads(line))
-            except ValueError:
+                line = line.lstrip()
+                data.append(json.dumps(line))
+            except IOError:
+                print line
                 pass
     return data
 
-#
+json_data = json.load(__builtin__.open(filename))
+
+
+d = {}
+for pair in json_file_parse(filename)[1:-1].split(','):
+    (k,v) = pair.split(':')
+    v = v.strip()
+    if v == "true":
+        v = "True"
+    try:
+        v = ast.literal_eval(v)
+    except:
+        print "Couldn't eval " + v
+    d[k] = v
+
+import codecs
+data = []
+with codecs.open(filename,'rU','utf-8') as f:
+    for line in f:
+        try:
+            data.append(json.load(line))
+        except:
+            pass
+# def json_datetime_handler(obj):
+#     if hasattr(obj, 'isoformat'):
+#         return obj.isoformat()
+#     elif isinstance(obj, ...):
+#         return ...
+#     else:
+#         raise TypeError, 'Object of type %s with value of %s is not JSON serializable' % (type(obj), repr(obj))
+
+#dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime) else json.JSONEncoder().default(obj)
 # {% if items %}
 # <tr>
 # {% for item in items %}

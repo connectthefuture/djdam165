@@ -148,7 +148,7 @@ class LookletShotListResource(ModelResource):
         list_allowed_methods = ['get', 'post', 'put']
         detail_allowed_methods = ['get', 'post', 'put']   #, 'put', 'delete']
         resource_name = 'looklet-shot-list'
-        detail_uri_name = 'slug'
+        detail_uri_name = 'timestamp'
         serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
         cache = SimpleCache(timeout=10)
         authorization = Authorization()

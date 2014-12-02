@@ -1436,12 +1436,12 @@ class LookletMetadataSidecar(models.Model):
 #         return self.file_path
 
 class LookletShotList(models.Model):
-    id = models.BigIntegerField(primary_key=True)
+    id = models.BigIntegerField(unique=True)
     colorstyle = models.CharField(max_length=9)
     photodate = models.DateField(max_length=10, blank=True, null=True)
     reshoot = models.CharField(max_length=1, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
-    timestamp = models.DateTimeField(blank=True, null=True)
+    timestamp = models.DateTimeField(primary_key=True)
     username = models.CharField(max_length=75, blank=True, null=True)
 
 
