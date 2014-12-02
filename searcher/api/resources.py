@@ -159,7 +159,7 @@ class LookletShotListResource(ModelResource):
         filtering = {
             'slug': ALL,
             #'user': ALL_WITH_RELATIONS,
-            'photodata': ['range', 'gt', 'gte', 'lt', 'lte'],
+            'timestamp': ['range', 'gt', 'gte', 'lt', 'lte'],
             'colorstyle': ALL,
             'reshoot': ALL,
         }
