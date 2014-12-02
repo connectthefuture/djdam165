@@ -1452,6 +1452,12 @@ class LookletShotList(models.Model):
         verbose_name_plural = 'Looklet_ShotLists'
         unique_together = ['colorstyle', 'photodate']
 
+    #hash = models.CharField(primary_key=True, max_length=32)
+
+    #def create_hash(self):
+    #    return os.urandom(32).encode('hex')
+
+
     slug = models.SlugField(blank=True,null=True)
     def save(self, *args, **kwargs):
         # For automatic slug generation.
