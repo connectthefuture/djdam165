@@ -1456,7 +1456,7 @@ class LookletShotList(models.Model):
     def save(self, *args, **kwargs):
         # For automatic slug generation.
         if not self.slug:
-            self.slug = slugify('{0}_{1}'.format(self.colorstyle,self.photodate))
+            self.slug = slugify('%s') % self.timestamp
         return super(LookletShotList, self).save(*args, **kwargs)
 
     def __unicode__(self):
