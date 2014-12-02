@@ -1441,7 +1441,7 @@ class LookletShotList(models.Model):
     photodate = models.DateField(max_length=10, blank=True, null=True)
     reshoot = models.CharField(max_length=1, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
-    timestamp = models.DateTimeField(primary_key=True)
+    timestamp = models.DateTimeField(primary_key=True, auto_now_add=True)
     username = models.CharField(max_length=75, blank=True, null=True)
 
 
