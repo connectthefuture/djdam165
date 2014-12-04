@@ -1436,21 +1436,21 @@ class LookletMetadataSidecar(models.Model):
 #         return self.file_path
 
 class LookletShotList(models.Model):
-    id = models.BigIntegerField(unique=True)
+    id = models.BigIntegerField(primary_key=True)
     colorstyle = models.CharField(max_length=9)
     photodate = models.DateField(max_length=10, blank=True, null=True)
     reshoot = models.CharField(max_length=1, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
-    timestamp = models.DateTimeField(primary_key=True)
+    timestamp = models.DateTimeField(unique=True)
     username = models.CharField(max_length=75, blank=True, null=True)
 
 
     class Meta:
         managed = True
         db_table = 'looklet_shot_list'
-        ordering = ['-timestamp', '-colorstyle' ]
+        #ordering = ['-timestamp', '-colorstyle' ]
         verbose_name_plural = 'Looklet_ShotLists'
-        unique_together = ['colorstyle', 'photodate']
+        #unique_together = ['colorstyle', 'photodate']
 
     #hash = models.CharField(primary_key=True, max_length=32)
 
@@ -1461,12 +1461,12 @@ class LookletShotList(models.Model):
     slug = models.SlugField(blank=True,null=True)
     def save(self, *args, **kwargs):
         # For automatic slug generation.
-        # if not self.slug:
-        #     self.slug = slugify('%s') % self.timestamp
+        if not self.slug:
+            self.slug = slugify('%d') % self.timestamp
         return super(LookletShotList, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return '{0}_{1}'.format(self.colorstyle,self.photodate)
+        return '{0}_{1}'.format(self.colorstyle,self.photodate[:10])
 
 
     def primary_select_small(self):
