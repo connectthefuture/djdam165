@@ -1330,8 +1330,11 @@ class File(models.Model):
         return u'{0}'.format(filetype)
     filetype = property(_get_file_type)
 
-    def _save(self):
-            return self.url
+    def save(self, *args, **kwargs):
+        # For automatic slug generation.
+        # if not self.slug:
+        #    self.slug = slugify('%d') % self.timestamp
+        return super(File, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.file_path
@@ -1340,6 +1343,11 @@ class File(models.Model):
 class Document(models.Model):
     docfile = models.FileField(upload_to='uploads/%Y/%m/%d')
 
+    def save(self, *args, **kwargs):
+        # For automatic slug generation.
+        # if not self.slug:
+        #    self.slug = slugify('%d') % self.timestamp
+        return super(Document, self).save(*args, **kwargs)
 
 ################################################################
 #   Metadata
@@ -1365,6 +1373,12 @@ class Metadata(models.Model):
         db_table = 'metadata'
         #ordering = ('position',)
         verbose_name_plural = 'Metadata'
+
+    def save(self, *args, **kwargs):
+        # For automatic slug generation.
+        # if not self.slug:
+        #    self.slug = slugify('%d') % self.timestamp
+        return super(Metadata, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.metadata_type
@@ -1398,10 +1412,11 @@ class Asset(models.Model):
     def __unicode__(self):
         return self.file_path
 
-    def save(self):
-        return self.file_path
-
-
+    def save(self, *args, **kwargs):
+        # For automatic slug generation.
+        # if not self.slug:
+        #    self.slug = slugify('%d') % self.timestamp
+        return super(Asset, self).save(*args, **kwargs)
 
 ##############################################################################
 ##############################################################################
@@ -1428,6 +1443,11 @@ class LookletMetadataSidecar(models.Model):
     def __unicode__(self):
         return self.metadata_value
 
+    def save(self, *args, **kwargs):
+        # For automatic slug generation.
+        # if not self.slug:
+        #    self.slug = slugify('%d') % self.timestamp
+        return super(LookletMetadataSidecar, self).save(*args, **kwargs)
 
 # class LookletShotListPostReadyOriginal(models.Model):
 #     #id = models.BigIntegerField(primary_key=True)
@@ -1454,6 +1474,11 @@ class LookletMetadataSidecar(models.Model):
 #         #ordering = ['-colorstyle']
 #         verbose_name_plural = 'Looklet_Returned_Files'
 #
+    # def save(self, *args, **kwargs):
+    #     # For automatic slug generation.
+    #     # if not self.slug:
+    #     #    self.slug = slugify('%d') % self.timestamp
+    #     return super(LookletReturned, self).save(*args, **kwargs)
 #     def __unicode__(self):
 #         return self.file_path
 
@@ -1494,7 +1519,8 @@ class LookletShotList(models.Model):
 
     def primary_select_small(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img class="img-rounded" style="width: 240px;" src="{0}"  alt="{1}"/>').format(img_url, self.timestamp)
+        img_url = "{0}zImages/{1}/{2}_1.jpg".format(MEDIA_ROOT, self.colorstyle[:4], self.colorstyle)
+        return mark_safe('<img class="img-rounded" style="width: 120px;" src="{0}"  alt="{1}"/>').format(img_url, self.timestamp)
         #return mark_safe(
         #    '<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(self.file_path)
     primary_select_small.allow_tags = True
