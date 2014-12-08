@@ -96,7 +96,7 @@ def search_brand(request):
 #    if 'brandsearch' in request.GET and request.GET['brandsearch']:
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        images = Images.image_select.get_query_set()      ##(photo_date__range=(start_date, end_date))
+        images = Images.image_select.get_queryset()      ##(photo_date__range=(start_date, end_date))
         results = Product.objects.filter(brand__icontains=q)
         images = []
         for image in images:
@@ -125,11 +125,11 @@ def search_photo_date(request, startdate):
 
     #if not startend:
     #startend = startdate
-    images = Images.image_select.get_query_set()      ##(photo_date__range=(start_date, end_date))
+    images = Images.image_select.get_queryset()      ##(photo_date__range=(start_date, end_date))
     results = images.filter(photo_date__iexact=startdate)
     #else:
     #    ##TODO:Change to do Range search with End date
-    #    images = Images.image_select.get_query_set()      ##(photo_date__range=(start_date, end_date))
+    #    images = Images.image_select.get_queryset()      ##(photo_date__range=(start_date, end_date))
     #    results = images.objects.filter(photo_date__range=(start_date, end_date))
 
     return render(request, 'search_results.html', {'results': results, 'images': results, 'query': startdate,})
@@ -822,7 +822,7 @@ def get_all_images_colorstyle(request):
     found_style_data    = {}
     colorstyles         = []
     selects_found       = ''
-    selects_all         = Images.image_select.get_query_set()
+    selects_all         = Images.image_select.get_queryset()
 
 
 
@@ -851,8 +851,8 @@ def get_all_images_colorstyle(request):
 
         elif re.findall(regex_outtakes, retest):
            #print 'colorstyle Found{0}'.format(retest)
-           #selects_all = Images.image_outtake.get_query_set()
-           selects_all = ProductionRawZimages.objects.get_query_set()
+           #selects_all = Images.image_outtake.get_queryset()
+           selects_all = ProductionRawZimages.objects.get_queryset()
            colorstyle = retest
 
         elif re.findall(regex_date, retest):
@@ -904,7 +904,7 @@ def get_all_images_colorstyle(request):
             for style in selects_found.values_list('colorstyle', flat=True):
                 colorstyles.append(style)
             colorstyles = sorted(set(colorstyles))
-            styledata = PmData.objects.get_query_set(colorstyle__in=colorstyles)
+            styledata = PmData.objects.get_queryset(colorstyle__in=colorstyles)
             #found_style_data = {}
             #for found in selects_found.values():
             #    datatmp = PmData.objects.get(colorstyle__icontains=found['colorstyle'])
@@ -921,10 +921,10 @@ def get_all_images_colorstyle(request):
 
     #try:
     #    if request.POST['outtakes']:
-    #        outtakes_all = Images.image_outtake.get_query_set()
+    #        outtakes_all = Images.image_outtake.get_queryset()
     #        outtakes_found = outtakes_all.filter(colorstyle__icontains=query)
-    #        #selectspush_all = Images.image_select_push.get_query_set()
-    #        #selectsthumb_all = Images.image_select_thumb.get_query_set()
+    #        #selectspush_all = Images.image_select_push.get_queryset()
+    #        #selectsthumb_all = Images.image_select_thumb.get_queryset()
     #        from itertools import chain
     #        results = list(chain(outtakes_found, selects_found,))
     #        #results = sorted(
@@ -998,7 +998,7 @@ def get_all_images_outtakes(request):
     found_style_data    = {}
     colorstyles         = []
     selects_found       = ''
-    #selects_all         = Images.image_select.get_query_set()
+    #selects_all         = Images.image_select.get_queryset()
     selects_all = ProductionRawZimages.objects.distinct()
 
     if request.POST['searchquery']:
@@ -1027,8 +1027,8 @@ def get_all_images_outtakes(request):
 
         elif re.findall(regex_outtakes, retest):
            #print 'colorstyle Found{0}'.format(retest)
-           #selects_all = Images.image_outtake.get_query_set()
-           #selects_all = ProductionRawZimages.objects.get_query_set()
+           #selects_all = Images.image_outtake.get_queryset()
+           #selects_all = ProductionRawZimages.objects.get_queryset()
            colorstyle = retest
 
         elif re.findall(regex_datefull, retest):
