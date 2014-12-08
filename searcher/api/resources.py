@@ -157,7 +157,7 @@ class LookletShotListResource(ModelResource):
         #authorization   = SillyAuthorization()
         #validation      = ColorstyleValidation()
         filtering = {
-            'slug': ALL,
+            #'slug': ALL,
             #'user': ALL_WITH_RELATIONS,
             'timestamp': ['range', 'gt', 'gte', 'lt', 'lte'],
             'colorstyle': ALL,
