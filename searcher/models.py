@@ -1505,11 +1505,11 @@ class LookletShotList(models.Model):
     #    return os.urandom(32).encode('hex')
 
 
-    slug = models.SlugField(blank=True,null=True)
+    #slug = models.SlugField(blank=True,null=True)
     def save(self, *args, **kwargs):
         #For automatic slug generation.
-        if not self.slug:
-           self.slug = slugify('%s') % self.id
+        # if not self.slug:
+        #    self.slug = slugify('%s') % self.id
         return super(LookletShotList, self).save(*args, **kwargs)
 
 
