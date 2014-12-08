@@ -1509,7 +1509,7 @@ class LookletShotList(models.Model):
     def save(self, *args, **kwargs):
         #For automatic slug generation.
         if not self.slug:
-           self.slug = slugify('%d') % self.id
+           self.slug = slugify('%s') % self.id
         return super(LookletShotList, self).save(*args, **kwargs)
 
 
