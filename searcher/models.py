@@ -993,8 +993,16 @@ class Images(models.Model):
     filetype = property(_get_file_type)
 
 
+    def save(self, *args, **kwargs):
+        # For automatic slug generation.
+        # if not self.slug:
+        #    self.slug = slugify('%d') % self.timestamp
+        return super(Images, self).save(*args, **kwargs)
+
     def __unicode__(self):
         return self.colorstyle
+
+
 
 # class ScriptRunner(models.Model):
 #     name    = models.CharField(max_length=40)
@@ -1061,6 +1069,12 @@ class Product(models.Model):
         db_table = 'product'
         #unique_together = ('brand', 'vendor_style',)
         #ordering = ['-colorstyle']
+
+    def save(self, *args, **kwargs):
+        # For automatic slug generation.
+        # if not self.slug:
+        #    self.slug = slugify('%d') % self.timestamp
+        return super(Product, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.colorstyle
@@ -1466,12 +1480,13 @@ class LookletShotList(models.Model):
     #    return os.urandom(32).encode('hex')
 
 
-    #slug = models.SlugField(blank=True,null=True)
+    slug = models.SlugField(blank=True,null=True)
     def save(self, *args, **kwargs):
-        # For automatic slug generation.
-        #if not self.slug:
-        #    self.slug = slugify('%d') % self.timestamp
+        #For automatic slug generation.
+        if not self.slug:
+           self.slug = slugify('%d') % self.id
         return super(LookletShotList, self).save(*args, **kwargs)
+
 
     def __unicode__(self):
         return '{0}_{1}'.format(self.colorstyle,self.photodate[:10])
