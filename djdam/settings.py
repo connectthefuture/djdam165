@@ -119,7 +119,7 @@ INSTALLED_APPS = (# '',
     'searcher',
     'imgadjust',
     # 'uploader',
-    # 'accounts',
+    'accounts',
 
     # Local digassets app, referenced via appname
     #'digassets',
