@@ -193,7 +193,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
     'searcher.utils.Tastypie_Default_Format.TastyJSONMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
 
 )
@@ -426,7 +426,7 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TEMPLATE_CONTEXT': True,
     'ENABLE_STACKTRACES': True,
 }
-#
+# Also need to comment out or uncomment the debug middleware above as well as the entry in install_apps
 DEBUG_TOOLBAR_PANELS = (
     #'debug_toolbar_user_panel.panels.UsersPanel',
     'debug_toolbar.panels.request.RequestPanel',
