@@ -1081,9 +1081,15 @@ class ImageUpdate(models.Model):
     class Meta:
         managed = True
         db_table = 'image_update'
-        unique_together = ('colorstyle', 'alt',)
+        #unique_together = ('colorstyle', 'alt',)
         ordering = ['-modify_dt', 'colorstyle', 'alt']
         verbose_name_plural = 'Image_Cache_Updates'
+
+    def save(self, *args, **kwargs):
+        # For automatic slug generation.
+        # if not self.slug:
+        #    self.slug = slugify('%d') % self.timestamp
+        return super(ImageUpdate, self).save(*args, **kwargs)
 
     def __unicode__(self):
         if self.alt == '1':
