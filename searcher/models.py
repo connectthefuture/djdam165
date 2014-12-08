@@ -904,7 +904,7 @@ class Images(models.Model):
 # #    image_site_bfly = models.ForeignKey(SiteImageFileBfly)
 
     from djdam.settings import MEDIA_ROOT
-    id = models.BigIntegerField(primary_key=True)
+    #id = models.BigIntegerField(primary_key=True)
     colorstyle = models.ForeignKey(ProductSnapshotLive, to_field='colorstyle', related_name='images_colorstyle')
 
     image_outtake       = models.ForeignKey(ProductionRawZimages, related_name='outtake', to_field='file_path')
@@ -1033,7 +1033,7 @@ class SelectedFiles(models.Model):
         return self.file_path
 
 class Product(models.Model):
-    id = models.BigIntegerField(primary_key=True)
+    #id = models.BigIntegerField(primary_key=True)
     colorstyle = models.ForeignKey(ProductSnapshotLive, to_field='colorstyle', related_name='snp_colorstyle')
     #brand = models.ForeignKey(ProductSnapshotLive, to_field='brand', related_name='snp_brand')
     #color = models.ForeignKey(ProductSnapshotLive, to_field='color', related_name='snp_color')
@@ -1264,7 +1264,7 @@ class ViewExcelToolDuplicateVendorStyle(models.Model):
 ####################################
 
 class File(models.Model):
-    id = models.IntegerField(primary_key=True)
+    #id = models.IntegerField(primary_key=True)
     #colorstyle = models.ForeignKey(Product)
     #images = models.ManyToManyField('SearcherProductImages', related_name='product_images')
     file = models.FileField("File", upload_to='uploads/%Y/%m/%d')
@@ -1324,7 +1324,7 @@ class Document(models.Model):
 ################################################################
 
 class Metadata(models.Model):
-    id = models.IntegerField(primary_key=True)
+    #id = models.IntegerField(primary_key=True)
     #images = models.ManyToManyField(Images)
     #file = models.ForeignKey(File)
     metadata_type = models.CharField(max_length=10,)
@@ -1350,7 +1350,7 @@ class Metadata(models.Model):
 #################### Top Level Class -- Asset #############
 
 class Asset(models.Model):
-    id = models.IntegerField(primary_key=True)
+    #id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
     file_path = models.ForeignKey(File, related_name='asset_file_path')
     metadata = models.ForeignKey(Metadata, related_name='asset_metadata')
@@ -1387,7 +1387,7 @@ class Asset(models.Model):
 ##############################################################################
 
 class LookletMetadataSidecar(models.Model):
-    id = models.IntegerField(primary_key=True)  # AutoField?
+    #id = models.IntegerField(primary_key=True)  # AutoField?
     metadata_type = models.CharField(max_length=10)
     metadata_tag = models.CharField(max_length=255)
     metadata_value = models.CharField(max_length=255)
@@ -1408,7 +1408,7 @@ class LookletMetadataSidecar(models.Model):
 
 
 # class LookletShotListPostReadyOriginal(models.Model):
-#     id = models.BigIntegerField(primary_key=True)
+#     #id = models.BigIntegerField(primary_key=True)
 #     colorstyle = models.ForeignKey('LookletShotList',  related_name='looklet_colorstyles_sent')
 #     file_paths = models.ManyToManyField('PostReadyOriginal', related_name='looklet_file_paths_returned+')
 #
@@ -1436,7 +1436,7 @@ class LookletMetadataSidecar(models.Model):
 #         return self.file_path
 
 class LookletShotList(models.Model):
-    id = models.BigIntegerField(primary_key=True)
+    #id = models.BigIntegerField(primary_key=True)
     colorstyle = models.CharField(max_length=9)
     photodate = models.DateField(max_length=10, blank=True, null=True)
     reshoot = models.CharField(max_length=1, blank=True, null=True)
