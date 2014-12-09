@@ -341,17 +341,23 @@ class OffshoreStatusSentOnlyResource(ModelResource):
 class ImageUpdateResource(ModelResource):
     # user = fields.ForeignKey(UserResource, 'user')
     class Meta:
-        serializer = Serializer(formats=['json', 'jsonp', 'xml'])
+        serializer = Serializer(formats=['json', 'jsonp', 'xml', 'yaml', 'html', 'plist'])
         resource_name = 'image-update'
         # detail_uri_name = 'colorstyle'
         authorization= Authorization()
-        authentication= ApiKeyAuthentication()
-
+        #authentication= ApiKeyAuthentication()
         queryset =  ImageUpdate.objects.all()
-        allowed_methods         = ['get', 'post', 'put']
-        list_allowed_methods    = ['get', 'post']
-        detail_allowed_methods  = ['get']
+        allowed_methods = ['get', 'post', 'put']
+        list_allowed_methods = ['get', 'post', 'put']
+        detail_allowed_methods = ['get', 'post', 'put']
         cache = SimpleCache(timeout=10)
+        filtering = {
+            'colorstyle': ALL,
+            'alt': ALL_WITH_RELATIONS,
+            'create_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
+            'modify_dt': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
+            'image_type': ALL,
+        }
 
 ### Raw Capture 1 data
 class ProductionRawCp1DataResource(ModelResource):
