@@ -1528,8 +1528,8 @@ class LookletShotList(models.Model):
 
     def primary_select_zthumb(self):
         #from djdam.settings import MEDIA_URL
-        zroot='/'  #192.168.20.242/'
-        img_url = "{0}zImages/{1}/{2}_1.jpg".format(zroot, self.colorstyle[:4], self.colorstyle)
+        zroot='/192.168.20.242/'
+        img_url = "{0}zImages_1/{1}/{2}_1.jpg".format(zroot, self.colorstyle[:4], self.colorstyle)
         from django.utils.safestring import mark_safe
         return mark_safe('<img class="img-rounded" style="width: 240px;" src="{0}"  alt="{1}"/>').format(img_url, self.timestamp)
     #primary_select_thumb = property(primary_select_zthumb)
