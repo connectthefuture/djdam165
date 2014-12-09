@@ -1411,6 +1411,7 @@ class Asset(models.Model):
 #         return reverse('images.views.details', args=[str(self.id)])
 
     class Meta:
+        managed = True
         db_table = 'asset'
         ordering = ['-asset_type']
 
