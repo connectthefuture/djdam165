@@ -60,6 +60,9 @@ class AdminToolsMenuBookmark(models.Model):
     class Meta:
         db_table = 'admin_tools_menu_bookmark'
 
+    def __unicode__(self):
+        return 'Url: ' + self.url
+
 
 class AuthGroup(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -98,6 +101,7 @@ class AuthPermission(models.Model):
         #return 'CodeName: ' + self.codename + '\n\t' + 'AuthDesc: ' + self.name
         return 'AuthDesc: ' + self.name
 
+
 class AuthUser(models.Model):
     id = models.IntegerField(primary_key=True)
     password = models.CharField(max_length=128L)
@@ -128,7 +132,7 @@ class AuthUserGroups(models.Model):
         verbose_name_plural = 'AuthUsersGroups'
 
     def __unicode__(self):
-        return 'AuthUserID: ' + self.id ##.username + '\n\t' + 'Group: ' + self.group.name
+        return 'AuthUserID: ' + str(self.id) + ' ' + str(self.user) ##.username + '\n\t' + 'Group: ' + self.group.name
 
 
 class AuthUserUserPermissions(models.Model):
@@ -140,7 +144,7 @@ class AuthUserUserPermissions(models.Model):
         db_table = 'auth_user_user_permissions'
 
     def __unicode__(self):
-        return 'AuthUserPermissionID: ' + self.id  ##+ '\n\t' + 'Permission: ' + self.permission.codename
+        return 'AuthUserPermissionID: ' + str(self.id)  ##+ '\n\t' + 'Permission: ' + self.permission.codename
 
 
 class DjangoAdminLog(models.Model):
@@ -156,7 +160,7 @@ class DjangoAdminLog(models.Model):
         db_table = 'django_admin_log'
 
     def __unicode__(self):
-        return 'ObjectID: ' + self.object_id ##+ '\n\t' + 'ContentType: ' + self.content_type.name
+        return 'ObjectID: ' + str(self.object_id) ##+ '\n\t' + 'ContentType: ' + self.content_type.name
 
 
 class DjangoContentType(models.Model):
@@ -179,7 +183,7 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
     def __unicode__(self):
-        return 'SessionKey: ' + self.session_key + '\n\t' + 'SessionData: ' + self.session_data
+        return 'SessionKey: ' + str(self.session_key) + '\n\t' + 'SessionData: ' + str(self.session_data)
 
 
 class DjangoSite(models.Model):
