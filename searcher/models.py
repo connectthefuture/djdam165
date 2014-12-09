@@ -95,8 +95,8 @@ class AuthPermission(models.Model):
         db_table = 'auth_permission'
 
     def __unicode__(self):
-        return 'CodeName: ' + self.codename + '\n\t' + 'AuthDesc: ' + self.name
-
+        #return 'CodeName: ' + self.codename + '\n\t' + 'AuthDesc: ' + self.name
+        return 'AuthDesc: ' + self.name
 
 class AuthUser(models.Model):
     id = models.IntegerField(primary_key=True)

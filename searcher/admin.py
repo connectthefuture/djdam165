@@ -202,3 +202,10 @@ class AuthGroupPermissionsAdmin(myadmin.ModelAdmin):
     list_display = ('id', 'group', 'permission')
     form = autocomplete_light.modelform_factory(AuthGroupPermissions)
 myadmin.site.register(AuthGroupPermissions, AuthGroupPermissionsAdmin)
+
+
+class AuthUserGroupsAdmin(myadmin.ModelAdmin):
+    search_fields = ['group', 'id']
+    list_display = ('id', 'group', 'user')
+    form = autocomplete_light.modelform_factory(AuthUserGroups)
+myadmin.site.register(AuthUserGroups, AuthUserGroupsAdmin)
