@@ -1493,7 +1493,7 @@ class LookletShotList(models.Model):
 
 
     class Meta:
-        managed = True
+        #managed = True
         db_table = 'looklet_shot_list'
         #ordering = ['-timestamp', '-colorstyle' ]
         verbose_name_plural = 'Looklet_ShotLists'
