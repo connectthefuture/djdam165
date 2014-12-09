@@ -125,6 +125,7 @@ class AuthUserGroups(models.Model):
     class Meta:
         managed = True
         db_table = 'auth_user_groups'
+        verbose_name_plural = 'AuthUsersGroups'
 
     def __unicode__(self):
         return 'AuthUserID: ' + self.id ##.username + '\n\t' + 'Group: ' + self.group.name
@@ -1493,7 +1494,7 @@ class LookletShotList(models.Model):
 
 
     class Meta:
-        #managed = True
+        managed = True
         db_table = 'looklet_shot_list'
         #ordering = ['-timestamp', '-colorstyle' ]
         verbose_name_plural = 'Looklet_ShotLists'
