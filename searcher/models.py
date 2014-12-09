@@ -1520,7 +1520,7 @@ class LookletShotList(models.Model):
     def primary_select_small(self):
         from django.utils.safestring import mark_safe
         img_url = "{0}zImages/{1}/{2}_1.jpg".format(MEDIA_ROOT, self.colorstyle[:4], self.colorstyle)
-        return mark_safe('<img class="img-rounded" style="width: 120px;" src="{0}"  alt="{1}"/>').format(img_url, self.timestamp)
+        return mark_safe('<img href="#" class="img-rounded" style="width: 120px;" src="{0}"  alt="{1}"/>').format(img_url, self.timestamp)
         #return mark_safe(
         #    '<img src="{0}" onload="this.width=\'80\'; this.height=\'96\'" onmouseover="this.width=\'200\'; this.height=\'240\'" onmouseout="this.width=\'80\'; this.height=\'96\'"/>').format(self.file_path)
     primary_select_small.allow_tags = True
@@ -1529,9 +1529,10 @@ class LookletShotList(models.Model):
     def primary_select_zthumb(self):
         #from djdam.settings import MEDIA_URL
         zroot='http://192.168.20.242/'
+        zroot='http://192.168.20.242/'
         img_url = "{0}zImages_1/{1}/{2}_1.jpg".format(zroot, self.colorstyle[:4], self.colorstyle)
         from django.utils.safestring import mark_safe
-        return mark_safe('<img class="img-rounded" style="width: 240px;" src="{0}"  alt="{1}"/>').format(img_url, self.timestamp)
+        return mark_safe('<img href="#" class="img-rounded" style="width: 240px;" src="{0}"  alt="{1}"/>').format(img_url, self.timestamp)
     #primary_select_thumb = property(primary_select_zthumb)
     primary_select_zthumb.allow_tags = True
 
@@ -1540,20 +1541,20 @@ class LookletShotList(models.Model):
         zroot='192.168.20.242/'
         img_url = "{0}zImages/{1}/{2}_2.jpg".format(zroot, self.colorstyle[:4], self.colorstyle)
         from django.utils.safestring import mark_safe
-        return mark_safe('<img class="img-rounded" style="width: 240px;" src="{0}" alt="{1}"/>').format(img_url, self.timestamp)
+        return mark_safe('<img href="#" class="img-rounded" style="width: 240px;" src="{0}" alt="{1}"/>').format(img_url, self.timestamp)
     back_select_thumb = property(back_select_zthumb)
 
 
     def primary_pdp_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=340&height=408&ver=null class="img-rounded" style="width: 240px;"/>').format(self.colorstyle)
+        return mark_safe('<img href="#" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=340&height=408&ver=null class="img-rounded" style="width: 240px;"/>').format(self.colorstyle)
     primary_pdp_image.allow_tags = True
 
 
     def bfly_list_image(self):
         from django.utils.safestring import mark_safe
         ##if len(self.file_name) == 9:
-        return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=250&height=301&ver=null class="img-rounded" style="width: 240px;"/>').format(self.colorstyle)
+        return mark_safe('<img href="#" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=250&height=301&ver=null class="img-rounded" style="width: 240px;"/>').format(self.colorstyle)
     bfly_list_image.allow_tags = True
 
 
