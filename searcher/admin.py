@@ -100,7 +100,7 @@ class LookletShotListAdmin(myadmin.ModelAdmin):
     # This will generate a ModelForm
     list_display = ( 'primary_select_zthumb', 'colorstyle', 'photodate', 'reshoot', 'username', 'bfly_list_image', 'primary_pdp_image')
     search_fields = ['colorstyle', 'photodate']
-    list_filter = ('reshoot', 'username')
+    list_filter = ('reshoot', 'username', 'photodate')
     list_per_page = 100
     form = autocomplete_light.modelform_factory(LookletShotList)
 myadmin.site.register(LookletShotList, LookletShotListAdmin)
