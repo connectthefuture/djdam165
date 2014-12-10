@@ -1553,14 +1553,14 @@ class LookletShotList(models.Model):
 
     def primary_pdp_image(self):
         from django.utils.safestring import mark_safe
-        return mark_safe('<img href="/reloadrefresh/{0}" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=340&height=408&ver=null class="img-rounded" style="width: 240px;"/>').format(self.colorstyle)
+        return mark_safe('<img href="/reloadrefresh/{0}" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=340&height=408&ver=null" class="img-rounded" style="width: 240px;"/>').format(self.colorstyle)
     primary_pdp_image.allow_tags = True
 
 
     def bfly_list_image(self):
         from django.utils.safestring import mark_safe
         ##if len(self.file_name) == 9:
-        return mark_safe('<img href="#" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=250&height=301&ver=null class="img-rounded" style="width: 240px;"/>').format(self.colorstyle)
+        return mark_safe('<img href="#" src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=250&height=301&ver=null" class="img-rounded" style="width: 240px;"/>').format(self.colorstyle)
     bfly_list_image.allow_tags = True
 
 
