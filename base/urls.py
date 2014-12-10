@@ -28,6 +28,9 @@ urlpatterns += patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT}),
     )
 
+urlpatterns += patterns('',
+                        url(r'^reloadrefresh/(?P<colorstyle>\d{7,9})$', 'reloadrefresh'),
+
 urlpatterns += patterns('searcher.tables',
                         url(r'^suppliers/?$','suppliers'),
                         url(r'^suppliers/compare/?.*?$', 'suppliers_compare'),

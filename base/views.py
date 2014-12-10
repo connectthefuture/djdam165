@@ -79,6 +79,20 @@ def testjsonform(request):
 
 
 
+def reloadrefresh(request,colorstyle=None):
+    import requests, json
+    data=''
+    try:
+        colorstyle = request.GET['input_list']
+        print colorstyle
+        data = json.dumps({'colorstyle': colorstyle})
+    except IndexError:
+        pass
+
+    res = requests.post('http://prodimages.ny.bluefly.com/images-updates', data=data)
+    return res.content
+
+
 # "brand": "Gucci",
 # "category": "",
 # "color": "Brown",
