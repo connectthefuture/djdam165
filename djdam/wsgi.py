@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 # newrelic.agent.initialize("newrelic.ini")
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djdam.settings")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()

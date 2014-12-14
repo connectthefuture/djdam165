@@ -78,7 +78,7 @@ INSTALLED_APPS = (# '',
     'django.contrib.staticfiles',
     'django.contrib.redirects',
     # Third-party apps, patches, fixes
-    'djcelery',  #
+    #'djcelery',  #
     'compressor',
 
     ## Debug toolbar
