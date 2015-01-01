@@ -26,7 +26,7 @@ urlpatterns = patterns('searcher.views',
 
                       (r'^find/(\d{5,9})/$', 'search_colorstyle'),
                       url(r'^findall/(?P<colorstyle>\d{5,9})/$', 'get_all_images_colorstyle', name='getall_colorstyle'),
-                      url(r'^findall/outtakes/?$', 'get_all_images_outtakes', name='get_all_images_outtakes'),
+                      url(r'^findall/outtakes/?$', 'get_all_images_bydate', name='get_all_images_bydate'),
                       #url(r'^findall/outtakes/(?P<pkey>\d+)/?$', 'get_all_images_outtakes', name='get_all_images_outtakes'),
                       (r'^findall/?$', 'get_all_images_colorstyle'),
                       # (r'^findall/?(colorstyle=\d{5,9})/$', 'get_all_images_colorstyle'),

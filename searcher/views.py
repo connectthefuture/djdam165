@@ -1064,6 +1064,44 @@ def get_all_images_colorstyle(request):
 
 ###################################################################################################
 ###################################################################################################
+@cache_page(60 * 15)
+def get_all_images_bydate(request):
+    from searcher.models import PostReadyOriginal
+    from searcher.models import ProductSnapshotLive
+    selects_all = PostReadyOriginal.objects.distinct()
+    results             = []
+    images              = ''
+    colorstyle          = ''
+    photo_date          = ''
+    metadata            = {}
+    colorstyles         = []
+    selects_found       = {}
+
+    if request.get()['photo_date']:
+        querytmp           = photo_date
+        ## Create datetime obj from post str formatted variable
+        query           = datetime.datetime.strptime(querytmp, '%Y-%m-%d').date()
+        selects_found   =  selects_all.filter(photo_date=query)
+
+        colorstyles = []
+        #metadata = {}
+        for style in selects_found.values_list('colorstyle', flat=True):
+            colorstyles.append(style)
+            #colorstyles = sorted(set(colorstyles))
+
+            #i = PmData.get(colorstyle__icontains=style).values()
+            #metadata[style] = i
+        metadata=PmData.all().filter(colorstyle__in=[colorstyles])
+
+        from itertools import chain
+        results_list = list(chain(selects_found, styledata))
+
+    images  = selects_found
+    results = results_list
+    return render(request, 'image/image_results.html', {'results': results, 'images': images, 'styledata': styledata, 'query': query })
+
+###################################################################################################
+###################################################################################################
 
 @cache_page(60 * 15)
 def get_all_images_outtakes(request):
