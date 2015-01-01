@@ -54,7 +54,7 @@
               <p><label for="shot_number">Shot Number: </label><input type="text" name="shot_number" id="shot_number" value="{{ image.shot_number }}" /></p>
               <p><label for="photo_date">Photo Date: </label><input type="date" name="photo_date" id="photo_date" value="{{ image.photo_date }}" /></p>
               <p><label for="brand">Brand: </label><input type="text" name="brand" id="brand" value="{{ image.styledata.brand }}" /></p>
-              <p><label for="file_path">Source URL: </label><input type="url" name="file_path" id="file_path{{ image.pk }}" value="http://{{ image.file_path }}" /></p>
+              <p><label for="file_path">Source URL: </label><input type="url" name="file_path" id="file_path{{ image.pk }}" value="http:/{{ image.file_path }}" /></p>
               <p><label for="modelname">Model: </label><input type="text" name="modelname" id="modelname" value="{{ styledata.model }}" /></p>
               <p><label for="notes">Notes: </label><input type="text" name="notes" id="notes" value="{{ image.notes.notes }}" /></p>
                                                    <input type="hidden" name="file_path" id="file_path{{ image.pk }}" value="{{ image.file_path }}">
