@@ -125,7 +125,8 @@
             <input type="checkbox"name="imagepk" class="a-checkbox" id="isselected{{ image.pk }}" value="{{ image.pk }}"> {{ image.colorstyle }}
             </label>
             <input type="hidden" name="file_path" id="file_path{{ image.pk }}" value="{{ image.file_path }}">
-            <button type="submit" name="submit" class="btn btn-mini btn-success" value="SubmitSelect"><span class="glyphicon glyphicon-edit"></span>
+            <button type="submit" name="submit" class="btn btn-mini btn-success" value="SubmitSelect">
+                <span class="glyphicon glyphicon-edit"></span>
                 SubmitSelection
             </button>
         </form>
@@ -164,8 +165,14 @@
   {% if image.model_name %}
     <tr>
         <th> Model Name</th>
-        <td><span class="glyphicon glyphicon-camera"></span>  {{ image.model_name }}</td>
+        <td><span class="glyphicon glyphicon-hand-left"></span>  {{ image.model_name }}</td>
     </tr>    
+  {% endif %}
+  {% if results.metadata %}
+    <tr>
+        <th> Metadata Results</th>
+        <td><span class="glyphicon glyphicon-comment"></span>  {{ results.metadata }}</td>
+    </tr>
   {% endif %}
 {% endfor %}
 
@@ -186,6 +193,6 @@
 </table><!-- table close-->
 {% endfor %}
 
-<p>ENDLASTFORLOOPFORPAGEALLGROUOP</p>
+{#<p>ENDLASTFORLOOPFORPAGEALLGROUOP</p>#}
 </div><!-- container close-->
 {% endblock %}
