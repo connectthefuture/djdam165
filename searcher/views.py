@@ -443,8 +443,65 @@ def lastweeks_fashion_selects(request):
 
     #return render(request, 'listing/image_list_page.html', {'results': results, 'images': images, })
 
+###################################################################################################
+########################## Looklet HomePAge Views #################################################
+###################################################################################################
+
+def lastweeks_looklet_selects(request):
+    results = query_previous_week(PostReadyOriginal)
+    results = results.filter(file_path__contains="_LL/")
+    images = results
+    paginator = Paginator(results, 27) # Show 25 results per page
+    page = request.GET.get('page')
+    try:
+        results = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        results = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        results = paginator.page(paginator.num_pages)
+    return render(request, 'image/image_results.html', {'results': results, 'images': images})
+
+
+def weeks_looklet_selects(request):
+    results = query_current_week(PushPhotoselects)
+    results = results.filter(file_path__contains="_LL/")
+    images = results
+    paginator = Paginator(results, 27) # Show 25 results per page
+    page = request.GET.get('page')
+    try:
+        results = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        results = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        results = paginator.page(paginator.num_pages)
+    return render(request, 'image/image_results.html', {'results': results, 'images': images,})
+
+
+def yesterday_looklet_selects(request):
+    results = query_yesterday(PushPhotoselects)
+    results = results.filter(file_path__contains="_LL/")
+    images = results
+    paginator = Paginator(results, 27) # Show 25 results per page
+
+    page = request.GET.get('page')
+    try:
+        results = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        results = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        results = paginator.page(paginator.num_pages)
+    return render(request, 'image/image_results.html', {'results': results, 'images': images, })
+
 
 ###################################################################################################
+###################################################################################################
+
 ###################################################################################################
 ###################################################################################################
 ###################################################################################################
