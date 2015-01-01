@@ -244,6 +244,15 @@ def query_yesterday(modelname):
     results = modelname.objects.filter(photo_date__gte=yesterday)
     return results
 
+#####################################
+#####################################
+
+def query_today(modelname):
+    from datetime import timedelta
+    from django.utils import timezone
+    today = timezone.now().date()
+    results = modelname.objects.filter(photo_date__exact=today)
+    return results
 
 ###################################################################################################
 ###################################################################################################
@@ -274,7 +283,7 @@ def yesterday_fashion_selects(request):
 
 def yesterday_still_selects(request):
     results = query_yesterday(PushPhotoselects)
-    results = results.filter(file_path__contains="aPhoto")
+    results = results.filter(file_path__contains="aPhoto").exclude(file_path__contains="_LL/")
     images = results
     paginator = Paginator(results, 27) # Show 25 contacts per page
 
@@ -360,7 +369,7 @@ def lastweeks_fashion_outtakes(request):
 # @cache_page(60 * 15)
 def weeks_still_selects(request):
     results = query_current_week(PushPhotoselects)
-    results = results.filter(file_path__contains="aPhoto")
+    results = results.filter(file_path__contains="aPhoto").exclude(file_path__contains="_LL/")
     images = results
     paginator = Paginator(results, 27) # Show 25 contacts per page
 
@@ -402,7 +411,7 @@ def weeks_fashion_selects(request):
 # @cache_page(60 * 15)
 def lastweeks_still_selects(request):
     results = query_previous_week(PostReadyOriginal)
-    results = results.filter(file_path__contains="Still")
+    results = results.filter(file_path__contains="Still").exclude(file_path__contains="_LL/")
     images = results
     paginator = Paginator(results, 27) # Show 25 contacts per page
 
@@ -498,6 +507,23 @@ def yesterday_looklet_selects(request):
         results = paginator.page(paginator.num_pages)
     return render(request, 'image/image_results.html', {'results': results, 'images': images, })
 
+
+def today_all_selects(request):
+    results = query_today(PushPhotoselects)
+    results = results.filter(file_path__contains="/")
+    images = results
+    paginator = Paginator(results, 27) # Show 25 results per page
+
+    page = request.GET.get('page')
+    try:
+        results = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        results = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        results = paginator.page(paginator.num_pages)
+    return render(request, 'image/image_results.html', {'results': results, 'images': images, })
 
 ###################################################################################################
 ###################################################################################################
