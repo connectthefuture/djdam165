@@ -1078,7 +1078,8 @@ def get_all_images_bydate(request):
     metadata            = {}
     colorstyles         = []
     selects_found       = {}
-
+    query               = ''
+    
     if request.method == 'GET' and request.GET['photo_date']:
         querytmp           = photo_date
         ## Create datetime obj from post str formatted variable
