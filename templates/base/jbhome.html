@@ -25,6 +25,7 @@
 
     <!-- Main hero unit, renamed jumbotron, for a primary marketing message or call to action -->
     {#<div class="container-fluid"> #}
+    {% block jumbotron %}
     <div class="container">
         <div class="jumbotron" style="background:rgba(2, 111, 57, 0.82); color: rgb(224, 210, 131)">
             <h1>Motowns Hitmaker is Back!</h1>
@@ -69,16 +70,18 @@
             </p>
             </div></div>
             <!--close dated queries links row and container divs looklet -->
-            <!--open Today query link row and container divs All -->
-            <div class="container"><div class="row">
+            <!--open Today query link row and container divs All
+            <div class="container"><div class="row">-->
             <p>
-                <a href="searcher/today-all-selects" class="btn btn-md" style="background: rgba(129, 0, 152, 0.58);color: rgb(224, 210, 131)"><span class="glyphicon glyphicon-calendar" style="color: rgba(216, 143, 6, 0.99)"></span> Shots Received Today</a>
+                <div class="col-sm-2 col-md-2">
+                <a href="searcher/today-all-selects" class="btn btn-lg" style="background: rgba(129, 0, 152, 0.58);color: rgb(224, 210, 131)"><span class="glyphicon glyphicon-calendar" style="color: rgba(216, 143, 6, 0.99)"></span> Shots Received Today</a>
+                </div>
             </p>
-            </div></div>
+            <!--</div></div>-->
             <!--close Today query link row and container divs All -->
             </div>
             <!-- END close ALL queries links row and container divs END -->
-            {% comment %}
+{% comment %}
             <p>
                 <a href="searcher/postreadyorig/2013/11/19/" class="btn btn-danger btn-sm"> ArchiveDayView<N/a>
                 <a href="searcher/postreadyorig/2013/week/47/" class="btn btn-warning btn-sm"> ArchiveWeekView</a>
@@ -104,7 +107,8 @@
 
         </div>
     </div>
-    <!-- end silly named marketing message -->
+    <!-- end silly named marketing message jumbotron, just inherit it away to a better place -->
+    {% endblock %}
     <!--<li><a href="http://prodimages.ny.bluefly.com:8082/siteshome/Reports/event_incomplete_14days.html">The Lavender Report</a></li> -->
 
     <!-- Example row of columns MIDDLE ROW Begin -->
