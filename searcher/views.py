@@ -1066,8 +1066,10 @@ def get_all_images_colorstyle(request):
 ###################################################################################################
 @cache_page(60 * 15)
 def get_all_images_bydate(request):
+    import datetime
     from searcher.models import PostReadyOriginal
     from searcher.models import ProductSnapshotLive
+    pmdata = ProductSnapshotLive.objects.all()
     selects_all = PostReadyOriginal.objects.distinct()
     results             = []
     images              = ''
@@ -1077,7 +1079,7 @@ def get_all_images_bydate(request):
     colorstyles         = []
     selects_found       = {}
 
-    if request.get()['photo_date']:
+    if request.method == 'GET' and request.GET['photo_date']:
         querytmp           = photo_date
         ## Create datetime obj from post str formatted variable
         query           = datetime.datetime.strptime(querytmp, '%Y-%m-%d').date()
@@ -1089,16 +1091,16 @@ def get_all_images_bydate(request):
             colorstyles.append(style)
             #colorstyles = sorted(set(colorstyles))
 
-            #i = PmData.get(colorstyle__icontains=style).values()
+            #i = pmdata.get(colorstyle__icontains=style).values()
             #metadata[style] = i
-        metadata=PmData.all().filter(colorstyle__in=[colorstyles])
+        metadata=pmdata.all().filter(colorstyle__in=[colorstyles])
 
         from itertools import chain
-        results_list = list(chain(selects_found, styledata))
+        results = list(chain(selects_found, metadata))
 
     images  = selects_found
-    results = results_list
-    return render(request, 'image/image_results.html', {'results': results, 'images': images, 'styledata': styledata, 'query': query })
+    results = results
+    return render(request, 'image/image_results.html', {'results': results, 'images': images, 'metadata': metadata, 'query': query })
 
 ###################################################################################################
 ###################################################################################################
