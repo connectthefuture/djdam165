@@ -71,6 +71,8 @@ urlpatterns = patterns('searcher.views',
                       (r'^ajax/colorstyle/$', 'ajax_colorstyle_search'), #, name='ajax_colorstyle_search'),
                       (r'^manage/local-image-urls/.*/(\d{5,9})_(\d)_?(\d{1,4})?\.(\w+)/$', 'manage_local_image_urls'),
                       (r'^manage/products/(\d{5,9})/$', 'manage_products'),
+                      url(r'^manage/swatches/edit/(\d{5,9}/?)$', 'swatch_params_modal', name='swatch_params_modal'),
+                      url(r'^manage/swatches/edit/((\d{5,9}\s?)*?/)?$', 'swatch_params_modal', name='swatch_params_modal_multi'),
 
                       url(r'^manage/supplier-ingest/$', 'manage_supplier_ingest', name='manage_supplier_base'),
                       #url(r'^manage/supplier-ingest/(?P<colorstyle>\d{5,9})/?$', 'manage_supplier_ingest', name='manage_supplier_colorstyle'),

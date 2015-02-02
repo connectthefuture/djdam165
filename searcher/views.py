@@ -76,6 +76,7 @@ def search_users_albums_bycolorstyle(request):
 def search_colorstyle(request, q):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
+        errors = ''
         if not q:
             errors.append('Enter a search term.')
         else:
@@ -1790,3 +1791,22 @@ def ajax_colorstyle_search(request,q=None,sq=None):
 #         context_instance=RequestContext(request)
 #     )
 
+
+from models import LookletShotList, PostReadyOriginal
+def swatch_params_modal(request):
+    results = ''
+    images = ''
+    try:
+        styles = str(request.GET.items()[0])#['input_list'])
+        print styles
+    except:
+        try:
+            if request.GET.items()[0]:
+                styles= request.GET.items()[0] ##['input_list']
+                print styles, '\t Part2'
+        except IndexError:
+            message = 'You submitted an empty list of styles. Please try again.'
+            return HttpResponseRedirect(redirect_to='#')
+
+
+    return render(request, 'image/image_results_v2.html', {'results': results, 'images': images, })

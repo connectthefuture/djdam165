@@ -40,7 +40,7 @@
             </button>
             <h4 class="modal-title" id="myModalLabel{{ image.pk }}">{{ image.file_path }}</h4>
         </div>
-        <form enctype="multipart/form-data" action="/searcher/metadata/edit/{{ image.pk }}/" method="post">
+        <form enctype="multipart/form-data" action="/searcher/manage/swatches/edit/{{ image.colorstyle }}/" method="post">
                 <!--{% comment %}-->
            <!--<form enctype="multipart/form-data" action="metadata/edit//{{ image.pk }}/{{ image.colorstyle }}/{{ image.alt }}/{{ image.shot_number }}/" method="post">-->
                 <!--{% endcomment %}-->
