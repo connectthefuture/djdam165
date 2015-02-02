@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block image_results %}
-{% regroup images by colorstyle as colorstyles %}
+{% regroup results by colorstyle as colorstyles %}
 
 
 <div class="container">
@@ -107,7 +107,7 @@
             </button>
             <h4 class="modal-title" id="myModalSwatchLabel{{ image.pk }}">{{ image.file_path }}</h4>
         </div>
-        <form enctype="multipart/form-data" action="/searcher/swatch/edit/{{ image.colorstyle }}/" method="post">
+        <form enctype="multipart/form-data" action="/searcher/manage/swatches/edit/{{ image.colorstyle }}/" method="post">
                 {% csrf_token %}
 
             <div class="modal-body">

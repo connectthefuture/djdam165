@@ -1792,7 +1792,8 @@ def ajax_colorstyle_search(request,q=None,sq=None):
 #     )
 
 
-from models import LookletShotList, PostReadyOriginal
+from models import LookletShotList, PostReadyOriginal, ProductSnapshotLive
+from django.db.models import Q
 def swatch_params_modal(request):
     results = ''
     images = ''
@@ -1807,6 +1808,14 @@ def swatch_params_modal(request):
         except IndexError:
             message = 'You submitted an empty list of styles. Please try again.'
             return HttpResponseRedirect(redirect_to='#')
+
+    results = {}
+    for style in styles:
+        pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
+        file7_returned_list = PostReadyOriginal.objects.filter(Q(colorstyle__icontains=style) | Q(alt__icontains=1))
+        looklet_shot_list = LookletShotList.objects.objects.filter(colorstyle__icontains=style)
+        images = pmdata_list | file7_returned_list |looklet_shot_list
+        results[style] = images
 
 
     return render(request, 'image/image_results_v2.html', {'results': results, 'images': images, })
