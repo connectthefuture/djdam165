@@ -1819,3 +1819,71 @@ def swatch_params_modal(request):
 
 
     return render(request, 'image/image_results_v2.html', {'results': results, 'images': images, })
+
+
+
+def query_previous_month(modelname):
+    from datetime import timedelta
+    from django.utils import timezone
+    some_day_last_week = timezone.now().date() - timedelta(days=30)
+    monday_of_last_week = some_day_last_week - \
+        timedelta(days=(some_day_last_week.isocalendar()[2] - 1))
+    monday_of_this_week = monday_of_last_week + timedelta(days=30)
+    try:
+        results = modelname.objects.filter(photo_date__gte=monday_of_last_week, photo_date__lt=monday_of_this_week)
+    except:
+        results = modelname.objects.filter(photodate__gte=monday_of_last_week, photodate__lt=monday_of_this_week)
+    return results
+
+
+def lastmonths_looklet_selects(request):
+    try:
+        styles = str(request.GET.items()[0])
+    except:
+        styles = query_previous_month(LookletShotList)
+    results = {}
+    for style in styles:
+        pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
+        file7_returned_list = PostReadyOriginal.objects.filter(Q(colorstyle__icontains=style) | Q(alt__icontains=1))
+        looklet_shot_list = LookletShotList.objects.objects.filter(colorstyle__icontains=style)
+        images = pmdata_list | file7_returned_list | looklet_shot_list
+        results[style] = images
+    paginator = Paginator(results, 27) # Show 25 results per page
+    page = request.GET.get('page')
+    try:
+        results = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        results = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        results = paginator.page(paginator.num_pages)
+    return render(request, 'image/image_results_v2.html', {'results': results, 'images': images})
+
+
+
+def swatch_params_modal(request):
+    results = ''
+    images = ''
+    try:
+        styles = str(request.GET.items()[0])#['input_list'])
+        print styles
+    except:
+        try:
+            if request.GET.items()[0]:
+                styles= request.GET.items()[0] ##['input_list']
+                print styles, '\t Part2'
+        except IndexError:
+            message = 'You submitted an empty list of styles. Please try again.'
+            return HttpResponseRedirect(redirect_to='#')
+
+    results = {}
+    for style in styles:
+        pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
+        file7_returned_list = PostReadyOriginal.objects.filter(Q(colorstyle__icontains=style) | Q(alt__icontains=1))
+        looklet_shot_list = LookletShotList.objects.objects.filter(colorstyle__icontains=style)
+        images = pmdata_list | file7_returned_list |looklet_shot_list
+        results[style] = images
+
+
+    return render(request, 'image/image_results_v2.html', {'results': results, 'images': images, })
