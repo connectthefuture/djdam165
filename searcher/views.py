@@ -1825,14 +1825,14 @@ def swatch_params_modal(request):
 def query_previous_month(modelname):
     from datetime import timedelta
     from django.utils import timezone
-    some_day_last_week = timezone.now().date() - timedelta(days=30)
-    monday_of_last_week = some_day_last_week - \
-        timedelta(days=(some_day_last_week.isocalendar()[2] - 1))
-    monday_of_this_week = monday_of_last_week + timedelta(days=30)
+    some_day_last_month = timezone.now().date() - timedelta(days=30)
+    monday_of_last_month = some_day_last_month - \
+        timedelta(days=(some_day_last_month.isocalendar()[2] - 1))
+    monday_of_this_week = monday_of_last_month + timedelta(days=30)
     try:
-        results = modelname.objects.filter(photo_date__gte=monday_of_last_week, photo_date__lt=monday_of_this_week)
+        results = modelname.objects.filter(photo_date__gte=monday_of_last_month, photo_date__lt=monday_of_this_week)
     except:
-        results = modelname.objects.filter(photodate__gte=monday_of_last_week, photodate__lt=monday_of_this_week)
+        results = modelname.objects.filter(photodate__gte=monday_of_last_month, photodate__lt=monday_of_this_week)
     return results
 
 
