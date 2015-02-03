@@ -1841,11 +1841,11 @@ def lastmonths_looklet_selects(request):
         styles = str(request.GET.items()[0])
     except:
         styles = query_previous_month(PostReadyOriginal)
-        styles = styles.values_list('colorstyle', flat=True).order_by('colorstyle')
+        styles = styles.values_list('colorstyle', flat=True).order_by('colorstyle')[:50]
     results = {}
     for style in styles:
         #pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
-        file7_returned_list = PostReadyOriginal.objects.filter(colorstyle__icontains=style).filter(alt__icontains=1)
+        file7_returned_list = PostReadyOriginal.objects.filter(alt__icontains=1).filter(colorstyle__icontains=style)
         looklet_shot_list = LookletShotList.objects.filter(colorstyle__icontains=style)
         ##images = pmdata_list | file7_returned_list | looklet_shot_list
         from operator import attrgetter
