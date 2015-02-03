@@ -1840,7 +1840,8 @@ def lastmonths_looklet_selects(request):
     try:
         styles = str(request.GET.items()[0])
     except:
-        styles = query_previous_month(LookletShotList)
+        styles = query_previous_month(PostReadyOriginal)
+        styles = styles.values_list('colorstyle', flat=True).order_by('colorstyle')
     results = {}
     for style in styles:
         pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
