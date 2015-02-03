@@ -1844,27 +1844,27 @@ def lastmonths_looklet_selects(request):
         styles = styles.values_list('colorstyle', flat=True).order_by('colorstyle')
     results = {}
     for style in styles:
-        pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
-        file7_returned_list = PostReadyOriginal.objects.filter(Q(colorstyle__icontains=style) | Q(alt__icontains=1))
+        #pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
+        file7_returned_list = PostReadyOriginal.objects.filter(colorstyle__icontains=style).filter(alt__icontains=1)
         looklet_shot_list = LookletShotList.objects.filter(colorstyle__icontains=style)
         ##images = pmdata_list | file7_returned_list | looklet_shot_list
         from operator import attrgetter
         from itertools import chain
         images = sorted(
-            chain(pmdata_list, file7_returned_list, looklet_shot_list),
+            chain(file7_returned_list, looklet_shot_list),
             key=attrgetter('colorstyle')
         )
         results[style] = images
-    paginator = Paginator(results, 27) # Show 25 results per page
-    page = request.GET.get('page')
-    try:
-        results = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        results = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        results = paginator.page(paginator.num_pages)
+    # paginator = Paginator(results, 27) # Show 25 results per page
+    # page = request.GET.get('page')
+    # try:
+    #     results = paginator.page(page)
+    # except PageNotAnInteger:
+    #     # If page is not an integer, deliver first page.
+    #     results = paginator.page(1)
+    # except EmptyPage:
+    #     # If page is out of range (e.g. 9999), deliver last page of results.
+    #     results = paginator.page(paginator.num_pages)
     return render(request, 'image/image_results_v2.html', {'results': results, 'images': images})
 
 
