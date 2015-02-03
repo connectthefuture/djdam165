@@ -1846,7 +1846,7 @@ def lastmonths_looklet_selects(request):
     for style in styles:
         #pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
         file7_returned_list = PostReadyOriginal.objects.filter(alt__icontains=1).filter(colorstyle__icontains=style)
-        looklet_shot_list = LookletShotList.objects.filter(colorstyle__icontains=style)
+        looklet_shot_list = LookletShotList.objects.filter(colorstyle__icontains=style).values()
         ##images = pmdata_list | file7_returned_list | looklet_shot_list
         from operator import attrgetter
         from itertools import chain
