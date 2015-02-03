@@ -1847,7 +1847,13 @@ def lastmonths_looklet_selects(request):
         pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
         file7_returned_list = PostReadyOriginal.objects.filter(Q(colorstyle__icontains=style) | Q(alt__icontains=1))
         looklet_shot_list = LookletShotList.objects.filter(colorstyle__icontains=style)
-        images = pmdata_list | file7_returned_list | looklet_shot_list
+        ##images = pmdata_list | file7_returned_list | looklet_shot_list
+        from operator import attrgetter
+        from itertools import chain
+        images = sorted(
+            chain(pmdata_list, file7_returned_list, looklet_shot_list),
+            key=attrgetter('colorstyle')
+        )
         results[style] = images
     paginator = Paginator(results, 27) # Show 25 results per page
     page = request.GET.get('page')
