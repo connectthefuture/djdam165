@@ -240,6 +240,13 @@
   {% endif %}
 {% endfor %}
 
+{% for i in images %}
+<div id="imageresults{{ i.colorstyle }}">{{ i }}
+<a href="{{ i.file_path }}">
+    <img alt="{{ i.photo_date }}" src="{{ i.file_path }}">
+</a>
+</div>
+{% endfor %}
 
 {% comment %}
 </div></div>

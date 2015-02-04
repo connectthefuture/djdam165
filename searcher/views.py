@@ -1854,7 +1854,7 @@ def lastmonths_looklet_selects(request):
             chain(file7_returned_list, looklet_shot_list),
             key=attrgetter('colorstyle')
         )
-        results[style] = images
+        results[style] = looklet_shot_list
     # paginator = Paginator(results, 27) # Show 25 results per page
     # page = request.GET.get('page')
     # try:
@@ -1865,7 +1865,7 @@ def lastmonths_looklet_selects(request):
     # except EmptyPage:
     #     # If page is out of range (e.g. 9999), deliver last page of results.
     #     results = paginator.page(paginator.num_pages)
-    return render(request, 'image/image_results_v2.html', {'results': results})
+    return render(request, 'image/image_results_v2.html', {'results': results, 'images':images})
 
 
 
