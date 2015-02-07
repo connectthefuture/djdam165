@@ -946,10 +946,11 @@ class Images(models.Model):
 
     def _get_absolute_url(self):
         return "/{0}/{1}/".format(MEDIA_ROOT, self.id)
-#       #(Whilst this code is correct and simple, it may not be the most portable way to write this kind of method. The reverse() function is usually the best approach.)
-#
-#     def get_absolute_url(self):
-#         from django.core.urlresolvers import reverse
+        # (Whilst this code is correct and simple, it may not be the most portable way to write this kind of method.
+        # The reverse() function is usually the best approach.)
+        #
+        #     def get_absolute_url(self):
+        #         from django.core.urlresolvers import reverse
 #         return reverse('images.views.details', args=[str(self.id)])
 
 

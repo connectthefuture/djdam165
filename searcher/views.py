@@ -1856,8 +1856,8 @@ def lastmonths_looklet_selects(request):
         #     key=attrgetter('colorstyle')
         # )
 
-        images[style] = file7_returned_list
-        results[style] = looklet_shot_list
+        images = file7_returned_list
+        results = looklet_shot_list
     # paginator = Paginator(results, 27) # Show 25 results per page
     # page = request.GET.get('page')
     # try:
