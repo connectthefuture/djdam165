@@ -1843,7 +1843,7 @@ def lastmonths_looklet_selects(request):
         styles = query_previous_month(PostReadyOriginal)
         styles = styles.values_list('colorstyle', flat=True).order_by('-photo_date')[:50]
     results = {}
-    images = {}
+    images = []
     for style in styles:
         #pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
         file7_returned_list = PostReadyOriginal.objects.filter(alt__icontains=1).filter(colorstyle__icontains=style)
@@ -1856,7 +1856,7 @@ def lastmonths_looklet_selects(request):
         #     key=attrgetter('colorstyle')
         # )
 
-        images = file7_returned_list
+        images.append(file7_returned_list)
         results = looklet_shot_list
     # paginator = Paginator(results, 27) # Show 25 results per page
     # page = request.GET.get('page')
@@ -1872,9 +1872,10 @@ def lastmonths_looklet_selects(request):
 
 
 
-def swatch_params_modal(request):
+def swatch_params_modal_Q(request):
     results = ''
     images = ''
+    styles = ''
     try:
         styles = str(request.GET.items()[0])#['input_list'])
         print styles
