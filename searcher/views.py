@@ -601,19 +601,19 @@ def upload(request):
 ######################################################################################################
 
 # def manage_metadata(request, image_id):
-#     image = Image.objects.get(pk=image_id)
-#     MetadataInlineFormSet = inlineformset_factory(image, metadata)
-#     if request.method == "POST":
-#         formset = MetadataInlineFormSet(request.POST, request.FILES, instance=image)
-#         if formset.is_valid():
-#             formset.save()
+#     image = Image.objects.get(pk=image_id)
+#     MetadataInlineFormSet = inlineformset_factory(image, metadata)
+#     if request.method == "POST":
+#         formset = MetadataInlineFormSet(request.POST, request.FILES, instance=image)
+#         if formset.is_valid():
+#             formset.save()
 #             ##TODO: Add function to process form data and embed in image as well as update DB table
-#             return HttpResponseRedirect(image.get_absolute_url())
-#     else:
-#         formset = MetadataInlineFormSet(instance=image)
-#     return render_to_response("manage_metadata.html", {
-#         "formset": formset,
-#     })
+#             return HttpResponseRedirect(image.get_absolute_url())
+#     else:
+#         formset = MetadataInlineFormSet(instance=image)
+#     return render_to_response("manage_metadata.html", {
+#         "formset": formset,
+#     })
 
 
 ###################################################################################################
@@ -1893,7 +1893,7 @@ def swatch_params_modal_Q(request):
         pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
         file7_returned_list = PostReadyOriginal.objects.filter(Q(colorstyle__icontains=style) | Q(alt__icontains=1))
         looklet_shot_list = LookletShotList.objects.objects.filter(colorstyle__icontains=style)
-        images = file7_returned_list #| pmdata_list | looklet_shot_list
+        images = pmdata_list | file7_returned_list |looklet_shot_list
         results[style] = images
 
 
