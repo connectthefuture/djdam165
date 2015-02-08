@@ -601,19 +601,19 @@ def upload(request):
 ######################################################################################################
 
 # def manage_metadata(request, image_id):
-#     image = Image.objects.get(pk=image_id)
-#     MetadataInlineFormSet = inlineformset_factory(image, metadata)
-#     if request.method == "POST":
-#         formset = MetadataInlineFormSet(request.POST, request.FILES, instance=image)
-#         if formset.is_valid():
-#             formset.save()
+#     image = Image.objects.get(pk=image_id)
+#     MetadataInlineFormSet = inlineformset_factory(image, metadata)
+#     if request.method == "POST":
+#         formset = MetadataInlineFormSet(request.POST, request.FILES, instance=image)
+#         if formset.is_valid():
+#             formset.save()
 #             ##TODO: Add function to process form data and embed in image as well as update DB table
-#             return HttpResponseRedirect(image.get_absolute_url())
-#     else:
-#         formset = MetadataInlineFormSet(instance=image)
-#     return render_to_response("manage_metadata.html", {
-#         "formset": formset,
-#     })
+#             return HttpResponseRedirect(image.get_absolute_url())
+#     else:
+#         formset = MetadataInlineFormSet(instance=image)
+#     return render_to_response("manage_metadata.html", {
+#         "formset": formset,
+#     })
 
 
 ###################################################################################################
