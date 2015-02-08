@@ -1,10 +1,6 @@
 {% extends "search_results.html" %}
 
 <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}uploader/css/style.css">
-{% comment %}
-<link  href="http://fotorama.s3.amazonaws.com/4.4.9/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
-<script src="http://fotorama.s3.amazonaws.com/4.4.9/fotorama.js"></script> <!-- 15 KB -->
-{% endcomment %}
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 
 
@@ -13,7 +9,7 @@
 {% endblock %}
 
 {% block image_results %}
-{% regroup results by colorstyle as colorstyles %}
+{% regroup images by colorstyle as colorstyles %}
 
 
 <div class="container">
@@ -157,14 +153,14 @@
     <tr>
         <th> Shot Number</th>
         <td><span class="glyphicon glyphicon-camera"></span>  {{ image.shot_number }}</td>
-    </tr>    
+    </tr>
   {% endif %}
-  
+
   {% if image.model_name %}
     <tr>
         <th> Model Name</th>
         <td><span class="glyphicon glyphicon-hand-left"></span>  {{ image.model_name }}</td>
-    </tr>    
+    </tr>
   {% endif %}
   {% if results.metadata %}
     <tr>
@@ -174,7 +170,7 @@
   {% endif %}
 {% endfor %}
 
-{% for i in images %}
+{% for i in results %}
 <div id="imageresults{{ i.colorstyle }}">{{ i }}
 <a href="{{ i.file_path }}">
     <img class="img-rounded" style="width: 240px;"  alt="{{ i.photo_date }}" src="{{ i.file_path }}">
