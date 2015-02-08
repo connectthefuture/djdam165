@@ -1889,7 +1889,7 @@ def swatch_params_modal(request):
         pmdata_list = ProductSnapshotLive.objects.filter(colorstyle__icontains=style)
         file7_returned_list = PostReadyOriginal.objects.filter(Q(colorstyle__icontains=style) | Q(alt__icontains=1))
         looklet_shot_list = LookletShotList.objects.objects.filter(colorstyle__icontains=style)
-        images = pmdata_list | file7_returned_list |looklet_shot_list
+        images = file7_returned_list #| pmdata_list | looklet_shot_list
         results[style] = images
 
 
