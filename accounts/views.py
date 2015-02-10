@@ -163,7 +163,7 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,upda
     try:
         updated_by = request.DATA['updated_by']
     except:
-        updated_by = 'ingest01'
+        updated_by = 'djdam'
         pass
 
     try:
@@ -188,11 +188,18 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,upda
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == 'POST' and not ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt):
+    elif request.method == 'POST':
         serializer = ImageUpdateSerializer(data=request.DATA)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # else if there do a put update
+        else:
+            image_update = ImageUpdate.objects.get(updated_by=updated_by, colorstyle=colorstyle, alt=alt)
+            serializer = ImageUpdateSerializer(image_update, data=request.DATA)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'POST' and ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt):
