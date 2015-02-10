@@ -68,7 +68,7 @@ class AuthGroup(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=80L, unique=True)
     class Meta:
-        managed = True
+        #managed = True
         db_table = 'auth_group'
 
     def __unicode__(self):
@@ -80,7 +80,7 @@ class AuthGroupPermissions(models.Model):
     group = models.ForeignKey(AuthGroup)
     permission = models.ForeignKey('AuthPermission')
     class Meta:
-        managed = True
+        #managed = True
         db_table = 'auth_group_permissions'
         verbose_name_plural = 'AuthGroupPermissions'
 
@@ -94,7 +94,7 @@ class AuthPermission(models.Model):
     content_type = models.ForeignKey('DjangoContentType')
     codename = models.CharField(max_length=100L)
     class Meta:
-        managed = True
+        #managed = True
         db_table = 'auth_permission'
 
     def __unicode__(self):
@@ -115,7 +115,7 @@ class AuthUser(models.Model):
     is_active = models.IntegerField()
     date_joined = models.DateTimeField()
     class Meta:
-        managed = True
+        #managed = True
         db_table = 'auth_user'
 
     def __unicode__(self):
@@ -127,7 +127,7 @@ class AuthUserGroups(models.Model):
     user = models.ForeignKey(AuthUser)
     group = models.ForeignKey(AuthGroup)
     class Meta:
-        managed = True
+        #managed = True
         db_table = 'auth_user_groups'
         verbose_name_plural = 'AuthUsersGroups'
 
@@ -140,7 +140,7 @@ class AuthUserUserPermissions(models.Model):
     user = models.ForeignKey(AuthUser)
     permission = models.ForeignKey(AuthPermission)
     class Meta:
-        managed = True
+        #managed = True
         db_table = 'auth_user_user_permissions'
 
     def __unicode__(self):
@@ -271,7 +271,7 @@ class OffshoreStatus(models.Model):
         db_table = 'offshore_status'
         ordering = ['-modify_dt']
         verbose_name_plural = 'Outsourced_Clipping_Styles'
-        managed = True
+        #managed = True
 
     #slug = models.SlugField()
     def save(self, *args, **kwargs):
@@ -450,7 +450,7 @@ class SupplierIngest(models.Model):
     start_dt = models.DateField(blank=True, null=True)
 
     class Meta:
-        #managed = False
+        ##managed = False
         db_table = 'supplier_ingest'
         ordering = ['-modified_dt', '-colorstyle', 'alt', ]
         verbose_name_plural = 'Supplier_Styles'
@@ -489,7 +489,7 @@ class SupplierIngest404(models.Model):
 #    holding = models.ForeignKey(SupplierIngest,to_field=) # models.CharField(max_length=100, blank=True)
 
     class Meta:
-        #managed = True
+        ##managed = True
         db_table = 'supplier_ingest_404'
 
     def __unicode__(self):
@@ -518,7 +518,7 @@ class SupplierIngestImages(models.Model):
 
 
     class Meta:
-        managed = False
+        #managed = False
         db_table = 'supplier_ingest_images'
         ordering = ['-colorstyle', 'alt']
         verbose_name_plural = 'Supplier_Images'
@@ -1071,7 +1071,7 @@ class Product(models.Model):
                               height_field="height",
                               width_field="width")
     class Meta:
-        managed = True
+        #managed = True
         db_table = 'product'
         #unique_together = ('brand', 'vendor_style',)
         #ordering = ['-colorstyle']
@@ -1095,15 +1095,15 @@ class ImageUpdate(models.Model):
     image_type  = models.CharField(max_length=3,
                                   choices=IMAGE_TYPE_CHOICES,
                                   default=PRIMARY)
-    cache_cleared = models.BooleanField(False, blank=True)
-    updated_by = models.CharField(max_length=15)
+    cache_cleared = models.DateTimeField(blank=True, null=True)
+    updated_by = models.CharField(max_length=15, default="ingest01")
     ## below param on updated by seemed unnecessary for now
     #models.ForeignKey(AuthUser, null=True, blank=True, to_field='username', related_name='image_update_user')
     #deleted_by = models.ForeignKey('auth.User', null=True, related_name='profile_user_deleted')
     class Meta:
-        managed = True
+        ##managed = True
         db_table = 'image_update'
-        unique_together = ('colorstyle', 'alt',)
+        #unique_together = ('colorstyle', 'alt',)
         ordering = ['-modify_dt', 'colorstyle', 'alt']
         verbose_name_plural = 'Image_Cache_Updates'
 
@@ -1376,7 +1376,7 @@ class Metadata(models.Model):
     #position = models.PositiveSmallIntegerField("Position")
 
     class Meta:
-        managed = True
+        #managed = True
         #unique_together = ('image', 'metadata_type',)
         db_table = 'metadata'
         #ordering = ('position',)
@@ -1414,7 +1414,7 @@ class Asset(models.Model):
 #         return reverse('images.views.details', args=[str(self.id)])
 
     class Meta:
-        managed = True
+        #managed = True
         db_table = 'asset'
         ordering = ['-asset_type']
 
@@ -1444,7 +1444,7 @@ class LookletMetadataSidecar(models.Model):
     user_id = models.IntegerField()
 
     class Meta:
-        managed = True
+        #managed = True
         db_table = 'looklet_metadata_sidecar'
         ordering = ['-create_dt', '-modify_dt']
         verbose_name_plural = 'Looklet_Metadata'
@@ -1464,7 +1464,7 @@ class LookletMetadataSidecar(models.Model):
 #     file_paths = models.ManyToManyField('PostReadyOriginal', related_name='looklet_file_paths_returned+')
 #
 #     class Meta:
-#         managed = True
+#         #managed = True
 #         ordering = ['-colorstyle', '-file_paths']
 #         verbose_name_plural = 'Looklet_PostReady_M2M'
 #
@@ -1479,7 +1479,7 @@ class LookletMetadataSidecar(models.Model):
 #     metadata = models.ManyToManyField(LookletMetadataSidecar)
 #
 #     class Meta:
-#         managed = True
+#         #managed = True
 #         #ordering = ['-colorstyle']
 #         verbose_name_plural = 'Looklet_Returned_Files'
 #
@@ -1502,7 +1502,7 @@ class LookletShotList(models.Model):
 
 
     class Meta:
-        managed = True
+        #managed = True
         db_table = 'looklet_shot_list'
         #ordering = ['-timestamp', '-colorstyle' ]
         verbose_name_plural = 'Looklet_ShotLists'
