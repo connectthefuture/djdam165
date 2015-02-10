@@ -117,7 +117,7 @@ def image_update_list(request, pk=None, alt=1, colorstyle=None,updated_by=None):
     """
     try:
         if not updated_by:
-            updated_by = request.GET['updated_by']
+            updated_by = request.DATA['updated_by']
     except:
         updated_by = 'ingest01'
         pass
@@ -160,10 +160,10 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,upda
             colorstyle = request.GET['colorstyle']
     except:
         pass
-    
+
     try:
         if not updated_by:
-            updated_by = request.GET['updated_by']
+            updated_by = request.DATA['updated_by']
     except:
         updated_by = 'ingest01'
         pass
