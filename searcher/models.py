@@ -1103,7 +1103,7 @@ class ImageUpdate(models.Model):
     class Meta:
         managed = True
         db_table = 'image_update'
-        #unique_together = ('colorstyle', 'alt',)
+        unique_together = ('colorstyle', 'alt',)
         ordering = ['-modify_dt', 'colorstyle', 'alt']
         verbose_name_plural = 'Image_Cache_Updates'
 
