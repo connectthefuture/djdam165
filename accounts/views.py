@@ -111,15 +111,15 @@ from rest_framework.response import Response
 
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes((IsAuthenticated, ))
-def image_update_list(request, pk=None, alt=1, colorstyle=None,authusername=None):
+def image_update_list(request, pk=None, alt=1, colorstyle=None,updated_by=None):
     """
     List all image_updates, or create a new image_update.
     """
     try:
-        if not authusername:
-            authusername = request.GET['authusername']
+        if not updated_by:
+            updated_by = request.GET['updated_by']
     except:
-        authusername = 'ingest01'
+        updated_by = 'ingest01'
         pass
 
     if request.method == 'GET':
@@ -139,7 +139,7 @@ def image_update_list(request, pk=None, alt=1, colorstyle=None,authusername=None
         if not colorstyle:
             colorstyle = request.DATA['colorstyle']
         try:
-            image_update = ImageUpdate.objects.get(updated_by=authusername,colorstyle=colorstyle,alt=alt)
+            image_update = ImageUpdate.objects.get(updated_by=updated_by,colorstyle=colorstyle,alt=alt)
         except ImageUpdate.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = ImageUpdateSerializer(image_update, data=request.DATA)
@@ -151,7 +151,7 @@ def image_update_list(request, pk=None, alt=1, colorstyle=None,authusername=None
 
 @api_view(['GET', 'PUT', 'POST'])
 @permission_classes((IsAuthenticated,))
-def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,authusername=None):
+def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,updated_by=None):
     """
     Retrieve, update or delete an ImageUpdate instance.
     """
@@ -162,17 +162,17 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,auth
         pass
     
     try:
-        if not authusername:
-            authusername = request.GET['authusername']
+        if not updated_by:
+            updated_by = request.GET['updated_by']
     except:
-        authusername = 'ingest01'
+        updated_by = 'ingest01'
         pass
 
     try:
-        image_update = ImageUpdate.objects.get(updated_by=authusername,colorstyle=colorstyle, alt=1)
+        image_update = ImageUpdate.objects.get(updated_by=updated_by,colorstyle=colorstyle, alt=1)
     except ImageUpdate.DoesNotExist:
         try:
-            image_update = ImageUpdate.objects.get(updated_by=authusername,colorstyle=colorstyle,alt=alt)
+            image_update = ImageUpdate.objects.get(updated_by=updated_by,colorstyle=colorstyle,alt=alt)
         except ImageUpdate.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -183,7 +183,7 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,auth
     elif request.method == 'PUT':
         if not colorstyle:
             colorstyle = request.DATA['colorstyle']
-        image_update = ImageUpdate.objects.get(updated_by=authusername,colorstyle=colorstyle, alt=alt)
+        image_update = ImageUpdate.objects.get(updated_by=updated_by,colorstyle=colorstyle, alt=alt)
         serializer = ImageUpdateSerializer(image_update, data=request.DATA)
         if serializer.is_valid():
             serializer.save()
@@ -198,7 +198,7 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,auth
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        image_update = ImageUpdate.objects.get(updated_by=authusername,colorstyle=colorstyle, alt=alt)
+        image_update = ImageUpdate.objects.get(updated_by=updated_by,colorstyle=colorstyle, alt=alt)
         image_update.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
