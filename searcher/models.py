@@ -1095,7 +1095,7 @@ class ImageUpdate(models.Model):
     image_type  = models.CharField(max_length=3,
                                   choices=IMAGE_TYPE_CHOICES,
                                   default=PRIMARY)
-    #cache_cleared = models.BooleanField(False, blank=True)
+    cache_cleared = models.BooleanField(False, blank=True)
     updated_by = models.CharField(max_length=15)
     ## below param on updated by seemed unnecessary for now
     #models.ForeignKey(AuthUser, null=True, blank=True, to_field='username', related_name='image_update_user')
