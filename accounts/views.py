@@ -116,8 +116,7 @@ def image_update_list(request, pk=None, alt=1, colorstyle=None,updated_by=None):
     List all image_updates, or create a new image_update.
     """
     try:
-        if not updated_by:
-            updated_by = request.DATA['updated_by']
+        updated_by = request.DATA['updated_by']
     except:
         updated_by = 'ingest01'
         pass
@@ -162,8 +161,7 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,upda
         pass
 
     try:
-        if not updated_by:
-            updated_by = request.DATA['updated_by']
+        updated_by = request.DATA['updated_by']
     except:
         updated_by = 'ingest01'
         pass
@@ -190,11 +188,21 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,upda
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == 'POST':
+    elif request.method == 'POST' and not ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt):
         serializer = ImageUpdateSerializer(data=request.DATA)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'POST' and ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt):
+        if not colorstyle:
+            colorstyle = request.DATA['colorstyle']
+        image_update = ImageUpdate.objects.get(updated_by=updated_by,colorstyle=colorstyle, alt=alt)
+        serializer = ImageUpdateSerializer(image_update, data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
