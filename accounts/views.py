@@ -206,7 +206,7 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,upda
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        image_update = ImageUpdate.objects.get(updated_by=updated_by,colorstyle=colorstyle, alt=alt)
+        image_update = ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt)
         image_update.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
