@@ -115,6 +115,13 @@ def image_update_list(request, pk=None, alt=1, colorstyle=None,authusername=None
     """
     List all image_updates, or create a new image_update.
     """
+    try:
+        if not authusername:
+            authusername = request.GET['authusername']
+    except:
+        authusername = 'ingest01'
+        pass
+
     if request.method == 'GET':
         image_updates = ImageUpdate.objects.all()
         serializer = ImageUpdateSerializer(image_updates, many=True)
@@ -153,6 +160,14 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,auth
             colorstyle = request.GET['colorstyle']
     except:
         pass
+    
+    try:
+        if not authusername:
+            authusername = request.GET['authusername']
+    except:
+        authusername = 'ingest01'
+        pass
+
     try:
         image_update = ImageUpdate.objects.get(updated_by=authusername,colorstyle=colorstyle, alt=1)
     except ImageUpdate.DoesNotExist:
