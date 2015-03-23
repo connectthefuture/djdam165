@@ -104,7 +104,7 @@ class ImageSource(models.Model):
         if len(self.colorstyle) == 9:
             return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={0}&width=80&height=96&ver=null"/>').format(self.colorstyle)
         else:
-            return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom85.ms?img={0}.pct&outputx=80&outputy=96&level=1&ver=nukk').format(self.file_name, self.version)
+            return mark_safe('<img src="http://cdn.is.bluefly.com/mgen/Bluefly/eqzoom85.ms?img={0}.pct&outputx=80&outputy=96&level=1&ver=null').format(self.file_name, self.version)
     bfly_image.allow_tags = True
 
     def __unicode__(self):
