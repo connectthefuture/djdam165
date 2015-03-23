@@ -75,7 +75,7 @@ urlpatterns = patterns('searcher.views',
                       url(r'^manage/swatches/edit/(\d{5,9}/?)$', 'swatch_params_modal', name='swatch_params_modal'),
                       url(r'^manage/swatches/edit/((\d{5,9}\s?)*?/)?$', 'swatch_params_modal', name='swatch_params_modal_multi'),
 
-                      url(r'^manage/supplier-ingest/?$', 'manage_supplier_ingest', name='manage_supplier_base'),
+                      url(r'^manage/supplier-ingest/?(manage_supplier_ingest)?$', 'manage_supplier_ingest', name='manage_supplier_base'),
                       #url(r'^manage/supplier-ingest/(?P<colorstyle>\d{5,9})/?$', 'manage_supplier_ingest', name='manage_supplier_colorstyle'),
                       url(r'^manage/supplier-images/?$', 'manage_supplier_images', name='manage_supplier_images_base'),
                       url(r'^manage/productdata/?$', 'manage_product_snapshot_live', name='manage_product_snapshot_live'),
