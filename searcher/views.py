@@ -734,11 +734,11 @@ def manage_supplier_images(request, colorstyle=None, alt=None):
 
 
 def manage_product_snapshot_live(request, colorstyle=None):
-    try:
-        if not colorstyle:
-            colorstyle = request.POST['colorstyle']
-    except KeyError:
-        pass
+    # try:
+    #     if not colorstyle:
+    #         colorstyle = request.POST['colorstyle']
+    # except KeyError:
+    #     pass
     if request.method == "GET":
         colorstyle = request.GET['colorstyle']
     if request.method == "POST" or request.method == "GET":

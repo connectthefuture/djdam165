@@ -751,6 +751,6 @@ class SupplierImagesModelForm(forms.ModelForm):
             'vendor_image',
             HTML("""{% if form.vendor_image.value %}<img class="img-responsive" src="{{ form.vendor_image.value }}">{% endif %}""", ),
             'bfly_image',
-            HTML("""{% if form.bfly_image.value %}<img class="img-responsive" src="{{ form.bfly_image.value }}">{% endif %}""", ),
+            HTML("""{% if form.bfly_image.value %}{{ form.bfly_image.value }}{% endif %}""", ),
             Submit('submit', 'Submit'),
         )
