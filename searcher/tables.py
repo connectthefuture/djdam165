@@ -100,7 +100,7 @@ def suppliers(request):
 
 
 def suppliers_compare(request):
-    table = SupplierIngestTable(SupplierIngest.objects.all().filter(colorstyle__icontains=request.get['colorstyle']))
+    table = SupplierIngestTable(SupplierIngest.objects.all().filter(colorstyle__icontains=request.get()['colorstyle']))
     RequestConfig(request).configure(table)
     return render(request, 'tables/supplier-ingest-styles.html', {'table': table})
 
