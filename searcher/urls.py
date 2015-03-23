@@ -355,7 +355,7 @@ urlpatterns += patterns('',
         'searcher.run-script-views.script_runner_home_page',
         name='download_server_imgs_byPOorStyleList'),
 
-    url(r'^searcher/utils/newAll_Sites_CacheClear.py/?.*?(?P<styles_list>.+)$',
+    url(r'^utils/newAll_Sites_CacheClear.py/?.*?(?P<styles_list>.+)$',
         'searcher.run-script-views.script_runner_home_page',
         name='newAll_Sites_CacheClear'),
 
