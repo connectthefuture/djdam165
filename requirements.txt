@@ -138,14 +138,14 @@ django-dtpanel-htmltidy
 django-filter
 django-floppyforms
 django-gunicorn
-# cx-Oracle  #==5.1.2
+cx-Oracle  #==5.1.2
 django-redis
 django-tables2
 django-tastypie
 djangorestframework
 dropbox
 futures ## req for threading for gunicorn
-googleapi
+# googleapi
 gunicorn
 html5lib
 mechanize
