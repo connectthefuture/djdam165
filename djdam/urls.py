@@ -191,7 +191,7 @@ urlpatterns += patterns('',
                        ## Include autocompleter
                        url(r'^autocomplete/', include('autocomplete_light.urls')),
                        # # Debug tool bar html tidy panel
-                       url(r'^', include('debug_toolbar_htmltidy.urls')),
+                       # url(r'^', include('debug_toolbar_htmltidy.urls')),
 
                        ### Direct Bad requests to Someting
                        url(r'^bad/$', bad),
