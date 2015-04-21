@@ -16,7 +16,7 @@ class PostReadyOriginalSerializer(serializers.HyperlinkedModelSerializer):
 
 class ProductSnapshotLiveSerializer(serializers.HyperlinkedModelSerializer):
     po_number = serializers.ChoiceField(
-        widget=autocomplete_light.ChoiceWidget('PoNumberAutocomplete')
+        widget=autocomplete_light.ChoiceWidget(),'PoNumberAutocomplete'
     )
     class Meta:
         model = ProductSnapshotLive
