@@ -15,9 +15,9 @@ class PostReadyOriginalSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('colorstyle', 'alt', 'file_path', 'photo_date', 'image_type')
 
 class ProductSnapshotLiveSerializer(serializers.HyperlinkedModelSerializer):
-    po_number = serializers.ChoiceField(
-        widget=autocomplete_light.ChoiceWidget(),'PoNumberAutocomplete'
-    )
+    #po_number = serializers.ChoiceField(
+    #    widget=autocomplete_light.ChoiceWidget(),'PoNumberAutocomplete'
+    #)
     class Meta:
         model = ProductSnapshotLive
         fields = ('colorstyle', 'brand', 'vendor_style', 'po_number', 'po_type', 'product_type', 'product_subtype')
