@@ -7,10 +7,32 @@
 {% block page_title %}jQuery Ajax Example with JSON Response
 {% endblock %}
 
+{% block extrajshead %}
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.6/css/jquery.dataTables.css">
+
+<!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.6/js/jquery.dataTables.js"></script>
+
+<!-- Datatables Function base -->
+
+<script>
+$(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>
+
+<!-- Separate from Datatables -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+
 <script>
 var myArray=[];
 $('#submitButton').click(function(){
-   $('#formAjax textarea').each(function(){
+   $('#formAjax:input textarea').each(function(){
       var inputTextData = $(this);
       var k=$('input:first',inputTextData).val();
       var v=$('input:first',inputTextData).next().val();
@@ -20,18 +42,6 @@ $('#submitButton').click(function(){
 });
 </script>
 
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.6/css/jquery.dataTables.css">
-
-<!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-  
-<!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.js"></script>
-
-
-{% block content %}
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function(){
   $(':submit').on('click', function() { // This event fires when a button is clicked
@@ -70,12 +80,9 @@ $(document).ready(function(){
 });
 </script>
 
-<script>
-$(document).ready( function () {
-    $('#table_id').DataTable();
-} );
-</script>
+{% endblock %}
 
+{% block content %}
 <!-- Write HTML Content code here -->
 
 <body>
@@ -89,7 +96,7 @@ $(document).ready( function () {
   <div id="results">
   <!-- Javascript will print data in here when we have finished the page -->
   
-  <table id="table_id" class="display">
+  <table id="table_id" class="display" cellspacing="0">
     <thead>
         <tr>
             <th>Column 1</th>
