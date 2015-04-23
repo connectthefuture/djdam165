@@ -44,10 +44,11 @@ def ajaxexample2(request):
     try:
         colorstyle = request.GET['q']   
         data = SupplierIngestImages.objects.filter(colorstyle__icontains=colorstyle)
-        
+
         return render(request, 'base/ajaxexample.html', {'data': data})
     except:
-        return render(request, 'base/ajaxexample.html',)
+        data = SupplierIngestImages.objects.all().order_by('-modified_dt', 'vendor_name', 'colorstyle')[:100]
+        return render(request, 'base/ajaxexample.html', {'data': data})
 
 def ajaxdatatables(request):
     """ Default view for the root """
@@ -55,10 +56,10 @@ def ajaxdatatables(request):
     try:
         colorstyle = request.GET['q']   
         query = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
-
         return render(request, 'base/ajaxdatatables.html', {'data': data})
     except:
-        return render(request, 'base/ajaxdatatables.html',)
+        data = ProductSnapshotLive.objects.all().order_by('-status_dt', '-colorstyle')[:100]
+        return render(request, 'base/ajaxdatatables.html', {'data': data})
 
 
 from django.shortcuts import render_to_response
