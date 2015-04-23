@@ -111,6 +111,17 @@ $(document).ready(function(){
 } );
 </script>
 
+<script>
+function simpleAjax() {
+  var httpRequest = new XMLHttpRequest();
+  httpRequest.open('GET', "/ajax2/");
+  data = "simpleAJAXDATA";
+  httpRequest.send();
+  return httpRequest.responseText;
+}
+var returnResult = simpleAjax();
+</script>
+
 {% endblock %}
 
 {% block content %}
