@@ -44,6 +44,7 @@ def ajaxexample2(request):
     try:
         colorstyle = request.GET['q']   
         data = SupplierIngestImages.objects.filter(colorstyle__icontains=colorstyle)
+        
         return render(request, 'base/ajaxexample.html', {'data': data})
     except:
         return render(request, 'base/ajaxexample.html',)

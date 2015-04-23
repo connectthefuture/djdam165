@@ -173,12 +173,16 @@ function successCallback(responseObj){
   <table id="table_id" class="table table-striped table-bordered" cellspacing="0">
       <thead>
         <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
-            <th>Column 3</th>
-            <th>Column 4</th>
-            <th>Column 5</th>
-            <th>Column 6</th>
+            <th>Bluefly Style</th>
+            <th>ImgNumber Alt</th>
+            <th>Vendor ImageUrl</th>  
+            <th>Vendor Image</th>
+            <th>Bluefly Image</th>
+            <th>Md5 or HTTP Code</th>
+            <th>Vendor Name</th>
+            <th>Vendor Brand</th>
+            <th>Bluefly Brand</th>
+            <th>Upload Count</th>
         </tr>
       </thead>
     
@@ -188,12 +192,14 @@ function successCallback(responseObj){
           <td>{{ row.colorstyle }}</td>
           <td>{{ row.alt }}</td>
           <td>{{ row.image_url }}</td>
+          <td><img src="{{ row.image_url }}" href="{{ row.image_url }}"/></td>
+          <td><img src="http://cdn.is.bluefly.com/mgen/Bluefly/prodImage.ms?productCode={{ row.colorstyle }}&width=80&height=96&ver=1" href="http://bluefly.com/search/?={{ row.colorstyle }}" alt="click to see on bluefly.com"/></td>
           <td>{{ row.md5 }}</td>
           <td>{{ row.vendor_name }}</td>
           <td>{{ row.vendor_brand }}</td>
           <td>{{ row.brand }}</td>
           <td>{{ row.upload_ct }}</td>
-          <td><img src="{{ row.image_url }}" href="{{ row.image_url }}"></td>
+          
       </tr>
       {% empty %}
       <p> <hr> </p>
