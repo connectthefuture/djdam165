@@ -114,6 +114,7 @@ $(document).ready(function(){
   
   <div id="searchQ">
     <form id="searchForm" method="post" action="/ajax2/">
+      {% csrf_token %}
       <input type="text" id="idTextInput" name="q">
       <button type="submit" name="submit">Submit</button>  
     </form>
