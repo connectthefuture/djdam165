@@ -118,6 +118,8 @@ $(document).ready(function(){
 
 <body>
   <form id="formAjax">
+      {% csrf_token %}
+
       <button value="All" type="submit">Get All Urls!</button>
       <button value="Valid" type="submit">Get Valid Urls!</button>
       <button value="Invalid" type="submit">Get Invalid Urls!</button>
@@ -125,7 +127,7 @@ $(document).ready(function(){
   </form>
   
   <div id="searchQ">
-    <form id="searchForm" method="get" enctype="multipart/form-data" action="/ajax2/">
+    <form id="formSearch" method="get" enctype="multipart/form-data" action="/ajax2/">
       {% csrf_token %}
       <input type="text" id="idTextInput" name="q">
       <button type="submit" name="submit">Submit</button>  
