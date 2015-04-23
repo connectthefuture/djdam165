@@ -27,19 +27,19 @@ $(document).ready( function () {
 </script>
 
 
-<!-- Another Datatables Fun -->
-<script>
-$(document).ready(function() {
+<$(document).ready(function() {
     $('#example').dataTable( {
         "processing": true,
+!-- Another Datatables Fun -->
+<script>
         "ajax": "data/objects_deep.txt",
         "columns": [
             { "data": "colorstyle" },
-            { "data": "hr.position" },
-            { "data": "contact.0" },
-            { "data": "contact.1" },
-            { "data": "hr.start_date" },
-            { "data": "hr.salary" }
+            { "data": "alt" },
+            { "data": "image_url" },
+            { "data": "vendor_name" },
+            { "data": "vendor_brand" },
+            { "data": "ingest_dt" }
         ]
     } );
 } );
@@ -113,7 +113,7 @@ $(document).ready(function(){
   </form>
   
   <div id="searchQ">
-    <form id="searchForm">
+    <form id="searchForm" method="post" action="/ajax2/">
       <input type="text" id="idTextInput" name="q">
       <button type="submit" name="submit">Submit</button>  
     </form>

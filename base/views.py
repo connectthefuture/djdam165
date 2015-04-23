@@ -41,12 +41,11 @@ def ajaxexample(request):
 def ajaxexample2(request):
     """ Default view for the root """
     from searcher.models import *
-    
-    if request.GET['q']:
-        colorstyle = request.get('q')   
+    try:
+        colorstyle = request.POST['q']   
         data = SupplierIngestImages.objects.filter(colorstyle__icontains=colorstyle)
         return render(request, 'base/ajaxexample.html', data=data)
-    else:
+    except:
         return render(request, 'base/ajaxexample.html',)
 
 
