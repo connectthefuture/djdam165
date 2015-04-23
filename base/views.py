@@ -47,7 +47,7 @@ def ajaxexample2(request):
 
         return render(request, 'base/ajaxexample.html', {'data': data})
     except:
-        data = SupplierIngestImages.objects.all().order_by('-modified_dt', 'vendor_name', 'colorstyle')[:100]
+        data = SupplierIngestImages.objects.all().order_by('-modified_dt', 'vendor_name', 'colorstyle', 'alt')[:100]
         return render(request, 'base/ajaxexample.html', {'data': data})
 
 def ajaxdatatables(request):
