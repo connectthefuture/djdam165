@@ -48,12 +48,13 @@ def ajaxexample2(request):
     except:
         return render(request, 'base/ajaxexample.html',)
 
-def ajaxexample2(request):
+def ajaxdatatables(request):
     """ Default view for the root """
     from searcher.models import *
     try:
         colorstyle = request.GET['q']   
-        data = SupplierIngestImages.objects.filter(colorstyle__icontains=colorstyle)
+        query = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
+        
         return render(request, 'base/ajaxdatatables.html', data=data)
     except:
         return render(request, 'base/ajaxdatatables.html',)
