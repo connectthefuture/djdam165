@@ -55,12 +55,14 @@ $('#submitButton').click(function(){
       var k=$('input:first',inputTextData).val();
       var v=$('input:first',inputTextData).next().val();
         myArray.push({key:k, value: v});
+        alert( 'You submitted this array '+myArray+'\'s row' );
+
 
    });
 });
 </script>
 
-<script type="text/javascript">
+<script>
 $(document).ready(function(){
   $(':submit').on('click', function() { // This event fires when a button is clicked
       var button = $(this).val().serialize();
@@ -96,6 +98,17 @@ $(document).ready(function(){
       return false; // keeps the page from not refreshing 
   });
 });
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('#table_id').dataTable();
+     
+    $('#table_id tbody').on('click', 'tr', function () {
+        var image_url = $('td', this).eq(3).text();
+        alert( 'You clicked on '+image_url+'\'s row' );
+    } );
+} );
 </script>
 
 {% endblock %}
