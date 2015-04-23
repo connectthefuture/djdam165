@@ -26,6 +26,25 @@ $(document).ready( function () {
 } );
 </script>
 
+
+<!-- Another Datatables Fun -->
+<script>
+$(document).ready(function() {
+    $('#example').dataTable( {
+        "processing": true,
+        "ajax": "data/objects_deep.txt",
+        "columns": [
+            { "data": "colorstyle" },
+            { "data": "hr.position" },
+            { "data": "contact.0" },
+            { "data": "contact.1" },
+            { "data": "hr.start_date" },
+            { "data": "hr.salary" }
+        ]
+    } );
+} );
+</script>
+
 <!-- Separate from Datatables -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
 
