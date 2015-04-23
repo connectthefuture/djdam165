@@ -122,6 +122,25 @@ function simpleAjax() {
 var returnResult = simpleAjax();
 </script>
 
+
+<script>
+function callServerAsync(){
+ $.ajax({
+      url: 'http://prodimages.ny.bluefly.com/api/v1/pmdata',
+      data: {"colorstyle": $("#idTextInput").vals()},
+      success: function(response, data) {
+
+          successCallback(response);
+
+      }
+  });
+}
+
+function successCallback(responseObj){
+   //do something like read the response and show data 
+   alert(JSON.stringify(responseObj)); // Only applicable to JSON response
+ }
+</script>
 {% endblock %}
 
 {% block content %}
