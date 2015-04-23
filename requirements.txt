@@ -119,6 +119,7 @@ Pillow
 SQLAlchemy
 ajaxuploader
 beautifulsoup4
+bcrypt
 bleach
 celery
 distribute
