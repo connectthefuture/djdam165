@@ -38,6 +38,10 @@ def ajaxexample(request):
     """ Default view for the root """
     return render(request, 'base/ajaxexample.html',)
 
+def ajaxexample2(request):
+    """ Default view for the root """
+    return render(request, 'base/ajaxexample.html',)
+
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
