@@ -136,9 +136,12 @@ $(document).ready(function(){
   
 <div id="results">
   <!-- Javascript will print data in here when we have finished the page -->
-  
+  <div id="linkAjaxDatatables">
+  <a href="/ajaxdatatables" alt="AnotherExample"> Ajaxdatatables</a>
+  </div>
+
   <table id="table_id" class="table table-striped table-bordered" cellspacing="0">
-    <thead>
+      <thead>
         <tr>
             <th>Column 1</th>
             <th>Column 2</th>
@@ -147,21 +150,24 @@ $(document).ready(function(){
             <th>Column 5</th>
             <th>Column 6</th>
         </tr>
-    </thead>
-    <tbody>
-        
-        {% for row in data %}
-        <tr>
-            <td>{{ row.colorstyle }}</td>
-            <td>{{ row.alt }}</td>
-            <td>{{ row.image_url }}</td>
-            <td>{{ row.md5 }}</td>
-            <td>{{ row.upload }}</td>
-            <td><img src="{{ row.image_url }}" href="{{ row.image_url }}"></td>
-        </tr>
-        {% empty %}
-          <p> <hr> </p>
-        {% endfor %}
+      </thead>
+    
+    <tbody>      
+      {% for row in data %}
+      <tr>
+          <td>{{ row.colorstyle }}</td>
+          <td>{{ row.alt }}</td>
+          <td>{{ row.image_url }}</td>
+          <td>{{ row.md5 }}</td>
+          <td>{{ row.vendor_name }}</td>
+          <td>{{ row.vendor_brand }}</td>
+          <td>{{ row.brand }}</td>
+          <td>{{ row.upload_ct }}</td>
+          <td><img src="{{ row.image_url }}" href="{{ row.image_url }}"></td>
+      </tr>
+      {% empty %}
+      <p> <hr> </p>
+      {% endfor %}
     
     </tbody>
   </table>
