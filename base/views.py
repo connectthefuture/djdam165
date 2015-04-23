@@ -42,11 +42,21 @@ def ajaxexample2(request):
     """ Default view for the root """
     from searcher.models import *
     try:
-        colorstyle = request.POST['q']   
+        colorstyle = request.GET['q']   
         data = SupplierIngestImages.objects.filter(colorstyle__icontains=colorstyle)
         return render(request, 'base/ajaxexample.html', data=data)
     except:
         return render(request, 'base/ajaxexample.html',)
+
+def ajaxexample2(request):
+    """ Default view for the root """
+    from searcher.models import *
+    try:
+        colorstyle = request.GET['q']   
+        data = SupplierIngestImages.objects.filter(colorstyle__icontains=colorstyle)
+        return render(request, 'base/ajaxdatatables.html', data=data)
+    except:
+        return render(request, 'base/ajaxdatatables.html',)
 
 
 from django.shortcuts import render_to_response

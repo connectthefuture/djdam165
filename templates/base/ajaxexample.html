@@ -26,12 +26,11 @@ $(document).ready( function () {
 } );
 </script>
 
-
-<$(document).ready(function() {
+<!-- Another Datatables Fun -->
+<script>
+$(document).ready(function() {
     $('#example').dataTable( {
         "processing": true,
-!-- Another Datatables Fun -->
-<script>
         "ajax": "data/objects_deep.txt",
         "columns": [
             { "data": "colorstyle" },
@@ -113,7 +112,7 @@ $(document).ready(function(){
   </form>
   
   <div id="searchQ">
-    <form id="searchForm" method="post" enctype="multipart/form-data" action="/ajax2/">
+    <form id="searchForm" method="get" enctype="multipart/form-data" action="/ajax2/">
       {% csrf_token %}
       <input type="text" id="idTextInput" name="q">
       <button type="submit" name="submit">Submit</button>  
@@ -145,6 +144,8 @@ $(document).ready(function(){
             <td>{{ row.upload }}</td>
             <td><img src="{{ row.image_url }}" href="{{ row.image_url }}"></td>
         </tr>
+        {% empty %}
+          <p> <hr> </p>
         {% endfor %}
     
     </tbody>
