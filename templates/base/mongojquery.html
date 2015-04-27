@@ -9,7 +9,8 @@
 		var data = {
 			run: function () {
 				$('button').bind('click', function () {
-					var colorstyle = $('input text').val
+					var colorstyle = $('input text').val()
+					var acolorstyle = $('#inputColorstyle').val()
 				});
 			// 	navigator.geolocation.getCurrentPosition(data.send, data.error, geo_options);
 			// },
@@ -24,6 +25,7 @@
 					contentType: "application/json"
 				}).done(function( msg ) {
 					console.log(msg);
+
 				});
 			}
 		};
@@ -36,6 +38,7 @@
 	<div class="container">
 		<h1>data.</h1>
 		<p>
+			<input type="text" name="colorstyle" id="inputColorstyle">
 			<button class="btn btn-large">Press Me!</button>
 		</p>
 	</div>
