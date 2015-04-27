@@ -62,6 +62,19 @@ def ajaxdatatables(request):
         return render(request, 'base/ajaxdatatables.html', {'data': data})
 
 
+def mongojquery(request):
+    """ Default view for the root """
+    from searcher.models import *
+    try:
+        colorstyle = request.GET['colorstyle']   
+        query = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
+        return render(request, 'base/mongojquery.html', {'data': data})
+    except:
+        data = ProductSnapshotLive.objects.all().order_by('-status_dt', '-colorstyle')[:100]
+        return render(request, 'base/mongojquery.html', {'data': data})
+
+
+
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from searcher.forms import testJSONForm

@@ -15,6 +15,7 @@ urlpatterns = patterns('base.views',
                        url(r'^testjsonform/?.*?$', 'testjsonform', name='testjsonform'),
                        url(r'^ajaxexample/?.*?$', 'ajaxexample', name='ajaxexample'),
                        url(r'^ajax2/?.*?$', 'ajaxexample2', name='ajaxexample2'),
+                       url(r'^mongojquery/?.*?$', 'mongojquery', name='mongojquery'),
                        url(r'^ajaxdatatables/?.*?$', 'ajaxdatatables', name='ajaxdatatables'),
                        url(r'^onepageappview/?.*?$', 'onepageappview', name='onepageappview'),
 
