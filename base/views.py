@@ -62,18 +62,6 @@ def ajaxdatatables(request):
         return render(request, 'base/ajaxdatatables.html', {'data': data})
 
 
-def mongojquery(request):
-    """ Default view for the root """
-    from searcher.models import *
-    try:
-        colorstyle = request.GET['colorstyle']
-        query = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
-        return render(request, 'base/mongojquery.html', {'data': data})
-    except:
-        data = ProductSnapshotLive.objects.all().order_by('-status_dt', '-colorstyle')[:100]
-        return render(request, 'base/mongojquery.html', {'data': data})
-
-
 
 def connect_gridfs_mongodb(hostname=None, db_name=None):
     import pymongo, gridfs
@@ -100,6 +88,26 @@ def connect_gridfs_mongodb(hostname=None, db_name=None):
     fs = ''
     fs = gridfs.GridFS(mongo_db)
     return mongo_db, fs
+
+
+
+
+def mongojquery(request):
+    """ Default view for the root """
+    from searcher.models import *
+    hostname = 'mongodb:relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
+    db_name = str(hostname.split('/'))
+    mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
+    try:
+        colorstyle = request.GET['colorstyle']
+        res = mongodb_gfsmkt['fs.files'].find(colorstyle)
+        #query = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
+        return render(request, 'base/mongojquery.html', {'data': res})
+    except:
+        #data = ProductSnapshotLive.objects.all().order_by('-status_dt', '-colorstyle')[:100]
+        res = mongodb_gfsmkt['fs.files'].findall().sort({"_id": "-1"})
+        return render(request, 'base/mongojquery.html', {'data': res})
+
 
 
 def unwind_metadata_array_duplicate(request):
@@ -138,13 +146,12 @@ def mongodisplay(request):
     import requests, pymongo, re
     hostname = 'mongodb:relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
     mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name='gridfs_mrktplce')
-
-
+    #mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
 
     try:
         colorstyle = request.GET['colorstyle']
-        query = request.(colorstyle__icontains=colorstyle)
-        return render(request, 'searcher/image/image_results_v2.html', {'data': data})
+        images = mongodb_gfsmkt['fs.files'].find(colorstyle)
+        return render(request, 'searcher/image/image_results_v2.html', {'images': images})
     except:
         images = mongodb_gfsmkt.fs.files.find()[:100]
         return render(request, 'searcher/image/image_results_v2.html', {'images': images})
