@@ -8,6 +8,32 @@
 <h3>Found {{ images|length }} result{{ images|pluralize }}</h3>
 {% endblock %}
 
+{% block actions %}
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-4-md">
+            <form id="idButton1" name="mongoactions" action="/mongo_display" >
+                <input type="search" name="data_src" id="data_src" value="#resultsBasicTest">
+            </form>
+            </div>
+            <div class="col-8-md">
+                <form id="idButton1" name="mongoactions" action="/mongo_imagesobj">
+                <button class="btn btn-danger btn-mini" type="submit"></button>
+                </form>
+                <form id="idButton2" name="mongoactions" action="/mongo_imagesobj" >
+                <button class="btn btn-danger btn-mini" type="submit"></button>
+                </form>
+                <form id="idButton3" name="mongoactions" action="/mongo_imagesdata" >
+                <button class="btn btn-danger btn-mini" type="submit"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
 {% block image_results %}
 {% regroup images by colorstyle as colorstyles %}
 

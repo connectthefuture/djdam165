@@ -18,20 +18,11 @@
 
 {% block content %}
 
+    {% block actions %}{% endblock %}
 
-{% if images %}
-
-<span><p>Your Search Result Summary based on: <strong>{{ query }}
-    {#{ image.photo_date }#}
-    </strong></p>
-</span>
-
-          {% block image_results %}{% endblock %}
+    {% block image_results %}{% endblock %}
 
 
-{% else %}
-    <p>Nothing matched your search criteria.</p>
-{% endif %}
 {% endblock %}
 {# endblock #}
 

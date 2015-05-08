@@ -42,7 +42,7 @@ def ajaxexample2(request):
     """ Default view for the root """
     from searcher.models import *
     try:
-        colorstyle = request.GET['q']   
+        colorstyle = request.GET['q']
         data = SupplierIngestImages.objects.filter(colorstyle__icontains=colorstyle)
 
         return render(request, 'base/ajaxexample.html', {'data': data})
@@ -54,7 +54,7 @@ def ajaxdatatables(request):
     """ Default view for the root """
     from searcher.models import *
     try:
-        colorstyle = request.GET['q']   
+        colorstyle = request.GET['q']
         query = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
         return render(request, 'base/ajaxdatatables.html', {'data': data})
     except:
@@ -66,12 +66,90 @@ def mongojquery(request):
     """ Default view for the root """
     from searcher.models import *
     try:
-        colorstyle = request.GET['colorstyle']   
+        colorstyle = request.GET['colorstyle']
         query = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
         return render(request, 'base/mongojquery.html', {'data': data})
     except:
         data = ProductSnapshotLive.objects.all().order_by('-status_dt', '-colorstyle')[:100]
         return render(request, 'base/mongojquery.html', {'data': data})
+
+
+
+def connect_gridfs_mongodb(hostname=None, db_name=None):
+    import pymongo, gridfs
+    db_nameMlab = 'gridfs'
+    if not hostname:
+        hostname = '127.0.0.1'
+        try:
+            mongo = pymongo.MongoClient(hostname, waitQueueMultiple=10)
+            mongo_db = mongo[db_name]
+        except pymongo.errors.ConnectionFailure:
+            hostname = '192.168.20.59'
+            mongo = pymongo.MongoClient(hostname, waitQueueMultiple=10)
+            mongo_db = mongo[db_name]
+            mongo_db.authenticate('mongo', 'mongo')
+    else:
+        try:
+            mongo = pymongo.MongoClient(hostname, waitQueueMultiple=10)
+            if hostname[:7] == 'mongodb':
+                db_name = hostname.split('/')[-1]
+            mongo_db = mongo[db_name]
+        except pymongo.errors.ConnectionFailure:
+            print 'Failed --> '
+            pass
+    fs = ''
+    fs = gridfs.GridFS(mongo_db)
+    return mongo_db, fs
+
+
+def unwind_metadata_array_duplicate(request):
+    hostname=None
+    data_src=None
+
+    from bson import Binary, Code, SON
+    if not request.get('hostname'):
+        hostname = 'mongodb:relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
+    db_name = str(hostname.split('/'))
+
+    # res = get_duplicate_records(db_name='gridfs_file7', collection_name='fs.files')
+    #res = get_duplicate_records(db_name='gridfs_mrktplce', collection_name='fs.files')
+    if not request.get('data_src'):
+        data_src = '$metadata.File'
+    if data_src[:1] == '$': pass
+    else:
+        data_src = str('$' + str(data_src))
+
+
+    piped = [
+        {"$unwind": data_src},
+        {"$group": {"_id": data_src, "count": {"$sum": 1}}},
+        {"$sort": SON([("count", 1), ("_id", -1)])},
+        {"$limit": 55}
+    ]
+
+    mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
+    res = mongodb_gfsmkt['fs.files'].aggregate(piped, allowDiskUse=True)
+    return render_to_response('searcher/image/image_results_v2.html', {'data': res})
+
+
+def mongodisplay(request):
+    """ Default view for the root """
+    from searcher.models import *
+    import requests, pymongo, re
+    hostname = 'mongodb:relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
+    mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name='gridfs_mrktplce')
+
+
+
+    try:
+        colorstyle = request.GET['colorstyle']
+        query = request.(colorstyle__icontains=colorstyle)
+        return render(request, 'searcher/image/image_results_v2.html', {'data': data})
+    except:
+        images = mongodb_gfsmkt.fs.files.find()[:100]
+        return render(request, 'searcher/image/image_results_v2.html', {'images': images})
+
+
 
 
 
