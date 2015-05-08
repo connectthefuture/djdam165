@@ -21,6 +21,7 @@ urlpatterns = patterns('base.views',
                        url(r'^mongojquery/?.*?$', 'mongojquery', name='mongojquery'),
                        url(r'^ajaxdatatables/?.*?$', 'ajaxdatatables', name='ajaxdatatables'),
                        url(r'^onepageappview/?.*?$', 'onepageappview', name='onepageappview'),
+                       
 
 )
 
