@@ -111,7 +111,7 @@ def mongojquery(request):
 
 
 
-def unwind_metadata_array_duplicate(request,data_src=None, objectid=None):
+def unwind_metadata_array_duplicate(request,**kwargs):
     hostname=None
     data_src=None
 
@@ -122,6 +122,9 @@ def unwind_metadata_array_duplicate(request,data_src=None, objectid=None):
 
     # res = get_duplicate_records(db_name='gridfs_file7', collection_name='fs.files')
     #res = get_duplicate_records(db_name='gridfs_mrktplce', collection_name='fs.files')
+    data_src = kwargs.get(['data_src'])
+    objectid = kwargs.get(['objectid'])
+    
     if not data_src:
         data_src = '$metadata.File'
     if data_src[:1] == '$': pass
@@ -152,7 +155,7 @@ def mongodisplay(request,**kwargs):
     #mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
 
     try:
-        colorstyle = kwargs.get(['colorstyle']) #request.GET['colorstyle']
+        colorstyle = kwargs.get(['data_src']) #request.GET['colorstyle']
         images = mongodb_gfsmkt['fs.files'].find({"colorstyle": colorstyle})
         return render(request, 'searcher/image/image_results_v2.html', {'images': images})
     except:
