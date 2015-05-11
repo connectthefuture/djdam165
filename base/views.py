@@ -115,13 +115,13 @@ def unwind_metadata_array_duplicate(request,data_src=None):
     data_src=None
 
     from bson import Binary, Code, SON
-    if not request.get()['hostname']:
-        hostname = 'mongodb:relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
+    #if not request.get('hostname'):
+    hostname = 'mongodb:relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
     db_name = str(hostname.split('/'))
 
     # res = get_duplicate_records(db_name='gridfs_file7', collection_name='fs.files')
     #res = get_duplicate_records(db_name='gridfs_mrktplce', collection_name='fs.files')
-    if not request.get()['data_src'] and not data_src:
+    if not data_src:
         data_src = '$metadata.File'
     if data_src[:1] == '$': pass
     else:
