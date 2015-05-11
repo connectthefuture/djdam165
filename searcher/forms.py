@@ -526,6 +526,8 @@ class UploadFileForm(forms.Form):
                                   # label = 'Enter New Styles'
                                   #,help_text = 'must be ordered like Input 100 colorstyles'
                                 )
+    class Meta:
+        exclude = ('',)
 
 
 #from django.forms.models import inlineformset_factory
@@ -543,9 +545,9 @@ from .models import ViewExcelToolDuplicateVendorStyle
 
 class InputMergeChoiceForm(forms.Form):
     merge_fields = forms.ModelChoiceField(queryset=ExcelToolData.objects.all().order_by('vendor_style','color_group_id'))
-    #class Meta:
+    class Meta:
      #   model = ViewExcelToolDuplicateVendorStyle
-
+        exclude = ('long_description',)
 
 # FileUpload form class.
 import datetime
@@ -634,6 +636,7 @@ class SupplierIngestModelForm(forms.ModelForm):
 
     class Meta:
         model = SupplierIngest
+        exclude = ('id',)
 
 
 class SupplierIngestImagesModelForm(forms.ModelForm):
@@ -681,7 +684,7 @@ class SupplierIngestImagesModelForm(forms.ModelForm):
 
     class Meta:
         model = SupplierIngestImages
-
+        exclude = ('create_dt',)
 
 class ProductSnapshotLiveModelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -713,7 +716,7 @@ class ProductSnapshotLiveModelForm(forms.ModelForm):
                 Tab(
                 'Samples',
                 'sample_id',
-                'sample_status',
+                # 'sample_status',
                 'sample_location',
                 'status_dt',
                 'track_number',
@@ -732,12 +735,12 @@ class ProductSnapshotLiveModelForm(forms.ModelForm):
 
     class Meta:
         model = ProductSnapshotLive
-
+        exclude = ('sample_status',)
 
 class SupplierImagesModelForm(forms.ModelForm):
     class Meta:
         model = SupplierIngestImages
-
+        exclude = ('vendor_style',)
     def __init__(self, *args, **kwargs):
         super(SupplierImagesModelForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
