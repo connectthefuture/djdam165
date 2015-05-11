@@ -154,7 +154,7 @@ def mongodisplay(request):
         images = mongodb_gfsmkt['fs.files'].find({"colorstyle": colorstyle})
         return render(request, 'searcher/image/image_results_v2.html', {'images': images})
     except:
-        images = mongodb_gfsmkt['fs.files']find()[:100]
+        images = mongodb_gfsmkt['fs.files'].find()[:100]
         return render(request, 'searcher/image/image_results_v2.html', {'images': images})
 
 
