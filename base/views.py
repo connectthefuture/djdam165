@@ -95,7 +95,7 @@ def connect_gridfs_mongodb(hostname=None, db_name=None):
 def mongojquery(request):
     """ Default view for the root """
     from searcher.models import *
-    
+
     hostname = 'mongodb://relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
     db_name = str(hostname.split('/')[-1])
     mongodb_gfsmkt, fs = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
@@ -106,7 +106,7 @@ def mongojquery(request):
         return render(request, 'base/mongojquery.html', {'data': res})
     except:
         #data = ProductSnapshotLive.objects.all().order_by('-status_dt', '-colorstyle')[:100]
-        res = mongodb_gfsmkt['fs.files'].find().sort({"_id": -1})
+        res = mongodb_gfsmkt['fs.files'].find() #.sort({"_id": -1})
         return render(request, 'base/mongojquery.html', {'data': res})
 
 

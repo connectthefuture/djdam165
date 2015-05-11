@@ -82,7 +82,7 @@ INSTALLED_APPS = (# '',
     'compressor',
 
     ## Debug toolbar
-    # 'debug_toolbar.apps.DebugToolbarConfig',  ## Uncomment for >= Django 1.7
+    'debug_toolbar.apps.DebugToolbarConfig',  ## Uncomment for >= Django 1.7
     #'debug_toolbar',  ## Uncomment for <= Django 1.6
     # 'debug_toolbar_htmltidy',
     # 'debug_toolbar_user_panel',#
@@ -417,6 +417,8 @@ FILE_UPLOAD_PERMISSIONS = 0664
 def custom_show_toolbar(request):
     """ Only show the debug toolbar to users with the superuser flag. """
     return request.user.is_superuser
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 DEBUG_TOOLBAR_CONFIG = {
     # depreciated'INTERCEPT_REDIRECTS': False,
