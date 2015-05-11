@@ -110,7 +110,7 @@ def mongojquery(request):
 
 
 
-def unwind_metadata_array_duplicate(request):
+def unwind_metadata_array_duplicate(request,data_src=None):
     hostname=None
     data_src=None
 
@@ -121,7 +121,7 @@ def unwind_metadata_array_duplicate(request):
 
     # res = get_duplicate_records(db_name='gridfs_file7', collection_name='fs.files')
     #res = get_duplicate_records(db_name='gridfs_mrktplce', collection_name='fs.files')
-    if not request.get('data_src'):
+    if not request.get('data_src') and not data_src:
         data_src = '$metadata.File'
     if data_src[:1] == '$': pass
     else:
