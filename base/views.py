@@ -100,7 +100,7 @@ def mongojquery(request):
     mongodb_gfsmkt, fs = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
     try:
         colorstyle = request.GET['colorstyle']
-        res = mongodb_gfsmkt['fs.files'].find(colorstyle)
+        res = mongodb_gfsmkt['fs.files'].find({"colorstyle": colorstyle})
         #query = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
         return render(request, 'base/mongojquery.html', {'data': res})
     except:
@@ -151,7 +151,7 @@ def mongodisplay(request):
 
     try:
         colorstyle = request.GET['colorstyle']
-        images = mongodb_gfsmkt['fs.files'].find(colorstyle)
+        images = mongodb_gfsmkt['fs.files'].find({"colorstyle": colorstyle})
         return render(request, 'searcher/image/image_results_v2.html', {'images': images})
     except:
         images = mongodb_gfsmkt['fs.files']find()[:100]
