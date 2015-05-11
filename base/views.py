@@ -132,6 +132,7 @@ def unwind_metadata_array_duplicate(request,data_src=None, objectid=None):
     piped = [
         {"$unwind": data_src},
         {"$group": {"_id": data_src, "count": {"$sum": 1}}},
+        {"filename": "$$filename"},
         {"$sort": SON([("count", 1), ("_id", -1)])},
         {"$limit": 55}
     ]
