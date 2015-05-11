@@ -105,7 +105,7 @@ def mongojquery(request):
         return render(request, 'base/mongojquery.html', {'data': res})
     except:
         #data = ProductSnapshotLive.objects.all().order_by('-status_dt', '-colorstyle')[:100]
-        res = mongodb_gfsmkt['fs.files'].find().sort({"_id": "-1"})
+        res = mongodb_gfsmkt['fs.files'].find().sort({"_id": -1})
         return render(request, 'base/mongojquery.html', {'data': res})
 
 
