@@ -82,8 +82,8 @@ INSTALLED_APPS = (# '',
     'compressor',
 
     ## Debug toolbar
-    'debug_toolbar.apps.DebugToolbarConfig',  ## Uncomment for >= Django 1.7
-    #'debug_toolbar',  ## Uncomment for <= Django 1.6
+    #'debug_toolbar.apps.DebugToolbarConfig',  ## Uncomment for >= Django 1.7
+    'debug_toolbar',  ## Uncomment for <= Django 1.6
     # 'debug_toolbar_htmltidy',
     # 'debug_toolbar_user_panel',#
 
