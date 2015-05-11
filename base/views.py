@@ -143,7 +143,7 @@ def unwind_metadata_array_duplicate(request,data_src=None, objectid=None):
     return render_to_response('searcher/image/image_results_v2.html', {'images': res})
 
 
-def mongodisplay(request):
+def mongodisplay(request,**kwargs):
     """ Default view for the root """
     from searcher.models import *
     import requests, pymongo, re
@@ -152,7 +152,7 @@ def mongodisplay(request):
     #mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
 
     try:
-        colorstyle = request.GET['colorstyle']
+        colorstyle = kwargs.get(['colorstyle']) #request.GET['colorstyle']
         images = mongodb_gfsmkt['fs.files'].find({"colorstyle": colorstyle})
         return render(request, 'searcher/image/image_results_v2.html', {'images': images})
     except:
