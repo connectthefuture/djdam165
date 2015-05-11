@@ -95,6 +95,7 @@ def connect_gridfs_mongodb(hostname=None, db_name=None):
 def mongojquery(request):
     """ Default view for the root """
     from searcher.models import *
+    
     hostname = 'mongodb://relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
     db_name = str(hostname.split('/')[-1])
     mongodb_gfsmkt, fs = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
