@@ -55,7 +55,7 @@ def ajaxdatatables(request):
     from searcher.models import *
     try:
         colorstyle = request.GET['q']
-        query = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
+        data = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
         return render(request, 'base/ajaxdatatables.html', {'data': data})
     except:
         data = ProductSnapshotLive.objects.all().order_by('-status_dt', '-colorstyle')[:100]
