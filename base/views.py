@@ -95,7 +95,7 @@ def connect_gridfs_mongodb(hostname=None, db_name=None):
 def mongojquery(request):
     """ Default view for the root """
     from searcher.models import *
-    hostname = 'mongodb:relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
+    hostname = 'mongodb://relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
     db_name = str(hostname.split('/'))
     mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
     try:
@@ -116,7 +116,7 @@ def unwind_metadata_array_duplicate(request,data_src=None):
 
     from bson import Binary, Code, SON
     #if not request.get('hostname'):
-    hostname = 'mongodb:relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
+    hostname = 'mongodb://relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
     db_name = str(hostname.split('/'))
 
     # res = get_duplicate_records(db_name='gridfs_file7', collection_name='fs.files')
@@ -144,7 +144,7 @@ def mongodisplay(request):
     """ Default view for the root """
     from searcher.models import *
     import requests, pymongo, re
-    hostname = 'mongodb:relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
+    hostname = 'mongodb://relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
     mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name='gridfs_mrktplce')
     #mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
 
