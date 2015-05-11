@@ -146,7 +146,7 @@ def mongodisplay(request):
     from searcher.models import *
     import requests, pymongo, re
     hostname = 'mongodb://relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
-    mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name='gridfs_mrktplce')
+    mongodb_gfsmkt, fs = connect_gridfs_mongodb(hostname=hostname, db_name='gridfs_mrktplce')
     #mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
 
     try:
@@ -154,7 +154,7 @@ def mongodisplay(request):
         images = mongodb_gfsmkt['fs.files'].find(colorstyle)
         return render(request, 'searcher/image/image_results_v2.html', {'images': images})
     except:
-        images = mongodb_gfsmkt.fs.files.find()[:100]
+        images = mongodb_gfsmkt['fs.files']find()[:100]
         return render(request, 'searcher/image/image_results_v2.html', {'images': images})
 
 
