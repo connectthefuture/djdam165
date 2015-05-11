@@ -96,7 +96,7 @@ def mongojquery(request):
     """ Default view for the root """
     from searcher.models import *
     hostname = 'mongodb://relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
-    db_name = str(hostname.split('/'))
+    db_name = str(hostname.split('/')[-1])
     mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
     try:
         colorstyle = request.GET['colorstyle']
@@ -117,7 +117,7 @@ def unwind_metadata_array_duplicate(request,data_src=None):
     from bson import Binary, Code, SON
     #if not request.get('hostname'):
     hostname = 'mongodb://relic7:mongo7@ds031852.mongolab.com:31852/gridfs_mrktplce'
-    db_name = str(hostname.split('/'))
+    db_name = str(hostname.split('/')[-1])
 
     # res = get_duplicate_records(db_name='gridfs_file7', collection_name='fs.files')
     #res = get_duplicate_records(db_name='gridfs_mrktplce', collection_name='fs.files')
@@ -136,7 +136,7 @@ def unwind_metadata_array_duplicate(request,data_src=None):
     ]
 
     mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
-    print res
+
     res = mongodb_gfsmkt['fs.files'].aggregate(piped, allowDiskUse=True)
     return render_to_response('searcher/image/image_results_v2.html', {'data': res})
 
