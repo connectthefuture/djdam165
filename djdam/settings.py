@@ -419,6 +419,7 @@ def custom_show_toolbar(request):
     """ Only show the debug toolbar to users with the superuser flag. """
     return request.user.is_superuser
 
+
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 
@@ -430,6 +431,10 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TEMPLATE_CONTEXT': True,
     'ENABLE_STACKTRACES': True,
 }
+
+# for mongo panel
+DEBUG_TOOLBAR_MONGO_STACKTRACES = False
+
 # Also need to comment out or uncomment the debug middleware above as well as the entry in install_apps
 DEBUG_TOOLBAR_PANELS = (
     #'debug_toolbar_user_panel.panels.UsersPanel',
