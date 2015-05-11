@@ -139,7 +139,7 @@ def unwind_metadata_array_duplicate(request,data_src=None, objectid=None):
     mongodb_gfsmkt, fs = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
 
     res = mongodb_gfsmkt['fs.files'].aggregate(piped, allowDiskUse=True)
-    return render_to_response('searcher/image/image_results_v2.html', {'data': res})
+    return render_to_response('searcher/image/image_results_v2.html', {'images': res})
 
 
 def mongodisplay(request):
