@@ -136,6 +136,7 @@ def unwind_metadata_array_duplicate(request,data_src=None):
     ]
 
     mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
+    print res
     res = mongodb_gfsmkt['fs.files'].aggregate(piped, allowDiskUse=True)
     return render_to_response('searcher/image/image_results_v2.html', {'data': res})
 
