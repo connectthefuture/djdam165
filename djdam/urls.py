@@ -144,6 +144,15 @@ urlpatterns += patterns('',
 from django.conf.urls import include, url
 #from djdam.admin import *
 
+
+### Debug toolbar
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )
+
+#################
 # urlpatterns += patterns('',
 #     (r'^admin/', include(admin.urls)),
 # )

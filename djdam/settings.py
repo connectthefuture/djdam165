@@ -420,11 +420,6 @@ def custom_show_toolbar(request):
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns += patterns('',
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    )
 
 DEBUG_TOOLBAR_CONFIG = {
     # depreciated'INTERCEPT_REDIRECTS': False,
