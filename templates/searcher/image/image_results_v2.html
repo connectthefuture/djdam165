@@ -13,15 +13,14 @@
 
         <div class="row">
 
-            <div class="col-4-md">
-            <form id="idButton1" name="mongoactions" action="/mongo_display" >
+            <div class="col-4-lg">
+            <form id="idForm1" name="mongoactions" action="/mongo_display" >
                 <input type="search" name="data_src" id="data_src" value="#resultsBasicTest">
+                <button class="btn btn-danger btn-mini" type="submit"></button>
+
             </form>
             </div>
-            <div class="col-8-md">
-                <form id="idButton1" name="mongoactions" action="/mongo_imagesobj">
-                <button class="btn btn-danger btn-mini" type="submit"></button>
-                </form>
+            <div class="col-8-lg">
                 <form id="idButton2" name="mongoactions" action="/mongo_imagesobj" >
                 <button class="btn btn-danger btn-mini" type="submit"></button>
                 </form>
@@ -35,7 +34,7 @@
 {% endblock %}
 
 {% block image_results %}
-{% regroup images by colorstyle as colorstyles %}
+{% regroup images by filename as colorstyles %}
 
 
 <div class="container">
