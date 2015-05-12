@@ -116,7 +116,7 @@ def image_update_list(request, pk=None, alt=1, colorstyle=None,updated_by=None):
     List all image_updates, or create a new image_update.
     """
     try:
-        updated_by = request.DATA['updated_by']
+        updated_by = request.data['updated_by']
     except:
         updated_by = 'ingest01'
         pass
@@ -127,7 +127,7 @@ def image_update_list(request, pk=None, alt=1, colorstyle=None,updated_by=None):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = ImageUpdateSerializer(data=request.DATA)
+        serializer = ImageUpdateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -136,12 +136,12 @@ def image_update_list(request, pk=None, alt=1, colorstyle=None,updated_by=None):
 
     elif request.method == 'PUT':
         if not colorstyle:
-            colorstyle = request.DATA['colorstyle']
+            colorstyle = request.data['colorstyle']
         try:
             image_update = ImageUpdate.objects.get(updated_by=updated_by,colorstyle=colorstyle,alt=alt)
         except ImageUpdate.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = ImageUpdateSerializer(image_update, data=request.DATA)
+        serializer = ImageUpdateSerializer(image_update, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -161,7 +161,7 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,upda
         pass
 
     try:
-        updated_by = request.DATA['updated_by']
+        updated_by = request.data['updated_by']
     except:
         updated_by = 'djdam'
         pass
@@ -180,23 +180,23 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,upda
 
     elif request.method == 'PUT':
         if not colorstyle:
-            colorstyle = request.DATA['colorstyle']
+            colorstyle = request.data['colorstyle']
         image_update = ImageUpdate.objects.get(updated_by=updated_by,colorstyle=colorstyle, alt=alt)
-        serializer = ImageUpdateSerializer(image_update, data=request.DATA)
+        serializer = ImageUpdateSerializer(image_update, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'POST':
-        serializer = ImageUpdateSerializer(data=request.DATA)
+        serializer = ImageUpdateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         # else if there do a put update
         else:
             image_update = ImageUpdate.objects.get(updated_by=updated_by, colorstyle=colorstyle, alt=alt)
-            serializer = ImageUpdateSerializer(image_update, data=request.DATA)
+            serializer = ImageUpdateSerializer(image_update, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
@@ -204,9 +204,9 @@ def image_update_detail(request, format=None, pk=None,alt=1,colorstyle=None,upda
 
     elif request.method == 'POST' and ImageUpdate.objects.get(colorstyle=colorstyle, alt=alt):
         if not colorstyle:
-            colorstyle = request.DATA['colorstyle']
+            colorstyle = request.data['colorstyle']
         image_update = ImageUpdate.objects.get(updated_by=updated_by,colorstyle=colorstyle, alt=alt)
-        serializer = ImageUpdateSerializer(image_update, data=request.DATA)
+        serializer = ImageUpdateSerializer(image_update, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -281,7 +281,7 @@ def looklet_shot_list_update_list(request,
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = LookletShotListSerializer(data=request.DATA)
+        serializer = LookletShotListSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -289,13 +289,13 @@ def looklet_shot_list_update_list(request,
 
     elif request.method == 'PUT':
         if not colorstyle:
-            colorstyle = request.DATA['colorstyle']
+            colorstyle = request.data['colorstyle']
         try:
             looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle)
         except LookletShotList.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = LookletShotListSerializer(looklet_shot_list_update,
-                                               data=request.DATA)
+                                               data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -317,8 +317,8 @@ def looklet_shot_list_update_detail(request,
     Retrieve, update or delete an LookletShotList instance.
     """
     if not colorstyle:
-        colorstyle = request.DATA['colorstyle']
-        #photodate = request.DATA['photodate']
+        colorstyle = request.data['colorstyle']
+        #photodate = request.data['photodate']
         pass
 
     looklet_shot_list_update = ''
@@ -340,7 +340,7 @@ def looklet_shot_list_update_detail(request,
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = LookletShotListSerializer(data=request.DATA)
+        serializer = LookletShotListSerializer(data=request.data)
         try:
             looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle)
             pass
@@ -352,11 +352,11 @@ def looklet_shot_list_update_detail(request,
 
     elif request.method == 'PUT':
         if not colorstyle:
-            colorstyle = request.DATA['colorstyle']
+            colorstyle = request.data['colorstyle']
         looklet_shot_list_update = LookletShotList.objects.get(colorstyle=colorstyle
                                                                )
         serializer = LookletShotListSerializer(looklet_shot_list_update,
-                                               data=request.DATA)
+                                               data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

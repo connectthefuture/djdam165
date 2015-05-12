@@ -55,7 +55,7 @@ def ajaxdatatables(request):
     from searcher.models import *
     try:
         colorstyle = request.GET['q']
-        query = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
+        data = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
         return render(request, 'base/ajaxdatatables.html', {'data': data})
     except:
         data = ProductSnapshotLive.objects.all().order_by('-status_dt', '-colorstyle')[:100]
@@ -111,7 +111,7 @@ def mongojquery(request):
 
 
 
-def unwind_metadata_array_duplicate(request,data_src=None, objectid=None):
+def unwind_metadata_array_duplicate(request,**kwargs):
     hostname=None
     data_src=None
 
@@ -122,6 +122,9 @@ def unwind_metadata_array_duplicate(request,data_src=None, objectid=None):
 
     # res = get_duplicate_records(db_name='gridfs_file7', collection_name='fs.files')
     #res = get_duplicate_records(db_name='gridfs_mrktplce', collection_name='fs.files')
+    data_src = kwargs.get('data_src')
+    objectid = kwargs.get('objectid')
+
     if not data_src:
         data_src = '$metadata.File'
     if data_src[:1] == '$': pass
@@ -142,7 +145,7 @@ def unwind_metadata_array_duplicate(request,data_src=None, objectid=None):
     return render_to_response('searcher/image/image_results_v2.html', {'images': res})
 
 
-def mongodisplay(request):
+def mongodisplay(request,**kwargs):
     """ Default view for the root """
     from searcher.models import *
     import requests, pymongo, re
@@ -151,7 +154,7 @@ def mongodisplay(request):
     #mongodb_gfsmkt = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
 
     try:
-        colorstyle = request.GET['colorstyle']
+        colorstyle = kwargs.get('data_src') #request.GET['colorstyle']
         images = mongodb_gfsmkt['fs.files'].find({"colorstyle": colorstyle})
         return render(request, 'searcher/image/image_results_v2.html', {'images': images})
     except:
