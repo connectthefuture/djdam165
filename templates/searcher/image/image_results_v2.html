@@ -31,6 +31,7 @@
 {% for groups in colorstyles %}
   <table class="table table-bordered table-striped">
   {% block image_results_group_title %}{% endblock %}
+
 {% for image in groups.list %}
     <tr>
     <td>
@@ -48,7 +49,6 @@
         <form enctype="multipart/form-data" action="/searcher/manage/swatches/edit/{{ image.colorstyle }}/" method="post">
         {% csrf_token %}
             <div class="modal-body">
-              {# block modal_body %} {% endblock #}
               <p>Colorstyle:  {{ image.colorstyle }}</p>
               <p><label for="filename">Filename: </label><input type="text" id="filename" name="filename" value="{{ image.filename }}" /></p>
               <p><label for="md5">Md5: </label><input type="text" id="md5" name="md5" value="{{ image.md5 }}" /></p>
@@ -65,9 +65,10 @@
                   Save changes
               </button>
 
-              <a href="{{ image.file_path }}"><img class="img-rounded" style="width: 240px;" alt="{{ image.colorstyle }}"
-                    {% if image.shot_number %}
-                    src="{{ image.file_path }}_thumb"/>
+              <a href="{{ image.file_path }}">
+              <img class="img-rounded" style="width: 240px;" alt="{{ image.colorstyle }}"
+                    {% if image.image_url %}
+                    src="{{ image.image_url }}" name="nameImage{{ image.filename }}" style="width: 180px;" alt="bfly-{{ image.filename }}"/>
 
                     {% elif image.alt and image.alt == '1' %}
                     src="/zImages/{{ image.colorstyle|stringformat:'.4s' }}/{{ image.colorstyle }}_{{ image.alt }}.jpg"/>
@@ -76,7 +77,6 @@
                     src="/zImages/{{ image.colorstyle|stringformat:'.4s' }}/{{ image.colorstyle }}_{{ image.alt }}.jpg"/>
 
                     {% else %}
-                    {#                    src="{{ image.file_path }}"/>#}
                     src="http://prodimages.ny.bluefly.com:8082/gridfs_file7/{{ image.colorstyle|stringformat:'.9s' }}.jpg"/>
                     {% endif %}
               </a>
@@ -102,10 +102,11 @@
         {% csrf_token %}
             <input type="hidden" name="selectedFiles" id="CheckedBoxes" value="{{ image.file_path }}">
 
-            <a href="{{ image.file_path }}">
+            <a href="{{ image.image_url }}">
                 <img class="img-rounded" style="width: 180px;" alt="Alt{{ image.colorstyle }}"
-                {% if image.shot_number %}
-                src="{{ image.file_path }}_thumb"/>
+                
+                {% if image.image_url %}
+                src="{{ image.image_url }}" name="nameImage{{ image.filename }}" style="width: 180px;" alt="bfly-{{ image.filename }}"/>
 
                 {% elif image.alt and image.alt == '1' %}
                 src="/zImages/{{ image.colorstyle|stringformat:'.4s' }}/{{ image.colorstyle }}_{{ image.alt }}.jpg"/>
@@ -115,11 +116,10 @@
 
                 {% else %}
                 src="{{ image.file_path }}"/>
-
                 {% endif %}
+
             </a>
             IMG
-
             <label for="isselected{{ image.filename }}" class="btn btn-mini btn-warning">
             <input type="checkbox"name="imagefilename" class="a-checkbox" id="isselected{{ image.filename }}" value="{{ image.filename }}"> {{ image.colorstyle }}
             </label>
@@ -139,12 +139,12 @@
     
     {% if data %}
     <tr>
-        <th align="left" scope="row"> Brand</th>
-        <td> {{ styledata.brand }}</td>
+        <th align="left" scope="row"> ID</th>
+        <td> {{ data._id }}</td>
        </tr>
     <tr>
-        <th align="left" scope="row"> PO Number</th>
-        <td> {{ styledata.po_number }}</td>
+        <th align="left" scope="row"> Name</th>
+        <td> {{ data.name }}</td>
     </tr>
     {% endif %}
     

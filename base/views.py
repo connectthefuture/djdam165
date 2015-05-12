@@ -101,12 +101,16 @@ def mongojquery(request):
     mongodb_gfsmkt, fs = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
     try:
         colorstyle = request.GET['colorstyle']
-        res = mongodb_gfsmkt['fs.files'].find({"colorstyle": colorstyle})
+        cursor = mongodb_gfsmkt['fs.files'].find({"colorstyle": colorstyle})
+        res = dict((record['_id'], record) for record in cursor)
+
         #query = ProductSnapshotLive.objects.filter(colorstyle__icontains=colorstyle)
         return render(request, 'base/mongojquery.html', {'data': res})
     except:
         #data = ProductSnapshotLive.objects.all().order_by('-status_dt', '-colorstyle')[:100]
-        res = mongodb_gfsmkt['fs.files'].find() #.sort({"_id": -1})
+        cursor = mongodb_gfsmkt['fs.files'].find() #.sort({"_id": -1})
+        res = dict((record['_id'], record) for record in cursor)
+
         return render(request, 'base/mongojquery.html', {'data': res})
 
 
@@ -141,8 +145,10 @@ def unwind_metadata_array_duplicate(request,**kwargs):
 
     mongodb_gfsmkt, fs = connect_gridfs_mongodb(hostname=hostname, db_name=db_name)
 
-    res = mongodb_gfsmkt['fs.files'].aggregate(piped, allowDiskUse=True)
-    return render_to_response('searcher/image/image_results_v2.html', {'images': res})
+    cursor = mongodb_gfsmkt['fs.files'].aggregate(piped, allowDiskUse=True)
+    images = dict((record['_id'], record) for record in cursor)
+
+    return render_to_response('searcher/image/image_results_v2.html', {'images': images})
 
 
 def mongodisplay(request,**kwargs):
@@ -155,10 +161,12 @@ def mongodisplay(request,**kwargs):
 
     try:
         colorstyle = kwargs.get('data_src') #request.GET['colorstyle']
-        images = mongodb_gfsmkt['fs.files'].find({"colorstyle": colorstyle})
+        cursor = mongodb_gfsmkt['fs.files'].find({"colorstyle": colorstyle})
+        images = dict((record['_id'], record) for record in cursor)
         return render(request, 'searcher/image/image_results_v2.html', {'images': images})
     except:
-        images = mongodb_gfsmkt['fs.files'].find()[:100]
+        cursor = mongodb_gfsmkt['fs.files'].find()[:100]
+        images = dict((record['_id'], record) for record in cursor)
         return render(request, 'searcher/image/image_results_v2.html', {'images': images})
 
 
