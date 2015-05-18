@@ -95,7 +95,7 @@
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal-fade -->
     <!-- </div> /.modal-container-interior -->
-
+    MODAL RESULT
     <!-- /.modal -->
     <td>
         <form enctype="multipart/form-data" action="/searcher/mark-selected/{{ image.filename }}/" method="POST">
@@ -181,7 +181,7 @@
 
 {% for i in results %}
   <div id="imageresults{{ i.colorstyle }}">{{ i }}
-      <a href="{{ i.file_path }}">
+      <a href="{{ i.file_path }}"> I in RESULTS
           <img class="img-rounded" style="width: 240px;"  alt="{{ i.photo_date }}" src="{{ i.file_path }}">
       </a>
   </div>
