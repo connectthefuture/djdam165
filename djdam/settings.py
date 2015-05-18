@@ -147,11 +147,11 @@ DATABASES = {
         'PASSWORD': 'mysql',
         'HOST': '127.0.0.1',
         'PORT': '3301',
-        #'OPTIONS': {
-        #    'init_command': 'SET storage_engine=InnoDB',
-        #    'charset' : 'utf8',
-        #    'use_unicode' : True,
-        #},
+        'OPTIONS': {
+           'init_command': 'SET storage_engine=InnoDB',
+           'charset' : 'utf8',
+           'use_unicode' : True,
+        },
         #'TEST_CHARSET': 'utf8',
         #'TEST_COLLATION': 'utf8_general_ci',
     },
