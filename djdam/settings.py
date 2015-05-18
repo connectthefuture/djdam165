@@ -106,7 +106,7 @@ INSTALLED_APPS = (# '',
     # Image/Thumbnail Rendering and Manipulation
     # 'sorl.thumbnail',
     # 'ajaxuploader',
-    # 'ajax_upload',
+    'ajax_upload',
 
     ## REST
     'rest_framework',
