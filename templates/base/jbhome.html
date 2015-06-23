@@ -4,6 +4,10 @@
 {% endcomment %}
 {% block page_title %}Flim Flam Dam{% endblock %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{# DriveApp CliendID - GDevConsole #}
+<meta name="google-signin-client_id" content="153570890903-3tl6bkluun2r32smkpgtqdultfrctvg6.apps.googleusercontent.com">
+
 {#<script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>#}
 {#<script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js"></script>#}
 
@@ -248,12 +252,29 @@
                         </div>
                         </div>
                         </div>
+                    <div class="container">
+                    <div class="row">
                     <div class="modal-footer">
+                        <div class="col-sm-3 col-md-3">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-{#                        <button type="submit" class="btn btn-primary btn-sm" name="submitAjax" id="submitAjax">ajax</button>#}
-                        {#  <span class="glyphicon glyphicon-exclamation-sign"></span> Run Script</button> #}
-                        {#<button type="button" class="btn btn-warning">Save changes</button>#}
-                        {#<button type="submit" class="btn btn-success">Submit</button>#}
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <script src="https://apis.google.com/js/platform.js" async defer></script>
+                            <div class="g-savetodrive"
+                               data-src="//example.com/path/to/myfile.pdf"
+                               data-filename="My Statement.pdf"
+                               data-sitename="My Company Name">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                          <div id="my-signin2"></div>
+                        </div>
+                        {# <button type="submit" class="btn btn-primary btn-sm" name="submitAjax" id="submitAjax">ajax</button>#}
+                        {# <span class="glyphicon glyphicon-exclamation-sign"></span> Run Script</button> #}
+                        {# <button type="button" class="btn btn-warning">Save changes</button>#}
+                        {# <button type="submit" class="btn btn-success">Submit</button>#}
+                    </div>
+                    </div>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -289,7 +310,7 @@
 {##}
 {#                    </iframe>#}
 {#                </div>#}
-                 <div class="col-md-2"></div>
+                <div class="col-md-2"></div>
 {#                <div class="col-md-2">{% include "searcher/modal/modal_multi_input_form.html" %}</div>#}
                 <div class="col-md-8">
                     <ul class="nav nav-pills nav-stacked">
@@ -364,7 +385,26 @@
 <script src="{{ STATIC_URL }}js/home.js"></script>
 <script src="{{ STATIC_URL }}js/ajaxfuncs.js"></script>
 <script src="{{ STATIC_URL }}js/common.js"></script>
-
+<script>
+function onSuccess(googleUser) {
+  console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+}
+function onFailure(error) {
+  console.log(error);
+}
+function renderButton() {
+  gapi.signin2.render('my-signin2', {
+    'scope': 'https://www.googleapis.com/auth/plus.login',
+    'width': 200,
+    'height': 50,
+    'longtitle': true,
+    'theme': 'light',
+    'onsuccess': onSuccess,
+    'onfailure': onFailure
+  });
+}
+</script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <!-- jQ anchors load to middle search -->
 {#<script>#}
 {#$(document.body).animate({#}

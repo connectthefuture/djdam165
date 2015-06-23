@@ -114,7 +114,7 @@
 #-e git://github.com/clouserw/tower.git#egg=tower
 BeautifulSoup
 Markdown
-MySQL-python # ==1.2.4b4
+MySQL-python
 Pillow
 SQLAlchemy
 ajaxuploader
