@@ -186,8 +186,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times; </button>
-                        <a><h3 class="modal-title" id="myModalLabel" style="font-family: DejaVu Serif, serif"><span
-                                class="glyphicon glyphicon-globe"></span> A Place to Run Some Black Magick </h3></a>
+                        <a><h4 class="modal-title" id="myModalLabel" style="font-family: DejaVu Serif, serif"><span
+                                class="glyphicon glyphicon-globe"></span> A Place to Run Some Black Magick and now Google too</h4></a>
+                            <div class="g-savetodrive"
+                               data-src="//example.com/path/to/myfile.pdf"
+                               data-filename="My Statement.pdf"
+                               data-sitename="My Company Name">
+                            </div>
                         {# block modal_body %}{% endblock #}
                     </div>
                     <div class="row">
@@ -242,30 +247,26 @@
                         </div>
                         </div>
                         </div>
-                    <div class="container">
-                    <div class="row">
+
                     <div class="modal-footer">
+                        <div class="container">
+                        <div class="row">
                         <div class="col-sm-3 col-md-3">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
                         </div>
                         <div class="col-sm-3 col-md-3">
-                            <script src="https://apis.google.com/js/platform.js" async defer></script>
-                            <div class="g-savetodrive"
-                               data-src="//example.com/path/to/myfile.pdf"
-                               data-filename="My Statement.pdf"
-                               data-sitename="My Company Name">
-                            </div>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
                         <div class="col-sm-3 col-md-3">
-                          <div id="my-signin2"></div><div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+                          <div id="my-signin2"></div>
                         </div>
                         {# <button type="submit" class="btn btn-primary btn-sm" name="submitAjax" id="submitAjax">ajax</button>#}
                         {# <span class="glyphicon glyphicon-exclamation-sign"></span> Run Script</button> #}
                         {# <button type="button" class="btn btn-warning">Save changes</button>#}
                         {# <button type="submit" class="btn btn-success">Submit</button>#}
-                    </div>
-                    </div>
-                    </div>
+                        </div>
+                        </div>
+                        </div>
                 </div>
                 <!-- /.modal-content -->
             </div>
@@ -385,9 +386,9 @@ function onFailure(error) {
 function renderButton() {
   gapi.signin2.render('my-signin2', {
     'scope': 'https://www.googleapis.com/auth/plus.login',
-    'width': 200,
-    'height': 50,
-    'longtitle': true,
+    'width': 75,
+    'height': 30,
+    'longtitle': false,
     'theme': 'light',
     'onsuccess': onSuccess,
     'onfailure': onFailure
