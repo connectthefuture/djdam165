@@ -364,7 +364,7 @@
 {% endcomment %}
 
 <!-- Javascript -->
-{% block js %}{% endblock %}
+
 {#  <script src="{{ STATIC_URL }}js/libs/jquery-1.9.1.min.js"></script>#}
 {#  <script src="{{ STATIC_URL }}js/bootstrap.js"></script>#}
 {#  <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>#}
@@ -372,6 +372,7 @@
 <script src="{{ STATIC_URL }}js/home.js"></script>
 <script src="{{ STATIC_URL }}js/ajaxfuncs.js"></script>
 <script src="{{ STATIC_URL }}js/common.js"></script>
+ {% block js %}
 <script>
 function onSuccess(googleUser) {
   console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -407,7 +408,7 @@ function renderButton() {
     console.log("ID Token: " + id_token);
   };
 </script>
-
+{% endblock %}
 <!-- jQ anchors load to middle search -->
 {#<script>#}
 {#$(document.body).animate({#}
