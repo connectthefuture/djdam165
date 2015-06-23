@@ -192,7 +192,10 @@
                                data-src="//example.com/path/to/myfile.pdf"
                                data-filename="My Statement.pdf"
                                data-sitename="My Company Name">
+                            <button onclick="s.showSettingsDialog()">Share</button>
                             </div>
+
+
                         {# block modal_body %}{% endblock #}
                     </div>
                     <div class="row">
@@ -408,6 +411,17 @@ function renderButton() {
     console.log("ID Token: " + id_token);
   };
 </script>
+ <script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
+<script>
+    init = function() {
+        s = new gapi.drive.share.ShareClient('153570890903-3tl6bkluun2r32smkpgtqdultfrctvg6.apps.googleusercontent.com');
+        s.setItemIds(["<FILE_ID>"]);
+    }
+    window.onload = function() {
+        gapi.load('drive-share', init);
+}
+</script>
+
 {% endblock %}
 <!-- jQ anchors load to middle search -->
 {#<script>#}
