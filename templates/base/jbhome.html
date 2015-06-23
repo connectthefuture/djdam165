@@ -3,16 +3,6 @@
 {% load django-bootstrap-toolkit %}
 {% endcomment %}
 {% block page_title %}Flim Flam Dam{% endblock %}
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-{# DriveApp CliendID - GDevConsole #}
-<meta name="google-signin-client_id" content="153570890903-3tl6bkluun2r32smkpgtqdultfrctvg6.apps.googleusercontent.com">
-
-{#<script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>#}
-{#<script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js"></script>#}
-
-<!-- Site Favicon -->
-<link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.ico">
 
 {#{% block css %}#}
 {#<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/navbar.css">#}
@@ -267,7 +257,7 @@
                             </div>
                         </div>
                         <div class="col-sm-3 col-md-3">
-                          <div id="my-signin2"></div>
+                          <div id="my-signin2"></div><div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
                         </div>
                         {# <button type="submit" class="btn btn-primary btn-sm" name="submitAjax" id="submitAjax">ajax</button>#}
                         {# <span class="glyphicon glyphicon-exclamation-sign"></span> Run Script</button> #}
@@ -405,6 +395,22 @@ function renderButton() {
 }
 </script>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+<script>
+  function onSignIn(googleUser) {
+    // Useful data for your client-side scripts:
+    var profile = googleUser.getBasicProfile();
+    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+    console.log("Name: " + profile.getName());
+    console.log("Image URL: " + profile.getImageUrl());
+    console.log("Email: " + profile.getEmail());
+
+    // The ID token you need to pass to your backend:
+    var id_token = googleUser.getAuthResponse().id_token;
+    console.log("ID Token: " + id_token);
+  };
+</script>
+
 <!-- jQ anchors load to middle search -->
 {#<script>#}
 {#$(document.body).animate({#}
