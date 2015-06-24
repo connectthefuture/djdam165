@@ -233,14 +233,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'john.bragato@gmail.com'
-# EMAIL_FILE_PATH =
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '993'
-EMAIL_HOST_USER = 'john.bragato@gmail.com'
-EMAIL_HOST_PASSWORD = ''
-
 
 #==============================================================================
 #  General Cache Settings - Memcached, Redis
@@ -398,7 +390,14 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 #==============================================================================
 
 SERVER_EMAIL = "johnb@prodimages.ny.bluefly.com"
-DEFAULT_FROM_EMAIL = "johnb@prodimages.ny.bluefly.com"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'john.bragato@gmail.com'
+# EMAIL_FILE_PATH =
+EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = '993'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = 'john.bragato@gmail.com'
+EMAIL_HOST_PASSWORD = ''
 SYSTEM_EMAIL_PREFIX = "[prodimages.ny.bluefly.com]"
 
 #==============================================================================
