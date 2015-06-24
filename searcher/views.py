@@ -471,7 +471,7 @@ def lastweeks_looklet_selects(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         results = paginator.page(paginator.num_pages)
-    return render(request, 'image/image_results.html', {'results': results, 'images': images})
+    return render(request, 'image/image_results_v2.html', {'results': results, 'images': images})
 
 
 def weeks_looklet_selects(request):
