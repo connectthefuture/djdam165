@@ -89,9 +89,6 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         {#<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">#}
-      <!-- Open Container -->
-        {#  <div class="container">#}
-        {#<div class="col-sm-6 col-md-6">#}
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -178,7 +175,7 @@
         </ul>
 {% endcomment %}
 
-          <form class="navbar-form navbar-right" role="searchall" enctype="multipart/form-data" method="POST" action="/searcher/findall">
+          <form class="navbar-form navbar-right" enctype="multipart/form-data" method="POST" action="/searcher/findall">
               {% csrf_token %}
               <div class="form-group" style="width: 150px;">
                   {# <input type="text" class="form-control" name="colorstyle" id="colorstyle" placeholder="Search"> #}
