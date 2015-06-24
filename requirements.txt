@@ -1,3 +1,4 @@
+jinja2
 #  Virtualenv / Deployment / wsgi
 # -e git://github.com/playfire/django-debug-toolbar-user-panel#egg=django_debug_toolbar_user_panel-dev
 # -r compiled.txt
