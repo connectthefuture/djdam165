@@ -88,7 +88,7 @@ def search_colorstyle(request, q):
                 images = results
                 return render(request, 'listing/image_list_page.html', {'images': images, 'query': q, })
     else:
-        message = 'You submitted an empty form from views.main using {}.'.format(request.GET['q'])
+        message = 'You submitted an empty form from views.main_routing_view using {}.'.format(request.GET['q'])
         return HttpResponse(message)
 
 
@@ -151,7 +151,7 @@ def search_keyword(request):
 
 
 # @cache_page(60 * 15)
-def main(request):
+def main_routing_view(request):
     """All Queries Get Routed to functions via this regex parser"""
     import re
     regex_datesearch = re.compile(r'.*?[0-9]{4}-[0-3][0-9]-[0-3][0-9]?$')
@@ -194,7 +194,7 @@ def main(request):
                         print "Search terms not found"
                         pass
     else:
-        message = 'You submitted an empty form from views.main using {}.'.format(request.GET['q'])
+        message = 'You submitted an empty form from views.main_routing_view using {}.'.format(request.GET['q'])
         return HttpResponse(message)
 
 
